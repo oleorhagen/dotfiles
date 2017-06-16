@@ -43,8 +43,11 @@ values."
      ;; The go-layer needs the auto-completion and syntax-checking layers
      go
      auto-completion
+
      ;; syntax-checking
-     ;; markdown
+     markdown
+     yaml
+     gtags
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
