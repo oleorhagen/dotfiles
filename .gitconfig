@@ -1,3 +1,10 @@
 [user]
 	email = ole.orhagen@cfengine.com
 	name = Ole Petter
+
+[alias]
+	lg = log --all --oneline --graph --decorate
+	a = add
+	cm = commit
+	s = status
+
