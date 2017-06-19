@@ -85,3 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+# --------MENDER---------
+# Source the oe-init-build-env with every new terminal-session
+source ~/poky/oe-init-build-env
