@@ -88,4 +88,7 @@ source $ZSH/oh-my-zsh.sh
 #
 # --------MENDER---------
 # Source the oe-init-build-env with every new terminal-session
-source ~/poky/oe-init-build-env
+# source ~/poky/oe-init-build-env -- error, adds the build dir in home
+
+# ------- Aliases -------
+alias lsa="ls -a"
