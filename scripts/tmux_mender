@@ -1,0 +1,13 @@
+
+select-pane -t 0 # Select the first pane
+splitw -v # Split the window vertically
+splitw -h # Split horisontally
+
+select-pane -t 2 # Select the new pane
+splitw -v # Split the window vertically
+
+select-pane -t 0 # Go back to the first pane
+select-layout tile # Make all the windows the same size
+
+# Take the top-left frame to the software folder
+select-pane -t 0

@@ -27,7 +27,7 @@ values."
    ;; If non-nil layers with lazy install support are lazy installed.
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
-   dotspacemacs-configuration-layer-path '()
+   dotspacemacs-configuration-layer-path '("~/.layers/")
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
@@ -39,15 +39,17 @@ values."
      helm
      ;; better-defaults
      emacs-lisp
-     git
+     (git
+      :variables
+      git-magit-status-fullscreen t)
      ;; The go-layer needs the auto-completion and syntax-checking layers
-     go
+     (my-go :varibles gofmt-command "goimports")
      auto-completion
 
-     ;; syntax-checking
+     syntax-checking
      markdown
      yaml
-     gtags
+     ;; gtags
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -59,7 +61,10 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+                                      ;; Add in-buffer code coverage visualisation
+                                      ;; (coverage :location (recipe :fetcher github :repo "google/coverage"))
+                                      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -330,6 +335,20 @@ you should place your code here."
     "eb" 'eval-buffer
     )
 
+  ;; ------ Go-Coverage ---------- TODO; Not working atm
+  ;; (add-to-list 'load-path "~/.emacs.d/private/local/coverage/")
+  ;; (require 'coverage)
+  ;; TODO - why is this not set with package macro in (go :variables ?)
+  (setq gofmt-command "goimports") ;; goimports automatically adds and removes imports as well as fixes syntax
+
+  ;; ;; bind keys for the github.com/google/coverage code coverage for go in buffer package
+  ;; (spacemacs/set-leader-keys
+  ;;   "cg" 'cov-gen ;; runs compilation that generates coverage profile for the
+  ;;   ;;           file. Compilation hooks refresh all affected buffers.)
+  ;;   "cs" 'cov-show
+  ;;   "ch" 'cov-hide
+  ;;   )
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;;; Evil fix, for key consistency
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -342,3 +361,15 @@ you should place your code here."
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(magit-commit-arguments (quote ("--signoff"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

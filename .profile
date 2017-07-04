@@ -7,6 +7,8 @@
 # the default umask is set in /etc/profile; for setting the umask
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
+export GOPATH=~/go
+export PATH=$PATH:$GOPATH/bin
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
