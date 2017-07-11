@@ -375,7 +375,12 @@ you should place your code here."
   (add-to-list
    'display-buffer-alist
    '("\\*go-guru-output\\*"
-     open-go-guru-laptop-display))
+     open-go-guru-laptop-display
+     display-buffer-reuse-window))
+
+  ;; TODO - implement a checker function, so that if in the *go-guru-output* buffer, open
+  ;; buffer in last used window
+  ;; TODO - also make the font larger by default on the laptop display
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
