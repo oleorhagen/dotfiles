@@ -49,8 +49,9 @@ values."
      syntax-checking
      markdown
      yaml
+     python
      ;; gtags
-     ;; org
+     org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -62,6 +63,7 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
+                                      ;; org-jira maybe? TODO
                                       ;; Add in-buffer code coverage visualisation
                                       ;; (coverage :location (recipe :fetcher github :repo "google/coverage"))
                                       )
@@ -231,7 +233,7 @@ values."
    dotspacemacs-loading-progress-bar t
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup t
+   dotspacemacs-fullscreen-at-startup nil
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native nil
@@ -357,7 +359,24 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd "L") (kbd "$")) ; L Goes the end of the line
   (define-key evil-visual-state-map (kbd "L") (kbd "$")) ;
   (define-key evil-motion-state-map (kbd "L") (kbd "$")) ; Keep motions consistent
-  (define-key evil-motion-state-map (kbd "H") (kbd "^"))  )
+  (define-key evil-motion-state-map (kbd "H") (kbd "^"))
+
+
+  ;; TODO - now opens go-guru in laptop display, also add functionality for all compilation buffers
+  (defun open-go-guru-laptop-display (buffer alist)
+    (if  (string-equal (cdaar (display-monitor-attributes-list)) "eDP-1")
+        (progn (message "Found the laptop display")
+               (message "%s" (cadar (cdr (cdddar (display-monitor-attributes-list)))))
+               (window--display-buffer buffer (frame-root-window (cadar (cdr (cdddar (display-monitor-attributes-list))))) 'reuse))
+      (message "%s" (cdaar (display-monitor-attributes-list)))))
+
+  display-buffer-alist
+
+  (add-to-list
+   'display-buffer-alist
+   '("\\*go-guru-output\\*"
+     open-go-guru-laptop-display))
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -366,7 +385,12 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(magit-commit-arguments (quote ("--signoff"))))
+ '(magit-commit-arguments (quote ("--signoff")))
+ '(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n256")))
+ '(org-agenda-files (quote ("~/misc/org/test.org")))
+ '(package-selected-packages
+   (quote
+    (smartparens highlight evil helm helm-core avy markdown-mode org-plus-contrib magit magit-popup with-editor org-projectile org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot yaml-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-bullets open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-guru go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word company-statistics company-go column-enforce-mode clean-aindent-mode bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
