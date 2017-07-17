@@ -362,21 +362,24 @@ you should place your code here."
   (define-key evil-motion-state-map (kbd "H") (kbd "^"))
 
 
-  ;; TODO - now opens go-guru in laptop display, also add functionality for all compilation buffers
-  (defun open-go-guru-laptop-display (buffer alist)
-    (if  (string-equal (cdaar (display-monitor-attributes-list)) "eDP-1")
-        (progn (message "Found the laptop display")
-               (message "%s" (cadar (cdr (cdddar (display-monitor-attributes-list)))))
-               (window--display-buffer buffer (frame-root-window (cadar (cdr (cdddar (display-monitor-attributes-list))))) 'reuse))
-      (message "%s" (cdaar (display-monitor-attributes-list)))))
+  ;; ;; TODO - now opens go-guru in laptop display, also add functionality for all compilation buffers
+  ;; (defun open-go-guru-laptop-display (buffer alist)
+  ;;   (if  (string-equal (cdaar (display-monitor-attributes-list)) "eDP-1")
+  ;;       (progn (message "Found the laptop display")
+  ;;              (message "%s" (cadar (cdr (cdddar (display-monitor-attributes-list)))))
+  ;;              (window--display-buffer buffer (frame-root-window (cadar (cdr (cdddar (display-monitor-attributes-list))))) 'reuse))
+  ;;     (message "%s" (cdaar (display-monitor-attributes-list)))))
 
-  display-buffer-alist
+  ;; display-buffer-alist
 
-  (add-to-list
-   'display-buffer-alist
-   '("\\*go-guru-output\\*"
-     open-go-guru-laptop-display
-     display-buffer-reuse-window))
+  ;; (add-to-list
+  ;;  'display-buffer-alist
+  ;;  '("\\*go-guru-output\\*"
+  ;;    open-go-guru-laptop-display
+  ;;    display-buffer-reuse-window))
+
+  ;; TODO - Instead of having a dedicated window, use a popwin
+  (add-to-list 'popwin:special-display-config '("*go-guru-output*" :tail t :dedicated t :position bottom))
 
   ;; TODO - implement a checker function, so that if in the *go-guru-output* buffer, open
   ;; buffer in last used window
@@ -391,7 +394,7 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(magit-commit-arguments (quote ("--signoff")))
- '(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n256")))
+ '(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n512")))
  '(org-agenda-files (quote ("~/misc/org/test.org")))
  '(package-selected-packages
    (quote
