@@ -53,7 +53,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git, z, docker, docker-compose, golang)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -75,7 +75,7 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -92,3 +92,19 @@ source $ZSH/oh-my-zsh.sh
 
 # ------- Aliases -------
 alias lsa="ls -a"
+# Needs to have the BUILDDIR set
+alias dockdev='BUILDDIR=/home/opus/ docker-compose -f docker-compose.yml -f docker-compose.storage.minio.yml -f docker-compose.demo.yml -f docker-compose.client.yml -f docker-compose.client-dev.yml run mender-client'
+# add user to the integration test environment through the mender-useradm microservice
+alias addusr='sudo docker-compose exec mender-useradm \
+                         /usr/bin/useradm \
+                         create-user \
+                         --username=user@host.com \
+                         --password=rootpass'
+# Used for compiling gcc-cross-compiler for OPOS
+#export PREFIX="$HOME/opt/cross"
+#export TARGET=i686-elf
+#export PATH="$PREFIX/bin:$PATH"
+export PATH="$HOME/opt/cross/bin:$PATH"
+
+# Run neofetch on starting a shell
+neofetch
