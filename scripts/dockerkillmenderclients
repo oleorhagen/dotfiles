@@ -1,0 +1,2 @@
+#!/usr/bin/zsh
+docker rm -f $(docker ps -a | grep mender-client | awk '{print $1}')

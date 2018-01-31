@@ -4,12 +4,14 @@ source ~/.profile # Consider adding this to an autorun-login shell-script
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/opus/.oh-my-zsh
+export ZSH=/home/$USER/.oh-my-zsh
+
+export SCRIPT_DIR=/home/olepor/.i3blocks/i3blocks-contrib/
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell" # sammy
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -22,7 +24,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=1
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -53,7 +55,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git, z, docker, docker-compose, golang)
+plugins=(git z docker docker-compose golang)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -104,7 +106,13 @@ alias addusr='sudo docker-compose exec mender-useradm \
 #export PREFIX="$HOME/opt/cross"
 #export TARGET=i686-elf
 #export PATH="$PREFIX/bin:$PATH"
+export GOROOT="/usr/lib/go-1.9"
+export PATH="${GOROOT}/bin:$PATH"
 export PATH="$HOME/opt/cross/bin:$PATH"
 
 # Run neofetch on starting a shell
-neofetch
+# neofetch
+cd ~/poky && source oe-init-build-env && cd ~/
+
+# Make funny on startup
+fortune -a | cowsay

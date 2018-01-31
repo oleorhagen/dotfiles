@@ -1,0 +1,5 @@
+#!/usr/bin/zsh
+
+# Shell script that kills all running docker containers
+
+docker rm -f -v $(docker ps -a -q)

@@ -1,0 +1,3 @@
+#!/bin/bash
+TMP=$(docker ps -a | grep cli | awk '{print $1}')
+docker attach ${TMP}
