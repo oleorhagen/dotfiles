@@ -112,7 +112,7 @@ export PATH="$HOME/opt/cross/bin:$PATH"
 
 # Run neofetch on starting a shell
 # neofetch
-cd ~/poky && source oe-init-build-env && cd ~/
+# cd ~/poky && source oe-init-build-env && cd ~/
 
 # Make funny on startup
 fortune -a | cowsay

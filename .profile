@@ -25,3 +25,9 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 # and remaps return to control when held, and ctrl when pressed
 # save as ~/bin/ezrctls.sh (easier controls)
 
+
+# Rust to PATH
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# RUST source code location (for auto-completion)
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
