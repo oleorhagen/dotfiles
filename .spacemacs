@@ -71,9 +71,14 @@ This function should only modify configuration layer settings."
      semantic
      systemd
      syntax-checking
-     markdown
+     (markdown :variables
+               markdown-live-preview-engine 'vmd)
      yaml
-     python
+     (python :variables
+             python-backend 'anaconda
+             python-test-runner 'pytest
+             python-enable-yapf-format-on-save t
+             python-sort-imports-on-save t)
      ;; gtags
      org
      neotree
@@ -94,8 +99,15 @@ This function should only modify configuration layer settings."
                                       ;; org-jira maybe? TODO
                                       ;; Add in-buffer code coverage visualisation
                                       ;; (coverage :location (recipe :fetcher github :repo "google/coverage"))
-                                      (go-impl :location (recipe :fetcher github :repo "syohex/emacs-go-impl"))
+                                      (go-impl :location
+                                               (recipe
+                                                :fetcher github
+                                                :repo "syohex/emacs-go-impl"))
                                       coverage ;; add in-buffer test coverage for golang
+                                      (bitbake :location
+                                               (recipe
+                                                    :fetcher github
+                                                    :repo "canatella/bitbake-el"))
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -564,6 +576,10 @@ you should place your code here."
   ;; Add shell script highligting to bbclass files (Yocto)
   ;; (add-to-list 'auto-mode-alist '(("\\.bbclass.*\\'") . shell-script-mode))
 
+  ;; Add bitbake.el as a syntax highlighter for bitbake files
+  ;; TODO - fix regex!
+  (add-to-list 'auto-mode-alist '(("\\.\(bb|bbclass|bbappend|inc)" . bitbake-mode)))
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -601,7 +617,7 @@ This function is called at the very end of Spacemacs initialization."
  '(org-agenda-files (quote ("~/misc/org/test.org")))
  '(package-selected-packages
    (quote
-    (org-mime web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat multiple-cursors js-doc ghub let-alist disaster company-tern tern company-c-headers coffee-mode cmake-mode clang-format js2-refactor js2-mode yapfify xterm-color powerline shell-pop pyvenv pytest pyenv-mode py-isort pip-requirements spinner org-category-capture multi-term live-py-mode hydra hy-mode dash-functional parent-mode helm-pydoc projectile request go-impl gitignore-mode pos-tip flycheck pkg-info epl flx git-commit iedit anzu goto-chg undo-tree eshell-z eshell-prompt-extras esh-help diminish cython-mode coverage ov go-mode company-anaconda company bind-map bind-key yasnippet packed anaconda-mode pythonic f dash s async auto-complete popup smartparens highlight evil helm helm-core avy markdown-mode org-plus-contrib magit magit-popup with-editor org-projectile org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot yaml-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-bullets open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-guru go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word company-statistics company-go column-enforce-mode clean-aindent-mode bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (bitbake web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat multiple-cursors js-doc ghub let-alist disaster company-tern tern company-c-headers coffee-mode cmake-mode clang-format js2-refactor js2-mode yapfify xterm-color powerline shell-pop pyvenv pytest pyenv-mode py-isort pip-requirements spinner org-category-capture multi-term live-py-mode hydra hy-mode dash-functional parent-mode helm-pydoc projectile request go-impl gitignore-mode pos-tip flycheck pkg-info epl flx git-commit iedit anzu goto-chg undo-tree eshell-z eshell-prompt-extras esh-help diminish cython-mode coverage ov go-mode company-anaconda company bind-map bind-key yasnippet packed anaconda-mode pythonic f dash s async auto-complete popup smartparens highlight evil helm helm-core avy markdown-mode org-plus-contrib magit magit-popup with-editor org-projectile org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot yaml-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-bullets open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-guru go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word company-statistics company-go column-enforce-mode clean-aindent-mode bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

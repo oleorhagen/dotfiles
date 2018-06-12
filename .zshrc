@@ -102,6 +102,7 @@ alias addusr='sudo docker-compose exec mender-useradm \
                          create-user \
                          --username=user@host.com \
                          --password=rootpass'
+alias bb='bitbake'
 # Used for compiling gcc-cross-compiler for OPOS
 #export PREFIX="$HOME/opt/cross"
 #export TARGET=i686-elf

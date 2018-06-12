@@ -8,3 +8,5 @@
 	cm = commit
 	s = status
 
+[color]
+	ui = auto
