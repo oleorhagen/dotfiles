@@ -107,9 +107,9 @@ alias bb='bitbake'
 #export PREFIX="$HOME/opt/cross"
 #export TARGET=i686-elf
 #export PATH="$PREFIX/bin:$PATH"
-export GOROOT="/usr/lib/go-1.9"
+export GOROOT="/usr/local/go"
 export PATH="${GOROOT}/bin:$PATH"
-export PATH="$HOME/opt/cross/bin:$PATH"
+export PATH="$PATH:/usr/local/go/bin"
 
 # Run neofetch on starting a shell
 # neofetch
