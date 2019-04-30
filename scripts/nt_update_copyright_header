@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#GOFILES = $(find . -name "*.go" -not -path "./vendor/*" | sed 's:./::')
+# EOH_LNR=$(grep package -n $1 | cut -d':' -f1)
+
+# sed "1,${EOH_LNR} s/[0-9]\{4\}/$(date +%Y)/" $1
+
+sed "s,// Copyright [0-9]\{4\} Northern.tech AS,// Copyright $(date +%Y) Northern.tech AS,"

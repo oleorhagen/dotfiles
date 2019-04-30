@@ -1,7 +1,7 @@
 # source .profile to enable the remapping of return and caps-lock
 source ~/.profile # Consider adding this to an autorun-login shell-script
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=/home/$USER/.oh-my-zsh
@@ -103,13 +103,18 @@ alias addusr='sudo docker-compose exec mender-useradm \
                          --username=user@host.com \
                          --password=rootpass'
 alias bb='bitbake'
+# alias runqemu="~/"
 # Used for compiling gcc-cross-compiler for OPOS
 #export PREFIX="$HOME/opt/cross"
 #export TARGET=i686-elf
 #export PATH="$PREFIX/bin:$PATH"
+##
+# Go version 1.11
+#
 export GOROOT="/usr/local/go"
-export PATH="${GOROOT}/bin:$PATH"
-export PATH="$PATH:/usr/local/go/bin"
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+# export PATH="/home/olepor/go:$PATH"
+#export PATH="$PATH:/usr/local/go/bin"
 
 # Run neofetch on starting a shell
 # neofetch
@@ -117,3 +122,8 @@ export PATH="$PATH:/usr/local/go/bin"
 
 # Make funny on startup
 fortune -a | cowsay
+
+
+#export PATH=$PATH:/home/olepor/go/bin
+
+#export PATH=/home/olepor/.go/bin:$PATH

@@ -1,12 +1,23 @@
 [user]
-	email = ole.orhagen@cfengine.com
+	email = ole.orhagen@northern.tech
 	name = Ole Petter
+	signingkey = A7100375167A7B21
 
 [alias]
 	lg = log --all --oneline --graph --decorate
 	a = add
 	cm = commit
 	s = status
+	pr = "!f() { git fetch $1 pull/$2/head:pull_$2; git checkout pull_$2; }; f"
 
 [color]
 	ui = auto
+[github]
+	oauth-token = 5f9db8b96623a199d3c30afaddbcc00f7418dac8
+	user = oleorhagen
+[commit]
+	gpgsign = true
+[core]
+	editor = vim
+[filter "nt_update_copyright_header"]
+	clean = /home/olepor/dotfiles/scripts/nt_update_copyright_header
