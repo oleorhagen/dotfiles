@@ -11,7 +11,7 @@ export SCRIPT_DIR=/home/olepor/.i3blocks/i3blocks-contrib/
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell" # sammy
+ZSH_THEME="olepor" # sammy
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -127,3 +127,18 @@ fortune -a | cowsay
 #export PATH=$PATH:/home/olepor/go/bin
 
 #export PATH=/home/olepor/.go/bin:$PATH
+
+# Simple function to output whatever is on the clip-board
+# to the given file.
+#function pasteto(destfile) {
+#    
+#}
+#
+function inityocto() {
+	cd ~/yocto/qemu-setup/
+	source poky/oe-init-build-env
+	cd -2
+}
+
+# added by travis gem
+[ -f /home/olepor/.travis/travis.sh ] && source /home/olepor/.travis/travis.sh
