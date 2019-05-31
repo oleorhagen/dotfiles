@@ -143,6 +143,7 @@ function inityocto() {
 # Switches to and from the freestanding i3-config.
 function i3switchconfig() {
     (
+        set -vxe
         cd ~/.config/i3/
         tmpf=$(mktemp --suffix=i3conf)
         cp config $tmpf
