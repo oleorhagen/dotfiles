@@ -140,5 +140,18 @@ function inityocto() {
 	cd -2
 }
 
+# Switches to and from the freestanding i3-config.
+function i3switchconfig() {
+    (
+        cd ~/.config/i3/
+        tmpf=$(mktemp --suffix=i3conf)
+        cp config $tmpf
+        cp config.bak config
+        cp $tmpf config.bak
+        i3-msg restart
+        # rm $tmpf
+    )
+}
+
 # added by travis gem
 [ -f /home/olepor/.travis/travis.sh ] && source /home/olepor/.travis/travis.sh
