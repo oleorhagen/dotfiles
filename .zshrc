@@ -154,5 +154,12 @@ function i3switchconfig() {
     )
 }
 
+function i3multiscreensetup() {
+    set -xve
+    xrandr --output DP-2-2 --left-of DP-2-1 \
+           --auto --output DP-2-1 --left-of eDP-1 \
+           --rotate right --auto --output eDP-1 --auto
+}
+
 # added by travis gem
 [ -f /home/olepor/.travis/travis.sh ] && source /home/olepor/.travis/travis.sh
