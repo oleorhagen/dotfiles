@@ -14,7 +14,8 @@ cd ~/mendersoftware/meta-mender/meta-mender-qemu/docker
 
 # Start the demo environment in the background, and suppress the output
 cd ~/mendersoftware/integration
-./demo --client up >/dev/null 2>/dev/null &
+tmpf=$(mktemp)
+./demo --client up >$tmpf 2>/dev/null &
 demo_env_pid=$!
 
 # Make sure that the demo environment is brought down on SIGINT
@@ -34,6 +35,15 @@ echo "Waiting for the useradm service to come up"
 #      --connect-timeout 5 \
 #      https://localhost/api/management/v1/useradm/auth/login
 sleep 60
+
+# Extract the mender tmp server password from the tmp file
+export MENDER_PWD=$(awk '/Login password:/ {print $3}' < $tmpf)
+echo "Password: " $MENDER_PWD
+
+# Login to the mender server
+# mender-cli --skip-verify --server https://localhost login --username mender-demo@example.com --password=$PWD
+
+# Accept the device (?)
 
 # Connect to the running client
 echo "Connecting to the client..."
