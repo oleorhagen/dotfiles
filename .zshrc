@@ -108,11 +108,9 @@ alias bb='bitbake'
 #export PREFIX="$HOME/opt/cross"
 #export TARGET=i686-elf
 #export PATH="$PREFIX/bin:$PATH"
-##
-# Go version 1.11
-#
-export GOROOT="/usr/local/go"
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export GOROOT="/usr/lib/go-1.12/"
+export PATH="$PATH:$(go env GOPATH)/bin:$GOROOT"
+#export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 # export PATH="/home/olepor/go:$PATH"
 #export PATH="$PATH:/usr/local/go/bin"
 
