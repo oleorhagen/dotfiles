@@ -8,6 +8,7 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 export GOPATH=~/go
+export GOROOT="/usr/lib/go-1.13/"
 export PATH=$PATH:$GOPATH/bin
 
 # if running bash

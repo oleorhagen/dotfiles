@@ -40,10 +40,11 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      (c-c++ :variables
             c-c++-enable-clang-support t
-            c-c++-enable-clang-format-on-save t
+            c-c++-enable-clang-format-on-save nil
             c-c++-enable-rtags-support t
-            c++-enable-organize-includes-on-save t)
+            c++-enable-organize-includes-on-save nil)
      debug
+     docker
      dash
      helm
      ;; better-defaults
@@ -82,7 +83,9 @@ This function should only modify configuration layer settings."
      syntax-checking
      (markdown :variables
                markdown-live-preview-engine 'vmd)
-     yaml
+     (yaml
+      :variables
+      yaml-indent-offset 4) ;; Standard in the mender yaml files
      (python :variables
              python-backend 'anaconda
              python-test-runner 'pytest
@@ -520,8 +523,12 @@ you should place your code here."
   ;; evaluate sexpressions with ee
   (spacemacs/set-leader-keys
     "ee" 'eval-last-sexp
-    "eb" 'eval-buffer
-    )
+    "eb" 'eval-buffer)
+
+  ;; Comment box binding on '<leader> o c b'
+  (spacemacs/declare-prefix "oc" "comment")
+  (spacemacs/set-leader-keys
+    "ocb" 'comment-box)
 
   ;; ------ Go-Coverage ---------- TODO; Not working atm
   ;; (add-to-list 'load-path "~/.emacs.d/private/local/coverage/")

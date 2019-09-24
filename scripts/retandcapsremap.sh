@@ -8,6 +8,6 @@ xmodmap -e 'add Control = Control_L'
 xmodmap -e 'keycode 999 = Escape'
 xcape -e 'Control_L=Escape'
 
-./retremap.sh
+#./retremap.sh
 # depends xmodmap xcape
 # https://github.com/alols/xcape

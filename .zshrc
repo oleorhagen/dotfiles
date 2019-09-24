@@ -108,7 +108,7 @@ alias bb='bitbake'
 #export PREFIX="$HOME/opt/cross"
 #export TARGET=i686-elf
 #export PATH="$PREFIX/bin:$PATH"
-export GOROOT="/usr/lib/go-1.12/"
+export GOROOT="/usr/lib/go-1.13/"
 export PATH="$PATH:$(go env GOPATH)/bin:$GOROOT"
 #export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 # export PATH="/home/olepor/go:$PATH"
@@ -129,7 +129,7 @@ fortune -a | cowsay
 # Simple function to output whatever is on the clip-board
 # to the given file.
 #function pasteto(destfile) {
-#    
+#
 #}
 #
 function inityocto() {
@@ -159,5 +159,31 @@ function i3multiscreensetup() {
            --rotate right --auto --output eDP-1 --auto
 }
 
+# Aliases
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+alias pip=pip3
+alias ma='mender-artifact'
+
+function dockercontainerlog() {
+    docker logs $(docker ps -a | grep $1 | awk '{print $1}')
+}
+
+function dockergetcontainerid() {
+    docker ps -a | grep $1 | cut -d' ' -f 1 | pbcopy && echo "hash copied to clipboard"
+}
+
 # added by travis gem
 [ -f /home/olepor/.travis/travis.sh ] && source /home/olepor/.travis/travis.sh
+
+# Vagrant setup
+export NTECH_ROOT="$HOME/northern.tech"
+
+# Add dotfiles/scripts to PATH
+export PATH=$HOME/dotfiles/scripts:$PATH
+
+# Alias the sourcing of this file (.zshrc)
+alias zshsrc='source ~/.zshrc'
+
+# Make sure xbindkeys is sourced
+xbindkeys --poll-rc
