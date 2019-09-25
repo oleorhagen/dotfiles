@@ -187,3 +187,5 @@ alias zshsrc='source ~/.zshrc'
 
 # Make sure xbindkeys is sourced
 xbindkeys --poll-rc
+
+alias plz="sudo"
