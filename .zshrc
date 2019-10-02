@@ -205,6 +205,6 @@ function explain {
         url=$url"$i""+"
     done
 
-    # opens url in browser
-    open $url
+    # opens url in firefox
+    w3m -dump "$url" | awk 'NR > 8 {print}'
 }
