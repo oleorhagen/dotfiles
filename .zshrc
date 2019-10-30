@@ -205,6 +205,14 @@ function explain {
         url=$url"$i""+"
     done
 
-    # opens url in firefox
+    # dump the explanation to the terminal. Strip off mumbojumbo
     w3m -dump "$url" | awk 'NR > 8 {print}'
 }
+
+function srcyocto {
+    cd ~/yocto/qemu-setup
+    source ./poky/oe-init-build-env build
+}
+
+# Add the misc/scripts folder to PATH
+export PATH=$PATH:/home/olepor/misc/scripts
