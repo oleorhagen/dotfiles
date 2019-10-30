@@ -44,6 +44,7 @@ This function should only modify configuration layer settings."
             c-c++-enable-rtags-support t
             c++-enable-organize-includes-on-save nil)
      debug
+     erlang
      docker
      dash
      helm
@@ -58,14 +59,29 @@ This function should only modify configuration layer settings."
      (github
       :variables
       )
+     (lsp :variables
+          lsp-ui-remap-xref-keybindings nil
+          lsp-ui-doc-enable             nil
+          lsp-ui-doc-include-signature  nil
+          lsp-ui-sideline-enable        nil
+          lsp-ui-sideline-show-symbol   nil
+          )
+     ;; web-beautify
+     ;; (html :variables
+     ;;       css-enable-lsp t
+     ;;       less-enable-lsp t
+     ;;       scss-enable-lsp t
+     ;;       html-enable-lsp t
+     ;;       web-fmt-tool 'web-beautify
+     ;;       )
      ;; The go-layer needs the auto-completion and syntax-checking layers
      ;; TODO - add gotests function wrappers to the go-mode https://github.com/cweill/gotests
      (go :varibles
-            go-format-before-save t
+            go-format-before-save nil
             gofmt-command "goimports"
             go-use-golangci-lint t
             gofmt-show-errors nil ;; errors are already shown by flycheck
-            go-backend 'lsp ;; Use the LSP backend.
+            go-backend 'go-mode ;; Use the LSP backend.
             godoc-at-point-function 'godoc-gogetdoc)
 
      (auto-completion :variables
@@ -89,6 +105,7 @@ This function should only modify configuration layer settings."
      (python :variables
              python-backend 'anaconda
              python-test-runner 'pytest
+             python-formatter 'black
              python-enable-yapf-format-on-save nil
              python-sort-imports-on-save nil)
      ;; gtags
@@ -264,7 +281,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 15
                                :weight normal
                                :width normal)
 
@@ -536,8 +553,6 @@ you should place your code here."
   ;; (add-to-list 'load-path "~/.emacs.d/private/local/coverage/")
   ;; (require 'coverage)
   ;; TODO - why is this not set with package macro in (go :variables ?)
-  (setq go-format-before-save t)
-  (setq gofmt-command "goimports")
 
   ;; ;; bind keys for the github.com/google/coverage code coverage for go in buffer package
   ;; (spacemacs/set-leader-keys
