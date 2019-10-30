@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [ -n "${NO_CLIENT}" ]; then
+	echo "YAY"
+fi
+

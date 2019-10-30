@@ -1,0 +1,23 @@
+#!/bin/bash
+
+echo "Piping command output to 'pull.out'"
+echo "Building..."
+make build > pull.out || (echo "Build failed"; false)
+
+echo "Testing..."
+make test >> pull.out || (echo "Tests failed"; false)
+
+echo "Extra code checks..."
+make extracheck >> pull.out || (echo "Extra checks failed"; false)
+
+echo "Running integration tests..."
+echo "Do you wish to run integration tests? (y[es]/no)"
+read INTEGRATION
+if [[ "$INTEGRATION" =~ y ]]
+then
+    echo "TODO -- Running integration tests"
+    # TODO -- add the ability to choose the tests to run
+    # Build for qemu on the oslo-dc server
+else
+    echo "Regexp failed"
+fi

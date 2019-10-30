@@ -1,0 +1,13 @@
+#!/bin/bash
+
+trap 'echo SIGUSR1 received' SIGUSR1
+while :
+do
+    # Work period
+    sleep 1500 && notify-send "Break!" # && i3-msg 'workspace 6'
+    sleep 5
+    # Lock the screen
+    i3lock -i ${HOME}/dotfiles/scripts/trex.png
+    # Pause
+    sleep 300 && notify-send "Break finished!" && i3-msg 'workspace 7'
+done

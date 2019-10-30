@@ -1,0 +1,2 @@
+#!/usr/bin/zsh
+docker ps -a | grep client | awk '{print }'

@@ -1,0 +1,180 @@
+{
+      "parameters" : [
+        {
+          "name" : "MENDER_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "META_MENDER_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "POKY_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "MENDER_QA_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "MENDER_ARTIFACT_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "MENDER_CONDUCTOR_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "MENDER_CONDUCTOR_ENTERPRISE_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "DEPLOYMENTS_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "DEVICEADM_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "DEVICEAUTH_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "GUI_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "INVENTORY_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "USERADM_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "MENDER_API_GATEWAY_DOCKER_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "MENDER_CLI_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "INTEGRATION_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "TENANTADM_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "MENDER_STRESS_TEST_CLIENT_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "META_OPENEMBEDDED_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "META_RASPBERRYPI_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "MENDER_IMAGE_TESTS_REV",
+          "value" : "master"
+        },
+        {
+          "name" : "BASE_BRANCH",
+          "value" : "master"
+        },
+        {
+          "name" : "BUILD_QEMUX86_64_UEFI_GRUB",
+          "value" : false
+        },
+        {
+          "name" : "TEST_QEMUX86_64_UEFI_GRUB",
+          "value" : false
+        },
+        {
+          "name" : "BUILD_QEMUX86_64_BIOS_GRUB",
+          "value" : false
+        },
+        {
+          "name" : "TEST_QEMUX86_64_BIOS_GRUB",
+          "value" : false
+        },
+        {
+          "name" : "BUILD_QEMUX86_64_BIOS_GRUB_GPT",
+          "value" : false
+        },
+        {
+          "name" : "TEST_QEMUX86_64_BIOS_GRUB_GPT",
+          "value" : false
+        },
+        {
+          "name" : "BUILD_VEXPRESS_QEMU_UBOOT_UEFI_GRUB",
+          "value" : false
+        },
+        {
+          "name" : "TEST_VEXPRESS_QEMU_UBOOT_UEFI_GRUB",
+          "value" : false
+        },
+        {
+          "name" : "BUILD_VEXPRESS_QEMU",
+          "value" : false
+        },
+        {
+          "name" : "TEST_VEXPRESS_QEMU",
+          "value" : false
+        },
+        {
+          "name" : "BUILD_VEXPRESS_QEMU_FLASH",
+          "value" : false
+        },
+        {
+          "name" : "TEST_VEXPRESS_QEMU_FLASH",
+          "value" : false
+        },
+        {
+          "name" : "BUILD_BEAGLEBONEBLACK",
+          "value" : false
+        },
+        {
+          "name" : "TEST_BEAGLEBONEBLACK",
+          "value" : false
+        },
+        {
+          "name" : "BUILD_RASPBERRYPI3",
+          "value" : false
+        },
+        {
+          "name" : "TEST_RASPBERRYPI3",
+          "value" : false
+        },
+        {
+          "name" : "RUN_INTEGRATION_TESTS",
+          "value" : true
+        },
+        {
+          "name" : "SPECIFIC_INTEGRATION_TEST",
+          "value" : ""
+        },
+        {
+          "name" : "TESTS_IN_PARALLEL",
+          "value" : "4"
+        },
+        {
+          "name" : "PUBLISH_ARTIFACTS",
+          "value" : false
+        },
+        {
+          "name" : "STOP_SLAVE",
+          "value" : false
+        },
+        {
+          "name" : "CLEAN_BUILD_CACHE",
+          "value" : false
+        }
+      ]
+}
