@@ -188,7 +188,7 @@ alias zshsrc='source ~/.zshrc'
 # Make sure xbindkeys is sourced
 xbindkeys --poll-rc
 
-alias plz="sudo"
+alias please="sudo"
 
 # Use explainshell.com to explain weird bash commands to me
 function explain {
