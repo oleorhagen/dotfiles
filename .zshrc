@@ -216,6 +216,10 @@ function srcyocto {
 
 # Add the misc/scripts folder to PATH
 export PATH=$PATH:/home/olepor/misc/scripts
+
+# Add cfengine binaries to the PATh
+export PATH=/var/cfengine/bin:$PATH
+
 # Automatically source Python virtualenv if present
 function venv() {
     if [ -d .venv ]; then
