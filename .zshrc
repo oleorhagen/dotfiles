@@ -216,3 +216,11 @@ function srcyocto {
 
 # Add the misc/scripts folder to PATH
 export PATH=$PATH:/home/olepor/misc/scripts
+# Automatically source Python virtualenv if present
+function venv() {
+    if [ -d .venv ]; then
+        source .venv/bin/activate
+    else
+        echo >&2 "No .venv directory found in the current directory"
+    fi
+}
