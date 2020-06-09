@@ -55,7 +55,7 @@ export UPDATE_ZSH_DAYS=1
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z docker docker-compose golang)
+plugins=(git z docker docker-compose golang colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,7 +108,7 @@ alias bb='bitbake'
 #export PREFIX="$HOME/opt/cross"
 #export TARGET=i686-elf
 #export PATH="$PREFIX/bin:$PATH"
-export GOROOT="/usr/lib/go-1.13/"
+export GOROOT="/usr/lib/go-1.14/"
 export PATH="$PATH:$(go env GOPATH)/bin:$GOROOT"
 #export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 # export PATH="/home/olepor/go:$PATH"
@@ -217,8 +217,11 @@ function srcyocto {
 # Add the misc/scripts folder to PATH
 export PATH=$PATH:/home/olepor/misc/scripts
 
-# Add cfengine binaries to the PATh
+# Add cfengine binaries to the PATH
 export PATH=/var/cfengine/bin:$PATH
+
+# Add ~/code/scripts to the PATH
+export PATH=${HOME}/code/scripts:$PATH
 
 # Automatically source Python virtualenv if present
 function venv() {
@@ -228,3 +231,25 @@ function venv() {
         echo >&2 "No .venv directory found in the current directory"
     fi
 }
+
+# Mender-artifact autocomplete zsh
+PROG=mender-artifact
+export _CLI_ZSH_AUTOCOMPLETE_HACK=1
+source  ~/mendersoftware/mender-artifact/autocomplete/zsh_autocomplete
+
+if [[ ${RANDOM} -le 5000 ]]; then
+	echo >2 "Updating the firmware..."
+	fwupdmgr update
+fi
+
+
+###############################################################################
+#                 ZSH auto-completion stuff and configurations                #
+###############################################################################
+
+# folder of all of your autocomplete functions
+fpath=($HOME/.zsh-completions $fpath)
+
+# enable autocomplete function
+autoload -U compinit
+compinit

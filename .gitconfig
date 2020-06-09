@@ -17,9 +17,13 @@
 	user = oleorhagen
 [commit]
 	gpgsign = true
+	template = /home/olepor/dotfiles/git-commit-template.txt
 [core]
 	editor = vim
 [filter "nt_update_copyright_header"]
 	clean = /home/olepor/dotfiles/scripts/nt_update_copyright_header
 [init]
 	templatedir = ~/.git-templates
+
+# [remote "mendersoftware"]
+	#fetch = +refs/pull/*/head:refs/remotes/mendersoftware/pr/*
