@@ -108,7 +108,7 @@ alias bb='bitbake'
 #export PREFIX="$HOME/opt/cross"
 #export TARGET=i686-elf
 #export PATH="$PREFIX/bin:$PATH"
-export GOROOT="/usr/lib/go-1.14/"
+export GOROOT="/usr/lib/go-1.15/"
 export PATH="$PATH:$(go env GOPATH)/bin:$GOROOT"
 #export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 # export PATH="/home/olepor/go:$PATH"
@@ -170,7 +170,7 @@ function dockercontainerlog() {
 }
 
 function dockergetcontainerid() {
-    docker ps -a | grep $1 | cut -d' ' -f 1 | pbcopy && echo "hash copied to clipboard"
+    docker ps -a | grep $1 | cut -d' ' -f 1 | pbcopy && echo >&2 "hash copied to clipboard"
 }
 
 # added by travis gem
@@ -233,12 +233,12 @@ function venv() {
 }
 
 # Mender-artifact autocomplete zsh
-PROG=mender-artifact
-export _CLI_ZSH_AUTOCOMPLETE_HACK=1
-source  ~/mendersoftware/mender-artifact/autocomplete/zsh_autocomplete
+#PROG=mender-artifact
+#export _CLI_ZSH_AUTOCOMPLETE_HACK=1
+#source  ~/mendersoftware/mender-artifact/autocomplete/zsh_autocomplete
 
-if [[ ${RANDOM} -le 5000 ]]; then
-	echo >2 "Updating the firmware..."
+if [[ ${RANDOM} -le 1000 ]]; then
+	echo >&2 "Updating the firmware..."
 	fwupdmgr update
 fi
 
@@ -253,3 +253,15 @@ fpath=($HOME/.zsh-completions $fpath)
 # enable autocomplete function
 autoload -U compinit
 compinit
+source /opt/ros/melodic/setup.zsh
+
+# ArduPilot paths
+export PATH=$PATH:$HOME/ardupilot/Tools/autotest
+export PATH=/usr/lib/ccache:$PATH
+source ~/catkin_ws/devel/setup.zsh
+
+########################################
+#               ROS                    #
+########################################
+export ROS_HOSTNAME=localhost
+ROS_MASTER_URI=http://localhost:11311
