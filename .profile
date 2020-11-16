@@ -33,3 +33,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # RUST source code location (for auto-completion)
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export GPG_TTY=$(tty)
+export PATH=/opt/gcc-arm-none-eabi-7-2017-q4-major/bin:$PATH
+export PATH=/opt/gcc-arm-none-eabi-6-2017-q2-update/bin:$PATH
+export PATH=/home/olepor/misc/projects/quadcopter/ardupilot/Tools/autotest:$PATH
+export PATH=/usr/lib/ccache:$PATH

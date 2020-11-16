@@ -154,9 +154,14 @@ function i3switchconfig() {
 
 function i3multiscreensetup() {
     set -xve
-    xrandr --output DP-2-2 --left-of DP-2-1 \
-           --auto --output DP-2-1 --left-of eDP-1 \
+    xrandr --output DP-2-2 --right-of DP-2-1 \
+           --auto --output DP-2-1 --right-of eDP-1 \
            --rotate right --auto --output eDP-1 --auto
+    # Move the workspaces to the correct monitors
+    i3-msg '[workspace=7]' move workspace to output DP-2-1
+    i3-msg '[workspace=8]' move workspace to output DP-2-2
+    i3-msg '[workspace=9]' move workspace to output DP-2-2
+    i3-msg '[workspace=10]' move workspace to output DP-2-2
 }
 
 # Aliases
@@ -223,6 +228,12 @@ export PATH=/var/cfengine/bin:$PATH
 # Add ~/code/scripts to the PATH
 export PATH=${HOME}/code/scripts:$PATH
 
+# Add the changelog-generator the the PATH
+export PATH="${HOME}/mendersoftware/integration/extra/changelog-generator:${PATH}"
+
+# Add the release-tool to the PATH
+export PATH="${HOME}/mendersoftware/integration/extra:${PATH}"
+
 # Automatically source Python virtualenv if present
 function venv() {
     if [ -d .venv ]; then
@@ -232,15 +243,41 @@ function venv() {
     fi
 }
 
-# Mender-artifact autocomplete zsh
-#PROG=mender-artifact
-#export _CLI_ZSH_AUTOCOMPLETE_HACK=1
-#source  ~/mendersoftware/mender-artifact/autocomplete/zsh_autocomplete
+function released_debian_package_version_exists() {
+	if [[ $# != 1 ]]; then
+		echo >&2 "Usage: released_debian_package_version_exists version-tag"
+	fi
+	wget https://d1b0l86ne08fsf.cloudfront.net/$1/dist-packages/debian/armhf/mender-client_$1-1_armhf.deb
+}
+
+function acceptance-tests() {
+	cd ~/mendersoftware/meta-mender/tests/acceptance
+}
+function integration-tests() {
+	cd ~/mendersoftware/integration/tests
+}
+function yocto-build-folder() {
+	cd ~/yocto/qemu/build
+}
+
+function makefile-verify() {
+	make --warn-undefined-variables
+}
+
+function bitbake-list-image-packages() {
+  if [ $# -ne 1 ]; then
+    echo >&2 "No image/package given"
+  fi
+  bitbake -g "$1" && cat pn-depends.dot | grep -v -e '-native' | \
+      grep -v digraph | grep -v -e '-image' | awk '{print $1}' | sort | uniq
+}
 
 if [[ ${RANDOM} -le 1000 ]]; then
 	echo >&2 "Updating the firmware..."
 	fwupdmgr update
 fi
+
+export GITLAB_TOKEN=$(pass show gitlab.com)
 
 
 ###############################################################################
@@ -259,6 +296,9 @@ source /opt/ros/melodic/setup.zsh
 export PATH=$PATH:$HOME/ardupilot/Tools/autotest
 export PATH=/usr/lib/ccache:$PATH
 source ~/catkin_ws/devel/setup.zsh
+
+# release-tool to PATH
+export PATH=$PATH:$HOME/mendersoftware/integration/extra
 
 ########################################
 #               ROS                    #

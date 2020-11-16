@@ -1,5 +1,5 @@
 # clear all mappings
-setxkbmap -option ''
+#setxkbmap -option '' TODO - Remove?
 # assign return to control on press, return on release
 xmodmap -e 'clear Lock'
 xmodmap -e 'keycode 66 = Control_L'

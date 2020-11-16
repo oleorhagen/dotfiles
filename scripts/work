@@ -1,0 +1,37 @@
+#! /bin/bash
+
+help() {
+  cat <<EOF
+Ole's work script.
+
+Logs work time, through simply keeping a ledger of time in and time out
+
+Usage:
+work hard
+hardly working
+EOF
+}
+
+work_hard() {
+  date >> ${HOME}/.timeledger
+}
+
+hardly_working() {
+  date >> ${HOME}/.timeledger
+}
+
+if [[ "$1" = "hard" ]]; then
+  work_hard
+  exit 0
+fi
+
+
+if [[ "$1" == "working" ]]; then
+  hardly_working
+  exit 0
+fi
+
+help
+
+
+

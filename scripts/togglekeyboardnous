@@ -1,0 +1,11 @@
+#! /bin/bash
+
+if [[ -e ~/.engkey ]]; then
+	source ~/dotfiles/scripts/norsk
+	rm -f ~/.engkey
+	touch ~/.nokey
+else
+	source ~/dotfiles/scripts/engelsk
+	touch ~/.engkey
+	rm -f ~/.nokey
+fi

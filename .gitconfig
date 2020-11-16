@@ -27,3 +27,5 @@
 
 # [remote "mendersoftware"]
 	#fetch = +refs/pull/*/head:refs/remotes/mendersoftware/pr/*
+[mailmap]
+	file = /home/olepor/go/src/github.com/mendersoftware/integration/extra/gitdm/mailmap
