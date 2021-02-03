@@ -38,6 +38,14 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+
+     ;; My private display package from ~/.layers
+     display
+
+     (unicode-fonts
+      :variables
+      unicode-fonts-enable-ligatures t
+      unicode-fonts-ligature-modes '(prog-mode))
      (c-c++ :variables
             c-c++-enable-clang-support t
             c-c++-enable-clang-format-on-save nil
@@ -128,7 +136,7 @@ This function should only modify configuration layer settings."
      spacemacs-org
      neotree
      ;; (shell :variables
-     ;;        shell-default-height 30
+     ;;        shell-default-height 300
      ;;        shell-default-position 'bottom)
      (spell-checking :variables
                      spell-checking-enable-by-default nil
@@ -155,10 +163,7 @@ This function should only modify configuration layer settings."
                                                (recipe
                                                     :fetcher github
                                                     :repo "canatella/bitbake-el"))
-                                      (ox-jira :location
-                                               (recipe
-                                                :fetcher github
-                                                :repo "stig/ox-jira.el"))
+                                      ox-jira
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -312,10 +317,20 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-colorize-cursor-according-to-state t
 
    ;; Default font or prioritized list of fonts.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '(
+                               ("Fira Code"
+                                :size 15
+                                :weight normal
+                                :width normal)
+                               ("Cascadia Code"
+                                :size 15
+                                :weight normal
+                                :width normal)
+                               ("Source Code Pro"
                                :size 15
                                :weight normal
-                               :width normal)
+                               :width normal))
+
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
@@ -549,12 +564,12 @@ It should only modify the values of Spacemacs settings."
 
    ;; Either nil or a number of seconds. If non-nil zone out after the specified
    ;; number of seconds. (default nil)
-   dotspacemacs-zone-out-when-idle nil
+   dotspacemacs-zone-out-when-idle 900
 
    ;; Run `spacemacs/prettify-org-buffer' when
    ;; visiting README.org files of Spacemacs.
    ;; (default nil)
-   dotspacemacs-pretty-docs nil
+   dotspacemacs-pretty-docs t
 
    ;; If nil the home buffer shows the full path of agenda items
    ;; and todos. If non nil only the file name is shown.
@@ -647,7 +662,7 @@ you should place your code here."
   ;;    display-buffer-reuse-window))
 
   ;; TODO - Instead of having a dedicated window, use a popwin
-  (add-to-list 'popwin:special-display-config '("*go-guru-output*" :tail t :dedicated t :position bottom :stick t))
+  ;; (add-to-list 'popwin:special-display-config '("*go-guru-output*" :tail t :dedicated t :position bottom :stick t))
 
   ;; TODO - implement a checker function, so that if in the *go-guru-output* buffer, open
   ;; buffer in last used window
@@ -682,6 +697,7 @@ you should place your code here."
   ;; Org
   (with-eval-after-load 'org
     (setq org-todo-keywords '((sequence "TODO" "INPROGRESS" "PR" "ONHOLD" "|" "DONE")))
+    '(require 'ox-jira nil t)
     )
 
 
@@ -690,11 +706,13 @@ you should place your code here."
 
   ;; Add bitbake.el as a syntax highlighter for bitbake files
   ;; TODO - fix regex!
-  (add-to-list 'auto-mode-alist '("\\.\\(bbclass\\|inc\\)" . bitbake-mode))
+  (add-to-list 'auto-mode-alist '("\\(.bbclass\\|.inc\\|.bb\\|.bbappend\\)" . bitbake-mode))
   (add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
+  ;; (add-to-list 'auto-mode-alist '("\\.scm\\'" . prettify-symbols-mode))
+  (add-to-list 'auto-mode-alist '("\\.amb" . scheme-mode))
 
-  ;; ("\\*.el\\'" . emacs-lisp-mode)
-  ;; (setq mmm-global-mode 'auto) -- NOTE : try to fix bitbake highlihgtin.
+  ;; ("\\.el\\'" . emacs-lisp-mode)
+  ;; (setq mmm-global-mode 'auto) -- NOTE : try to fix bitbake highlighting.
 
   )
 
@@ -726,11 +744,15 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
  '(magit-commit-arguments '("--signoff"))
  '(magit-log-arguments '("--graph" "--color" "--decorate" "-n512"))
  '(org-agenda-files '("~/misc/org/test.org"))
+ '(org-export-backends '(ascii html icalendar latex odt confluence))
  '(package-selected-packages
-   '(ox-jira yasnippet-snippets doom-modeline zeal-at-point vmd-mode toml-mode systemd stickyfunc-enhance srefactor racer phpunit phpcbf php-extras php-auto-yasnippets org-mime magit-gh-pulls helm-dash github-search github-clone github-browse-file gist gh marshal logito pcache ht flycheck-rust drupal-mode php-mode company-quickhelp cargo rust-mode bitbake web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat multiple-cursors js-doc ghub let-alist disaster company-tern tern company-c-headers coffee-mode cmake-mode clang-format js2-refactor js2-mode yapfify xterm-color powerline shell-pop pyvenv pytest pyenv-mode py-isort pip-requirements spinner org-category-capture multi-term live-py-mode hydra hy-mode dash-functional parent-mode helm-pydoc projectile request go-impl gitignore-mode pos-tip flycheck pkg-info epl flx git-commit iedit anzu goto-chg undo-tree eshell-z eshell-prompt-extras esh-help diminish cython-mode coverage ov go-mode company-anaconda company bind-map bind-key yasnippet packed anaconda-mode pythonic f dash s async auto-complete popup smartparens highlight evil helm helm-core avy markdown-mode org-plus-contrib magit magit-popup with-editor org-projectile org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot yaml-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-bullets open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-guru go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word company-statistics company-go column-enforce-mode clean-aindent-mode bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))
+   '(org-jira pretty-mode ox-jira yasnippet-snippets doom-modeline zeal-at-point vmd-mode toml-mode systemd stickyfunc-enhance srefactor racer phpunit phpcbf php-extras php-auto-yasnippets org-mime magit-gh-pulls helm-dash github-search github-clone github-browse-file gist gh marshal logito pcache ht flycheck-rust drupal-mode php-mode company-quickhelp cargo rust-mode bitbake web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat multiple-cursors js-doc ghub let-alist disaster company-tern tern company-c-headers coffee-mode cmake-mode clang-format js2-refactor js2-mode yapfify xterm-color powerline shell-pop pyvenv pytest pyenv-mode py-isort pip-requirements spinner org-category-capture multi-term live-py-mode hydra hy-mode dash-functional parent-mode helm-pydoc projectile request go-impl gitignore-mode pos-tip flycheck pkg-info epl flx git-commit iedit anzu goto-chg undo-tree eshell-z eshell-prompt-extras esh-help diminish cython-mode coverage ov go-mode company-anaconda company bind-map bind-key yasnippet packed anaconda-mode pythonic f dash s async auto-complete popup smartparens highlight evil helm helm-core avy markdown-mode org-plus-contrib magit magit-popup with-editor org-projectile org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot yaml-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-bullets open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-guru go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word company-statistics company-go column-enforce-mode clean-aindent-mode bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))
+ '(projectile-globally-ignored-directories
+   '(".idea" ".vscode" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" ".ccls-cache" ".cache" ".clangd" "*.venv"))
  '(safe-local-variable-values
    '((geiser-scheme-implementation quote mit)
      (TeX-master . t)
