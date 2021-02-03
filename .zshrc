@@ -91,6 +91,7 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # --------MENDER---------
 # Source the oe-init-build-env with every new terminal-session
 # source ~/poky/oe-init-build-env -- error, adds the build dir in home
+source ~/dotfiles/scripts/runbackendacceptance
 
 # ------- Aliases -------
 alias lsa="ls -a"
@@ -103,6 +104,18 @@ alias addusr='sudo docker-compose exec mender-useradm \
                          --username=user@host.com \
                          --password=rootpass'
 alias bb='bitbake'
+alias open='xdg-open'
+alias calculator='bc'
+function calc () {
+	case $# in
+		0)
+			bc
+			;;
+		*)
+			bc -l <<< "$@"
+			;;
+	esac
+}
 # alias runqemu="~/"
 # Used for compiling gcc-cross-compiler for OPOS
 #export PREFIX="$HOME/opt/cross"
@@ -270,6 +283,21 @@ function bitbake-list-image-packages() {
   fi
   bitbake -g "$1" && cat pn-depends.dot | grep -v -e '-native' | \
       grep -v digraph | grep -v -e '-image' | awk '{print $1}' | sort | uniq
+}
+
+function everyn () {
+  if [[ $# -le 1 ]]; then
+    echo >&2 "Usage: everyn seconds function"
+    echo >&2 "NArgs: $#"
+    return 1
+  fi
+  local TIME="$1"
+  shift
+  while :
+  do
+        "$@"
+        sleep ${TIME}
+  done
 }
 
 if [[ ${RANDOM} -le 1000 ]]; then
