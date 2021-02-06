@@ -1,7 +1,7 @@
 [user]
 	email = ole.orhagen@northern.tech
 	name = Ole Petter
-	signingkey = A7100375167A7B21
+	signingkey = 399DBE0F4D4B02EB
 
 [alias]
 	lg = log --all --oneline --graph --decorate
