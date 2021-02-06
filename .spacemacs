@@ -40,7 +40,8 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
 
      ;; My private display package from ~/.layers
-     display
+     ;; display
+     my-private-conf
 
      (unicode-fonts
       :variables
@@ -706,7 +707,7 @@ you should place your code here."
 
   ;; Add bitbake.el as a syntax highlighter for bitbake files
   ;; TODO - fix regex!
-  (add-to-list 'auto-mode-alist '("\\(.bbclass\\|.inc\\|.bb\\|.bbappend\\)" . bitbake-mode))
+  (add-to-list 'auto-mode-alist '(".bbclass\\|.inc\\|.bb\\|.bbappend" . bitbake-mode))
   (add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
   ;; (add-to-list 'auto-mode-alist '("\\.scm\\'" . prettify-symbols-mode))
   (add-to-list 'auto-mode-alist '("\\.amb" . scheme-mode))
