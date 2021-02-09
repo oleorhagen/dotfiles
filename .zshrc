@@ -334,8 +334,3 @@ export PATH=$PATH:$HOME/mendersoftware/integration/extra
 export ROS_HOSTNAME=localhost
 ROS_MASTER_URI=http://localhost:11311
 
-#########################
-# TTY enabled gpg setup #
-#########################
-
-export GPG_TTY=$(tty)
