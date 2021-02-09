@@ -241,3 +241,7 @@ output DP-4 {
  # Add brigthness control
  bindsym XF86MonBrightnessUp exec light -A 20
  bindsym XF86MonBrightnessDown exec light -U 20
+
+# Lock screen with swaylock
+bindsym $mod+X exec ~/dotfiles/sway/lock
+
