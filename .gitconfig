@@ -23,7 +23,7 @@
 [filter "nt_update_copyright_header"]
 	clean = /home/olepor/dotfiles/scripts/nt_update_copyright_header
 [init]
-	templatedir = ~/.git-templates
+	templatedir = ~/.git_templates/template
 
 # [remote "mendersoftware"]
 	#fetch = +refs/pull/*/head:refs/remotes/mendersoftware/pr/*
