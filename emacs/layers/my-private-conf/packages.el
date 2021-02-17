@@ -30,7 +30,10 @@
 ;;; Code:
 
 (defconst my-private-conf-packages
-  '()
+  '(
+    ;; Personal packages
+    (github-review :location local)
+    )
   "The list of Lisp packages required by the my-private-conf layer.
 
 Each entry is either:
@@ -57,6 +60,10 @@ Each entry is either:
 
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
+
+
+(defun my-private-conf/init-github-review ()
+  (use-package github-review))
 
 
 ;;; packages.el ends here
