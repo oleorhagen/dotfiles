@@ -119,7 +119,13 @@ This function should only modify configuration layer settings."
      (yaml
       :variables
       yaml-indent-offset 4) ;; Standard in the mender yaml files
-     python
+     (python :variables
+             python-backend 'lsp
+             python-lsp-server 'pyls
+             python-pytest-runner 'pytest
+             python-formatter 'black
+             python-enable-yapf-format-on-save nil
+             pyton-sort-imports-on-save t)
      ;; (python :variables
      ;;         python-backend 'anaconda
      ;;         python-test-runner 'pytest
