@@ -1,3 +1,4 @@
+#set -x
 # source .profile to enable the remapping of return and caps-lock
 source ~/.profile # Consider adding this to an autorun-login shell-script
 # If you come from bash you might have to change your $PATH.
@@ -11,7 +12,7 @@ export SCRIPT_DIR=/home/olepor/.i3blocks/i3blocks-contrib/
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="olepor" # sammy
+ZSH_THEME="sammy" # sammy
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -91,7 +92,6 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # --------MENDER---------
 # Source the oe-init-build-env with every new terminal-session
 # source ~/poky/oe-init-build-env -- error, adds the build dir in home
-source ~/dotfiles/scripts/runbackendacceptance
 
 # ------- Aliases -------
 alias lsa="ls -a"
@@ -121,7 +121,7 @@ function calc () {
 #export PREFIX="$HOME/opt/cross"
 #export TARGET=i686-elf
 #export PATH="$PREFIX/bin:$PATH"
-export GOROOT="/usr/lib/go-1.15/"
+#export GOROOT="/usr/lib/go-1.15/"
 export PATH="$PATH:$(go env GOPATH)/bin:$GOROOT"
 #export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 # export PATH="/home/olepor/go:$PATH"
@@ -132,7 +132,7 @@ export PATH="$PATH:$(go env GOPATH)/bin:$GOROOT"
 # cd ~/poky && source oe-init-build-env && cd ~/
 
 # Make funny on startup
-fortune -a | cowsay
+#fortune -a | cowsay
 
 
 #export PATH=$PATH:/home/olepor/go/bin
@@ -204,7 +204,7 @@ export PATH=$HOME/dotfiles/scripts:$PATH
 alias zshsrc='source ~/.zshrc'
 
 # Make sure xbindkeys is sourced
-xbindkeys --poll-rc
+# xbindkeys --poll-rc
 
 alias please="sudo"
 
@@ -301,11 +301,11 @@ function everyn () {
 }
 
 if [[ ${RANDOM} -le 1000 ]]; then
-	echo >&2 "Updating the firmware..."
-	fwupdmgr update
+	echo >&2 "Updating the firmware... (TODO - install this!)"
+	#fwupdmgr update
 fi
 
-export GITLAB_TOKEN=$(pass show gitlab.com)
+export GITLAB_TOKEN=$(pass show gitlab/accesstoken)
 
 
 ###############################################################################
@@ -318,12 +318,12 @@ fpath=($HOME/.zsh-completions $fpath)
 # enable autocomplete function
 autoload -U compinit
 compinit
-source /opt/ros/melodic/setup.zsh
+[ -d /opt/ros/melodic ] && source /opt/ros/melodic/setup.zsh
 
 # ArduPilot paths
-export PATH=$PATH:$HOME/ardupilot/Tools/autotest
-export PATH=/usr/lib/ccache:$PATH
-source ~/catkin_ws/devel/setup.zsh
+#export PATH=$PATH:$HOME/ardupilot/Tools/autotest
+#export PATH=/usr/lib/ccache:$PATH
+[ -d ~/catkin_ws ] && source ~/catkin_ws/devel/setup.zsh
 
 # release-tool to PATH
 export PATH=$PATH:$HOME/mendersoftware/integration/extra
@@ -331,6 +331,11 @@ export PATH=$PATH:$HOME/mendersoftware/integration/extra
 ########################################
 #               ROS                    #
 ########################################
-export ROS_HOSTNAME=localhost
-ROS_MASTER_URI=http://localhost:11311
+#export ROS_HOSTNAME=localhost
+#ROS_MASTER_URI=http://localhost:11311
 
+
+#
+# Source .mender.rc
+#
+source ~/dotfiles/scripts/.mender.rc
