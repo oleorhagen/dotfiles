@@ -5,15 +5,15 @@
 ;;
 
 (defun update-license-year ()
-  (interactive)
-  (when (memq this-command '(save-buffer save-some-buffers))
-    (beginning-of-buffer)
-    (when (re-search-forward "^\\(#\\|;;\\|//\\)\\( +Copyright +\\)\\([0-9]\\{4\\}\\)" nil nil)
-      (replace-match (format-time-string "\\1\\2%Y")))))
+  (save-excursion
+    (when (memq this-command '(save-buffer save-some-buffers))
+      (beginning-of-buffer)
+      (when (re-search-forward "^\\(#\\|;;\\|//\\)\\( +Copyright +\\)\\([0-9]\\{4\\}\\)" nil nil)
+        (replace-match (format-time-string "\\1\\2%Y"))))))
 
-;; Add the hook to after-save
+;; Add the hook to before-save
 
-(add-hook 'after-save-hook
+(add-hook 'before-save-hook
           (lambda ()
             (when (memq this-command '(save-buffer save-some-buffers))
               (save-excursion
