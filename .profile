@@ -8,7 +8,7 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 export GOPATH=~/go
-export GOROOT="/usr/lib/go-1.13/"
+export GOROOT="/usr/lib/go/"
 export PATH=$PATH:$GOPATH/bin
 
 # if running bash
@@ -31,9 +31,13 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # RUST source code location (for auto-completion)
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-export GPG_TTY=$(tty)
-export PATH=/opt/gcc-arm-none-eabi-7-2017-q4-major/bin:$PATH
-export PATH=/opt/gcc-arm-none-eabi-6-2017-q2-update/bin:$PATH
-export PATH=/home/olepor/misc/projects/quadcopter/ardupilot/Tools/autotest:$PATH
-export PATH=/usr/lib/ccache:$PATH
+#export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+#export GPG_TTY=$(tty)
+#export PATH=/opt/gcc-arm-none-eabi-7-2017-q4-major/bin:$PATH
+#export PATH=/opt/gcc-arm-none-eabi-6-2017-q2-update/bin:$PATH
+#export PATH=/home/olepor/misc/projects/quadcopter/ardupilot/Tools/autotest:$PATH
+#export PATH=/usr/lib/ccache:$PATH
+
+alias gpg=gpg2
+
+#export GITLAB_TOKEN=`pass show -c gitlab/accesstoken`
