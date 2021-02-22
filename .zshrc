@@ -208,6 +208,8 @@ alias zshsrc='source ~/.zshrc'
 
 alias please="sudo"
 
+alias ssh="TERM=xterm-256color ssh"
+
 # Use explainshell.com to explain weird bash commands to me
 function explain {
     # base url with first command already injected
