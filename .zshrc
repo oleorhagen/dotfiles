@@ -180,7 +180,7 @@ function i3multiscreensetup() {
 # Aliases
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
-alias pip=pip3
+# alias pip=pip3
 alias ma='mender-artifact'
 
 function dockercontainerlog() {
