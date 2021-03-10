@@ -693,6 +693,10 @@ you should place your code here."
   (spacemacs/set-leader-keys
     "eb" 'flycheck-buffer)
 
+  ;; Don't kill the emacs-server on exit
+  (evil-leader/set-key
+    "q q" 'spacemacs/frame-killer)
+
 
   ;; https://github.com/syl20bnr/spacemacs/issues/13849#issuecomment-674560260
   (with-eval-after-load 'evil-iedit-state
