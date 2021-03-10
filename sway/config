@@ -251,3 +251,28 @@ input "type:keyboard" {
 # Lock screen with swaylock
 bindsym $mod+X exec ~/dotfiles/sway/lock
 
+# Test out binding certain windows to a workspace, and workspaces to screens
+# Set workspace 7 to monitor DP-3 (Middle)
+workspace 7 output DP-3
+workspace 8 output DP-4
+
+# Title is for wayloand
+# class is for X
+assign [title="firefox"] workspace number 8
+# assign [class="firefox"] output DP-4
+assign [title="emacs"] workspace number 7
+# assign [title="emacs"] output DP-3
+
+# wor
+exec firefox
+exec emacs
+# assign [title="emacs@olepor"] output DP-3
+
+# Mouse should not follow the focus
+# mouse_warping none
+mouse_warping output
+
+# moving mouse over a window gives that window focus
+# focus_follows_mouse yes
+#
+
