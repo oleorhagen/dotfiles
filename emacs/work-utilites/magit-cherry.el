@@ -14,8 +14,6 @@ to fix that and finish the process manually."
     (read-string "Branch name: ")
     (magit-completing-read-multiple* "Cherry to branch: " (magit-list-branch-names)) ;; branches
     (magit-cherry-pick-read-args "Cherry-pick"))) ;; commits
-  ;; Checkout the branch in branches
-  ;; TODO - get the MEN-number
   (let ((commits-new (car commits))
         (args-new (caadr commits)))
     (message commits-new)
@@ -23,7 +21,13 @@ to fix that and finish the process manually."
     (dolist (branch branches)
       (message branch)
       (progn
-        (magit-git-command (format "git checkout -B cherry-%s-%s %s" branch name branch))
-        (magit-cherry-copy commits (list "-x"))
-        (magit-git-command (format "git push -f oleorhagen cherry-%s-%s" branch name)))
-      )))
+        (magit-run-git
+               "checkout" "-B" (format "cherry-%s-%s" name branch) branch "--no-track")
+        (magit-run-git "cherry-pick" commits-new)
+        (magit-run-git "push" "--dry-run" "-f" "--set-upstream" "oleorhagen" (format "cherry-%s-%s" name branch))
+        (magit-call-process "gh" "pr" "create"
+                            "--head"
+                            ;; "--title" (format "cherry of %s" name)
+                            "--base" branch
+                            "--fill")
+        ))))
