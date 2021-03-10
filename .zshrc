@@ -341,3 +341,21 @@ export PATH=$PATH:$HOME/mendersoftware/integration/extra
 # Source .mender.rc
 #
 source ~/dotfiles/scripts/.mender.rc
+
+#
+# Overrides
+#
+
+# Pip
+function pip () {
+  if [[ -z "${VIRTUAL_ENV}" ]]; then
+    echo >&2 "Installing Python packages outside of a virtual environment is not allowed!"
+    return 1
+  fi
+  pip "$@"
+}
+
+# Create a folder and move into it in one command
+function mkcd() { mkdir -p "$@" && cd "$_"; }
+
+# Emacsclient
