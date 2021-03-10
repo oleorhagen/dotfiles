@@ -233,6 +233,12 @@ output DP-4 {
 	pos 3000,0
 }
 
+# Input configuration - US/NO
+input "type:keyboard" {
+	xkb_layout us,no
+	xkb_options "grp:ctrls_toggle"
+}
+
  # Add volume control
  bindsym XF86AudioMute exec amixer -q sset Master toggle
  bindsym XF86AudioLowerVolume exec amixer -q sset Master 3%-
