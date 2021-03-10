@@ -97,7 +97,7 @@ This function should only modify configuration layer settings."
             gofmt-command "goimports"
             go-use-golangci-lint t
             gofmt-show-errors nil ;; errors are already shown by flycheck
-            go-backend 'go-mode ;; Use the LSP backend.
+            go-backend 'lsp ;; Use the LSP backend.
             godoc-at-point-function 'godoc-gogetdoc)
 
      (auto-completion :variables
