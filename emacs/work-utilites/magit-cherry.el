@@ -15,7 +15,8 @@ to fix that and finish the process manually."
     (magit-completing-read-multiple* "Cherry to branch: " (magit-list-branch-names)) ;; branches
     (magit-cherry-pick-read-args "Cherry-pick"))) ;; commits
   (let ((commits-new (car commits))
-        (args-new (caadr commits)))
+        (args-new (caadr commits))
+        (body-description (magit-run-git "log -1 --format=\%s")))
     (message commits-new)
     (message args-new)
     (dolist (branch branches)
@@ -24,10 +25,11 @@ to fix that and finish the process manually."
         (magit-run-git
                "checkout" "-B" (format "cherry-%s-%s" name branch) branch "--no-track")
         (magit-run-git "cherry-pick" commits-new)
-        (magit-run-git "push" "--dry-run" "-f" "--set-upstream" "oleorhagen" (format "cherry-%s-%s" name branch))
+        (magit-run-git "push" "-f" "--set-upstream" "oleorhagen" (format "cherry-%s-%s" name branch))
         (magit-call-process "gh" "pr" "create"
-                            "--head"
-                            ;; "--title" (format "cherry of %s" name)
-                            "--base" branch
-                            "--fill")
+                            "--title" (format "\"[Cherry %s]: %s\"" (string-remove-prefix "mendersoftware/" branch) "Title")
+                            "--base" (string-remove-prefix "mendersoftware/" branch)
+                            ;; "--body" "Cherry"
+                            "--fill"
+                            "--draft")
         ))))
