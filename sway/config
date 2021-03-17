@@ -270,8 +270,8 @@ exec emacs
 # assign [title="emacs@olepor"] output DP-3
 
 # Mouse should not follow the focus
-# mouse_warping none
-#mouse_warping output
+# mouse_warping container
+mouse_warping output
 
 # moving mouse over a window gives that window focus
 focus_follows_mouse yes
