@@ -1,0 +1,25 @@
+#! /bin/bash
+
+declare -A CLIENT_MENDER_MAP=(
+	[2.5.0]="Mender Project 2.6.0"
+	[2.4.2]="Mender Project 2.5.1"
+	[2.3.2]="Mender Project 2.4.2"
+)
+
+(
+cd ~/mendersoftware/mender
+
+git fetch mendersoftware >/dev/null 2>&1
+
+RELEASES="$(git tag -l '*.*.*' --sort=-refname -n 3 --format='%(refname:short)' | grep -v build | grep -v b | sort -u -t. -k1,1 -k2,2 -r | head -3)"
+
+# Lookup the client releases in the map
+for release in ${RELEASES}; do
+	if [[ -n "${CLIENT_MENDER_MAP[$release]}" ]]; then
+		echo -e >&2 "${CLIENT_MENDER_MAP[$release]} contains mender-client: ${release}"
+	else
+		echo -e >&2 "Noo, I was not able to find mender-client release: $release in the current release map"
+		exit 1
+	fi
+done
+)
