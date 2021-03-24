@@ -178,8 +178,13 @@ function i3multiscreensetup() {
 }
 
 # Aliases
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
+if [[ -z "${WAYLAND_DISPLAY}" ]]; then
+	alias pbcopy='xclip -selection clipboard'
+	alias pbpaste='xclip -selection clipboard -o'
+else
+	alias pbcopy="wl-copy"
+	alias pbpaste="wl-paste"
+fi
 # alias pip=pip3
 alias ma='mender-artifact'
 
