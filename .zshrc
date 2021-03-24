@@ -307,6 +307,10 @@ function everyn () {
   done
 }
 
+function appendworkdirtopath () {
+  export PATH="${PWD}:$PATH"
+}
+
 if [[ ${RANDOM} -le 1000 ]]; then
 	echo >&2 "Updating the firmware... (TODO - install this!)"
 	#fwupdmgr update
