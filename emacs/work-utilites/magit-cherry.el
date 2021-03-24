@@ -29,7 +29,5 @@ to fix that and finish the process manually."
         (magit-call-process "gh" "pr" "create"
                             "--title" (format "\"[Cherry %s]: %s\"" (string-remove-prefix "mendersoftware/" branch) "Title")
                             "--base" (string-remove-prefix "mendersoftware/" branch)
-                            ;; "--body" "Cherry"
-                            "--fill"
-                            "--draft")
-        ))))
+                            "--body" "Cherry"
+                            "--draft")))))
