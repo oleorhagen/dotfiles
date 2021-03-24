@@ -339,13 +339,6 @@ compinit
 # release-tool to PATH
 export PATH=$PATH:$HOME/mendersoftware/integration/extra
 
-########################################
-#               ROS                    #
-########################################
-#export ROS_HOSTNAME=localhost
-#ROS_MASTER_URI=http://localhost:11311
-
-
 #
 # Source .mender.rc
 #
