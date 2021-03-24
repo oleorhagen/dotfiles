@@ -14,6 +14,7 @@ git fetch mendersoftware >/dev/null 2>&1
 RELEASES="$(git tag -l '*.*.*' --sort=-refname -n 3 --format='%(refname:short)' | grep -v build | grep -v b | sort -u -t. -k1,1 -k2,2 -r | head -3)"
 
 # Lookup the client releases in the map
+echo >&2 "The three newest Mender releases are as follows:"
 for release in ${RELEASES}; do
 	if [[ -n "${CLIENT_MENDER_MAP[$release]}" ]]; then
 		echo -e >&2 "${CLIENT_MENDER_MAP[$release]} contains mender-client: ${release}"
