@@ -367,6 +367,12 @@ function menderversion () {
   fi
   release_tool.py --version-of "$1" --in-integration-version "$2"
 }
+
+#
+# Pretty cat <3
+#
+alias cat=bat
+
 # Create a folder and move into it in one command
 function mkcd() { mkdir -p "$@" && cd "$_"; }
 
