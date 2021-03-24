@@ -357,6 +357,16 @@ function pip () {
   pip "$@"
 }
 
+#
+# Show the version of a mender-service in the given release version of Mender
+# (Always a puzzle to figure out)
+#
+function menderversion () {
+  if [[ $# -ne 2 ]]; then
+    echo >&2 "Usage: menderversion <service> <release-version>"
+  fi
+  release_tool.py --version-of "$1" --in-integration-version "$2"
+}
 # Create a folder and move into it in one command
 function mkcd() { mkdir -p "$@" && cd "$_"; }
 
