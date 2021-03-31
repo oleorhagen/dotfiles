@@ -277,3 +277,5 @@ mouse_warping output
 focus_follows_mouse yes
 #
 
+# Screenshot to clibboard
+bindsym $mod+p exec grim -g "$(slurp)" - | wl-copy
