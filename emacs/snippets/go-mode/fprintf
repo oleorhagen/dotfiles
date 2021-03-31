@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : fprintf
+#key : fprintf
+#contributor : Ole P. Orhagen
+# --
+fmt.Fprintf(os.Stderr, "$1")
