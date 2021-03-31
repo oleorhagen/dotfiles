@@ -41,3 +41,5 @@ export PATH="$HOME/.cargo/bin:$PATH"
 alias gpg=gpg2
 
 #export GITLAB_TOKEN=`pass show -c gitlab/accesstoken`
+
+export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
