@@ -43,114 +43,117 @@ This function should only modify configuration layer settings."
      ;; display
      my-private-conf
 
-     (unicode-fonts
-      :variables
-      unicode-fonts-enable-ligatures t
-      unicode-fonts-ligature-modes '(prog-mode))
-     (c-c++ :variables
-            c-c++-enable-clang-support t
-            c-c++-enable-clang-format-on-save nil
-            c-c++-enable-rtags-support t
-            c++-enable-organize-includes-on-save nil)
-     debug
-     (latex :variables
-      latex-build-command "LaTeX")
-     ess ;; Layer for R statistical computing
-     erlang
-     docker
-     dash
-     (asm :variables
-          asm-comment-char "#")
-     helm
-     julia
-     ;; better-defaults
-     (shell :variables shell-default-shell 'ansi-term
-            shell-default-term-shell "/bin/zsh")
-     shell-scripts
-     emacs-lisp
+     ;; cmake
+
+     ;; (unicode-fonts
+     ;;  :variables
+     ;;  unicode-fonts-enable-ligatures t
+     ;;  unicode-fonts-ligature-modes '(prog-mode))
+     ;; ;; (c-c++ :variables
+     ;; ;;        c-c++-enable-clang-support t
+     ;; ;;        c-c++-enable-clang-format-on-save nil
+     ;; ;;        c-c++-enable-rtags-support t
+     ;; ;;        c++-enable-organize-includes-on-save nil)
+     ;; c-c++
+     ;; debug
+     ;; (latex :variables
+     ;;  latex-build-command "LaTeX")
+     ;; ess ;; Layer for R statistical computing
+     ;; erlang
+     ;; docker
+     ;; dash
+     ;; (asm :variables
+     ;;      asm-comment-char "#")
+     ;; helm
+     ;; julia
+     ;; ;; better-defaults
+     ;; (shell :variables shell-default-shell 'ansi-term
+     ;;        shell-default-term-shell "/bin/zsh")
+     ;; shell-scripts
+     ;; emacs-lisp
      (git
       :variables
       git-magit-status-fullscreen t)
-     (github
-      :variables
-      )
-     (lsp :variables
-          lsp-ui-remap-xref-keybindings nil
-          lsp-ui-doc-enable             nil
-          lsp-ui-doc-include-signature  nil
-          lsp-ui-sideline-enable        nil
-          lsp-ui-sideline-show-symbol   nil
-          )
-     cfengine
-     ;; web-beautify
-     ;; (html :variables
-     ;;       css-enable-lsp t
-     ;;       less-enable-lsp t
-     ;;       scss-enable-lsp t
-     ;;       html-enable-lsp t
-     ;;       web-fmt-tool 'web-beautify
-     ;;       )
-     ;; The go-layer needs the auto-completion and syntax-checking layers
-     ;; TODO - add gotests function wrappers to the go-mode https://github.com/cweill/gotests
-     (go :varibles
-            go-format-before-save nil
-            gofmt-command "goimports"
-            go-use-golangci-lint t
-            gofmt-show-errors nil ;; errors are already shown by flycheck
-            go-backend 'lsp ;; Use the LSP backend.
-            godoc-at-point-function 'godoc-gogetdoc)
+     ;; ;; (github
+     ;; ;;  :variables
+     ;; ;;  )
+     ;; ;; (lsp :variables
+     ;; ;;      lsp-ui-remap-xref-keybindings nil
+     ;; ;;      lsp-ui-doc-enable             nil
+     ;; ;;      lsp-ui-doc-include-signature  nil
+     ;; ;;      lsp-ui-sideline-enable        nil
+     ;; ;;      lsp-ui-sideline-show-symbol   nil
+     ;; ;;      )
+     ;; ;; cfengine
+     ;; ;; web-beautify
+     ;; ;; (html :variables
+     ;; ;;       css-enable-lsp t
+     ;; ;;       less-enable-lsp t
+     ;; ;;       scss-enable-lsp t
+     ;; ;;       html-enable-lsp t
+     ;; ;;       web-fmt-tool 'web-beautify
+     ;; ;;       )
+     ;; ;; The go-layer needs the auto-completion and syntax-checking layers
+     ;; ;; TODO - add gotests function wrappers to the go-mode https://github.com/cweill/gotests
+     ;; ;; (go :varibles
+     ;; ;;        go-format-before-save t
+     ;; ;;        gofmt-command "goimports"
+     ;; ;;        go-use-golangci-lint t
+     ;; ;;        gofmt-show-errors nil ;; errors are already shown by flycheck
+     ;; ;;        godoc-at-point-function 'godoc-gogetdoc)
+     ;; ;; go
 
-     (auto-completion :variables
-                      auto-completion-return-key-behavior 'complete
-                      auto-completion-tab-key-behavior 'cycle
-                      auto-completion-complete-with-key-sequence nil
-                      auto-completion-complete-with-key-sequence-delay 0.1
-                      auto-completion-private-snippets-directory nil
-                      auto-completion-enable-sort-by-usage t
-                      auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-help-tooltip t
-                      flycheck-check-syntax-automatically '()) ;; never check syntax automatically! it's disturbing.
-     semantic
-     systemd
-     syntax-checking
-     (markdown :variables
-               markdown-live-preview-engine 'vmd
-               markdown-mmm-auto-modes '("c" "c++" "python" "scala" "bash" ("elisp" "emacs-lisp")))
-     (yaml
-      :variables
-      yaml-indent-offset 4) ;; Standard in the mender yaml files
-     (python :variables
-             python-backend 'lsp
-             python-lsp-server 'pyls
-             python-pytest-runner 'pytest
-             python-formatter 'black
-             python-enable-yapf-format-on-save nil
-             pyton-sort-imports-on-save t)
-     ;; (python :variables
-     ;;         python-backend 'anaconda
-     ;;         python-test-runner 'pytest
-     ;;         python-formatter 'black
-     ;;         python-enable-yapf-format-on-save nil
-     ;;         python-sort-imports-on-save nil)
-     ;; gtags
-     (scheme
-      :variables
-      geiser-active-implementation '(mit)
-      geiser-default-implementation 'mit)
-     (org
-      :variables
-      org-enable-github-support t)
-     spacemacs-org
-     neotree
-     ;; (shell :variables
-     ;;        shell-default-height 300
-     ;;        shell-default-position 'bottom)
-     (spell-checking :variables
-                     spell-checking-enable-by-default nil
-                     spell-checking-enable-auto-dictionary t)
-     ;; version-control
-     (rust :variables
-           rust-format-on-save t)
+     ;; (auto-completion :variables
+     ;;                  auto-completion-return-key-behavior 'complete
+     ;;                  auto-completion-tab-key-behavior 'cycle
+     ;;                  auto-completion-complete-with-key-sequence nil
+     ;;                  auto-completion-complete-with-key-sequence-delay 0.1
+     ;;                  auto-completion-private-snippets-directory "/home/olepor/dotfiles/emacs/snippets/"
+     ;;                  auto-completion-enable-sort-by-usage t
+     ;;                  auto-completion-enable-snippets-in-popup t
+     ;;                  auto-completion-enable-help-tooltip t
+     ;;                  flycheck-check-syntax-automatically '()) ;; never check syntax automatically! it's disturbing.
+     ;; ;; semantic
+     ;; systemd
+     ;; syntax-checking
+     ;; (markdown :variables
+     ;;           markdown-live-preview-engine 'vmd
+     ;;           markdown-mmm-auto-modes '("c" "c++" "python" "scala" "bash" ("elisp" "emacs-lisp")))
+     ;; (yaml
+     ;;  :variables
+     ;;  yaml-indent-offset 4) ;; Standard in the mender yaml files
+     ;; ;; (python :variables
+     ;; ;;         python-backend 'lsp
+     ;; ;;         python-lsp-server 'pyls
+     ;; ;;         python-pytest-runner 'pytest
+     ;; ;;         python-formatter 'black
+     ;; ;;         python-enable-yapf-format-on-save nil
+     ;; ;;         pyton-sort-imports-on-save t)
+     ;; ;; (python :variables
+     ;; ;;         python-backend 'anaconda
+     ;; ;;         python-test-runner 'pytest
+     ;; ;;         python-formatter 'black
+     ;; ;;         python-enable-yapf-format-on-save nil
+     ;; ;;         python-sort-imports-on-save nil)
+     ;; ;; gtags
+     ;; (scheme
+     ;;  :variables
+     ;;  geiser-active-implementation '(mit)
+     ;;  geiser-default-implementation 'mit)
+     ;; (org
+     ;;  :variables
+     ;;  org-enable-github-support t)
+     ;; spacemacs-org
+     ;; neotree
+     ;; ;; (shell :variables
+     ;; ;;        shell-default-height 300
+     ;; ;;        shell-default-position 'bottom)
+     ;; (spell-checking :variables
+     ;;                 spell-checking-enable-by-default nil
+     ;;                 spell-checking-enable-auto-dictionary t)
+     ;; ;; version-control
+     ;; (rust :variables
+     ;;       rust-format-on-save t)
      )
 
    ;; List of additional packages that will be installed without being
@@ -160,17 +163,17 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(
                                       ;; org-jira maybe? TODO
                                       ;; Add in-buffer code coverage visualisation
-                                      ;; (coverage :location (recipe :fetcher github :repo "google/coverage"))
-                                      (go-impl :location
-                                               (recipe
-                                                :fetcher github
-                                                :repo "syohex/emacs-go-impl"))
-                                      coverage ;; add in-buffer test coverage for golang
-                                      (bitbake :location
-                                               (recipe
-                                                    :fetcher github
-                                                    :repo "canatella/bitbake-el"))
-                                      ox-jira
+                                      ;; ;; (coverage :location (recipe :fetcher github :repo "google/coverage"))
+                                      ;; (go-impl :location
+                                      ;;          (recipe
+                                      ;;           :fetcher github
+                                      ;;           :repo "syohex/emacs-go-impl"))
+                                      ;; coverage ;; add in-buffer test coverage for golang
+                                      ;; (bitbake :location
+                                      ;;          (recipe
+                                      ;;               :fetcher github
+                                      ;;               :repo "canatella/bitbake-el"))
+                                      ;; ox-jira
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -201,18 +204,18 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil)
    dotspacemacs-enable-emacs-pdumper nil
 
-   ;; File path pointing to emacs 27.1 executable compiled with support
-   ;; for the portable dumper (this is currently the branch pdumper).
-   ;; (default "emacs-27.0.50")
-   dotspacemacs-emacs-pdumper-executable-file "emacs-27.0.50"
+   ;; Name of executable file pointing to emacs 27+. This executable must be
+   ;; in your PATH.
+   ;; (default "emacs")
+   dotspacemacs-emacs-pdumper-executable-file "emacs"
 
    ;; Name of the Spacemacs dump file. This is the file will be created by the
    ;; portable dumper in the cache directory under dumps sub-directory.
    ;; To load it when starting Emacs add the parameter `--dump-file'
    ;; when invoking Emacs 27.1 executable on the command line, for instance:
-   ;;   ./emacs --dump-file=~/.emacs.d/.cache/dumps/spacemacs.pdmp
-   ;; (default spacemacs.pdmp)
-   dotspacemacs-emacs-dumper-dump-file "spacemacs.pdmp"
+   ;;   ./emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs-27.1.pdmp
+   ;; (default (format "spacemacs-%s.pdmp" emacs-version))
+   dotspacemacs-emacs-dumper-dump-file (format "spacemacs-%s.pdmp" emacs-version)
 
    ;; If non-nil ELPA repositories are contacted via HTTPS whenever it's
    ;; possible. Set it to nil if you have no way to use HTTPS in your
@@ -241,12 +244,14 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
-   ;; latest version of packages from MELPA. (default nil)
+   ;; latest version of packages from MELPA. Spacelpa is currently in
+   ;; experimental state please use only for testing purposes.
+   ;; (default nil)
    dotspacemacs-use-spacelpa nil
 
    ;; If non-nil then verify the signature for downloaded Spacelpa archives.
-   ;; (default nil)
-   dotspacemacs-verify-spacelpa-archives nil
+   ;; (default t)
+   dotspacemacs-verify-spacelpa-archives t
 
    ;; If non-nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
@@ -282,14 +287,21 @@ It should only modify the values of Spacemacs settings."
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
-   ;; `recents' `bookmarks' `projects' `agenda' `todos'.
+   ;; `recents' `recents-by-project' `bookmarks' `projects' `agenda' `todos'.
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
+   ;; The exceptional case is `recents-by-project', where list-type must be a
+   ;; pair of numbers, e.g. `(recents-by-project . (7 .  5))', where the first
+   ;; number is the project limit and the second the limit on the recent files
+   ;; within a project.
    dotspacemacs-startup-lists '((recents . 5)
                                 (projects . 7))
 
    ;; True if the home buffer should respond to resize events. (default t)
    dotspacemacs-startup-buffer-responsive t
+
+   ;; The minimum delay in seconds between number key presses. (default 0.4)
+   dotspacemacs-startup-buffer-multi-digit-delay 0.4
 
    ;; Default major mode for a new empty buffer. Possible values are mode
    ;; names such as `text-mode'; and `nil' to use Fundamental mode.
@@ -298,6 +310,14 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default major mode of the scratch buffer (default `text-mode')
    dotspacemacs-scratch-mode 'text-mode
+
+   ;; If non-nil, *scratch* buffer will be persistent. Things you write down in
+   ;; *scratch* buffer will be saved and restored automatically.
+   dotspacemacs-scratch-buffer-persistent nil
+
+   ;; If non-nil, `kill-buffer' on *scratch* buffer
+   ;; will bury it instead of killing.
+   dotspacemacs-scratch-buffer-unkillable nil
 
    ;; Initial message in the scratch buffer, such as "Welcome to Spacemacs!"
    ;; (default nil)
@@ -317,7 +337,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(doom :separator nil :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -471,6 +491,10 @@ It should only modify the values of Spacemacs settings."
    ;; when it reaches the top or bottom of the screen. (default t)
    dotspacemacs-smooth-scrolling t
 
+   ;; Show the scroll bar while scrolling. The auto hide time can be configured
+   ;; by setting this variable to a number. (default t)
+   dotspacemacs-scroll-bar-while-scrolling t
+
    ;; Control line numbers activation.
    ;; If set to `t', `relative' or `visual' then line numbers are enabled in all
    ;; `prog-mode' and `text-mode' derivatives. If set to `relative', line
@@ -498,9 +522,14 @@ It should only modify the values of Spacemacs settings."
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
 
-   ;; If non-nil `smartparens-strict-mode' will be enabled in programming modes.
+   ;; If non-nil and `dotspacemacs-activate-smartparens-mode' is also non-nil,
+   ;; `smartparens-strict-mode' will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
+
+   ;; If non-nil smartparens-mode will be enabled in programming modes.
+   ;; (default t)
+   dotspacemacs-activate-smartparens-mode t
 
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc...
@@ -530,7 +559,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
    ;; (default '("rg" "ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("rg", "ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
 
    ;; Format specification for setting the frame title.
    ;; %a - the `abbreviated-file-name', or `buffer-name'
@@ -548,12 +577,18 @@ It should only modify the values of Spacemacs settings."
    ;; %n - Narrow if appropriate
    ;; %z - mnemonics of buffer, terminal, and keyboard coding systems
    ;; %Z - like %z, but including the end-of-line format
+   ;; If nil then Spacemacs uses default `frame-title-format' to avoid
+   ;; performance issues, instead of calculating the frame title by
+   ;; `spacemacs/title-prepare' all the time.
    ;; (default "%I@%S")
    dotspacemacs-frame-title-format "%I@%S"
 
    ;; Format specification for setting the icon title format
    ;; (default nil - same as frame-title-format)
    dotspacemacs-icon-title-format nil
+
+   ;; Show trailing whitespace (default t)
+   dotspacemacs-show-trailing-whitespace t
 
    ;; Delete whitespace while saving buffer. Possible values are `all'
    ;; to aggressively delete empty line and long sequences of whitespace,
@@ -569,9 +604,16 @@ It should only modify the values of Spacemacs settings."
    ;; (default t)
    dotspacemacs-use-clean-aindent-mode t
 
+   ;; If non-nil shift your number row to match the entered keyboard layout
+   ;; (only in insert state). Currently supported keyboard layouts are:
+   ;; `qwerty-us', `qwertz-de' and `querty-ca-fr'.
+   ;; New layouts can be added in `spacemacs-editing' layer.
+   ;; (default nil)
+   dotspacemacs-swap-number-row nil
+
    ;; Either nil or a number of seconds. If non-nil zone out after the specified
    ;; number of seconds. (default nil)
-   dotspacemacs-zone-out-when-idle 900
+   dotspacemacs-zone-out-when-idle nil
 
    ;; Run `spacemacs/prettify-org-buffer' when
    ;; visiting README.org files of Spacemacs.
@@ -580,7 +622,10 @@ It should only modify the values of Spacemacs settings."
 
    ;; If nil the home buffer shows the full path of agenda items
    ;; and todos. If non nil only the file name is shown.
-   dotspacemacs-home-shorten-agenda-source nil))
+   dotspacemacs-home-shorten-agenda-source nil
+
+   ;; If non-nil then byte-compile some of Spacemacs files.
+   dotspacemacs-byte-compile nil))
 
 (defun dotspacemacs/user-env ()
   "Environment variables setup.
@@ -595,8 +640,7 @@ See the header of this file for more information."
 This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
-If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  )
+If you are unsure, try setting them in `dotspacemacs/user-config' first.")
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -649,7 +693,7 @@ you should place your code here."
 
   ;; Shell-script mode basic offset ;;
 
-  (setq sh-basic-offset 2)
+  ;; (setq sh-basic-offset 2)
 
 
   ;; ;; TODO - now opens go-guru in laptop display, also add functionality for all compilation buffers
@@ -682,10 +726,10 @@ you should place your code here."
   ;;             (define-key c-mode-map [tab] 'clang-format-buffer)))
 
   ;; C-C++ format buffer binding for c-c++-mode
-  (spacemacs/set-leader-keys-for-major-mode 'c-c++-mode
-    "pc" 'clang-format-region)
-  ;; (spacemacs/declare-prefix-for-mode 'c-c++-mode "c" "port/paste")
-  (spacemacs/declare-prefix-for-mode 'c-c++-mode "cr" "clang-format-region")
+  ;; (spacemacs/set-leader-keys-for-major-mode 'c-c++-mode
+  ;;   "pc" 'clang-format-region)
+  ;; ;; (spacemacs/declare-prefix-for-mode 'c-c++-mode "c" "port/paste")
+  ;; (spacemacs/declare-prefix-for-mode 'c-c++-mode "cr" "clang-format-region")
 
   ;; Global only run flycheck when prompted
   (spacemacs/declare-prefix
@@ -717,10 +761,10 @@ you should place your code here."
 
   ;; Add bitbake.el as a syntax highlighter for bitbake files
   ;; TODO - fix regex!
-  (add-to-list 'auto-mode-alist '(".bbclass\\|.inc\\|.bb\\|.bbappend" . bitbake-mode))
-  (add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
+  ;; (add-to-list 'auto-mode-alist '(".bbclass\\|.inc\\|.bb\\|.bbappend" . bitbake-mode))
+  ;; (add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
   ;; (add-to-list 'auto-mode-alist '("\\.scm\\'" . prettify-symbols-mode))
-  (add-to-list 'auto-mode-alist '("\\.amb" . scheme-mode))
+  ;; (add-to-list 'auto-mode-alist '("\\.amb" . scheme-mode))
 
   ;; ("\\.el\\'" . emacs-lisp-mode)
   ;; (setq mmm-global-mode 'auto) -- NOTE : try to fix bitbake highlighting.
@@ -734,11 +778,7 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(magit-commit-arguments '("--signoff"))
- '(magit-log-arguments '("--graph" "--color" "--decorate" "-n512"))
- '(org-agenda-files '("~/misc/org/test.org"))
- '(package-selected-packages
-   '(dash-docs transient lv treepy graphql zeal-at-point vmd-mode toml-mode systemd stickyfunc-enhance srefactor racer phpunit phpcbf php-extras php-auto-yasnippets org-mime magit-gh-pulls helm-dash github-search github-clone github-browse-file gist gh marshal logito pcache ht flycheck-rust drupal-mode php-mode company-quickhelp cargo rust-mode bitbake web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat multiple-cursors js-doc ghub let-alist disaster company-tern tern company-c-headers coffee-mode cmake-mode clang-format js2-refactor js2-mode yapfify xterm-color powerline shell-pop pyvenv pytest pyenv-mode py-isort pip-requirements spinner org-category-capture multi-term live-py-mode hydra hy-mode dash-functional parent-mode helm-pydoc projectile request go-impl gitignore-mode pos-tip flycheck pkg-info epl flx git-commit iedit anzu goto-chg undo-tree eshell-z eshell-prompt-extras esh-help diminish cython-mode coverage ov go-mode company-anaconda company bind-map bind-key yasnippet packed anaconda-mode pythonic f dash s async auto-complete popup smartparens highlight evil helm helm-core avy markdown-mode org-plus-contrib magit magit-popup with-editor org-projectile org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot yaml-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-bullets open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-guru go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word company-statistics company-go column-enforce-mode clean-aindent-mode bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -755,22 +795,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(evil-want-Y-yank-to-eol nil)
- '(magit-commit-arguments '("--signoff"))
- '(magit-log-arguments '("--graph" "--color" "--decorate" "-n512"))
- '(org-agenda-files '("~/misc/org/test.org"))
- '(org-export-backends '(ascii html icalendar latex odt confluence))
- '(package-selected-packages
-   '(org-jira pretty-mode ox-jira yasnippet-snippets doom-modeline zeal-at-point vmd-mode toml-mode systemd stickyfunc-enhance srefactor racer phpunit phpcbf php-extras php-auto-yasnippets org-mime magit-gh-pulls helm-dash github-search github-clone github-browse-file gist gh marshal logito pcache ht flycheck-rust drupal-mode php-mode company-quickhelp cargo rust-mode bitbake web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat multiple-cursors js-doc ghub let-alist disaster company-tern tern company-c-headers coffee-mode cmake-mode clang-format js2-refactor js2-mode yapfify xterm-color powerline shell-pop pyvenv pytest pyenv-mode py-isort pip-requirements spinner org-category-capture multi-term live-py-mode hydra hy-mode dash-functional parent-mode helm-pydoc projectile request go-impl gitignore-mode pos-tip flycheck pkg-info epl flx git-commit iedit anzu goto-chg undo-tree eshell-z eshell-prompt-extras esh-help diminish cython-mode coverage ov go-mode company-anaconda company bind-map bind-key yasnippet packed anaconda-mode pythonic f dash s async auto-complete popup smartparens highlight evil helm helm-core avy markdown-mode org-plus-contrib magit magit-popup with-editor org-projectile org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot yaml-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-bullets open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-guru go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word company-statistics company-go column-enforce-mode clean-aindent-mode bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))
- '(projectile-globally-ignored-directories
-   '(".idea" ".vscode" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" ".ccls-cache" ".cache" ".clangd" "*.venv"))
- '(safe-local-variable-values
-   '((geiser-scheme-implementation quote mit)
-     (TeX-master . t)
-     (asm-comment-char . 35)
-     (asm-comment-char . "#")
-     (go-backend . go-mode)
-     (go-backend . lsp))))
+     )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
