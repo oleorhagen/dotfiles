@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: template
 # key: template
+# contributor: Ole P. Orhagen
 # --#
 !/usr/bin/env bash
 
