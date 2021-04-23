@@ -198,53 +198,10 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    #position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    #status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
-    swaybar_command waybar
-
-    # colors {
-    #    statusline #000000
-    #    background #323232
-    #    inactive_workspace #32323200 #32323200 #5c5c5c
-    # }
-}
-
 # Run a pure wayland session
 # xwayland disable
 
 include /etc/sway/config.d/*
-
-output eDP-1 {
-	pos 0,0
-	background /home/olepor/Documents/wallpapers/calvinspace1920x1080.jpg fill
-}
-
-output 'Dell Inc. DELL U2414H 292K472L172L' {
-	mode 1920x1080
-	pos 1920,0
-	transform 270
-	background /home/olepor/Documents/wallpapers/calvinandhobbeslogatnight.jpeg fill
-}
-output 'Dell Inc. DELL U2412M YPPY078D38KS' {
-	mode 1920x1200
-	pos 3000,0
-	#background /home/olepor/Documents/wallpapers/calvinhobbeswallpaper.jpg
-  background /home/olepor/Documents/wallpapers/calvinpondering1920x1200.jpg fill
-}
-
-# Input configuration - US/NO
-input "type:keyboard" {
-	xkb_layout us,no
-	xkb_options "grp:ctrls_toggle"
-}
 
  # Add volume control
  bindsym XF86AudioMute exec amixer -q sset Master toggle
@@ -286,31 +243,7 @@ exec emacs
 focus_follows_mouse yes
 #mouse_warping container
 
-
 # Screenshot to clibboard
 bindsym $mod+p exec grim -g "$(slurp)" -
 
-#
-# Gaps
-#
-
-# Set some gaps for prettiness :)
-gaps outer 10
-gaps inner 10
-
-#
-# Window decoration
-#
- 
-# Window border
-default_border pixel 7
- 
-# Window decoration
-# class                 border  backgr. text    indicator child_border
-client.focused          #ebcb8b #434c5e #eceff4 #8fbcbb   #ebcb8b
-client.focused_inactive #88c0d0 #2e3440 #d8dee9 #4c566a   #4c566a
-client.unfocused        #88c0d0 #2e3440 #d8dee9 #4c566a   #4c566a
-client.urgent           #ebcb8b #ebcb8b #2e3440 #8fbcbb   #ebcb8b
- 
-# Draw a uniform border around the focused window 5 pixels wide
-# border pixel 5
+include ~/.config/sway/config.d/*
