@@ -8,7 +8,7 @@ usage() {
 	exit 0
 }
 
-if [[ -z "$1" ]]; then
+if [[ -z "$1" || "$1" = "-h" || "$1" = "--help" ]]; then
   usage
 fi
 
