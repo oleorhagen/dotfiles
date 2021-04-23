@@ -1,4 +1,9 @@
 #set -x
+#
+# Show archey3 (Arch logo on login shell)
+#
+archey3 --color=green
+
 # source .profile to enable the remapping of return and caps-lock
 source ~/.profile # Consider adding this to an autorun-login shell-script
 # If you come from bash you might have to change your $PATH.
@@ -367,6 +372,15 @@ function menderversion () {
     echo >&2 "Usage: menderversion <service> <release-version>"
   fi
   release_tool.py --version-of "$1" --in-integration-version "mendersoftware/$2"
+}
+
+#
+# newest-file
+#
+# Lists the newest n files in the current dir
+#
+function newest-file {
+	ls -t . | head -"${1:-1}"
 }
 
 #
