@@ -23,7 +23,9 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+#output * background /home/olepor/Documents/wallpaper/calvinhobbeswallpaper.jpg fill
+#output "*" background /home/olepor/Documents/wallpapers/calvinhobbeswallpaper.jpg fit
 #
 # Example configuration:
 #
@@ -208,11 +210,11 @@ bar {
     #status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
     swaybar_command waybar
 
-    #colors {
-    #    statusline #ffffff
+    # colors {
+    #    statusline #000000
     #    background #323232
     #    inactive_workspace #32323200 #32323200 #5c5c5c
-    #}
+    # }
 }
 
 # Run a pure wayland session
@@ -222,16 +224,20 @@ include /etc/sway/config.d/*
 
 output eDP-1 {
 	pos 0,0
+	background /home/olepor/Documents/wallpapers/calvinspace1920x1080.jpg fill
 }
 
 output 'Dell Inc. DELL U2414H 292K472L172L' {
 	mode 1920x1080
 	pos 1920,0
 	transform 270
+	background /home/olepor/Documents/wallpapers/calvinandhobbeslogatnight.jpeg fill
 }
 output 'Dell Inc. DELL U2412M YPPY078D38KS' {
 	mode 1920x1200
 	pos 3000,0
+	#background /home/olepor/Documents/wallpapers/calvinhobbeswallpaper.jpg
+  background /home/olepor/Documents/wallpapers/calvinpondering1920x1200.jpg fill
 }
 
 # Input configuration - US/NO
@@ -249,6 +255,7 @@ input "type:keyboard" {
  bindsym XF86MonBrightnessUp exec light -A 20
  bindsym XF86MonBrightnessDown exec light -U 20
 
+
 # Lock screen with swaylock
 bindsym $mod+X exec ~/dotfiles/sway/lock
 
@@ -264,18 +271,46 @@ assign [title="firefox"] workspace number 8
 assign [title="emacs"] workspace number 7
 # assign [title="emacs"] output DP-3
 
-# wor
+# work
 exec firefox
 exec emacs
 # assign [title="emacs@olepor"] output DP-3
 
-# Mouse should not follow the focus
 # mouse_warping container
-mouse_warping output
+
+#
+# Focus
+#
 
 # moving mouse over a window gives that window focus
 focus_follows_mouse yes
-#
+#mouse_warping container
+
 
 # Screenshot to clibboard
-bindsym $mod+p exec grim -g "$(slurp)" - | wl-copy
+bindsym $mod+p exec grim -g "$(slurp)" -
+
+#
+# Gaps
+#
+
+# Set some gaps for prettiness :)
+gaps outer 10
+gaps inner 10
+
+#
+# Window decoration
+#
+ 
+# Window border
+default_border pixel 7
+ 
+# Window decoration
+# class                 border  backgr. text    indicator child_border
+client.focused          #ebcb8b #434c5e #eceff4 #8fbcbb   #ebcb8b
+client.focused_inactive #88c0d0 #2e3440 #d8dee9 #4c566a   #4c566a
+client.unfocused        #88c0d0 #2e3440 #d8dee9 #4c566a   #4c566a
+client.urgent           #ebcb8b #ebcb8b #2e3440 #8fbcbb   #ebcb8b
+ 
+# Draw a uniform border around the focused window 5 pixels wide
+# border pixel 5
