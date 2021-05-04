@@ -214,7 +214,7 @@ include /etc/sway/config.d/*
 
 
 # Lock screen with swaylock
-bindsym $mod+X exec ~/dotfiles/sway/lock
+bindsym $mod+X exec ~/dotfiles/.config/sway/lock
 
 # Test out binding certain windows to a workspace, and workspaces to screens
 # Set workspace 7 to monitor DP-3 (Middle)

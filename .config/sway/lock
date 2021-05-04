@@ -25,7 +25,7 @@ set -ex
 #BLURTYPE="5x2"
 #BLURTYPE="2x8"
 #BLURTYPE="2x3"
-BLURTYPE="0x6"
+BLURTYPE="0x2"
 # Get the screenshot, add the blur and lock the screen with it
 IMAGE="$(swaygrab output)"
 cp $IMAGE /tmp/swaylock.png
