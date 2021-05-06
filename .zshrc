@@ -403,3 +403,29 @@ eval "$(direnv hook zsh)"
 # Mender client releases
 #
 ~/dotfiles/scripts/client-releases
+
+function mcd() {
+    mkdir -p $1
+    cd $1
+}
+
+function cdl() {
+    cd $1
+    ls
+}
+
+function backup() {
+    cd "$1"{,.bak}
+}
+
+function gfind() {
+    find / -iname $@ 2>/dev/null
+}
+
+function lfind() {
+    find ~/ -name $@ 2>/dev/null
+}
+
+function rtfm() {
+    help $@ || man $@ || ${BROWSER:?Unset browser var} "https://google.com/search?q=$@"
+}
