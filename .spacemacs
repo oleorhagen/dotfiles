@@ -74,16 +74,16 @@ This function should only modify configuration layer settings."
      (git
       :variables
       git-magit-status-fullscreen t)
-     ;; ;; (github
-     ;; ;;  :variables
-     ;; ;;  )
-     ;; ;; (lsp :variables
-     ;; ;;      lsp-ui-remap-xref-keybindings nil
-     ;; ;;      lsp-ui-doc-enable             nil
-     ;; ;;      lsp-ui-doc-include-signature  nil
-     ;; ;;      lsp-ui-sideline-enable        nil
-     ;; ;;      lsp-ui-sideline-show-symbol   nil
-     ;; ;;      )
+     (github
+      :variables
+      )
+     ;; (lsp :variables
+     ;;      lsp-ui-remap-xref-keybindings nil
+     ;;      lsp-ui-doc-enable             nil
+     ;;      lsp-ui-doc-include-signature  nil
+     ;;      lsp-ui-sideline-enable        nil
+     ;;      lsp-ui-sideline-show-symbol   nil
+     ;;      )
      ;; ;; cfengine
      ;; ;; web-beautify
      ;; ;; (html :variables
@@ -95,13 +95,15 @@ This function should only modify configuration layer settings."
      ;; ;;       )
      ;; ;; The go-layer needs the auto-completion and syntax-checking layers
      ;; ;; TODO - add gotests function wrappers to the go-mode https://github.com/cweill/gotests
-     ;; ;; (go :varibles
-     ;; ;;        go-format-before-save t
-     ;; ;;        gofmt-command "goimports"
-     ;; ;;        go-use-golangci-lint t
-     ;; ;;        gofmt-show-errors nil ;; errors are already shown by flycheck
-     ;; ;;        godoc-at-point-function 'godoc-gogetdoc)
-     ;; ;; go
+     ;; go ;; TODO - modify the layer variables
+     (go :variables
+            go-format-before-save t
+            gofmt-command "goimports"
+            go-use-golangci-lint t
+            gofmt-show-errors nil ;; errors are already shown by flycheck
+            godoc-at-point-function 'godoc-gogetdoc)
+     ;; Debugging
+     dap
 
      ;; (auto-completion :variables
      ;;                  auto-completion-return-key-behavior 'complete
@@ -119,9 +121,9 @@ This function should only modify configuration layer settings."
      ;; (markdown :variables
      ;;           markdown-live-preview-engine 'vmd
      ;;           markdown-mmm-auto-modes '("c" "c++" "python" "scala" "bash" ("elisp" "emacs-lisp")))
-     ;; (yaml
-     ;;  :variables
-     ;;  yaml-indent-offset 4) ;; Standard in the mender yaml files
+     (yaml
+      :variables
+      yaml-indent-offset 4) ;; Standard in the mender yaml files
      ;; ;; (python :variables
      ;; ;;         python-backend 'lsp
      ;; ;;         python-lsp-server 'pyls
