@@ -402,7 +402,10 @@ eval "$(direnv hook zsh)"
 #
 # Mender client releases
 #
-~/dotfiles/scripts/client-releases
+if [ ! -e /tmp/client-releases-printed ]; then
+    ~/dotfiles/scripts/client-releases
+    touch /tmp/client-releases-printed
+fi
 
 function mcd() {
     mkdir -p $1
