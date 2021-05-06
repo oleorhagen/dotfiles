@@ -1,6 +1,8 @@
 #! /bin/bash
 
 declare -A CLIENT_MENDER_MAP=(
+  [2.6.0]="Mender Project 2.7.0"
+	[2.5.1]="Mender Project 2.6.1"
 	[2.5.0]="Mender Project 2.6.0"
 	[2.4.2]="Mender Project 2.5.1"
 	[2.3.2]="Mender Project 2.4.2"
