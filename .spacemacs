@@ -69,7 +69,7 @@ This function should only modify configuration layer settings."
      ;; ;; better-defaults
      ;; (shell :variables shell-default-shell 'ansi-term
      ;;        shell-default-term-shell "/bin/zsh")
-     ;; shell-scripts
+     shell-scripts
      ;; emacs-lisp
      (git
       :variables
@@ -99,22 +99,27 @@ This function should only modify configuration layer settings."
      (go :variables
             go-format-before-save t
             gofmt-command "goimports"
+            gofmt-args '("-local=github.com/mendersoftware")
             go-use-golangci-lint t
             gofmt-show-errors nil ;; errors are already shown by flycheck
             godoc-at-point-function 'godoc-gogetdoc)
      ;; Debugging
      dap
-
-     ;; (auto-completion :variables
-     ;;                  auto-completion-return-key-behavior 'complete
-     ;;                  auto-completion-tab-key-behavior 'cycle
-     ;;                  auto-completion-complete-with-key-sequence nil
-     ;;                  auto-completion-complete-with-key-sequence-delay 0.1
-     ;;                  auto-completion-private-snippets-directory "/home/olepor/dotfiles/emacs/snippets/"
-     ;;                  auto-completion-enable-sort-by-usage t
-     ;;                  auto-completion-enable-snippets-in-popup t
-     ;;                  auto-completion-enable-help-tooltip t
-     ;;                  flycheck-check-syntax-automatically '()) ;; never check syntax automatically! it's disturbing.
+     (auto-completion :variables
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-complete-with-key-sequence nil
+                      auto-completion-complete-with-key-sequence-delay 0.1
+                      auto-completion-minimum-prefix-length 2
+                      auto-completion-idle-delay 0.0 ;; set to 0.0 for optimal results with lsp
+                      auto-completion-minimum-prefix-length 1 ;; set to 1 for optimal results with lsp
+                      auto-completion-private-snippets-directory "/home/olepor/dotfiles/emacs/snippets/"
+                      auto-completion-enable-snippets-in-popup t
+                      ;; auto-completion-enable-help-tooltip nil
+                      ;; auto-completion-use-company-box t
+                      ;; auto-completion-enable-sort-by-usage t
+                      flycheck-check-syntax-automatically '()
+                      )
      ;; ;; semantic
      ;; systemd
      ;; syntax-checking
@@ -124,13 +129,13 @@ This function should only modify configuration layer settings."
      (yaml
       :variables
       yaml-indent-offset 4) ;; Standard in the mender yaml files
-     ;; ;; (python :variables
-     ;; ;;         python-backend 'lsp
-     ;; ;;         python-lsp-server 'pyls
-     ;; ;;         python-pytest-runner 'pytest
-     ;; ;;         python-formatter 'black
-     ;; ;;         python-enable-yapf-format-on-save nil
-     ;; ;;         pyton-sort-imports-on-save t)
+     (python :variables
+             python-backend 'lsp
+             python-lsp-server 'pyls
+             python-pytest-runner 'pytest
+             python-formatter 'black
+             python-enable-yapf-format-on-save nil
+             pyton-sort-imports-on-save t)
      ;; ;; (python :variables
      ;; ;;         python-backend 'anaconda
      ;; ;;         python-test-runner 'pytest
@@ -301,6 +306,9 @@ It should only modify the values of Spacemacs settings."
 
    ;; True if the home buffer should respond to resize events. (default t)
    dotspacemacs-startup-buffer-responsive t
+
+   ;; Show numbers before the startup list lines. (default t)
+   dotspacemacs-show-startup-list-numbers t
 
    ;; The minimum delay in seconds between number key presses. (default 0.4)
    dotspacemacs-startup-buffer-multi-digit-delay 0.4
@@ -605,6 +613,9 @@ It should only modify the values of Spacemacs settings."
    ;; If it does deactivate it here.
    ;; (default t)
    dotspacemacs-use-clean-aindent-mode t
+
+   ;; Accept SPC as y for prompts if non nil. (default nil)
+   dotspacemacs-use-SPC-as-y nil
 
    ;; If non-nil shift your number row to match the entered keyboard layout
    ;; (only in insert state). Currently supported keyboard layouts are:
