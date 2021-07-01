@@ -432,3 +432,31 @@ function lfind() {
 function rtfm() {
     help $@ || man $@ || ${BROWSER:?Unset browser var} "https://google.com/search?q=$@"
 }
+
+function docker-container-shell() {
+    if [[ $# -ne 1 ]]; then
+        cat <<-EOF >&2
+        docker-container-shell requires one argument.
+        Usage:
+        docker-container-shell <container-search-string>
+EOF
+    fi
+    docker exec -it $(docker ps | grep "${1}" | cut -d' ' -f1) /bin/bash
+}
+
+
+#
+## TODO - move to a separate shell file, or remove...
+#
+# function bitbake() {
+#     # echo >&2 "Foo"
+#     docker run \
+#            --rm \
+#            -it \
+#            -v /home/olepor/mendersoftware:/home/olepor/mendersoftware \
+#            -v ${PWD}:/home/olepor/yocto \
+#            crops/poky:ubuntu-20.04 \
+#            --workdir /home/olepor/yocto/mender \
+#            bash -c \
+#            "source poky/oe-init-build-env && $@"
+# }
