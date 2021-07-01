@@ -1,0 +1,198 @@
+#!/usr/bin/env bash
+
+
+set -Eeuo pipefail
+trap cleanup SIGINT SIGTERM ERR EXIT
+
+script_dir=$(cd "$(dirname "BASH_SOURCE[0]")" &>/dev/null && pwd -P)
+
+usage() {
+    cat <<EOF
+Usage: $(basename "BASH_SOURCE[0]") [-h] [-v] [-f] -p param_value arg1 [arg2...]
+
+Description...
+
+Available options:
+
+-h, --help      Print this help and exit
+-v, --verbose   Print script debug info
+-f, --flag      Some flag description
+-p, --param     Repository name
+EOF
+    exit
+}
+
+cleanup() {
+    trap - SIGINT SIGTERM ERR EXIT
+    # script cleanup here
+    # if [[ -n ${SCRIPT_LOG_FILE} ]]; then
+    #     rm -f ${SCRIPT_LOG_FILE}
+    # fi
+}
+
+setup_colors() {
+    if [[ -t 2 ]] && [[ -z "${NO_COLOR-}" ]] && [[ "${TERM-}" != "dumb" ]]; then
+        NOFORMAT='\033[0m' RED='\033[0;31m' GREEN='\033[0;32m' ORANGE='\033[0;33m' BLUE='\033[0;34m' PURPLE='\033[0;35m' CYAN='\033[0;36m' YELLOW='\033[1;33m'
+    else
+        NOFORMAT='' RED='' GREEN='' ORANGE='' BLUE='' PURPLE='' CYAN='' YELLOW=''
+    fi
+}
+
+msg() {
+    echo >&2 -e "${1:-}"
+}
+
+die() {
+    local msg=${1}
+    local code=${2:-1} # default exit status 1
+    msg "$msg"
+    exit "$code"
+}
+
+parse_params() {
+    # default values of variables set from params
+    flag=0
+    param=''
+
+    while :; do
+        case "${1:-}" in
+            -h | --help) usage ;;
+            -v | --verbose) set -x ;;
+            --no-color) NO_COLOR=1 ;;
+            -f | --flag) flag=1 ;; # example flag
+            -r | --repository) # example named parameter
+                param="${2:-}"
+                shift
+                ;;
+            -?*) die "Unknown option: " ;;
+            *) break ;;
+        esac
+        shift
+    done
+
+    args=("$@")
+
+    # check required params and arguments
+    # [[ -z "${param-}" ]] && die "Missing required parameter: param"
+    [[ ${#args[@]} -eq 0 ]] && die "No SHA's to cherry-pick given... Please provide some for me"
+    COMMITS="${args[*]}"
+
+    return 0
+}
+
+parse_params "$@"
+setup_colors
+
+# script logic here
+
+msg "${RED}Read parameters:${NOFORMAT}"
+msg "- flag: ${flag}"
+msg "- param: ${param}"
+msg "- arguments: ${args[*]-}"
+
+#################
+# functionality #
+#################
+
+
+# Enable the utility logger
+
+export LOG_SCRIPT_FILE=$(mktemp)
+source ~/dotfiles/scripts/util/log.sh
+
+#
+# First pick the branches in which we should cherry-pick to
+#
+
+#
+# Get the three latest releases from integration
+#
+function get_latest_release_versions() {
+    LATEST_RELEASE_VERSIONS=($(cd ~/mendersoftware/integration && git branch -a | grep -E 'mendersoftware/[0-9]' | sort -r | head -3))
+}
+
+#
+# Get the version of the repository in the latest_release_version
+#
+function version_of_repository() {
+    if [[ $# -ne 2 ]]; then
+        die "version_of_repository needs two arguments ($# given)"
+    fi
+    local -r repository_name=${1}
+    local -r integration_version=${2}
+    echo $(release_tool.py --version-of ${repository_name} --in-integration-version ${integration_version})
+}
+
+function update_upstream_master_remote() {
+    log_debug "Fetching mendersoftware master..."
+    git fetch mendersoftware master
+}
+
+function update_upstream_pr_branch() {
+    if [[ $# -ne 1 ]]; then
+        die "update_upstream_pr_branch: ${BASH_SOURCE} Missing one required parameter: PR_NUMBER"
+    fi
+    local -r PR_NUMBER=${1}
+    log_debug "Fetching mendersoftware pull ${PR_NUMBER}..."
+    git fetch mendersoftware +refs/pull/${PR_NUMBER}/head
+}
+
+function get_commits_in_PR () {
+    log_debug "Getting the commits in the PR..."
+    # git checkout mendersoftware/master
+    # COMMITS=$(git --no-pager diff --name-only FETCH_HEAD $(git merge-base FETCH_HEAD master))
+    msg "Cherry-picking the commits given on the CLI ${COMMITS:?No commits given}"
+}
+
+#
+# Cherry-pick to the given repository_release_version
+#
+
+#
+# How to decide the SHAs to be cherry-pick'ed
+#
+
+# First fetch the PR head
+# # git checkout -qF FETCH_HEAD
+
+# Then cherry-pick the commits to the branch
+
+# for release version - get the version to pick to.
+
+# Sets the latest release versions into the 'LATEST_RELEASE_VERSIONS' variable
+get_latest_release_versions
+
+# update_upstream_master_remote
+
+# update_upstream_pr_branch 821
+
+# commits=$(get_commits_in_PR 821)
+
+# msg "Commits: ${commits}"
+msg "Please enter the name: cherry-<name>-branch-name"
+read unique_name
+msg "unique_name: ${unique_name}"
+
+for version in ${LATEST_RELEASE_VERSIONS[@]}; do
+    log_debug "${version}"
+    cherry_pick_to_version=$(version_of_repository $(basename $(pwd)) ${version})
+
+    msg "Checkout out branch ${cherry_pick_to_version}"
+    git checkout -b "cherry-${unique_name}-${cherry_pick_to_version}" mendersoftware/${cherry_pick_to_version}
+    msg "Cherry-picking the commits:\n${COMMITS}\nto ${cherry_pick_to_version}"
+    if ! git cherry-pick -x --signoff ${COMMITS}; then
+        msg "Something went wrong with the cherry-pick. Falling back to a shell"
+        /usr/bin/zsh
+    fi
+
+    # TODO - do we want to push here (?)
+    git push
+
+    msg "Done \\o/ Cherry picked \n${COMMITS}\nTo ${cherry_pick_to_version}"
+    msg "Continue [Y/n]"
+    read CONTINUE
+    case ${CONTINUE} in
+        Y | y) continue ;;
+        *) exit 0 ;;
+    esac
+done
