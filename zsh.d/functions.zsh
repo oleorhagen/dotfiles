@@ -82,9 +82,6 @@ function acceptance-tests() {
 function integration-tests() {
 	cd ~/mendersoftware/integration/tests
 }
-function yocto-build-folder() {
-	cd ~/yocto/qemu/build
-}
 
 function makefile-verify() {
 	make --warn-undefined-variables
@@ -187,4 +184,15 @@ function dockercontainerlog() {
 
 function dockergetcontainerid() {
     docker ps -a | grep $1 | cut -d' ' -f 1 | pbcopy && echo >&2 "hash copied to clipboard"
+}
+
+function calc () {
+	  case $# in
+		    0)
+			      bc
+			      ;;
+		    *)
+			      bc -l <<< "$@"
+			      ;;
+	  esac
 }
