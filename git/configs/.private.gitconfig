@@ -1,0 +1,29 @@
+[user]
+	email = ole.orhagen@northern.tech
+	name = Ole Petter
+	signingkey = 399DBE0F4D4B02EB
+
+[alias]
+	lg = log --all --oneline --graph --decorate
+	a = add
+	cm = commit
+	s = status
+	pr = "!f() { git fetch $1 pull/$2/head:pull_$2; git checkout pull_$2; }; f"
+
+[color]
+	ui = auto
+[github]
+	oauth-token = 5f9db8b96623a199d3c30afaddbcc00f7418dac8
+	user = oleorhagen
+[commit]
+	gpgsign = true
+	template = /home/olepor/dotfiles/git-commit-template.txt
+[core]
+	editor = vim
+[init]
+	templatedir = ~/.git_templates/template
+
+# [remote "mendersoftware"]
+	#fetch = +refs/pull/*/head:refs/remotes/mendersoftware/pr/*
+[includeIf "gitdir:/home/olepor/scratchpad"]
+	path = /home/olepor/dotfiles/git/.private.gitconfig
