@@ -1268,3 +1268,6 @@ schemes:
       white:   '0xffffff'
 
 colors: *solarized_light
+
+env:
+    TERM: xterm

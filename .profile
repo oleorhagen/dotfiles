@@ -43,3 +43,6 @@ alias gpg=gpg2
 #export GITLAB_TOKEN=`pass show -c gitlab/accesstoken`
 
 export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
+
+# gpg needs to know the tty
+export GPG_TTY=$(tty)

@@ -244,6 +244,6 @@ focus_follows_mouse yes
 #mouse_warping container
 
 # Screenshot to clibboard
-bindsym $mod+p exec grim -g "$(slurp)" -
+bindsym $mod+p exec grim -g "$(slurp)" - | wl-copy
 
 include ~/.config/sway/config.d/*

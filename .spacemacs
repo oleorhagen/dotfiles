@@ -69,7 +69,7 @@ This function should only modify configuration layer settings."
      ;; ;; better-defaults
      ;; (shell :variables shell-default-shell 'ansi-term
      ;;        shell-default-term-shell "/bin/zsh")
-     shell-scripts
+     (shell-scripts :variables shell-scripts-backend 'lsp)
      ;; emacs-lisp
      (git
       :variables

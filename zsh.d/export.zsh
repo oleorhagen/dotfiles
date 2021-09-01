@@ -50,7 +50,8 @@ export PATH="${HOME}/mendersoftware/integration/extra/changelog-generator:${PATH
 # Add the release-tool to the PATH
 export PATH="${HOME}/mendersoftware/integration/extra:${PATH}"
 
-export GITLAB_TOKEN=$(pass show gitlab/accesstoken)
+export GITLAB_TOKEN=$(pass show private/gitlab/access-token)
 
 # release-tool to PATH
 export PATH=$PATH:$HOME/mendersoftware/integration/extra
+
