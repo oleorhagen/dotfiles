@@ -229,8 +229,8 @@ assign [title="emacs"] workspace number 7
 # assign [title="emacs"] output DP-3
 
 # work
-exec firefox
-exec emacs
+# exec firefox
+# exec emacs
 # assign [title="emacs@olepor"] output DP-3
 
 # mouse_warping container
