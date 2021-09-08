@@ -20,6 +20,7 @@
 	template = /home/olepor/dotfiles/git-commit-template.txt
 [core]
 	editor = vim
+	excludesFile = ~/.gitignore
 [filter "nt_update_copyright_header"]
 	clean = /home/olepor/dotfiles/scripts/nt_update_copyright_header
 [init]
