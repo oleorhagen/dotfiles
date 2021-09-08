@@ -3,6 +3,20 @@
 #
 
 
+function cm () {
+    echo >&2 ~/mendersoftware/*$1*
+    if [ "$1" = "c" ]; then
+        [ $# -lt 2 ] && echo >&2 "The c(hoice) option requires a second option" && return 1
+        select dir in ~/mendersoftware/*$2*; do
+            local -r _dir=$dir
+            break
+        done
+    else
+        local -r _dir=$(echo ~/mendersoftware/*$1${2:+*$2}* | cut -d' ' -f1)
+    fi
+    cd ${_dir}
+}
+
 function mcd() {
     mkdir -p $1
     cd $1
