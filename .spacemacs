@@ -84,7 +84,7 @@ This function should only modify configuration layer settings."
      ;;      lsp-ui-sideline-enable        nil
      ;;      lsp-ui-sideline-show-symbol   nil
      ;;      )
-     ;; ;; cfengine
+     cfengine
      ;; ;; web-beautify
      ;; ;; (html :variables
      ;; ;;       css-enable-lsp t
@@ -176,10 +176,10 @@ This function should only modify configuration layer settings."
                                       ;;           :fetcher github
                                       ;;           :repo "syohex/emacs-go-impl"))
                                       ;; coverage ;; add in-buffer test coverage for golang
-                                      ;; (bitbake :location
-                                      ;;          (recipe
-                                      ;;               :fetcher github
-                                      ;;               :repo "canatella/bitbake-el"))
+                                      (bitbake :location
+                                               (recipe
+                                                    :fetcher github
+                                                    :repo "canatella/bitbake-el"))
                                       ;; ox-jira
                                       )
    ;; A list of packages that cannot be updated.
@@ -781,6 +781,16 @@ you should place your code here."
 
   ;; ("\\.el\\'" . emacs-lisp-mode)
   ;; (setq mmm-global-mode 'auto) -- NOTE : try to fix bitbake highlighting.
+
+  ;; ediff combine both diffs
+  (defun ediff-copy-both-to-C ()
+    (interactive)
+    (ediff-copy-diff ediff-current-difference nil 'C nil
+                     (concat
+                      (ediff-get-region-contents ediff-current-difference 'A ediff-control-buffer)
+                      (ediff-get-region-contents ediff-current-difference 'B ediff-control-buffer))))
+  (defun add-B-to-ediff-mode-map () (define-key ediff-mode-map "B" 'ediff-copy-both-to-C))
+  (add-hook 'ediff-keymap-setup-hook 'add-B-to-ediff-mode-map)
 
   )
 
