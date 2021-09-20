@@ -247,3 +247,6 @@ focus_follows_mouse yes
 bindsym $mod+p exec grim -g "$(slurp)" - | wl-copy
 
 include ~/.config/sway/config.d/*
+
+# Needed for the xdg screen sharing, see: https://github.com/emersion/xdg-desktop-portal-wlr
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
