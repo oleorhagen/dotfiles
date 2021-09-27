@@ -1,0 +1,77 @@
+# Source this file to have shell utilites which helps in a release
+
+# Create a separate work-tree for each release
+function release-create-release-worktree () {
+  if [[ $# -ne 1 ]]; then
+    echo >&2 "Usage: create-release-worktree <path>"
+    return 1
+  fi
+  mkdir -p "$1"
+  for repo in $(release_tool.py -l); do
+    case "${repo}" in
+      *-enterprise)
+        echo >&2 "Skipping cloning of enterprise repo, adding it as a remote instead"
+        _repo="${repo%-enterprise}"
+        echo >&2 "_repo: ${repo_}"
+        (cd ${_repo} && git remote add enterprise git@github.com:mendersoftware/${_repo}.git)
+        ;;
+      *)
+        echo >&2 "Cloning repository ${repo}"
+      gh repo clone mendersoftware/${repo} && (cd $repo && git remote rename origin mendersoftware)
+      ;;
+    esac
+  done
+}
+
+
+# Check each module's log to see if the version requires a bump in the version
+# number
+function release-identify-components-to-bump () {
+  for repo in *; do
+    if [ -d ${repo} ]; then
+      echo $repo > current-repo && (cd $repo && git log mendersoftware/$(menderversion $repo 2.6.x))
+    fi
+  done
+}
+
+function release-download-release-images () {
+  # RPi 3
+  echo >&2 "Downloading the RPi 3 image for ${RELEASE_VERSION:?No release version given}"
+  wget https://d4o6e0uccgv40.cloudfront.net/2021-01-11-raspios-buster-armhf-lite/arm/2021-01-11-raspios-buster-armhf-lite-raspberrypi3-mender-${RELEASE_VERSION:?No release version given}.img.xz
+  # RPi 4
+  echo >&2 "Downloading the RPi 4 image for ${RELEASE_VERSION:?No release version given}"
+  wget https://d4o6e0uccgv40.cloudfront.net/2021-01-11-raspios-buster-armhf-lite/arm/2021-01-11-raspios-buster-armhf-lite-raspberrypi4-mender-${RELEASE_VERSION:?No release version given}.img.xz
+  # BBB
+  echo >&2 "Downloading BBB image for ${RELEASE_VERSION:?No release version given}"
+  wget https://mender.s3.amazonaws.com/2.5.1-build9/beagleboneblack/mender-beagleboneblack_${RELEASE_VERSION:?NO release version given}.sdimg.gz
+}
+
+function check-meta-mender-release-recipes () {
+         (cd mender-client && git checkout ${RELEASE_VERSION:?Release version not set} && sed some foo bar baz)
+         (cd mender-artifact && git checkout ${RELEASE_VERSION:?Release version not set} && sed some foo bar baz)
+         (cd mender-connect && git checkout ${RELEASE_VERSION:?Release version not set} && sed some foo bar baz)
+}
+
+function generate-relase-stats-and-changelogs () {
+    # Check what we are on a release branch for the release tool?
+    (cd integration && git checkout ${RELEASE_TAG:?RELEASE_TAG not set})
+    STATS=$(./integration/extra/statistics-generator --base-dir ${RELEASE_DIR:?Release directory not set} \
+                                             ${OLD_RELEASE_VERSION:?OLD_RELEASE_VERSION not set}..${NEW_RELEASE_VERSION:?NEW_RELEASE_VERSION not set})
+    CHANGELOGS=$(./integration/extra/changelog-generator/changelog-generator --all --base-dir ${RELEASE_DIR:?RELEASE_DIR not set} \
+                  ${OLD_RELEASE_VERSION:?OLD_RELEASE_VERSION not set}..${NEW_RELEASE_VERSION:?NEW_RELEASE_VERSION not set})
+
+    cat <<EOF
+## ${RELEASE_NAME:?RELEASE_NAME not set}
+
+_Release date $(cd integration && git log -n1 --date=format:%d.%m.%Y | awk '/Date/ {print $2}')_
+
+### Statistics
+
+$STATS
+
+### Changelogs
+
+$CHANGELOGS
+EOF
+
+}
