@@ -20,6 +20,109 @@ hardly_working() {
   date >> ${HOME}/.timeledger
 }
 
+#########################
+# Overtime calculations #
+#########################
+
+SECONDS_WORKED_TOTAL=0
+OVERTIME_TOTAL=0
+
+LOG_LEVEL=1
+
+function log() {
+    case "$1" in
+        "info")
+            shift
+            [[ ${LOG_LEVEL} -ge 1 ]] || return
+            echo >&2 "[INFO] " "$@"
+            ;;
+        "debug")
+            shift
+            [[ ${LOG_LEVEL} -ge 2 ]] || return
+            echo >&2 "[DEBUG] " "$@"
+            ;;
+        *)
+            echo >&2 "Unrecognized debug level"
+            exit 1
+    esac
+}
+
+function format_time() {
+    log debug "Seconds given to format_time: "
+    log debug "$1"
+    local -r HOURS=$(($1/60/60))
+    local -r MINUTES=$(($1/60 - $HOURS*60))
+    local -r SECONDS=$(($1 - $HOURS*60*60 - $MINUTES*60))
+    log info "Hours: ${HOURS}"
+    log info "Minutes: ${MINUTES}"
+    log info "Seconds: ${SECONDS}"
+}
+
+calculate_overtime() {
+	# First verify that a single day has only two entries (in, and out)
+	exec 3<~/.timeledger
+	exec 4<~/.timeledger
+
+	# Empty the first line from the first fd
+	read -u 3 start
+
+	#
+	# Get the next two elements from the ledger
+	while read -u 3 day_start rest_start ; do
+		read -u 4 day_end rest_end
+    log debug "Day data"
+    log debug "-----------"
+		log debug $day_start
+    log debug $rest_start
+    log debug "-----------"
+		log debug $day_end
+    log debug $rest_end
+    # The start and end must be on the same day
+	  [[ "${day_start}" != "${day_end}" ]] && { echo "The ledger contains errors. The day start and end are not the same for the given tuple."; exit 1; }
+	  # Then calculate the difference between the two data entries
+	  START=$(date +%s --date="${day_start} ${rest_start}")
+	  END=$(date +%s --date="${day_end} ${rest_end}")
+    SECONDS_WORKED_TODAY=$((START - END))
+    log debug "Time worked today:"
+    # format_time ${SECONDS_WORKED_TODAY}
+    OVERTIME_TODAY=$((SECONDS_WORKED_TODAY - 60*60*8))
+    # OVERTIME_TODAY=$SECONDS_WORKED_TODAY
+    log debug "Today's overtime"
+    # format_time ${OVERTIME_TODAY}
+    SECONDS_WORKED_TOTAL=$((SECONDS_WORKED_TOTAL + SECONDS_WORKED_TODAY))
+	  # And add the diff to the acumulated total
+    OVERTIME_TOTAL=$((OVERTIME_TOTAL + OVERTIME_TODAY))
+    # Increment both fd's file seekers
+    read -u 3
+    read -u 4
+	done
+
+  # calculate_overtime
+
+  log info "Total time worked"
+  log info "Seconds"
+  log info "${SECONDS_WORKED_TOTAL}"
+
+  log info "Hours worked"
+
+  log info "Total overtime: "
+  format_time ${OVERTIME_TOTAL}
+}
+
+worked_today() {
+    local -r last_line=$(cat ~/.timeledger | tail -n 1)
+	  START=$(date +%s --date="${last_line}")
+	  END=$(date +%s)
+    local -r TIMEDIFF=$((END - START))
+    log "info" "Worked today:"
+    format_time "${TIMEDIFF}"
+}
+
+##############################
+# General command executions #
+##############################
+
+
 if [[ "$1" = "hard" ]]; then
   work_hard
   exit 0
@@ -31,7 +134,17 @@ if [[ "$1" == "working" ]]; then
   exit 0
 fi
 
-help
+if [[ "$1" == "stats" ]]; then
+    calculate_overtime
+    exit 0
+fi
 
+if [[ "$1" == "today" ]]; then
+    worked_today
+    exit 0
+fi
+
+
+help
 
 
