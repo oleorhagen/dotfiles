@@ -782,6 +782,21 @@ you should place your code here."
   ;; ("\\.el\\'" . emacs-lisp-mode)
   ;; (setq mmm-global-mode 'auto) -- NOTE : try to fix bitbake highlighting.
 
+  ;;
+  ;;; Org archive all tasks marked as DONE
+  ;;; And add them to a key in org-mode
+  ;;
+
+  (defun org-archive-done-tasks ()
+    (interactive)
+    (org-map-entries
+     (lambda ()
+       (org-archive-subtree)
+       (setq org-map-continue-from (org-element-property :begin (org-element-at-point))))
+     "/DONE" 'file))
+  (define-key spacemacs-org-mode-map (kbd "A") 'org-archive-done-tasks)
+
+
   ;; ediff combine both diffs
   (defun ediff-copy-both-to-C ()
     (interactive)
