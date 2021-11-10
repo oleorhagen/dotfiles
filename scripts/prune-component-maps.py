@@ -1,7 +1,11 @@
+#! /bin/python
+
 import yaml
 import copy
+
 # TODO - parse args and create a CLI tool here
 import sys
+
 
 def strip_map(_map, components):
 
@@ -13,7 +17,7 @@ def strip_map(_map, components):
     # import pdb
     # pdb.set_trace()
 
-    res=[]
+    res = []
     nt = copy.deepcopy(_map)
     # in_subtree(_map, "mender", res)
     dfs(_map, components, res, nt, _map)
@@ -50,7 +54,7 @@ def dfs(tree, elements, res, newtree, origtree, path=[], depth=0):
     for node in tree:
         path.append(node)
         if type(tree) == dict:
-            dfs(tree[node], elements, res, newtree, origtree, path, depth=depth+1)
+            dfs(tree[node], elements, res, newtree, origtree, path, depth=depth + 1)
         if node in elements:
             # print(f"Node {node} in elements {elements}")
             l = copy.deepcopy(path)
@@ -65,12 +69,12 @@ def visualize_components(components):
     _stripped_map = strip_map(_map, components=components)
 
 
-
 def get_map():
     with open("/home/olepor/mendersoftware/integration/component-maps.yml") as fd:
         d = fd.read()
         components = yaml.load(d)
         return components
+
 
 # Now collect all repositories into a map based on the component names
 # first.

@@ -89,7 +89,7 @@ which okular  || die "okular not found in PATH"
 which python  || die "Python not found in PATH"
 
 
-python prune-component-maps.py "$@" > ${tfile}
+prune-component-maps.py "$@" > ${tfile}
 
 cat ${tfile}
 
