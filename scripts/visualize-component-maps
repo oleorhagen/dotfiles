@@ -1,0 +1,27 @@
+#! /bin/bash
+
+echo >&2 "TODO - script development in progress"
+
+
+# First prune the graph
+
+which yml2dot || { echo >&2 "yml2dot not found in PATH"; exit 1; }
+which okular  || { echo >&2 "okular not found in PATH"; exit 1; }
+
+tfile=$(mktemp)
+vizfile=$(mktemp)
+
+function cleanup() {
+    rm -rf ${tfile}
+    rm -rf ${vizfile}
+}
+
+trap cleanup EXIT
+
+python prune-component-maps.py "$@" > ${tfile}
+
+cat ${tfile}
+
+yml2dot ${tfile} | dot -Tpng > ${vizfile}
+
+okular ${vizfile}
