@@ -115,10 +115,10 @@ eval "$(direnv hook zsh)"
 #
 # Mender client releases
 #
-if [ ! -e /tmp/client-releases-printed ]; then
-    ~/dotfiles/scripts/client-releases
-    touch /tmp/client-releases-printed
-fi
+#if [ ! -e /tmp/client-releases-printed ]; then
+#    ~/dotfiles/scripts/client-releases
+#    touch /tmp/client-releases-printed
+#fi
 
 # Source all the individual configuration files
 for file in ~/dotfiles/zsh.d/*; do
