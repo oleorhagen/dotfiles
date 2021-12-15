@@ -55,3 +55,6 @@ export GITLAB_TOKEN=$(pass show private/gitlab/access-token)
 # release-tool to PATH
 export PATH=$PATH:$HOME/mendersoftware/integration/extra
 
+# No python bytecode plz
+export PYTHONDONTWRITEBYTECODE="true"
+
