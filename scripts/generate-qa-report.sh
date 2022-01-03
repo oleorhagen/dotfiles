@@ -1,7 +1,6 @@
 #! /bin/bash
 
 #
-# TODO - Automate the Gitlab pipeline statistics-generator
 # TODO - make functions out of the repetetive code here
 # TODO - split the gitlab-generator out into a separate file and function
 # TODO - gather statistics on naughty and misbehaving tests
@@ -62,18 +61,21 @@ echo >&2 "${NEW_ISSUES}"
 # Gitlab Nightlies #
 ####################
 
-# JQ filter for Gitlab nightlies:
-
-# jq '.pipelines | .[] | .details.status.text == failed, and created_at regexpequeals 2021-11'
-# Filter for processing the Gitlab scheduled nightlies JSON
-# jq -j '.pipelines |  map(select(.created_at | test("2021-11.*"))) | .[] | .created_at," ", .details.status.text,"\n"'
-
 # Tac this, and create a simple graphic for the red and green nightlies
 
+# Get all the scheduled pipelines from the last month
+function gitlab-get-nightlies() {
+    local -r PREVIOUS_MONTH=$(date --date "$(date +%Y-%m-01) -1 day" +%Y-%m)
+    local -r THIS_MONTH=$(date --date "$(date +%Y-%m-01)" +%Y-%m)
+    curl --header "PRIVATE-TOKEN: $(pass show private/gitlab/access-token)" "https://gitlab.com/api/v4/projects/12501706/pipelines.json?per_page=100&updated_after=${PREVIOUS_MONTH}-01&updated_before=${THIS_MONTH}-01&source=schedule"
 
-function gitlab-nigtly-stats() {
+}
 
-    NIGHTLIES="$(cat ~/page{1,2,3,4}.json | jq -j '.pipelines |  map(select(.created_at | test("2021-11.*"))) | .[] | .created_at," ", .details.status.text,"\n"' | tac)"
+
+function gitlab-nightly-stats() {
+
+    # Get the stats
+    NIGHTLIES=$(gitlab-get-nightlies | jq -j '.[] | .created_at," ",.status,"\n"' | tac)
 
     #
     # Per day overview
@@ -94,41 +96,44 @@ function gitlab-nigtly-stats() {
     done
     IFS=${OIFS}
 
+    local -r NR_OF_DAYS_IN_PREVIOUS_MONTH=$(date --date "$(date +%Y-%m-01) -1 day" +%d)
+
     #
     # Stats
     #
     echo
-    echo "Simple statistics"
+    echo "### Simple statistics"
     echo
-    echo "${NIGHTLIES}" | awk '
+    echo "${NIGHTLIES}" | awk -v DAYS=${NR_OF_DAYS_IN_PREVIOUS_MONTH} \
+'
 $2 == "failed" {failed += 1}
-$2 == "passed" {passed += 1}
+$2 == "success" {passed += 1}
 END {
 print "passed: " passed
 print "failed: " failed
-print "Success ratio: " passed/30
-print "Failure ratio: " failed/30
+print "Success ratio: " passed/DAYS
+print "Failure ratio: " failed/DAYS
 
 }'
 }
 
 cat <<EOF
-Mender QA
+# Mender QA - <Month>
 
-Closed issues this month:
+## Closed issues this month:
 
 ${CLOSED_ISSUES}
 
-Rejected issues this month:
+## Rejected issues this month:
 
 ${REJECTED_ISSUES}
 
-New issues this month:
+## New issues this month:
 
 ${NEW_ISSUES}
 
-Gitlab Nightlies:
+## GitLab Nightlies:
 
-$(gitlab-nigtly-stats)
+$(gitlab-nightly-stats)
 
 EOF
