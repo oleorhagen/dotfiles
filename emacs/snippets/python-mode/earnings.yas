@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: pandas-finance-earnings
+# key: earnings
+# --
+
+"$1": {
+    "earnings": $2,
+    "ebit": $3,
+    "result": $4,
+    "per/share": $5,
+    "ebit-margin": $6,
+    "egenkapital": $7,
+},

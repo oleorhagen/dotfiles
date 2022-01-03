@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Aoc setup
+# key: aoc
+# --
+import sys
+sys.path.append("../aocutils")
+
+from aocd.models import Puzzle
+puzzle = Puzzle(year=2021, day=$1)
+
+# Handy utility parser
+import parse as p
+
+from aocutils import *
+
+def parser(d):
+    pass
+
+def solve_p1(d):
+    pass
+
+def solve_p2(d):
+    pass
+
+d = data('part1.test', parser=parser)
+
+d = data(puzzle.input_data_fname, parser=parser)
+
+$0
+
+# puzzle.answer_a = 0
