@@ -40,7 +40,7 @@ function gfind() {
 }
 
 function lfind() {
-    find ~/ -name $@ 2>/dev/null
+    find ${PWD} -name $@ 2>/dev/null
 }
 
 function rtfm() {
