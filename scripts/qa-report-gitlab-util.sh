@@ -1,3 +1,10 @@
+#
+#
+# Utility functions for gathering Nightly statistics from Gitlab mender-qa
+#
+#
+# TODO - should probably get a lot nicer interface for these functions!
+# TODO - test stats should also mark which suite it's coming from (integration/acceptance/closed/open-source)
 
 # Get all the scheduled pipelines from the last month
 function gitlab-get-nightlies() {
@@ -6,10 +13,26 @@ function gitlab-get-nightlies() {
     curl --header "PRIVATE-TOKEN: $(pass show private/gitlab/access-token)" "https://gitlab.com/api/v4/projects/12501706/pipelines.json?per_page=100&updated_after=${PREVIOUS_MONTH}-01&updated_before=${THIS_MONTH}-01&source=schedule"
 }
 
+# Get all the scheduled pipelines this month so far
+function gitlab-get-nightlies-this-month-so-far() {
+    # local -r PREVIOUS_MONTH=$(date --date "$(date +%Y-%m-01) -1 day" +%Y-%m)
+    local -r TODAY=$(date +%Y-%m-%d)
+    local -r THIS_MONTH=$(date --date "$(date +%Y-%m-01)" +%Y-%m)
+    curl --header "PRIVATE-TOKEN: $(pass show private/gitlab/access-token)" "https://gitlab.com/api/v4/projects/12501706/pipelines.json?per_page=100&updated_after=${THIS_MONTH}-01&updated_before=${TODAY}&source=schedule"
+}
+
 function gitlab-nightlies-get() {
     local -r NIGHTLIES="$1"
     local -r key="$2"
     echo $NIGHTLIES | jq ".[] | ${key}"
+}
+
+# TODO - should be used i nget-pipeline-errors-or-failures instead of direct
+# curl call
+function get-gitlab-pipeline-test-report() {
+    [[ $# -ne 1 ]] && return 1
+    local -r GITLAB_PIPELINE_ID="$1"
+    curl --fail --header "PRIVATE-TOKEN: $(pass show private/gitlab/access-token)" "https://gitlab.com/api/v4/projects/12501706/pipelines/${GITLAB_PIPELINE_ID}/test_report"
 }
 
 function get-pipeline-errors-or-failures() {
@@ -21,6 +44,7 @@ function get-pipeline-errors-or-failures() {
         local new_tests_for_id="$(curl --fail --header "PRIVATE-TOKEN: $(pass show private/gitlab/access-token)" "https://gitlab.com/api/v4/projects/12501706/pipelines/${GITLAB_PIPELINE_ID}/test_report" | jq '.test_suites | .[] | .test_cases | .[] | select(.status=="error" or .status=="failed") | .name')"
         failing_tests=("${failing_tests}" "${new_tests_for_id}")
         # Don't hammer the API too hard - TODO - consider graphQL
+        # TODO - simply pipe the for-loop to the running AWK program (!)
         sleep 1
     done
     # extract the failing test stats
