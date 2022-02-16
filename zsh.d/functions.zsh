@@ -210,3 +210,19 @@ function calc () {
 			      ;;
 	  esac
 }
+
+# shell-format
+#
+# $1 - the file(s) to format with shfmt
+# Currently supports our mender required format.
+function shell-format() { shfmt \
+        -ln bash \
+        -i 4 \
+        -l \
+        -sr \
+        -ci \
+        -kp \
+        -bn \
+        -w \
+        $1
+}
