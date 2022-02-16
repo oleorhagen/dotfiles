@@ -60,3 +60,6 @@ alias ssh="TERM=xterm-256color ssh"
 # Pretty cat <3
 #
 #alias cat=bat
+
+alias release_tool=release_tool.py
+alias rt=release_tool.py
