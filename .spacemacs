@@ -26,7 +26,6 @@ This function should only modify configuration layer settings."
    ;; a layer lazily. (default t)
    dotspacemacs-ask-for-lazy-installation t
 
-   ;; If non-nil layers with lazy install support are lazy installed.
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '("~/.layers/")
@@ -45,10 +44,20 @@ This function should only modify configuration layer settings."
 
      ;; cmake
 
-     ;; (unicode-fonts
-     ;;  :variables
-     ;;  unicode-fonts-enable-ligatures t
-     ;;  unicode-fonts-ligature-modes '(prog-mode))
+     (javascript :variables
+                 javascript-backend 'lsp
+                 javascript-lsp-linter nil
+                 javascript-import-tool 'import-js
+                 )
+     react
+     prettier
+     (html :variables
+           web-fmt-tool 'web-beautify
+           scss-enable-lsp t
+           css-enable-lsp t
+           less-enable-lsp t
+           html-enable-lsp t)
+
      ;; ;; (c-c++ :variables
      ;; ;;        c-c++-enable-clang-support t
      ;; ;;        c-c++-enable-clang-format-on-save nil
@@ -128,7 +137,8 @@ This function should only modify configuration layer settings."
      ;;           markdown-mmm-auto-modes '("c" "c++" "python" "scala" "bash" ("elisp" "emacs-lisp")))
      (yaml
       :variables
-      yaml-indent-offset 4) ;; Standard in the mender yaml files
+      yaml-enable-lsp t
+      yaml-indent-offset 2) ;; Standard in the mender yaml files
      (python :variables
              python-backend 'lsp
              python-lsp-server 'pyls
@@ -147,10 +157,10 @@ This function should only modify configuration layer settings."
      ;;  :variables
      ;;  geiser-active-implementation '(mit)
      ;;  geiser-default-implementation 'mit)
-     ;; (org
-     ;;  :variables
-     ;;  org-enable-github-support t)
-     ;; spacemacs-org
+     (org
+      :variables
+      org-enable-github-support t)
+     spacemacs-org
      ;; neotree
      ;; ;; (shell :variables
      ;; ;;        shell-default-height 300
@@ -205,9 +215,13 @@ It should only modify the values of Spacemacs settings."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
-   ;; If non-nil then enable support for the portable dumper. You'll need
-   ;; to compile Emacs 27 from source following the instructions in file
+   ;; If non-nil then enable support for the portable dumper. You'll need to
+   ;; compile Emacs 27 from source following the instructions in file
    ;; EXPERIMENTAL.org at to root of the git repository.
+   ;;
+   ;; WARNING: pdumper does not work with Native Compilation, so it's disabled
+   ;; regardless of the following setting when native compilation is in effect.
+   ;;
    ;; (default nil)
    dotspacemacs-enable-emacs-pdumper nil
 
@@ -356,15 +370,15 @@ It should only modify the values of Spacemacs settings."
    ;; Default font or prioritized list of fonts.
    dotspacemacs-default-font '(
                                ("Fira Code"
-                                :size 15
+                                :size 16
                                 :weight normal
                                 :width normal)
                                ("Cascadia Code"
-                                :size 15
+                                :size 16
                                 :weight normal
                                 :width normal)
                                ("Source Code Pro"
-                               :size 15
+                               :size 16
                                :weight normal
                                :width normal))
 
@@ -509,8 +523,8 @@ It should only modify the values of Spacemacs settings."
    ;; If set to `t', `relative' or `visual' then line numbers are enabled in all
    ;; `prog-mode' and `text-mode' derivatives. If set to `relative', line
    ;; numbers are relative. If set to `visual', line numbers are also relative,
-   ;; but lines are only visual lines are counted. For example, folded lines
-   ;; will not be counted and wrapped lines are counted as multiple lines.
+   ;; but only visual lines are counted. For example, folded lines will not be
+   ;; counted and wrapped lines are counted as multiple lines.
    ;; This variable can also be set to a property list for finer control:
    ;; '(:relative nil
    ;;   :visual nil
@@ -607,14 +621,14 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
 
-   ;; If non nil activate `clean-aindent-mode' which tries to correct
-   ;; virtual indentation of simple modes. This can interfer with mode specific
+   ;; If non-nil activate `clean-aindent-mode' which tries to correct
+   ;; virtual indentation of simple modes. This can interfere with mode specific
    ;; indent handling like has been reported for `go-mode'.
    ;; If it does deactivate it here.
    ;; (default t)
    dotspacemacs-use-clean-aindent-mode t
 
-   ;; Accept SPC as y for prompts if non nil. (default nil)
+   ;; Accept SPC as y for prompts if non-nil. (default nil)
    dotspacemacs-use-SPC-as-y nil
 
    ;; If non-nil shift your number row to match the entered keyboard layout
@@ -634,7 +648,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-pretty-docs t
 
    ;; If nil the home buffer shows the full path of agenda items
-   ;; and todos. If non nil only the file name is shown.
+   ;; and todos. If non-nil only the file name is shown.
    dotspacemacs-home-shorten-agenda-source nil
 
    ;; If non-nil then byte-compile some of Spacemacs files.
@@ -646,14 +660,25 @@ This function defines the environment variables for your Emacs session. By
 default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
-  (spacemacs/load-spacemacs-env))
+  (spacemacs/load-spacemacs-env)
+)
 
 (defun dotspacemacs/user-init ()
   "Initialization for user code:
 This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
-If you are unsure, try setting them in `dotspacemacs/user-config' first.")
+If you are unsure, try setting them in `dotspacemacs/user-config' first."
+)
+
+
+(defun dotspacemacs/user-load ()
+  "Library to load while dumping.
+This function is called only while dumping Spacemacs configuration. You can
+`require' or `load' the libraries of your choice that will be included in the
+dump."
+)
+
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -662,6 +687,11 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  ;; https://github.com/syl20bnr/spacemacs/issues/15089#issuecomment-983837230
+  ;; Fixes rebase-mode in Magit
+  (setq auto-mode-alist (delete '("/git-rebase-todo$" . helm-ls-git-rebase-todo-mode) auto-mode-alist))
+
 
   ;; No smartparens plz
   (spacemacs/toggle-smartparens-globally-off)
