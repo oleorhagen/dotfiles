@@ -2,35 +2,19 @@
 
 # Create a separate work-tree for each release
 function release-create-release-worktree () {
-  if [[ $# -ne 1 ]]; then
-    echo >&2 "Usage: create-release-worktree <path>"
-    return 1
-  fi
-  mkdir -p "$1"
-  for repo in $(release_tool.py -l); do
-    case "${repo}" in
-      *-enterprise)
-        echo >&2 "Skipping cloning of enterprise repo, adding it as a remote instead"
-        _repo="${repo%-enterprise}"
-        echo >&2 "_repo: ${repo_}"
-        (cd ${_repo} && git remote add enterprise git@github.com:mendersoftware/${_repo}.git)
-        ;;
-      *)
-        echo >&2 "Cloning repository ${repo}"
-      gh repo clone mendersoftware/${repo} && (cd $repo && git remote rename origin mendersoftware)
-      ;;
-    esac
-  done
-}
-
-
-# Check each module's log to see if the version requires a bump in the version
-# number
-function release-identify-components-to-bump () {
-  for repo in *; do
-    if [ -d ${repo} ]; then
-      echo $repo > current-repo && (cd $repo && git log mendersoftware/$(menderversion $repo 2.6.x))
-    fi
+  # if [[ $# -ne 1 ]]; then
+  #   echo >&2 "Usage: create-release-worktree <path>"
+  #   return 1
+  # fi
+  # mkdir -p "$1"
+  repos="$(curl -s https://oleorhagen:@api.github.com/orgs/mendersoftware/repos\?per_page\=200 | jq '.[] | .name' | xargs -iz echo z)"
+  repos="${repos} $(release_tool.py --list --all)"
+  repos=$(echo "${repos}" | sort | uniq)
+  echo >&2 "repos: ${repos}"
+  IFS=$'\n'
+  for repo in $(echo ${repos} | cat); do
+    echo >&2 "Cloning repository ${repo}"
+    git clone git@github.com:mendersoftware/${repo}.git
   done
 }
 
