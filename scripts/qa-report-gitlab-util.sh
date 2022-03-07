@@ -36,22 +36,32 @@ function get-gitlab-pipeline-test-report() {
 }
 
 function get-pipeline-errors-or-failures() {
+    echo >&2 "Extracting the failures from the failing pipeline ID's"
     local -r pipeline_ids=$1
     local failing_tests=()
     for pipeline_id in $(echo $1); do
         local GITLAB_PIPELINE_ID="$pipeline_id"
+        echo >&2 "Extracting the statistics from:"
         echo >&2 "GITLAB_PIPELINE_ID: ${GITLAB_PIPELINE_ID}"
-        local new_tests_for_id="$(curl --fail --header "PRIVATE-TOKEN: $(pass show private/gitlab/access-token)" "https://gitlab.com/api/v4/projects/12501706/pipelines/${GITLAB_PIPELINE_ID}/test_report" | jq '.test_suites | .[] | .test_cases | .[] | select(.status=="error" or .status=="failed") | .name')"
-        failing_tests=("${failing_tests}" "${new_tests_for_id}")
+
+        while read -r TEST_NAME; do
+            echo >&2 "test name received:"
+            echo >&2 "${TEST_NAME}"
+            failing_tests+=(${TEST_NAME})
+        done < <(curl --fail --header "PRIVATE-TOKEN: $(pass show private/gitlab/access-token)" "https://gitlab.com/api/v4/projects/12501706/pipelines/${GITLAB_PIPELINE_ID}/test_report" 2>/dev/null | jq '.test_suites | .[] | .test_cases | .[] | select(.status=="error" or .status=="failed") | .name')
         # Don't hammer the API too hard - TODO - consider graphQL
         # TODO - simply pipe the for-loop to the running AWK program (!)
         sleep 1
     done
     # extract the failing test stats
-    echo >&2 ${failing_tests}
-    # AWK the shit out of these statistics!
-    echo ${failing_tests} | awk '
+    echo >&2 "Test cases:"
+    for value in "${failing_tests[@]}"; do
+        echo >&2 "Case:"
+        echo >&2 ${value}
+        echo ${value}
+    done | awk '
 {
+        printf("Case: %s\n", $1)
         failures[$1]++
 }
 END {
@@ -77,14 +87,16 @@ function gitlab-nightly-stats() {
     #
     # Per day overview
     #
-    echo -e "Day\tStatus"
-    echo "---------------"
+    echo -e "|Day\t| Status|"
+    echo "|--------|-------|"
     OIFS=${IFS}
     IFS=$'\n'
     for day in ${NIGHTLIES}; do
         # Show the nightly day, and the status
+        echo -n "|"
         echo -e -n $(echo -n "${day}" | cut -d' ' -f1 | awk -F'-' '{print $3}' | awk -FT '{print $1}') "\t"
-        echo " ${day}" | cut -d' ' -f3
+        echo -n "|"
+        echo " ${day}" | cut -d' ' -f3 "|"
         # TODO - add emojis
         # RES=$(echo " ${day}" | cut -d' ' -f3)
         # if [[ "${RES}" = "failed" ]]; then
