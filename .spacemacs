@@ -42,6 +42,10 @@ This function should only modify configuration layer settings."
      ;; display
      my-private-conf
 
+     ;; For changing the buffer format (hopefully)
+     (pandoc :variables
+             pandoc-data-dir "~/.emacs.d/.cache/pandoc/")
+
      ;; cmake
 
      (javascript :variables
@@ -83,9 +87,6 @@ This function should only modify configuration layer settings."
      (git
       :variables
       git-magit-status-fullscreen t)
-     (github
-      :variables
-      )
      ;; (lsp :variables
      ;;      lsp-ui-remap-xref-keybindings nil
      ;;      lsp-ui-doc-enable             nil
@@ -837,6 +838,23 @@ you should place your code here."
   (defun add-B-to-ediff-mode-map () (define-key ediff-mode-map "B" 'ediff-copy-both-to-C))
   (add-hook 'ediff-keymap-setup-hook 'add-B-to-ediff-mode-map)
 
+  ;; Add a function for converting to jira markdown
+  ;; Then tie this in with a specific quit function button
+  ;; Ideally <spc> q j
+
+  (defun replace-buffer-contents-to-jira-markdown-on-save()
+    "A utility function which should be called as a hook when closing the tridactyl interaction buffer. And then transform the written markdown to Jira markdown using pandoc, and pandoc-mode."
+    (interactive)
+  ;;; Generate the Jira markdown from the markdown contents of the current buffer
+    (pandoc-run-pandoc)
+  ;;; Replace the contents of the current buffer with the Jira markdown
+    (replace-buffer-contents pandoc--output-buffer-name))
+
+  ;; Set the leader bindings
+  (spacemacs/set-leader-keys
+    "qj" '(lambda ()
+            (replace-buffer-contents-to-jira-markdown-on-save)
+            (spacemacs/frame-killer)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
