@@ -86,7 +86,8 @@ This function should only modify configuration layer settings."
      ;; emacs-lisp
      (git
       :variables
-      git-magit-status-fullscreen t)
+      git-magit-status-fullscreen t
+      git-commit-major-mode 'git-conventional-commit-message-mode)
      ;; (lsp :variables
      ;;      lsp-ui-remap-xref-keybindings nil
      ;;      lsp-ui-doc-enable             nil
