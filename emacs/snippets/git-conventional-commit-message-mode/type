@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: type
+# key: type
+# contributor: Ole P. Orhagen <olepo89@gmail.com>
+# --
+${1:$$(yas-choose-value '("fix" "feat" "chore" "build" "ci" "docs" "perf" "refactor" "style" "test"))}: $2
+
+${3}
+
+# Optional expansion of Changelog and Ticket if fix or feat

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: fix
+# key: fix
+# contributor: Ole P. Orhagen <olepo89@gmail.com>
+# --
+fix${1:($2)}: $3
+
+$4
+
+# Optional expansion of Changelog and Ticket if fix or feat
+Changelog: ${5:None}
+Ticket: ${6:None}
