@@ -77,6 +77,7 @@ if [[ -n "${UMOUNT}" ]]; then
   echo >&2 "Unmounting ${MNT}"
   sudo umount "${MNT}"
 else
+  [ ! -d "${MNT}" ] && sudo mkdir -p "${MNT}"
   echo >&2 "mounting: mount -o loop,offset=$((512*${start_addresses[${PARTITION_NR}]})) ${IMAGE} ${MNT}"
   sudo mount -o loop,offset=$((512*${start_addresses[${PARTITION_NR}]}))  "${IMAGE}" "${MNT}"
 fi
