@@ -3,10 +3,9 @@
 # key: fix
 # contributor: Ole P. Orhagen <olepo89@gmail.com>
 # --
-fix${1:($2)}: $3
+fix: $1
 
-$4
+$0
 
-# Optional expansion of Changelog and Ticket if fix or feat
-Changelog: ${5:None}
-Ticket: ${6:None}
+Changelog: ${2:None}
+Ticket: ${4:None}
