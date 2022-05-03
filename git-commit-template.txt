@@ -8,8 +8,6 @@
 # Provide links or keys to any relevant tickets, articles or other resources
 # Example: Github issue #23
 
-Changelog: None
-
 # --- COMMIT END ---
 # Type can be 
 #    feat     (new feature)
