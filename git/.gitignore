@@ -1,0 +1,6 @@
+.envrc
+.direnv
+.in
+.out
+.dir-locals.el
+*.~undo-tree~
