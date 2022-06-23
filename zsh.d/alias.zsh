@@ -55,6 +55,7 @@ alias zshsrc='source ~/.zshrc'
 alias please="sudo"
 
 alias ssh="TERM=xterm-256color ssh"
+alias sshcloud="TERM=xterm-256color ssh -o UserKnownHostsFile=/dev/null"
 
 #
 # Pretty cat <3
