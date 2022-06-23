@@ -54,20 +54,20 @@ read PARTITION_NR
 
 case ${PARTITION_NR} in
   0)
-    echo >&2 "Mounting the boot partition to /mnt/boot"
-    MNT=/mnt/boot/
+    echo >&2 "Mounting the boot partition to /testmnt/boot"
+    MNT=/testmnt/boot/
     ;;
   1)
-    echo >&2 "Mounting the /rootfsa partition to /mnt/rootfsa"
-    MNT=/mnt/rootfsa/
+    echo >&2 "Mounting the /rootfsa partition to /testmnt/rootfsa"
+    MNT=/testmnt/rootfsa/
     ;;
   2)
-    echo >&2 "Mounting the /rootfsb partition to /mnt/rootfsb"
-    MNT=/mnt/rootfsb/
+    echo >&2 "Mounting the /rootfsb partition to /testmnt/rootfsb"
+    MNT=/testmnt/rootfsb/
     ;;
   3)
-    echo >&2 "Mounting the /data partition to /mnt/data"
-    MNT=/mnt/data/
+    echo >&2 "Mounting the /data partition to /testmnt/data"
+    MNT=/testmnt/data/
     ;;
   *)
     echo >&2 "$i not a valid index"
