@@ -52,11 +52,12 @@ This function should only modify configuration layer settings."
                  javascript-backend 'lsp
                  javascript-lsp-linter nil
                  javascript-import-tool 'import-js
-                 )
+                 javascript-fmt-tool 'prettier
+                 javascript-fmt-on-save t)
      react
      prettier
      (html :variables
-           web-fmt-tool 'web-beautify
+           web-fmt-tool 'prettier
            scss-enable-lsp t
            css-enable-lsp t
            less-enable-lsp t
@@ -167,9 +168,9 @@ This function should only modify configuration layer settings."
      ;; ;; (shell :variables
      ;; ;;        shell-default-height 300
      ;; ;;        shell-default-position 'bottom)
-     ;; (spell-checking :variables
-     ;;                 spell-checking-enable-by-default nil
-     ;;                 spell-checking-enable-auto-dictionary t)
+     (spell-checking :variables
+                     spell-checking-enable-by-default nil
+                     spell-checking-enable-auto-dictionary t)
      ;; ;; version-control
      ;; (rust :variables
      ;;       rust-format-on-save t)
@@ -188,6 +189,11 @@ This function should only modify configuration layer settings."
                                       ;;           :fetcher github
                                       ;;           :repo "syohex/emacs-go-impl"))
                                       ;; coverage ;; add in-buffer test coverage for golang
+                                      ;; Install logview mode
+                                      (logview :location
+                                               (recipe
+                                                :fetcher github
+                                                :repo "doublep/logview"))
                                       (bitbake :location
                                                (recipe
                                                     :fetcher github
@@ -882,11 +888,11 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-     )
+ '(ignored-local-variable-values '((eval add-hook 'before-save-hook 'time-stamp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
 )
