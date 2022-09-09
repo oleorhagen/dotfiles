@@ -10,6 +10,17 @@
 	s = status
 	pr = "!f() { git fetch $1 pull/$2/head:pull_$2; git checkout pull_$2; }; f"
 
+	# list files which have changed since REVIEW_BASE
+	# (REVIEW_BASE defaults to 'master' in my zshrc)
+	files = !git diff --name-only $(git merge-base HEAD \"${REVIEW_BASE:-master}\")
+
+	# Same as above, but with a diff stat instead of just names
+	# (better for interactive use)
+	stat = !git diff --stat $(git merge-base HEAD \"${REVIEW_BASE:-master}\")
+
+	# Open all the files changed in this PR in emacs
+	review = !git todo
+
 [color]
 	ui = auto
 [github]
@@ -29,6 +40,30 @@
 # [remote "mendersoftware"]
 	#fetch = +refs/pull/*/head:refs/remotes/mendersoftware/pr/*
 [mailmap]
-	file = /home/olepor/go/src/github.com/mendersoftware/integration/extra/gitdm/mailmap
+	file = /home/olepor/release/3.3.0/integration/extra/gitdm/mailmap
 [gpg]
 	program = gpg2
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
+[delta]
+    features = decorations
+
+[delta "interactive"]
+    keep-plus-minus-markers = false
+
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
