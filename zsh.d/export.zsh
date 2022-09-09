@@ -58,3 +58,6 @@ export PATH=$PATH:$HOME/mendersoftware/integration/extra
 # No python bytecode plz
 export PYTHONDONTWRITEBYTECODE="true"
 
+# Export a Mender auth token as a JWT
+export JWT="$(pass show private/hosted-mender/access-token)"
+
