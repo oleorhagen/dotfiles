@@ -64,3 +64,6 @@ alias sshcloud="TERM=xterm-256color ssh -o UserKnownHostsFile=/dev/null"
 
 alias release_tool=release_tool.py
 alias rt=release_tool.py
+
+# pwndbg
+alias pwndbg='gdb -x /usr/share/pwndbg/gdbinit.py'
