@@ -42,11 +42,23 @@ This function should only modify configuration layer settings."
      ;; display
      my-private-conf
 
+     ;; React baby
+     (react)
+
+     (sql
+      :variables
+      sql-capitalize-keywords t
+      sql-auto-indent t
+      )
+
      ;; For changing the buffer format (hopefully)
      (pandoc :variables
              pandoc-data-dir "~/.emacs.d/.cache/pandoc/")
 
      ;; cmake
+
+     ;; Jupyter notebook setup
+     (ipython-notebook :variables ein-backend 'jupyter)
 
      (javascript :variables
                  javascript-backend 'lsp
@@ -63,11 +75,11 @@ This function should only modify configuration layer settings."
            less-enable-lsp t
            html-enable-lsp t)
 
-     ;; ;; (c-c++ :variables
-     ;; ;;        c-c++-enable-clang-support t
-     ;; ;;        c-c++-enable-clang-format-on-save nil
-     ;; ;;        c-c++-enable-rtags-support t
-     ;; ;;        c++-enable-organize-includes-on-save nil)
+     (c-c++ :variables
+            c-c++-enable-clang-support t
+            c-c++-enable-clang-format-on-save nil
+            c-c++-enable-rtags-support t
+            c++-enable-organize-includes-on-save nil)
      ;; c-c++
      ;; debug
      ;; (latex :variables
@@ -184,6 +196,8 @@ This function should only modify configuration layer settings."
                                       ;; org-jira maybe? TODO
                                       ;; Add in-buffer code coverage visualisation
                                       ;; ;; (coverage :location (recipe :fetcher github :repo "google/coverage"))
+                                      ;;; Snippets for react when developing UI's
+                                      (react-snippets)
                                       ;; (go-impl :location
                                       ;;          (recipe
                                       ;;           :fetcher github
