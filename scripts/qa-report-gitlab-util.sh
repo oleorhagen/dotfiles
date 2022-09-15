@@ -44,7 +44,7 @@ function get-pipeline-errors-or-failures() {
         echo >&2 "Extracting the statistics from:"
         echo >&2 "GITLAB_PIPELINE_ID: ${GITLAB_PIPELINE_ID}"
 
-        curl --fail --header "PRIVATE-TOKEN: $(pass show private/gitlab/access-token)" "https://gitlab.com/api/v4/projects/12501706/pipelines/${GITLAB_PIPELINE_ID}/test_report" 2>/dev/null | jq '.test_suites | .[] | .test_cases | .[] | select(.status=="error" or .status=="failed") | .name'
+        curl --fail --header "PRIVATE-TOKEN: $(pass show private/gitlab/access-token)" "https://gitlab.com/api/v4/projects/12501706/pipelines/${GITLAB_PIPELINE_ID}/test_report" | jq '.test_suites | .[] | .test_cases | .[] | select(.status=="error" or .status=="failed") | .name'
 
         sleep 1
     done
