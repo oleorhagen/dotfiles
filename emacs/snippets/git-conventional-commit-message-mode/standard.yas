@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Standard template for our conventional commits
+# key: standard
+# contributor: Ole P. Orhagen <olepo89@gmail.com>
+# --
+${1:$$(yas-choose-value '("fix" "feat" "chore" "build" "ci" "docs" "perf" "refac" "style" "test"))}: $2
+
+$0
+
+${1:$(string-equal (yas-field-value 1) "fix")}
+
+${1:$(when (string-equal (yas-field-value 1) "fix") "FOOBAR")}

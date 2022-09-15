@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+#name : ostep-process-api
+#key : ostep-process-api
+#contributor : Ole P. Orhagen
+# --
+
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+int main(void) {
+
+  int rc = fork();
+
+  if (rc < 0) {
+    fprintf(stderr, "fork failed\n");
+    exit(1);
+  }
+
+  if (rc == 0) {
+    // Parent
+  }
+
+  if (rc > 0) {
+    // Child
+  }
+
+  return 0;
+}
