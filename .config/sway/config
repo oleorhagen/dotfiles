@@ -207,7 +207,7 @@ include /etc/sway/config.d/*
  bindsym XF86AudioMute exec amixer -q sset Master toggle
  bindsym XF86AudioLowerVolume exec amixer -q sset Master 3%-
  bindsym XF86AudioRaiseVolume exec amixer -q sset Master 3%+
- 
+
  # Add brigthness control
  bindsym XF86MonBrightnessUp exec light -A 20
  bindsym XF86MonBrightnessDown exec light -U 20
@@ -217,21 +217,21 @@ include /etc/sway/config.d/*
 bindsym $mod+X exec ~/dotfiles/.config/sway/lock
 
 # Test out binding certain windows to a workspace, and workspaces to screens
-# Set workspace 7 to monitor DP-3 (Middle)
-workspace 7 output DP-3
-workspace 8 output DP-4
+# Set workspace 7 to monitor DP-4 (Middle)
+workspace 7 output DP-4
+workspace 8 output DP-5
 
 # Title is for wayloand
 # class is for X
 assign [title="firefox"] workspace number 8
-# assign [class="firefox"] output DP-4
+# assign [class="firefox"] output DP-5
 assign [title="emacs"] workspace number 7
-# assign [title="emacs"] output DP-3
+# assign [title="emacs"] output DP-4
 
 # work
 # exec firefox
 # exec emacs
-# assign [title="emacs@olepor"] output DP-3
+# assign [title="emacs@olepor"] output DP-4
 
 # mouse_warping container
 
