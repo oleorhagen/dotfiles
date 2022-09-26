@@ -7,7 +7,7 @@ function show_dir_history_global_status {
     fi
 }
 
-PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}[$?]➜ %f)"
+PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}[%?]➜ %f)"
 PROMPT+=' $(show_dir_history_global_status) %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
