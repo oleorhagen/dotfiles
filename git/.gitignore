@@ -4,3 +4,4 @@
 .out
 .dir-locals.el
 *.~undo-tree~
+integration-client
