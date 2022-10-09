@@ -109,6 +109,28 @@ function bitbake-list-image-packages() {
       grep -v digraph | grep -v -e '-image' | awk '{print $1}' | sort | uniq
 }
 
+function bitbake() {
+    # Build using Docker crops/poky and the Ubuntu image This way I don't have
+    # to build locally, and have proper dependencies installed
+    #
+    # $@ - Passed on to the bitbake command line
+    #
+
+    # Start the container
+    nice -n 19 \
+         docker run \
+         -v /home/olepor/:/home/olepor \
+         --rm -it crops/poky:ubuntu-22.04 \
+         --workdir /home/olepor \
+         /bin/bash -c "source /home/olepor/yocto/mender/poky/oe-init-build-env && bitbake $@"
+
+    # Write to the stdin in the container process
+
+    echo >&2 "Done writing to the container"
+
+    # Then write the command to it's standard input
+}
+
 function everyn () {
   if [[ $# -le 1 ]]; then
     echo >&2 "Usage: everyn seconds function"
