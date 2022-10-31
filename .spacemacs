@@ -45,6 +45,8 @@ This function should only modify configuration layer settings."
      ;; React baby
      (react)
 
+     log
+
      (sql
       :variables
       sql-capitalize-keywords t
@@ -81,7 +83,7 @@ This function should only modify configuration layer settings."
             c-c++-enable-rtags-support t
             c++-enable-organize-includes-on-save nil)
      ;; c-c++
-     ;; debug
+     debug
      ;; (latex :variables
      ;;  latex-build-command "LaTeX")
      ;; ess ;; Layer for R statistical computing
@@ -204,10 +206,10 @@ This function should only modify configuration layer settings."
                                       ;;           :repo "syohex/emacs-go-impl"))
                                       ;; coverage ;; add in-buffer test coverage for golang
                                       ;; Install logview mode
-                                      (logview :location
-                                               (recipe
-                                                :fetcher github
-                                                :repo "doublep/logview"))
+                                      ;; (logview :location
+                                      ;;          (recipe
+                                      ;;           :fetcher github
+                                      ;;           :repo "doublep/logview"))
                                       (bitbake :location
                                                (recipe
                                                     :fetcher github
