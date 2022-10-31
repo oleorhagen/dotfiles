@@ -1,3 +1,8 @@
 #!/bin/bash
-TMP=$(docker ps -a | grep cli | awk '{print $1}')
-docker attach ${TMP}
+
+while : ; do
+	echo >&2 "Sleeping..."
+	sleep 5
+	TMP=$(docker ps -a | grep client | awk '{print $1}')
+	[ -n "$TMP" ] && docker attach ${TMP}
+done
