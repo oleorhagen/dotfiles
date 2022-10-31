@@ -1,0 +1,27 @@
+
+* TODO - Implement sway support to splitmind
+
+** DONE - Alternatively, just use tmux here...
+CLOSED: [2022-09-25 Sun 16:10]
+
+* INPROGRESS - Call about the free bed (finn)
+
+* TODO - Checkout the learningCS OS lectures, and when the projects are tbd
+
+* DONE - Finish the homework for multi-processor-scheduling
+CLOSED: [2022-09-24 Sat 18:29]
+
+* TODO - Roughly sort my clothes, and throw out old stuff
+
+* PR - Package the pwndbg util for Arch Linux
+
+*** INPROGRESS - Package it
+*** TODO - Maybe upstream it (?)
+
+* TODO - Look into AWK'ing the commit linter for mender
+
+* TODO - Look into zchunk for Mender
+
+* INPROGRESS - GraphQL edX course...
+
+* TODO - Cancel the key-service at joker Toyen

@@ -1,0 +1,25 @@
+#! /bin/sh
+
+## NOTE, I can use the commands from sway with swaymsg:
+#
+# move [absolute] position <pos_x> [px|ppt] <pos_y> [px|ppt]
+# Moves the focused container to the specified position in the workspace. The position can be specified in pixels
+# or percentage points, omitting the unit defaults to pixels. If    absolute is used, the position is relative to
+# all outputs. absolute can not be used with percentage points.
+
+swaymsg workspace 9
+swaymsg 'exec alacritty'
+swaymsg 'split horizontal'
+swaymsg 'exec alacritty'
+sleep 0.5
+swaymsg 'split vertical'
+swaymsg 'exec alacritty'
+sleep 0.5
+# swaymsg layout tabbed
+# sleep 1
+# exec alacritty --command "top" &
+# sleep 1
+# swaymsg splith
+# sleep 1
+# exec alacritty --command "emacsclient" &
+# exec alacritty --command "docker ps" &
