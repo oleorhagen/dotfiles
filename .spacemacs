@@ -158,7 +158,7 @@ This function should only modify configuration layer settings."
       yaml-indent-offset 2) ;; Standard in the mender yaml files
      (python :variables
              python-backend 'lsp
-             python-lsp-server 'pyls
+             python-lsp-server 'pylsp
              python-pytest-runner 'pytest
              python-formatter 'black
              python-enable-yapf-format-on-save nil
