@@ -34,7 +34,7 @@
     ;; Personal packages
     ;; (github-review :location local)
     ;; (md-to-jira-mode :location local)
-    (git-conventional-commit-message-mode :location local)
+    (git-conventional-commit-mode :location local)
     )
   "The list of Lisp packages required by the my-private-conf layer.
 
@@ -64,7 +64,7 @@ Each entry is either:
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
 
-(defun my-private-conf/init-git-conventional-commit-message-mode ()
-   (use-package git-conventional-commit-message-mode))
+(defun my-private-conf/init-git-conventional-commit-mode ()
+   (use-package git-conventional-commit-mode))
 
 ;;; packages.el ends here
