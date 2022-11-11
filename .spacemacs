@@ -102,7 +102,7 @@ This function should only modify configuration layer settings."
      (git
       :variables
       git-magit-status-fullscreen t
-      git-commit-major-mode 'git-conventional-commit-message-mode)
+      git-commit-major-mode 'git-conventional-commit-mode)
      ;; (lsp :variables
      ;;      lsp-ui-remap-xref-keybindings nil
      ;;      lsp-ui-doc-enable             nil
@@ -158,7 +158,7 @@ This function should only modify configuration layer settings."
       yaml-indent-offset 2) ;; Standard in the mender yaml files
      (python :variables
              python-backend 'lsp
-             python-lsp-server 'pylsp
+             python-lsp-server 'pyright
              python-pytest-runner 'pytest
              python-formatter 'black
              python-enable-yapf-format-on-save nil
@@ -523,6 +523,11 @@ It should only modify the values of Spacemacs settings."
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
    dotspacemacs-inactive-transparency 90
 
+   ;; A value from the range (0..100), in increasing opacity, which describes the
+   ;; transparency level of a frame background when it's active or selected. Transparency
+   ;; can be toggled through `toggle-background-transparency'. (default 90)
+   dotspacemacs-background-transparency 90
+
    ;; If non-nil show the titles of transient states. (default t)
    dotspacemacs-show-transient-state-title t
 
@@ -635,7 +640,9 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil - same as frame-title-format)
    dotspacemacs-icon-title-format nil
 
-   ;; Show trailing whitespace (default t)
+   ;; Color highlight trailing whitespace in all prog-mode and text-mode derived
+   ;; modes such as c++-mode, python-mode, emacs-lisp, html-mode, rst-mode etc.
+   ;; (default t)
    dotspacemacs-show-trailing-whitespace t
 
    ;; Delete whitespace while saving buffer. Possible values are `all'
