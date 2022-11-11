@@ -1,5 +1,29 @@
 #!/usr/bin/env zsh
 
+#
+## A simple wrapper for starting the emacsclient
+##
+## The script makes sure that we can pipe input to emacs using for instance:
+#
+## $ echo foobar | em
+#
+## Which is surprisingly handy (!)
+#
+
+if [ -z "$1" ]
+then
+    TMP="$(mktemp /tmp/stdin-XXX)"
+    cat >$TMP
+    emacsclient -a emacs ${TMP}
+    rm ${TMP}
+else
+    emacsclient -a emacs "$@"
+fi
+
+exit 0
+
+# Wtf is going on here (I don't remember - lol)
+
 # Checks if there's a frame open
 emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" 2> /dev/null | grep t &> /dev/null
 
