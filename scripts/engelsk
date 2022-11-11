@@ -1,7 +1,0 @@
-#! /bin/sh
-
-setxkbmap -model pc105 -layout us,no -option grp_ctrls_toggle
-
-~/dotfiles/scripts/retandcapsremap.sh
-
-echo " Yay" > ~/testi3
