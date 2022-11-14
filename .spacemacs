@@ -83,6 +83,11 @@ This function should only modify configuration layer settings."
             c-c++-enable-rtags-support t
             c++-enable-organize-includes-on-save nil)
      ;; c-c++
+
+     ;; Enable ligatures <3 and using unicode fonts
+     (unicode-fonts :variables
+                    unicode-fonts-enable-ligatures t)
+
      debug
      ;; (latex :variables
      ;;  latex-build-command "LaTeX")
