@@ -116,6 +116,9 @@ This function should only modify configuration layer settings."
      ;;      lsp-ui-sideline-show-symbol   nil
      ;;      )
      cfengine
+
+     ;; Emacs speaks statistics
+     ess
      ;; ;; web-beautify
      ;; ;; (html :variables
      ;; ;;       css-enable-lsp t
