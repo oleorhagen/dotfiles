@@ -3,10 +3,9 @@
 # key: aoc
 # --
 import sys
-sys.path.append("../aocutils")
+sys.path.append("../../aocutils")
 
 from aocd.models import Puzzle
-puzzle = Puzzle(year=2021, day=$1)
 
 # Handy utility parser
 import parse as p
@@ -22,10 +21,17 @@ def solve_p1(d):
 def solve_p2(d):
     pass
 
-d = data('part1.test', parser=parser)
+td = data(Input('part1.test'), parser=parser)
 
-d = data(puzzle.input_data_fname, parser=parser)
+assert solve_p1(td) == 0
+
+puzzle = Puzzle(year=2022, day=$1)
+d = data(puzzle.input_data, parser=parser, sep="\n")
+
+# puzzle.answer_a = solve_p1(d)
 
 $0
 
-# puzzle.answer_a = 0
+# assert solve_p2(td) == 0
+
+# puzzle.answer_b = solve_p2(d)
