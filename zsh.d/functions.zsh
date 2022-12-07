@@ -117,12 +117,15 @@ function bitbake() {
     #
 
     # Start the container
-    nice -n 19 \
-         docker run \
-         --mount 'type=bind,src=/home/olepor,dst=/home/olepor/' \
-         --rm -it crops/poky:ubuntu-22.04 \
-         --workdir /home/olepor \
-         /bin/bash -c "source /home/olepor/yocto/mender/poky/oe-init-build-env && bitbake $@"
+    #
+    # Give it a low priority in the scheduler (Since nicing doesn't help with
+    # docker since it's not inherited from the current process)
+    docker run \
+           --cpu-shares=256 \
+           --mount 'type=bind,src=/home/olepor,dst=/home/olepor/' \
+           --rm -it crops/poky:ubuntu-22.04 \
+           --workdir /home/olepor \
+           /bin/bash -c "source /home/olepor/yocto/mender/poky/oe-init-build-env && bitbake $@"
 
     # Write to the stdin in the container process
 
