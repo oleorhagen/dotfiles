@@ -77,12 +77,16 @@ This function should only modify configuration layer settings."
            less-enable-lsp t
            html-enable-lsp t)
 
+     ;; TODO - setup DAP for c++
      (c-c++ :variables
+            c-c++-backend 'lsp-clangd
             c-c++-enable-clang-support t
-            c-c++-enable-clang-format-on-save nil
+            c-c++-enable-clang-format-on-save t
             c-c++-enable-rtags-support t
-            c++-enable-organize-includes-on-save nil)
-     ;; c-c++
+            c-c++-enable-organize-includes-on-save nil
+            c-c++-lsp-enable-semantic-highlight 'rainbow
+            c-c++-default-mode-for-headers 'c++-mode ;; Ideally, should be project local
+            )
 
      ;; Enable ligatures <3 and using unicode fonts
      (unicode-fonts :variables
