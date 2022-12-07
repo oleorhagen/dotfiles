@@ -4,4 +4,4 @@ if [[ $# -ne 1 ]]; then
     echo >&2 "Usage: docker-ip container-ID"
 fi
 
-docker inspect -f "{{ .NetworkSettings.IPAddress }}" "${1}"
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "${1}"
