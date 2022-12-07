@@ -273,3 +273,12 @@ function encrypt () {
     [[ $# -ne 1 ]] && { printf >&2 "decrypt\nusage:\n\t\$1 - msg\n"; return 1; }
     gpg --decrypt "$1"
 }
+
+#
+# plot
+#
+# A wrapper around gnuplot /dev/stdin to plot sequences directly in the terminal
+#
+function plot () {
+    gnuplot -p -e 'plot "/dev/stdin"'
+}
