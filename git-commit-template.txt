@@ -7,28 +7,18 @@
 
 # Provide links or keys to any relevant tickets, articles or other resources
 # Example: Github issue #23
-
 # --- COMMIT END ---
 # Type can be
-#    feat     (new feature)
-#    fix      (bug fix)
-#    refactor (refactoring production code)
-#    style    (formatting, missing semi colons, etc; no code change)
-#    docs     (changes to documentation)
-#    test     (adding or refactoring tests; no production code change)
-#    chore    (updating grunt tasks etc; no production code change)
-#   Add = Create a capability e.g. feature, test, dependency.
-#   Drop = Delete a capability e.g. feature, test, dependency.
-#   Fix = Fix an issue e.g. bug, typo, accident, misstatement.
-#   Bump = Increase the version of something e.g. a dependency.
-#   Make = Change the build process, or tools, or infrastructure.
-#   Start = Begin doing something; e.g. enable a toggle, feature flag, etc.
-#   Stop = End doing something; e.g. disable a toggle, feature flag, etc.
-#   Optimize = A change that MUST be just about performance, e.g. speed up code.
-#   Document = A change that MUST be only in the documentation, e.g. help files.
-#   Refactor = A change that MUST be just refactoring.
-#   Reformat = A change that MUST be just format, e.g. indent line, trim space, etc.
-#   Rephrase = A change that MUST be just textual, e.g. edit a comment, doc, etc.
+# - feat: A new feature
+# - fix: A bug fix
+# - chore - misc category, say comment nitpicks, spelling, etc.
+# - build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+# - ci: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
+# - docs: Documentation only changes
+# - perf: A code change that improves performance
+# - refac: A code change that neither fixes a bug nor adds a feature
+# - style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+# - test: Adding missing tests or correcting existing tests
 # --------------------
 # Remember to
 #   - Capitalize the subject line
