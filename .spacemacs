@@ -57,10 +57,15 @@ This function should only modify configuration layer settings."
      (pandoc :variables
              pandoc-data-dir "~/.emacs.d/.cache/pandoc/")
 
-     ;; cmake
+     (cmake :variables
+            cmake-backend 'lsp
+            cmake-enable-cmake-ide-support t
+            )
 
      ;; Jupyter notebook setup
      (ipython-notebook :variables ein-backend 'jupyter)
+
+     import-js
 
      (javascript :variables
                  javascript-backend 'lsp
@@ -70,6 +75,7 @@ This function should only modify configuration layer settings."
                  javascript-fmt-on-save t)
      react
      prettier
+
      (html :variables
            web-fmt-tool 'prettier
            scss-enable-lsp t
