@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : mender-common-io
+#key : mcio
+#contributor : oleorhagen
+# --
+	namespace io = mender::common::io;

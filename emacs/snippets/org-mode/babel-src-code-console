@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+#name : babel-src-code-console
+#key : console
+#contributor : Ole Orhagen
+# --
+#+begin_src console
+  \$ $0
+#+end_src
