@@ -59,7 +59,7 @@ This function should only modify configuration layer settings."
 
      (cmake :variables
             cmake-backend 'lsp
-            cmake-enable-cmake-ide-support t
+            cmake-enable-cmake-ide-support nil ;; TODO - Hangs on opening C-files..
             )
 
      ;; Jupyter notebook setup
@@ -233,6 +233,12 @@ This function should only modify configuration layer settings."
                                                     :fetcher github
                                                     :repo "canatella/bitbake-el"))
                                       ;; ox-jira
+                                      ;;
+                                      ;; K8s mode
+                                      (k8s-mode :location
+                                                (recipe
+                                                 :fetcher github
+                                                 :repo "TxGVNN/emacs-k8s-mode"))
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()

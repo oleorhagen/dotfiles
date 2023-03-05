@@ -285,3 +285,13 @@ function encrypt () {
 function plot () {
     gnuplot -p -e 'plot "/dev/stdin"'
 }
+
+#
+# kubectl wrapper to enable kubeon if it is off
+#
+function kubectl () {
+	if [[ "${KUBE_PS1_ENABLED}" != "on" ]]; then
+		kubeon
+	fi
+	/usr/bin/kubectl "$@"
+}

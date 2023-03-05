@@ -64,7 +64,17 @@ export UPDATE_ZSH_DAYS=10
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z docker docker-compose golang colored-man-pages per-directory-history autoenv)
+plugins=(
+	git
+       	z
+       	docker
+       	docker-compose
+       	golang
+       	colored-man-pages
+       	per-directory-history
+       	autoenv
+	kube-ps1
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -124,3 +134,18 @@ eval "$(direnv hook zsh)"
 for file in ~/dotfiles/zsh.d/*; do
     source $file
 done
+
+#
+# K8s config
+#
+
+#
+# Source kubectl auto completion
+#
+source <(kubectl completion zsh)
+
+# Add the kube-ps1 prompt setup
+PROMPT='$(kube_ps1)'$PROMPT
+
+# Set the kubeconfig to handle all config file .kube/config & .kube/config.d/*.yaml|yml
+export KUBECONFIG="${HOME}/.kube/config$(for f in $(ls ${HOME}/.kube/config.d/); do echo ':'${HOME}/.kube/config.d/${f}; done)"

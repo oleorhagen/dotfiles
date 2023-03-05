@@ -2,9 +2,9 @@
 # Tridactyl configuration file
 #
 
-set searchurls.men https://tracker.mender.io/browse/MEN-%s
+set searchurls.men https://northerntech.atlassian.net/browse/MEN-%s
 set searchurls.ms https://github.com/mendersoftware/%s
-set searchurls.qa https://tracker.mender.io/browse/QA-%s
+set searchurls.qa https://northerntech.atlassian.net/browse/QA-%s
 set searchurls.gl https://gitlab.com/Northern.tech/Mender/%s
 
 # open phrasebook [fr|de|la|es|hi|it...]
@@ -198,6 +198,9 @@ alacritty --class tridactyl_editorcmd -e emacsclient --tty %f
 
 " Comment @mender-test-bot start pipeline on ';b'
 bind ;b js -r .config/tridactyl/scripts/mender-test-bot-start-pipeline.js
+
+" Switch from a gitlab to a github project (Northern.tech and mendersoftware assumed)
+bind ,g js -r .config/tridactyl/scripts/mendersoftware-gitlab-switch.js
 
 # controller in excmd: TypeError: EventTarget.dispatchEvent: Argument 1 is not an object."
 

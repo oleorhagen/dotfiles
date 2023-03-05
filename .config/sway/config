@@ -218,8 +218,8 @@ bindsym $mod+X exec ~/dotfiles/.config/sway/lock
 
 # Test out binding certain windows to a workspace, and workspaces to screens
 # Set workspace 7 to monitor DP-4 (Middle)
-workspace 7 output DP-4
-workspace 8 output DP-5
+#workspace 7 output DP-4
+#workspace 8 output DP-5
 
 # Title is for wayloand
 # class is for X
