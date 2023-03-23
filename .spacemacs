@@ -31,7 +31,8 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '("~/.layers/")
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(markdown
+     markdown
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -92,6 +93,7 @@ This function should only modify configuration layer settings."
             c-c++-enable-organize-includes-on-save nil
             c-c++-lsp-enable-semantic-highlight 'rainbow
             c-c++-default-mode-for-headers 'c++-mode ;; Ideally, should be project local
+            c-c++-adopt-subprojects t
             )
 
      ;; Enable ligatures <3 and using unicode fonts
@@ -166,7 +168,7 @@ This function should only modify configuration layer settings."
                       )
      ;; ;; semantic
      ;; systemd
-     ;; syntax-checking
+     syntax-checking
      ;; (markdown :variables
      ;;           markdown-live-preview-engine 'vmd
      ;;           markdown-mmm-auto-modes '("c" "c++" "python" "scala" "bash" ("elisp" "emacs-lisp")))
@@ -239,6 +241,10 @@ This function should only modify configuration layer settings."
                                                 (recipe
                                                  :fetcher github
                                                  :repo "TxGVNN/emacs-k8s-mode"))
+                                      (flycheck-google-cpplint :location
+                                                               (recipe
+                                                                :fetcher github
+                                                                :repo "flycheck/flycheck-google-cpplint"))
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -834,12 +840,34 @@ you should place your code here."
   (spacemacs/declare-prefix
     "eb" "flycheck-buffer")
   (spacemacs/set-leader-keys
-    "eb" 'flycheck-buffer)
+    "eb" '(lambda ()
+            (interactive)
+            ;; Enable flycheck if it is not enabled
+            (flycheck-mode 1)
+            (call-interactively #'flycheck-buffer)))
 
   ;; Don't kill the emacs-server on exit
   (evil-leader/set-key
     "q q" 'spacemacs/frame-killer)
 
+  ;; c-c++-mode hook for google-cpplint flycheck
+  (eval-after-load 'flycheck
+    '(progn
+       (require 'flycheck-google-cpplint)
+       ;; Chain lsp to the c-c++-clang flycheck-checker
+       ;; (flycheck-add-next-checker 'lsp 'c/c++-clang)
+       ;; (flycheck-add-next-checker 'c/c++-clang 'c/c++-gcc)
+       ;; (flycheck-add-next-checker 'c/c++-gcc 'c/c++-cppcheck)
+       ;; Add Google C++ Style checker.
+       ;; In default, syntax checked by Clang and Cppcheck.
+       ;; (flycheck-add-next-checker 'c/c++-cppcheck
+       ;;                            '(warning . c/c++-googlelint)))
+       (flycheck-select-checker 'c/c++-googlelint)
+       (flycheck-add-next-checker 'c/c++-googlelint 'c/c++-cppcheck)
+       )
+    )
+  ;; (eval-after-load)
+  (setq lsp-diagnostic-package :none)
 
   ;; https://github.com/syl20bnr/spacemacs/issues/13849#issuecomment-674560260
   (with-eval-after-load 'evil-iedit-state
@@ -936,7 +964,12 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ignored-local-variable-values '((eval add-hook 'before-save-hook 'time-stamp))))
+ '(ignored-local-variable-values '((eval add-hook 'before-save-hook 'time-stamp)))
+ '(safe-local-variable-values
+   '((flycheck-checker . c/c++-googlelint)
+     (javascript-backend . tide)
+     (javascript-backend . tern)
+     (javascript-backend . lsp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
