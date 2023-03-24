@@ -853,20 +853,14 @@ you should place your code here."
   ;; c-c++-mode hook for google-cpplint flycheck
   (eval-after-load 'flycheck
     '(progn
-       (require 'flycheck-google-cpplint)
-       ;; Chain lsp to the c-c++-clang flycheck-checker
-       ;; (flycheck-add-next-checker 'lsp 'c/c++-clang)
-       ;; (flycheck-add-next-checker 'c/c++-clang 'c/c++-gcc)
-       ;; (flycheck-add-next-checker 'c/c++-gcc 'c/c++-cppcheck)
-       ;; Add Google C++ Style checker.
-       ;; In default, syntax checked by Clang and Cppcheck.
-       ;; (flycheck-add-next-checker 'c/c++-cppcheck
-       ;;                            '(warning . c/c++-googlelint)))
-       (flycheck-select-checker 'c/c++-googlelint)
-       (flycheck-add-next-checker 'c/c++-googlelint 'c/c++-cppcheck)
-       )
+       (require 'flycheck-google-cpplint))
     )
-  ;; (eval-after-load)
+  (add-hook 'c++-mode-hook
+            (lambda ()
+              (message "C++ inintialisation hook...")
+              (flycheck-select-checker 'c/c++-googlelint)
+              (flycheck-add-next-checker 'c/c++-googlelint 'c/c++-cppcheck)))
+  ;; Disable lsp as the standard flycheck checker
   (setq lsp-diagnostic-package :none)
 
   ;; https://github.com/syl20bnr/spacemacs/issues/13849#issuecomment-674560260
@@ -966,7 +960,8 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(ignored-local-variable-values '((eval add-hook 'before-save-hook 'time-stamp)))
  '(safe-local-variable-values
-   '((flycheck-checker . c/c++-googlelint)
+   '((flycheck-googlelint-filter "-whitespace,+whitespace/braces")
+     (flycheck-checker . c/c++-googlelint)
      (javascript-backend . tide)
      (javascript-backend . tern)
      (javascript-backend . lsp))))
