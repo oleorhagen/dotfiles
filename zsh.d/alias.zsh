@@ -70,3 +70,6 @@ alias pwndbg='gdb -x /usr/share/pwndbg/gdbinit.py'
 
 # by default, only ping 3 times for good luck
 alias ping='ping -c 3'
+
+# Alias pup to htmlq
+alias htmlq='pup'
