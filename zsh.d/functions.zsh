@@ -295,3 +295,14 @@ function kubectl () {
 	fi
 	/usr/bin/kubectl "$@"
 }
+
+function simplestats () {
+    R --no-echo -e 'x <- scan(file="stdin", quiet=TRUE); summary(x)'
+}
+
+function sum () {
+    awk '
+{s += $1}
+END {print s}
+'
+}
