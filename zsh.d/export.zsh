@@ -61,3 +61,5 @@ export PYTHONDONTWRITEBYTECODE="true"
 # Export a Mender auth token as a JWT
 export JWT="$(pass show private/hosted-mender/access-token)"
 
+# Use hosted-mender as the default aws cli profile
+export AWS_DEFAULT_PROFILE=hosted-mender
