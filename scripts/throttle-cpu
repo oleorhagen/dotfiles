@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#CPUFREQ=$(cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq)
+# Was the old one before Google increased specs.
+#CPUFREQ=1400000
+# And again, Google...
+CPUFREQ=1800000
+#CPUFREQ=2000000
+GPUFREQ=$(cat /sys/class/drm/card0/gt_min_freq_mhz)
+
+declare -A cpufreqs
+
+for dir in /sys/devices/system/cpu/cpu[0-9]*/cpufreq; do
+    cpufreqs[$dir]=$(cat $dir/scaling_max_freq)
+    echo $CPUFREQ | sudo tee $dir/scaling_max_freq
+done
+
+brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
+echo 86 | sudo tee /sys/class/backlight/intel_backlight/brightness
+
+gpufreq=$(cat /sys/class/drm/card0/gt_max_freq_mhz)
+echo $GPUFREQ | sudo tee /sys/class/drm/card0/gt_max_freq_mhz
+
+echo "Power consumption reduced, press Enter to restore, or a number to restore temporarily for X seconds..."
+read
+
+echo $gpufreq | sudo tee /sys/class/drm/card0/gt_max_freq_mhz
+
+echo $brightness | sudo tee /sys/class/backlight/intel_backlight/brightness
+
+for dir in /sys/devices/system/cpu/cpu[0-9]*/cpufreq; do
+    echo ${cpufreqs[$dir]} | sudo tee $dir/scaling_max_freq
+done
+
+if [ -n "$REPLY" ]; then
+    echo "Restoring temporarily for $REPLY seconds..."
+    read -t "$REPLY"
+    exec "$0" "$@"
+fi
