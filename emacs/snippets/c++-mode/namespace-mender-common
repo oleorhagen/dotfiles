@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+#name : namespace-mender-common
+#key : nsm
+#type : snippet
+#contributor : Ole Orhagen
+# --
+namespace ${1:error} = mender::common::$1;
