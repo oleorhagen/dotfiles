@@ -63,3 +63,6 @@ export JWT="$(pass show private/hosted-mender/access-token)"
 
 # Use hosted-mender as the default aws cli profile
 export AWS_DEFAULT_PROFILE=hosted-mender
+
+# Add gem installs to PATh
+export PATH="/home/olepor/.local/share/gem/ruby/3.0.0/bin:${PATH}"
