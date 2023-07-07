@@ -1,0 +1,189 @@
+
+
+
+promise agent git
+{
+  path => "$(sys.workdir)/modules/promises/git.py";
+  interpreter => "/usr/bin/python3";
+}
+promise agent systemd
+{
+  path => "$(sys.workdir)/modules/promises/systemd.py";
+  interpreter => "/usr/bin/python3";
+}
+
+
+body common control
+{
+  # bundlesequence => { "edit_gitconfigs" "sync_git_mender_repos"};
+      # Only run the edit_gitconfigs for now
+        bundlesequence => { "edit_gitconfigs" };
+
+}
+
+bundle agent edit_gitconfigs
+{
+  vars:
+      "my_repos" slist => {
+                      "workflows-enterprise",
+      };
+
+	files:
+      "/home/olepor/mendersoftware/$(my_repos)/.git/config"
+        edit_line => add_ole_remote,
+        edit_line => add_mendersoftware_remote,
+        edit_line => add_ole_pushdefault;
+
+
+  reports:
+    any::
+      "Made sure $(my_repos) has the correct gitconfigs setup";
+}
+
+
+bundle edit_line add_ole_remote
+{
+  insert_lines:
+      "[remote \"oleorhagen\"]";
+	    "url = git@github.com:oleorhagen/$(my_repos).git";
+}
+
+bundle edit_line add_mendersoftware_remote
+{
+  insert_lines:
+      "[remote \"oleorhagen\"]";
+	    "url = git@github.com:oleorhagen/$(my_repos).git";
+}
+
+
+bundle edit_line add_ole_pushdefault
+{
+  insert_lines:
+      "[remote]";
+	    "pushDefault = oleorhagen";
+}
+
+
+
+bundle agent sync_git_mender_repos
+{
+
+  vars:
+      "my_repos" slist => {
+                      "artifact-format",
+                      "auditlogs",
+                      "autodocs",
+                      "buildroot-mender",
+                      "cli",
+                      "conductor",
+                      "create-artifact-worker",
+                      "deadcode",
+                      "deployments",
+                      "deployments-enterprise",
+                      "deviceadm",
+                      "deviceauth",
+                      "deviceconfig",
+                      "deviceconnect",
+                      "devicemonitor",
+                      "docker-openresty",
+                      "docker-watcher",
+                      "fake-update-client",
+                      "gobinarycoverage",
+                      "go-lib-micro",
+                      "grub-mender-grubenv",
+                      "gui",
+                      "infra",
+                      "integration",
+                      "integration-test-runner",
+                      "inventory",
+                      "inventory-enterprise",
+                      "log",
+                      "mantra",
+                      "markdown-link-check",
+                      "mender",
+                      "mender-api-docs",
+                      "mender-api-gateway-docker",
+                      "mender-artifact",
+                      "mender-backend-cli",
+                      "mender-binary-delta",
+                      "mender-cli",
+                      "mender-conductor",
+                      "mender-configure-module",
+                      "mender-connect",
+                      "mender-convert",
+                      "mender-convert-integration-scripts",
+                      "mender-convert-test-runner",
+                      "mender-crossbuild",
+                      "mender-demo-artifact",
+                      "mender-dist-packages",
+                      "mender-docs",
+                      "mender-docs-site",
+                      "mender-dual-rootfs-repartition",
+                      "mender-helm",
+                      "mender-image-tests",
+                      "mender.io",
+                      "mender-python-client",
+                      "mender-qa",
+                      "mender-server-integrations",
+                      "mender-shell",
+                      "mender-stress-test-client",
+                      "mender-test-containers",
+                      "mendertesting",
+                      "mender-update-modules",
+                      "meta-hosted-mender-login",
+                      "meta-mender",
+                      "meta-mender-community",
+                      "meta-mender-lob",
+                      "monitor-client",
+                      "mtls-ambassador",
+                      "oe-meta-go",
+                      "openssl",
+                      "poky",
+                      "progressbar",
+                      "qemu",
+                      "remark-validate-links",
+                      "reporting",
+                      "saas",
+                      "scopestack",
+                      "sys",
+                      "tenantadm",
+                      "thermostat",
+                      "uboot-mender",
+                      "useradm",
+                      "useradm-enterprise",
+                      "valid-html-test",
+                      "webhook-gui-redeployment",
+                      "workflows",
+                      "workflows-enterprise",
+      };
+
+
+	 git:
+      "/home/olepor/mendersoftware/mender"
+        update => "true",
+        remote => "mendersoftware",
+        repository => "git@github.com:oleorhagen/mender.git";
+      "/home/olepor/mendersoftware/mender-convert"
+        update => "false",
+        repository => "git@github.com:oleorhagen/mender-convert.git";
+      "all_mendersoftware_repos"
+        update => "true",
+        remote => "mendersoftware",
+        destination => "/home/olepor/mendersoftware/$(my_repos)",
+        repository => "git@github.com:oleorhagen/$(my_repos).git";
+      "all_mendersoftware_repos_origin"
+        update => "true",
+        remote => "origin",
+        destination => "/home/olepor/mendersoftware/$(my_repos)",
+        repository => "git@github.com:oleorhagen/$(my_repos).git";
+
+
+
+      # TODO - set the default push remote to oleorhagen for all repositories
+      # TODO - rename origin -> mendersoftware
+
+
+  reports:
+    any::
+      "Made sure $(my_repos) is installed";
+}
