@@ -151,21 +151,20 @@ This function should only modify configuration layer settings."
             godoc-at-point-function 'godoc-gogetdoc)
      ;; Debugging
      dap
-     (auto-completion :variables
-                      auto-completion-return-key-behavior 'complete
-                      auto-completion-tab-key-behavior 'cycle
-                      auto-completion-complete-with-key-sequence nil
-                      auto-completion-complete-with-key-sequence-delay 0.1
-                      auto-completion-minimum-prefix-length 2
-                      auto-completion-idle-delay 0.0 ;; set to 0.0 for optimal results with lsp
-                      auto-completion-minimum-prefix-length 1 ;; set to 1 for optimal results with lsp
-                      auto-completion-private-snippets-directory "/home/olepor/dotfiles/emacs/snippets/"
-                      auto-completion-enable-snippets-in-popup t
-                      ;; auto-completion-enable-help-tooltip nil
-                      ;; auto-completion-use-company-box t
-                      ;; auto-completion-enable-sort-by-usage t
-                      flycheck-check-syntax-automatically '()
-                      )
+     ;; (auto-completion :variables
+     ;;                  auto-completion-return-key-behavior 'complete
+     ;;                  auto-completion-tab-key-behavior 'cycle
+     ;;                  auto-completion-complete-with-key-sequence nil
+     ;;                  auto-completion-complete-with-key-sequence-delay 0.1
+     ;;                  auto-completion-idle-delay 0.0 ;; set to 0.0 for optimal results with lsp
+     ;;                  auto-completion-minimum-prefix-length 1 ;; set to 1 for optimal results with lsp
+     ;;                  auto-completion-private-snippets-directory "/home/olepor/dotfiles/emacs/snippets/"
+     ;;                  auto-completion-enable-snippets-in-popup nil
+     ;;                  ;; auto-completion-enable-help-tooltip nil
+     ;;                  auto-completion-use-company-box nil
+     ;;                  ;; auto-completion-enable-sort-by-usage t
+     ;;                  flycheck-check-syntax-automatically '()
+     ;;                  )
      ;; ;; semantic
      ;; systemd
      syntax-checking
@@ -405,7 +404,6 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(misterioso
-                         spacemacs-dark
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -750,6 +748,11 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;; Set a random theme on startup
+  (defun random-list-element (arg-list)
+	  (nth (random (length arg-list)) arg-list))
+  (spacemacs/load-theme (random-list-element  dotspacemacs-themes))
+
   ;; https://github.com/syl20bnr/spacemacs/issues/15089#issuecomment-983837230
   ;; Fixes rebase-mode in Magit
   (setq auto-mode-alist (delete '("/git-rebase-todo$" . helm-ls-git-rebase-todo-mode) auto-mode-alist))
@@ -875,6 +878,9 @@ you should place your code here."
     (setq org-todo-keywords '((sequence "TODO" "INPROGRESS" "PR" "ONHOLD" "|" "DONE")))
     '(require 'ox-jira nil t)
     )
+
+  ;; lsp no ui on hover
+  (setq lsp-ui-doc-enable nil)
 
 
   ;; Add shell script highligting to bbclass files (Yocto)
