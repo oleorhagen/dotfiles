@@ -1,0 +1,16 @@
+#! /bin/bash
+
+GCC_FEATURES=$(gcc -dM -E - <<< "#include <features.h>")
+
+if grep -q __UCLIBC__ <<< "${GCC_FEATURES}"; then
+    echo "uClibc"
+    grep "#define __UCLIBC_MAJOR__" <<< "${GCC_FEATURES}"
+    grep "#define __UCLIBC_MINOR__" <<< "${GCC_FEATURES}"
+    grep "#define __UCLIBC_SUBLEVEL__" <<< "${GCC_FEATURES}"
+elif grep -q __GLIBC__ <<< "${GCC_FEATURES}"; then
+    echo "glibc"
+    grep "#define __GLIBC__" <<< "${GCC_FEATURES}"
+    grep "#define __GLIBC_MINOR__" <<< "${GCC_FEATURES}"
+else
+    echo "something else"
+fi
