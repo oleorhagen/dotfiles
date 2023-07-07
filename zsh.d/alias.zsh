@@ -73,3 +73,9 @@ alias ping='ping -c 3'
 
 # Alias pup to htmlq
 alias htmlq='pup'
+
+# Alias to fq (binary query)
+alias bq='fq'
+
+# Always use parallell make
+alias make='make --jobs=4'
