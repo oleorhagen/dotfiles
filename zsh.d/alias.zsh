@@ -79,3 +79,6 @@ alias bq='fq'
 
 # Always use parallell make
 alias make='make --jobs=4'
+
+# kubectl (k8s)
+alias k=kubectl
