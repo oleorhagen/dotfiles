@@ -32,6 +32,9 @@ export PATH="$PATH:$(go env GOPATH)/bin:$GOROOT"
 # Vagrant setup
 export NTECH_ROOT="$HOME/northern.tech"
 
+# ccache should be in the $PATH before the compiler
+export PATH="/usr/bin/ccache:$PATH"
+
 # Add dotfiles/scripts to PATH
 export PATH=$HOME/dotfiles/scripts:$PATH
 
