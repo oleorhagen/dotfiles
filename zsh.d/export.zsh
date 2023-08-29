@@ -69,3 +69,6 @@ export AWS_DEFAULT_PROFILE=hosted-mender
 
 # Add gem installs to PATh
 export PATH="/home/olepor/.local/share/gem/ruby/3.0.0/bin:${PATH}"
+
+# Jira-cli https://github.com/ankitpokhrel/jira-cli JIRA access token
+export JIRA_API_TOKEN="$(pass show private/northern.tech/jira-cli-token)"
