@@ -283,7 +283,8 @@ function encrypt () {
 # A wrapper around gnuplot /dev/stdin to plot sequences directly in the terminal
 #
 function plot () {
-    gnuplot -p -e 'plot "/dev/stdin"'
+    # -e = command list
+    gnuplot --persist -e 'plot "/dev/stdin"'
 }
 
 #
