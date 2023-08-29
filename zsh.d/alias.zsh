@@ -82,3 +82,6 @@ alias make='make --jobs=4'
 
 # kubectl (k8s)
 alias k=kubectl
+
+# nm = names (short for)
+alias names=nm
