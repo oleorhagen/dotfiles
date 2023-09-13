@@ -748,15 +748,24 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;; C++ (Mender) State-machine alignment hack
+  (defun align-statemachine-states (start end)
+    (interactive "r\n")
+    (align-regexp start end "\\(\\s-*\\)\\s-" 1 1 t))
+
+
+  ;; (defun align-statemachine-states (start end)
+  ;;   "Align the state-machine states"
+  ;;   (interactive "r\n")
+  ;;   (align-regexp start end
+  ;;                 "\\(\\s-*\\)\\s-" 1 1 t)
+  ;;   (align-regexp start end
+  ;;                 (concat "\\(\\s-*\\)" "tf::") 1 1 t))
+
   ;; Set a random theme on startup
   (defun random-list-element (arg-list)
 	  (nth (random (length arg-list)) arg-list))
   (spacemacs/load-theme (random-list-element  dotspacemacs-themes))
-
-  ;; https://github.com/syl20bnr/spacemacs/issues/15089#issuecomment-983837230
-  ;; Fixes rebase-mode in Magit
-  (setq auto-mode-alist (delete '("/git-rebase-todo$" . helm-ls-git-rebase-todo-mode) auto-mode-alist))
-
 
   ;; No smartparens plz
   (spacemacs/toggle-smartparens-globally-off)
