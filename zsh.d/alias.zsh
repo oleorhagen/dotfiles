@@ -86,5 +86,8 @@ alias k=kubectl
 # nm = names (short for)
 alias names=nm
 
-# yamlq
+# YAML query language - yamlq
 alias yamlq=yq
+
+# binary query language - fq
+alias binaryq=fq
