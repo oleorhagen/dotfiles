@@ -85,3 +85,6 @@ alias k=kubectl
 
 # nm = names (short for)
 alias names=nm
+
+# yamlq
+alias yamlq=yq
