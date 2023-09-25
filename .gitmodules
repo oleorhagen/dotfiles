@@ -1,0 +1,3 @@
+[submodule "zsh-deps/gcloud-ps1"]
+	path = zsh-deps/gcloud-ps1
+	url = git@github.com:ShunHsiangYu/gcloud-ps1.git
