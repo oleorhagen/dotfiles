@@ -91,3 +91,9 @@ alias yamlq=yq
 
 # binary query language - fq
 alias binaryq=fq
+
+# bitcake is much better than bitbake
+alias bitcake=bitbake
+
+# Used too often
+alias fuck='sudo !!'
