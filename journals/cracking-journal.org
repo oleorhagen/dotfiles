@@ -1,0 +1,47 @@
+
+
+* OSINT
+
+** email
+*** hunter.io
+*** phonebook.cz
+
+** Passwords
+
+*** Hunting breached credentials
+**** dehashed.com (paid service)
+**** leakcheck.io
+**** haveibeenpwned.com
+**** scylla.sh
+
+* DNS
+
+** Resources
+
+*** https://hackertarget.com/quietly-mapping-the-network-attack-surface/
+
+*** Certificates
+
+Lists all the certificates available for a given site: Really helpful for
+finding for instance subdomains...
+
+https://crt.sh
+
+
+*** Whois
+
+***** BMW
+
+Find the /24 BMW-NET in Munich! Write it in CIDR format!
+
+I used
+
+#+begin_src console
+  $ whois -B -h whois.ripe.net BMW-NET
+#+end_src
+
+And tested them all, until I found:
+
+192.109.190.0 - 192.109.190.255
+
+Why this one worked, and the other did not, I do not know!

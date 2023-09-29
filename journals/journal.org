@@ -1,0 +1,477 @@
+* General
+
+** Shell
+
+Sometimes a good trick is to redirect some filtered output to another terminal's tty, like:
+
+#+begin_src console
+make -j 4 mender_update_state_test && ./mender-update/mender_update_state_test --gtest_filter="$TEST"  \
+| tee -a >(awk -f ~/test-diff.awk > /dev/pts/0)
+#+end_src
+
+Which gives me the regular output in one, and the filtered in another, side-by-side -- which is _nice_!
+
+** Rederr
+
+Tool by Mr. Poettering (https://github.com/poettering/rederr) to make the stderr red in the terminal:
+
+#+begin_src console
+  $ ./rederr ./command-or-program-which-writes-to-stderr
+#+end_src
+
+*** Tools
+
+**** tldr
+
+https://tldr.sh/
+
+Simple tool for simplified man-pages
+
+#+begin_src console
+  $ ➜  GH build tldr tar
+
+  tar
+
+  Archiving utility.
+  Often combined with a compression method, such as gzip or bzip2.
+  More information: https://www.gnu.org/software/tar.
+
+  - [c]reate an archive and write it to a [f]ile:
+    tar cf path/to/target.tar path/to/file1 path/to/file2 ...
+
+  - [c]reate a g[z]ipped archive and write it to a [f]ile:
+    tar czf path/to/target.tar.gz path/to/file1 path/to/file2 ...
+
+  - [c]reate a g[z]ipped archive from a directory using relative paths:
+    tar czf path/to/target.tar.gz --directory=path/to/directory .
+
+  - E[x]tract a (compressed) archive [f]ile into the current directory [v]erbosely:
+    tar xvf path/to/source.tar[.gz|.bz2|.xz]
+
+  - E[x]tract a (compressed) archive [f]ile into the target directory:
+    tar xf path/to/source.tar[.gz|.bz2|.xz] --directory=path/to/directory
+
+  - [c]reate a compressed archive and write it to a [f]ile, using [a]rchive suffix to determine the compression program:
+    tar caf path/to/target.tar.xz path/to/file1 path/to/file2 ...
+
+  - Lis[t] the contents of a tar [f]ile [v]erbosely:
+    tar tvf path/to/source.tar
+
+  - E[x]tract files matching a pattern from an archive [f]ile:
+    tar xf path/to/source.tar --wildcards "*.html"
+#+end_src
+
+**** Log wrangling
+***** Angle grinder
+
+#+begin_src console
+  $ # Simple log filtering
+#+end_src
+
+https://github.com/rcoh/angle-grinder
+
+***** lnav
+
+Hardcore tool for log filtering and viewing
+
+https://docs.lnav.org/en/v0.11.2/usage.html#basic-controls
+
+Check it out with this cool demo
+
+#+begin_src console
+  $ ssh playground@demo.lnav.org
+#+end_src
+
+***
+
+**** Query output streams
+***** jq
+
+Json querying
+***** yq
+
+Yaml querying
+
+#+begin_src console
+  $ yamlq
+#+end_src
+***** fq - binary querying
+**** Data visualisation on the terminal
+***** visidata
+
+Visualise data in the terminal (Really nice!)
+
+https://www.visidata.org/
+**** Shell environment per directory
+***** direnv
+
+Load environment variables when entering a directory tree
+
+#+begin_src console
+  $ cat .envrc
+  export FOO=bar
+#+end_src
+
+Means your `echo $FOO` yields `bar` in this context
+
+**** Global and local shell history in zsh
+
+per-directory-history plugin
+
+**** Shell explain
+
+https://explainshell.com/
+
+Explain what a shell command is:
+
+#+begin_src console
+  $ ➜  GH build explain tar xvf foo.bar
+
+tar(1)
+
+  • other manpages
+  •
+  • bsdtar(1)
+
+xvf foo.bar
+
+The GNU version of the tar archiving utility
+
+-x, --extract, --get
+      extract files from an archive
+
+-v, --verbose
+      verbosely list files processed
+
+-f, --file ARCHIVE
+      use archive file or device ARCHIVE
+
+source manpages: tar
+#+end_src
+
+
+* U-Boot
+
+** RPi
+*** Bootprocess
+
+    Described pretty well
+    [here](https://chaws.me/en/2019/04/16/compiling-uboot-for-raspberry-pi-3.html)
+
+*** Debug
+
+    uart_2ndstage=1 gives pre-uboot uart output
+
+* RedHat networking
+
+** Show all available and listening sockets with `ss`
+
+   Use ss -ta to show all available sockets in listening mode
+
+
+** Show the route taken to a host with `traceroute`
+
+
+** Show all processes using a file with `lsof`
+
+
+** Show statistics for an interface through `ip -s link show <interface>`
+
+* RedHat logging
+
+** Write to the syslog using `logger`
+
+* Websockets
+
+** What
+
+Full duplex - bi-directional communication channel
+
+Is a binary protocol!
+
+** Why
+
+Solves HTTP stateless problem.
+
+Fast, use way fewer resources, since the overhead is very little compared to HTTP.
+
+** How
+
+* gcloud test runners (Mender work)
+
+List all the instances, and grep for the one we want:
+
+#+begin_src console
+  ➜  GH ~ gcloud compute instances list | grep b106
+#+end_src
+
+Find the build docker container
+
+#+begin_src console
+  ➜  LH ~ gcloud compute ssh runner-brnxxjxm-gitlab-runner-slave-1668503622-8199b106 --command='sudo docker ps | grep build'
+#+end_src
+
+Then connect to it:
+
+#+begin_src console
+➜  LH ~ gcloud compute ssh runner-brnxxjxm-gitlab-runner-slave-1668503622-8199b106 --container=8cee09df1afa
+#+end_src
+
+And tada, we're in the running test container.
+
+* release_tool nice commands when adding new dependency to the graph
+
+https://github.com/mendersoftware/integration/pull/2227#pullrequestreview-1182206241
+
+* QNX
+
+** C++ Compiler
+
+x86_64-pc-nto-qnx7.1.0-g++
+
+** Building image
+
+mkqnximage
+
+* LVM
+
+** Volume groups
+
+*** Activate/deactivate(ing)
+
+vgchange --activate y/n <volume-group>
+
+* Yocto
+
+** Tips n' tricks
+
+The devshells
+
+#+begin_src console
+bitbake -c <devshell/pydevshell> <recipe>
+#+end_src
+
+Will drop you into the workdir tmp/work/core2../<recipe>/../ and give you a
+shell with all context available, just like in a build
+
+** list package contents
+
+#+begin_src console
+  $ ./scripts/oe-pkgdata-util list-pkg-files mender-auth
+  mender-auth:
+	/lib/systemd/system/mender-authd.service
+	/usr/bin/mender-auth
+	/usr/share/dbus-1/system.d/io.mender.AuthenticationManager.conf
+	/usr/share/dbus-1/system.d/io.mender.UpdateManager.conf
+	/usr/share/mender/identity/mender-device-identity
+#+end_src
+
+`oe-pkgdata-util` also has other nicieties, look at:
+
+#+begin_src console
+  $ ./oe-pkgdata-util -h
+usage: oe-pkgdata-util [-h] [-d] [-p PKGDATA_DIR] <subcommand> ...
+
+OpenEmbedded pkgdata tool - queries the pkgdata files written out during do_package
+
+options:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable debug output
+  -p PKGDATA_DIR, --pkgdata-dir PKGDATA_DIR
+                        Path to pkgdata directory (determined automatically if not specified)
+
+subcommands:
+  lookup-pkg            Translate between recipe-space package names and runtime package names
+  list-pkgs             List packages
+  list-pkg-files        List files within a package
+  lookup-recipe         Find recipe producing one or more packages
+  package-info          Show version, recipe and size information for one or more packages
+  find-path             Find package providing a target path
+  read-value            Read any pkgdata value for one or more packages
+  glob                  Expand package name glob expression
+Use oe-pkgdata-util <subcommand> --help to get help on a specific command
+#+end_src
+
+So we can even figure out which package provides a given path
+
+* Mender
+** C++
+
+*** Burnup
+
+https://northerntech.atlassian.net/projects/MEN?selectedItem=com.atlassian.plugins.atlassian-connect-plugin:app.releasemanagement.rmcloud__project-board
+
+** QA
+
+** Acceptance testing
+
+*** Remember the 'mender-testing-enabled'
+
+* Operating Systems (OS)
+
+** Virtual Memory
+
+*** Inspect the virtual memory layout of a process with `pmap`
+
+Usage: pmap <pid> [-w]
+
+To see
+
+```
+➜  LH ~ pmap 18763
+18763:   /usr/bin/zsh
+00005583c37f8000     92K r---- zsh
+00005583c380f000    724K r-x-- zsh
+00005583c38c4000    108K r---- zsh
+00005583c38df000      8K r---- zsh
+00005583c38e1000     24K rw--- zsh
+00005583c38e7000     80K rw---   [ anon ]
+00005583c4db9000   5184K rw---   [ anon ]
+00007fc831358000     12K r---- computil.so
+00007fc83135b000     52K r-x-- computil.so
+00007fc831368000      8K r---- computil.so
+00007fc83136a000      4K r---- computil.so
+00007fc83136b000      4K rw--- computil.so
+00007fc831388000     16K r---- compctl.so
+00007fc83138c000     44K r-x-- compctl.so
+00007fc831397000      8K r---- compctl.so
+00007fc831399000      4K r---- compctl.so
+00007fc83139a000      4K rw--- compctl.so
+00007fc8313a3000      4K r---- regex.so
+00007fc8313a4000      4K r-x-- regex.so
+00007fc8313a5000      4K r---- regex.so
+00007fc8313a6000      4K r---- regex.so
+00007fc8313a7000      4K rw--- regex.so
+00007fc8313a8000      4K r---- terminfo.so
+00007fc8313a9000      4K r-x-- terminfo.so
+00007fc8313aa000      4K r---- terminfo.so
+00007fc8313ab000      4K r---- terminfo.so
+00007fc8313ac000      4K rw--- terminfo.so
+00007fc8313ad000     92K r---- zle.so
+00007fc8313c4000    164K r-x-- zle.so
+00007fc8313ed000     36K r---- zle.so
+00007fc8313f6000      8K r---- zle.so
+00007fc8313f8000     28K rw--- zle.so
+00007fc8313ff000      4K rw---   [ anon ]
+00007fc831400000   2984K r---- locale-archive
+00007fc8316ed000     16K r---- complist.so
+00007fc8316f1000     40K r-x-- complist.so
+00007fc8316fb000      4K r---- complist.so
+00007fc8316fc000      4K r---- complist.so
+00007fc8316fd000      4K rw--- complist.so
+00007fc8316fe000     12K r---- parameter.so
+00007fc831701000     20K r-x-- parameter.so
+00007fc831706000      8K r---- parameter.so
+00007fc831708000      4K r---- parameter.so
+00007fc831709000      4K rw--- parameter.so
+00007fc83170a000      8K r---- stat.so
+00007fc83170c000      8K r-x-- stat.so
+00007fc83170e000      4K r---- stat.so
+00007fc83170f000      4K r---- stat.so
+00007fc831710000      4K rw--- stat.so
+00007fc831711000      8K r---- datetime.so
+00007fc831713000      4K r-x-- datetime.so
+00007fc831714000      4K r---- datetime.so
+00007fc831715000      4K r---- datetime.so
+00007fc831716000      4K rw--- datetime.so
+00007fc831717000      8K rw---   [ anon ]
+00007fc831719000    136K r---- libc.so.6
+00007fc83173b000   1384K r-x-- libc.so.6
+00007fc831895000    352K r---- libc.so.6
+00007fc8318ed000     16K r---- libc.so.6
+00007fc8318f1000      8K rw--- libc.so.6
+00007fc8318f3000     52K rw---   [ anon ]
+00007fc831900000     56K r---- libm.so.6
+00007fc83190e000    488K r-x-- libm.so.6
+00007fc831988000    376K r---- libm.so.6
+00007fc8319e6000      4K r---- libm.so.6
+00007fc8319e7000      4K rw--- libm.so.6
+00007fc8319e8000     88K r---- libncursesw.so.6.4
+00007fc8319fe000    264K r-x-- libncursesw.so.6.4
+00007fc831a40000     92K r---- libncursesw.so.6.4
+00007fc831a57000     16K r---- libncursesw.so.6.4
+00007fc831a5b000      4K rw--- libncursesw.so.6.4
+00007fc831a5c000     12K r---- libcap.so.2.67
+00007fc831a5f000     20K r-x-- libcap.so.2.67
+00007fc831a64000      8K r---- libcap.so.2.67
+00007fc831a66000      4K r---- libcap.so.2.67
+00007fc831a67000      4K rw--- libcap.so.2.67
+00007fc831a68000      8K rw---   [ anon ]
+00007fc831a6e000      4K r---- langinfo.so
+00007fc831a6f000      4K r-x-- langinfo.so
+00007fc831a70000      4K r---- langinfo.so
+00007fc831a71000      4K r---- langinfo.so
+00007fc831a72000      4K rw--- langinfo.so
+00007fc831a73000      8K r---- zutil.so
+00007fc831a75000     20K r-x-- zutil.so
+00007fc831a7a000      4K r---- zutil.so
+00007fc831a7b000      4K r---- zutil.so
+00007fc831a7c000      4K rw--- zutil.so
+00007fc831a7d000     32K r---- complete.so
+00007fc831a85000    104K r-x-- complete.so
+00007fc831a9f000     12K r---- complete.so
+00007fc831aa2000      8K r---- complete.so
+00007fc831aa4000      4K rw--- complete.so
+00007fc831aa5000     16K rw---   [ anon ]
+00007fc831aa9000      4K r---- ld-linux-x86-64.so.2
+00007fc831aaa000    152K r-x-- ld-linux-x86-64.so.2
+00007fc831ad0000     40K r---- ld-linux-x86-64.so.2
+00007fc831ada000      8K r---- ld-linux-x86-64.so.2
+00007fc831adc000      8K rw--- ld-linux-x86-64.so.2
+00007ffefe4f2000    280K rw---   [ stack ]
+00007ffefe5c3000     16K r----   [ anon ]
+00007ffefe5c7000      8K r-x--   [ anon ]
+ffffffffff600000      4K --x--   [ anon ]
+ total            14060K
+```
+
+* Debian
+
+** Packaging
+
+*** Install packages from local repo
+
+Nice guide from: https://linuxopsys.com/topics/create-your-own-repository-for-packages-on-debian
+
+
+In essence:
+
+#+begin_src console
+  $ apt install dpkg-dev
+#+end_src
+
+Create a repo to hold the packages
+
+#+begin_src console
+  $ mkdir -p /opt/local/deb
+#+end_src
+
+Copy all the packages there
+
+Then generate a packages file:
+
+#+begin_src console
+  $ cd /opt/local/deb && dpkg-scanpackages . | gzip -c > Packages.gz
+#+end_src
+
+Add the repo to apt's search paths
+
+#+begin_src console
+  $ vim /etc/apt/sources.list.d/mender.list
+
+  deb [trusted=yes] file:///opt/local/debs ./
+
+  $ apt update
+  $ apt install <mender-client|similar.
+#+end_src
+
+
+
+
+* Pytest
+
+** Debugging
+
+*** Run with --pdb
+
+*** Insert `import pytest; pytest.set_trace()
