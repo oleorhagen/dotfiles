@@ -307,3 +307,11 @@ function sum () {
 END {print s}
 '
 }
+
+# Swap two files
+function swap()
+{
+    [[ $# -ne 2 ]] && { echo "usage: swap <file1> <file2>"; return 1; }
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE "$2"
+}
