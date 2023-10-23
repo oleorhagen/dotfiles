@@ -65,7 +65,7 @@ export UPDATE_ZSH_DAYS=10
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git
+	      git
        	z
        	docker
        	docker-compose
@@ -73,8 +73,11 @@ plugins=(
        	colored-man-pages
        	per-directory-history
        	autoenv
-	kube-ps1
+	      kube-ps1
+        aws
 )
+
+#source /home/olepor/dotfiles/zsh-deps/gcloud-ps1/gcloud-ps1.sh
 
 source $ZSH/oh-my-zsh.sh
 
