@@ -97,3 +97,6 @@ alias bitcake=bitbake
 
 # Used too often
 alias fuck='sudo !!'
+
+# 1337 echo
+alias 3cho='echo'
