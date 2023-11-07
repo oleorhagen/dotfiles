@@ -263,16 +263,15 @@ function shell-format() { shfmt \
 #
 function encrypt () {
     [[ $# -ne 2 ]] && { printf >&2 "encrypt\nusage:\n\t\$1 - recipient\n\t\$2 - msg"; return 1; }
-    gpg --encrypt --armor --recipient "$2" "$1"
+    gpg --encrypt --armor --recipient "$1" "$2"
 }
 
 #
 # encrypt
 #
-# $1 - recipient
 # $2 - msg
 #
-function encrypt () {
+function decrypt () {
     [[ $# -ne 1 ]] && { printf >&2 "decrypt\nusage:\n\t\$1 - msg\n"; return 1; }
     gpg --decrypt "$1"
 }
