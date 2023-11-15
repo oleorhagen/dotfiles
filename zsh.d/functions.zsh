@@ -314,3 +314,7 @@ function swap()
     local TMPFILE=tmp.$$
     mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE "$2"
 }
+
+function mender_ssh_to_qemu_client () {
+    ssh -p 8822 root@$(docker-ip $(docker ps | grep mender-client-qemu | cut -d' ' -f1))
+}
