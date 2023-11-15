@@ -315,6 +315,17 @@ function swap()
     mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE "$2"
 }
 
+# ssh to the qemu container running the mender-client (if 1)
 function mender_ssh_to_qemu_client () {
-    ssh -p 8822 root@$(docker-ip $(docker ps | grep mender-client-qemu | cut -d' ' -f1))
+    ssh -o userknownhostsfile=/dev/null -p 8822 root@$(docker-ip $(docker ps | grep mender-client-qemu | cut -d' ' -f1))
+}
+
+# decode JWT tokens to regular JSON again
+# Courtesy: https://prefetch.net/blog/2020/07/14/decoding-json-web-tokens-jwts-from-the-linux-command-line/
+function jwtd() {
+    test $# -eq 1 || {echo >&2 "usage: jwtd <JWT_TOKEN_TEXT>"; return; }
+    if [[ -x $(command -v jq) ]]; then
+        jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< "${1}"
+        echo "Signature: $(echo "${1}" | awk -F'.' '{print $3}')"
+    fi
 }
