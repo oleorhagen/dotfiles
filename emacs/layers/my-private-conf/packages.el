@@ -67,4 +67,13 @@ Each entry is either:
 (defun my-private-conf/init-git-conventional-commit-mode ()
    (use-package git-conventional-commit-mode))
 
+
+;;
+;;; INPROGRESS - Add flyspell to the commit buffer
+;;
+
+(defun my-private-conf/post-init-flyspell ()
+  (spell-checking/add-flyspell-hook 'git-conventional-commit-mode-hook))
+
+
 ;;; packages.el ends here
