@@ -1,0 +1,56 @@
+# $HOME/.config/alacritty/alacritty.toml
+# by Ole P. Orhagen
+
+import = [
+"~/.config/alacritty/alacritty-theme/themes/github_light.toml",
+#"~/.config/alacritty/keybindings.toml",
+]
+
+[window]
+opacity = 0.9
+
+padding.x = 10
+padding.y = 10
+
+decorations = "None" # "Full"
+decorations_theme_variant = "Light" # "Dark"
+
+[shell]
+program="/bin/zsh"
+args = ["--login"]
+
+[env]
+#SOME_ENV_VARIABLE="foobar"
+
+#[font]
+#
+#normal.family = "Cascadia Code PL"
+#bold.family = "Cascadia Code PL"
+#italic.family = "Cascadia Code PL"
+#bold_italic.family = "Cascadia Code PL"
+#
+#size = 15.0
+
+[bell]
+animation="Linear"
+duration=1 # Visual bell flash in milliseconds
+
+[selection]
+save_to_clipboard=true
+
+#    [[hints.enabled]]
+#    command = "xdg-open" # On Linux/BSD
+#    # command = "open" # On macOS
+#    # command = { program = "cmd", args = [ "/c", "start", "" ] } # On Windows
+#    hyperlinks = true
+#    post_processing = true
+#    persist = false
+#    mouse.enabled = true
+#    binding = { key = "U", mods = "Control|Shift" }
+#    regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+
+#[keyboard]
+#bindings = [
+#{ key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
+#{ key = "L", mods = "Control|Shift", chars = "l" },
+#]
