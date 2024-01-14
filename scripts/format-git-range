@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    # Requires at least one argument, otherwise it will rewrite history since the dawn of time.
+    echo "Require a git commit to rebase against" >&2
+    exit 1
+fi
+
+set -e
+
+env FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch -f --tree-filter 'black tests' "$1..HEAD"
+
+# The reason this next step is necessary is that filter-branch does not support GPG signing, so we
+# need to resign the commits by going through history once more. The re-signing is triggered by
+# requesting a fake edit of the first commit in the range.
+EDITOR="sed -i -e '1 {s/^pick /reword /}'" git rebase -i "$(git merge-base "$1" HEAD)"
