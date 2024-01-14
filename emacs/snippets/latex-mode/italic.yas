@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : italic
+#key : ,it
+#contributor : Ole Petter Orhagen
+# --
+\it{$1}$0

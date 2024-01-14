@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+#name : aoc-cpp-template
+#key : at
+#contributor : Ole P. Orhagen
+# --
+#include "../utils.hpp"
+
+void solve(string filename) {
+$0
+}
+
+int main(int argc, char *argv[]) {
+	solve(argv[1]);
+	return 0;
+}

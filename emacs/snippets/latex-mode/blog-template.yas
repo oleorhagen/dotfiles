@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+#name : blog-template
+#key : blog-template
+#contributor : Ole P. Orhagen
+# --
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newtheorem{theorem}{Theorem}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{trees}
+\usepackage{soul}
+\usepackage{csquotes} % \begin{displayquote}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs},
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+\section{$1}
+
+\end{document}
