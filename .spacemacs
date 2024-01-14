@@ -50,6 +50,8 @@ This function should only modify configuration layer settings."
 
      (sql
       :variables
+      sql-backend 'lsp
+      sql-lsp-sqls-workspace-config-path 'workspace
       sql-capitalize-keywords t
       sql-auto-indent t
       )
@@ -85,8 +87,9 @@ This function should only modify configuration layer settings."
            html-enable-lsp t)
 
      ;; TODO - setup DAP for c++
+     dap
      (c-c++ :variables
-            c-c++-backend 'lsp-clangd
+            c-c++-backend 'rtags
             c-c++-enable-clang-support t
             c-c++-enable-clang-format-on-save t
             c-c++-enable-rtags-support t
@@ -94,6 +97,9 @@ This function should only modify configuration layer settings."
             c-c++-lsp-enable-semantic-highlight 'rainbow
             c-c++-default-mode-for-headers 'c++-mode ;; Ideally, should be project local
             c-c++-adopt-subprojects t
+            :init
+            ;; Set up DAP for C++
+            (require 'dap-cpptools)
             )
 
      ;; Enable ligatures <3 and using unicode fonts
@@ -101,47 +107,40 @@ This function should only modify configuration layer settings."
                     unicode-fonts-enable-ligatures t)
 
      debug
-     ;; (latex :variables
-     ;;  latex-build-command "LaTeX")
+     (latex :variables
+      latex-build-command "LaTeX")
      ;; ess ;; Layer for R statistical computing
      ;; erlang
-     ;; docker
+     helm
+     docker
      ;; dash
      ;; (asm :variables
      ;;      asm-comment-char "#")
-     ;; helm
      ;; julia
      ;; ;; better-defaults
      ;; (shell :variables shell-default-shell 'ansi-term
      ;;        shell-default-term-shell "/bin/zsh")
      (shell-scripts :variables shell-scripts-backend 'lsp)
-     ;; emacs-lisp
+     emacs-lisp
      (git
       :variables
       git-magit-status-fullscreen t
       git-commit-major-mode 'git-conventional-commit-mode)
-     ;; (lsp :variables
-     ;;      lsp-ui-remap-xref-keybindings nil
-     ;;      lsp-ui-doc-enable             nil
-     ;;      lsp-ui-doc-include-signature  nil
-     ;;      lsp-ui-sideline-enable        nil
-     ;;      lsp-ui-sideline-show-symbol   nil
-     ;;      )
+     (lsp :variables
+          lsp-pyright-multi-root nil
+          lsp-ui-remap-xref-keybindings nil
+          lsp-ui-doc-enable             nil
+          lsp-ui-doc-include-signature  nil
+          lsp-ui-sideline-enable        nil
+          lsp-ui-sideline-show-symbol   nil
+          )
      cfengine
 
      ;; Emacs speaks statistics
      ess
      ;; ;; web-beautify
-     ;; ;; (html :variables
-     ;; ;;       css-enable-lsp t
-     ;; ;;       less-enable-lsp t
-     ;; ;;       scss-enable-lsp t
-     ;; ;;       html-enable-lsp t
-     ;; ;;       web-fmt-tool 'web-beautify
-     ;; ;;       )
      ;; ;; The go-layer needs the auto-completion and syntax-checking layers
      ;; ;; TODO - add gotests function wrappers to the go-mode https://github.com/cweill/gotests
-     ;; go ;; TODO - modify the layer variables
      (go :variables
             go-format-before-save t
             gofmt-command "goimports"
@@ -150,21 +149,20 @@ This function should only modify configuration layer settings."
             gofmt-show-errors nil ;; errors are already shown by flycheck
             godoc-at-point-function 'godoc-gogetdoc)
      ;; Debugging
-     dap
-     ;; (auto-completion :variables
-     ;;                  auto-completion-return-key-behavior 'complete
-     ;;                  auto-completion-tab-key-behavior 'cycle
-     ;;                  auto-completion-complete-with-key-sequence nil
-     ;;                  auto-completion-complete-with-key-sequence-delay 0.1
-     ;;                  auto-completion-idle-delay 0.0 ;; set to 0.0 for optimal results with lsp
-     ;;                  auto-completion-minimum-prefix-length 1 ;; set to 1 for optimal results with lsp
-     ;;                  auto-completion-private-snippets-directory "/home/olepor/dotfiles/emacs/snippets/"
-     ;;                  auto-completion-enable-snippets-in-popup nil
-     ;;                  ;; auto-completion-enable-help-tooltip nil
-     ;;                  auto-completion-use-company-box nil
-     ;;                  ;; auto-completion-enable-sort-by-usage t
-     ;;                  flycheck-check-syntax-automatically '()
-     ;;                  )
+     (auto-completion :variables
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-complete-with-key-sequence nil
+                      auto-completion-complete-with-key-sequence-delay 0.1
+                      auto-completion-idle-delay 0.0 ;; set to 0.0 for optimal results with lsp
+                      auto-completion-minimum-prefix-length 1 ;; set to 1 for optimal results with lsp
+                      auto-completion-private-snippets-directory "/home/olepor/dotfiles/emacs/snippets/"
+                      auto-completion-enable-snippets-in-popup nil
+                      ;; auto-completion-enable-help-tooltip nil
+                      auto-completion-use-company-box nil
+                      ;; auto-completion-enable-sort-by-usage t
+                      flycheck-check-syntax-automatically '()
+                      )
      ;; ;; semantic
      ;; systemd
      syntax-checking
@@ -195,7 +193,10 @@ This function should only modify configuration layer settings."
      ;;  geiser-default-implementation 'mit)
      (org
       :variables
-      org-enable-github-support t)
+      org-enable-github-support t
+      org-enable-hugo-support t
+      org-enable-modern-support t
+      org-enable-org-journal-support t)
      spacemacs-org
      ;; neotree
      ;; ;; (shell :variables
@@ -229,10 +230,10 @@ This function should only modify configuration layer settings."
                                       ;;          (recipe
                                       ;;           :fetcher github
                                       ;;           :repo "doublep/logview"))
-                                      (bitbake :location
-                                               (recipe
-                                                    :fetcher github
-                                                    :repo "canatella/bitbake-el"))
+                                      ;; (bitbake :location
+                                      ;;          (recipe
+                                      ;;               :fetcher github
+                                      ;;               :repo "canatella/bitbake-el"))
                                       ;; ox-jira
                                       ;;
                                       ;; K8s mode
@@ -379,6 +380,11 @@ It should only modify the values of Spacemacs settings."
 
    ;; The minimum delay in seconds between number key presses. (default 0.4)
    dotspacemacs-startup-buffer-multi-digit-delay 0.4
+
+   ;; If non-nil, show file icons for entries and headings on Spacemacs home buffer.
+   ;; This has no effect in terminal or if "all-the-icons" package or the font
+   ;; is not installed. (default nil)
+   dotspacemacs-startup-buffer-show-icons nil
 
    ;; Default major mode for a new empty buffer. Possible values are mode
    ;; names such as `text-mode'; and `nil' to use Fundamental mode.
@@ -748,19 +754,18 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;;
+  ;;; Helm-projectil Make
+  ;;
+  ;; Default to two processes when calling Make from Helm
+  (setq-default helm-make-nproc 2)
+  ;; Make the process nice
+  (setq-default helm-make-niceness 20)
+
   ;; C++ (Mender) State-machine alignment hack
   (defun align-statemachine-states (start end)
     (interactive "r\n")
-    (align-regexp start end "\\(\\s-*\\)\\s-" 1 1 t))
-
-
-  ;; (defun align-statemachine-states (start end)
-  ;;   "Align the state-machine states"
-  ;;   (interactive "r\n")
-  ;;   (align-regexp start end
-  ;;                 "\\(\\s-*\\)\\s-" 1 1 t)
-  ;;   (align-regexp start end
-  ;;                 (concat "\\(\\s-*\\)" "tf::") 1 1 t))
+    (align-regexp start end ",\\(\\s-*\\)[a-z_.]+" 1 2 t))
 
   ;; Set a random theme on startup
   (defun random-list-element (arg-list)
@@ -875,6 +880,10 @@ you should place your code here."
   ;; Disable lsp as the standard flycheck checker
   (setq lsp-diagnostic-package :none)
 
+  ;; Python lsp-pyright (Do not start it in all directories)
+  (advice-add 'lsp :before (lambda (&rest _args) (eval '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
+
+
   ;; https://github.com/syl20bnr/spacemacs/issues/13849#issuecomment-674560260
   (with-eval-after-load 'evil-iedit-state
     (fset 'iedit-cleanup 'iedit-lib-cleanup))
@@ -897,7 +906,7 @@ you should place your code here."
 
   ;; Add bitbake.el as a syntax highlighter for bitbake files
   ;; TODO - fix regex!
-  (add-to-list 'auto-mode-alist '(".bbclass\\|.inc\\|.bb\\|.bbappend" . bitbake-mode))
+  ;; (add-to-list 'auto-mode-alist '(".bbclass\\|.inc\\|.bb\\|.bbappend" . bitbake-mode))
   ;; (add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
   ;; (add-to-list 'auto-mode-alist '("\\.scm\\'" . prettify-symbols-mode))
   ;; (add-to-list 'auto-mode-alist '("\\.amb" . scheme-mode))
@@ -974,6 +983,9 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ignored-local-variable-values '((eval add-hook 'before-save-hook 'time-stamp)))
+ '(org-agenda-files '("/home/olepor/Documents/journal/20230720"))
+ '(package-selected-packages
+   '(ccls cmake-mode lsp-docker doom-modeline nerd-icons flycheck-google-cpplint magit transient helm-ls-git helm helm-core hl-todo logview consult lsp-origami lsp-mode treemacs markdown-mode org-modern org-projectile org-project-capture org-category-capture yasnippet-snippets evil yapfify ws-butler writeroom-mode winum which-key wfnames web-mode web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen unicode-fonts undo-tree treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org term-cursor tagedit symon symbol-overlay string-inflection string-edit-at-point sqlup-mode sql-indent sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smeargle slim-mode shrink-path shfmt scss-mode sass-mode rjsx-mode restart-emacs realgud react-snippets rainbow-delimiters quickrun pytest pylookup pyenv-mode pydoc py-isort pug-mode prettier-js popwin poetry pippel pipenv pip-requirements pcre2el password-generator paradox pandoc-mode ox-pandoc ox-hugo ox-gfm overseer origami orgit-forge org-superstar org-rich-yank org-present org-pomodoro org-mime org-journal org-download org-contrib org-cliplink open-junk-file ob-cfengine3 npm-mode nose nodejs-repl nameless mustache-mode multi-line mmm-mode markdown-toc magit-section macrostep lsp-ui lsp-python-ms lsp-pyright lsp-latex lorem-ipsum livid-mode live-py-mode link-hint ligature k8s-mode json-reformat json-navigator json-mode js2-refactor js-doc inspector insert-shebang info+ indent-guide importmagic import-js impatient-mode hybrid-mode hungry-delete holy-mode highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-git-grep helm-descbinds helm-ctest helm-css-scss helm-company helm-c-yasnippet helm-ag goto-chg google-translate google-c-style golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link git-commit gh-md gendoxy fuzzy flyspell-correct-helm flycheck-ycmd flycheck-rtags flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flycheck-bashate flx-ido fish-mode fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-tex evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu ess-R-data-view emr emmet-mode elisp-slime-nav elisp-def ein editorconfig dumb-jump drag-stuff dotenv-mode dockerfile-mode docker disaster dired-quick-sort diminish devdocs define-word datetime dap-mode cython-mode cpp-auto-include company-ycmd company-web company-shell company-rtags company-reftex company-math company-go company-c-headers company-auctex company-anaconda column-enforce-mode code-cells clean-aindent-mode cfrs centered-cursor-mode blacken auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile all-the-icons aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell))
  '(safe-local-variable-values
    '((flycheck-googlelint-filter "-whitespace,+whitespace/braces")
      (flycheck-checker . c/c++-googlelint)
