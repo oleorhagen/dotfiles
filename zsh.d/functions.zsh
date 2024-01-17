@@ -329,3 +329,8 @@ function jwtd() {
         echo "Signature: $(echo "${1}" | awk -F'.' '{print $3}')"
     fi
 }
+
+# Reads the certificate present in the first cluster definition in the kubeconfig ~/.kube/config
+function read_kubeconfig_certificate() {
+    cat ~/.kube/config | yq --raw-output '.clusters[0].cluster."certificate-authority-data"' | base64 -d | openssl x509 -text
+}
