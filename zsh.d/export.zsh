@@ -72,3 +72,10 @@ export PATH="/home/olepor/.local/share/gem/ruby/3.0.0/bin:${PATH}"
 
 # Jira-cli https://github.com/ankitpokhrel/jira-cli JIRA access token
 export JIRA_API_TOKEN="$(pass show private/northern.tech/jira-cli-token)"
+
+# Add the kube-ps1 prompt setup
+PROMPT='$(kube_ps1)'$PROMPT
+kubeoff # Don't add the prompt by default
+
+# Set the kubeconfig to handle all config file .kube/config & .kube/config.d/*.yaml|yml
+export KUBECONFIG="${HOME}/.kube/config$(for f in $(ls ${HOME}/.kube/config.d/); do echo -n ':'${HOME}/.kube/config.d/${f}; done)"

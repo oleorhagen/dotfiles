@@ -147,9 +147,3 @@ done
 #
 source <(kubectl completion zsh)
 
-# Add the kube-ps1 prompt setup
-PROMPT='$(kube_ps1)'$PROMPT
-kubeoff # Don't add the prompt by default
-
-# Set the kubeconfig to handle all config file .kube/config & .kube/config.d/*.yaml|yml
-export KUBECONFIG="${HOME}/.kube/config$(for f in $(ls ${HOME}/.kube/config.d/); do echo ':'${HOME}/.kube/config.d/${f}; done)"
