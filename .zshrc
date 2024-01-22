@@ -72,7 +72,7 @@ plugins=(
        	golang
        	colored-man-pages
        	per-directory-history
-       	autoenv
+       	autoenv # .in and .out files to automatically setup an env when entering a directory
 	      kube-ps1
         aws
 )
