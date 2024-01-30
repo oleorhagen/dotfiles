@@ -1,5 +1,6 @@
 schemes:
-  afterglow: &afterglow
+  afterglow:
+    &afterglow
     primary:
       background: "0x2c2c2c"
       foreground: "0xd6d6d6"
@@ -38,7 +39,8 @@ schemes:
       cyan: "0x5c8482"
       white: "0x828282"
 
-  argonaut: &argonaut
+  argonaut:
+    &argonaut
     primary:
       background: "0x292C3E"
       foreground: "0xEBEBEB"
@@ -64,7 +66,8 @@ schemes:
       cyan: "0x73FBF1"
       white: "0xFEFEF8"
 
-  ayu_dark: &ayu_dark
+  ayu_dark:
+    &ayu_dark
     primary:
       background: "0x0A0E14"
       foreground: "0xB3B1AD"
@@ -87,7 +90,8 @@ schemes:
       cyan: "0x95E6CB"
       white: "0xFFFFFF"
 
-  base16_dark: &base16_dark
+  base16_dark:
+    &base16_dark
     primary:
       background: "0x181818"
       foreground: "0xd8d8d8"
@@ -113,7 +117,8 @@ schemes:
       cyan: "0x86c1b9"
       white: "0xf8f8f8"
 
-  blood_moon: &blood_moon
+  blood_moon:
+    &blood_moon
     primary:
       background: "0x10100E"
       foreground: "0xC6C6C4"
@@ -136,7 +141,8 @@ schemes:
       cyan: "0x00CCCC"
       white: "0xFFFAFA"
 
-  breeze: &breeze
+  breeze:
+    &breeze
     primary:
       background: "0x232627"
       foreground: "0xfcfcfc"
@@ -172,7 +178,8 @@ schemes:
       cyan: "0x186c60"
       white: "0x63686d"
 
-  campbell: &campbell
+  campbell:
+    &campbell
     primary:
       background: "0x0c0c0c"
       foreground: "0xcccccc"
@@ -195,7 +202,8 @@ schemes:
       cyan: "0x61d6d6"
       white: "0xf2f2f2"
 
-  challenger_deep: &challenger_deep
+  challenger_deep:
+    &challenger_deep
     primary:
       background: "0x1e1c31"
       foreground: "0xcbe1e7"
@@ -221,7 +229,8 @@ schemes:
       cyan: "0xaaffe4"
       white: "0xcbe3e7"
 
-  Cobalt2: &Cobalt2
+  Cobalt2:
+    &Cobalt2
     primary:
       background: "0x122637"
       foreground: "0xffffff"
@@ -247,7 +256,8 @@ schemes:
       cyan: "0x6ae3f9"
       white: "0xffffff"
 
-  cyber_punk_neon: &cyber_punk_neon
+  cyber_punk_neon:
+    &cyber_punk_neon
     primary:
       background: "0x000b1e"
       foreground: "0x0abdc6"
@@ -273,7 +283,8 @@ schemes:
       cyan: "0x0abdc6"
       white: "0xd7d7d5"
 
-  darcula: &darcula
+  darcula:
+    &darcula
     primary:
       background: "0x282a36"
       foreground: "0xf8f8f2"
@@ -296,7 +307,8 @@ schemes:
       cyan: "0x9aedfe"
       white: "0xe6e6e6"
 
-  dark_pastels: &dark_pastels
+  dark_pastels:
+    &dark_pastels
     primary:
       background: "0x2C2C2C"
       foreground: "0xDCDCCC"
@@ -319,7 +331,8 @@ schemes:
       cyan: "0x93E0E3"
       white: "0xFFFFFF"
 
-  doom_one: &doom_one
+  doom_one:
+    &doom_one
     primary:
       background: "0x282c34"
       foreground: "0xbbc2cf"
@@ -333,7 +346,8 @@ schemes:
       cyan: "0x46d9ff"
       white: "0xbbc2cf"
 
-  dracula: &dracula
+  dracula:
+    &dracula
     primary:
       background: "0x282a36"
       foreground: "0xf8f8f2"
@@ -356,7 +370,8 @@ schemes:
       cyan: "0x8be9fd"
       white: "0xffffff"
 
-  falcon: &falcon
+  falcon:
+    &falcon
     primary:
       background: "0x020221"
       foreground: "0xb4b4b9"
@@ -382,7 +397,8 @@ schemes:
       cyan: "0x8bccbf"
       white: "0xf8f8ff"
 
-  flat_remix: &flat_remix
+  flat_remix:
+    &flat_remix
     primary:
       background: "0x272a34"
       foreground: "0xFFFFFF"
@@ -405,7 +421,8 @@ schemes:
       cyan: "0x49AEE6"
       white: "0xFFFFFF"
 
-  gotham: &gotham
+  gotham:
+    &gotham
     primary:
       background: "0x0a0f14"
       foreground: "0x98d1ce"
@@ -428,7 +445,8 @@ schemes:
       cyan: "0x599caa"
       white: "0xd3ebe9"
 
-  gruvbox_dark: &gruvbox_dark
+  gruvbox_dark:
+    &gruvbox_dark
     primary:
       # hard contrast: background = '0x1d2021'
       background: "0x282828"
@@ -453,7 +471,8 @@ schemes:
       cyan: "0x8ec07c"
       white: "0xebdbb2"
 
-  gruvbox_light: &gruvbox_light
+  gruvbox_light:
+    &gruvbox_light
     primary:
       # hard contrast: background = '0xf9f5d7'
       background: "0xfbf1c7"
@@ -478,7 +497,8 @@ schemes:
       cyan: "0x427b58"
       white: "0x3c3836"
 
-  gruvbox_material: &gruvbox_material
+  gruvbox_material:
+    &gruvbox_material
     primary:
       background: "0x282828"
       foreground: "0xdfbf8e"
@@ -501,7 +521,8 @@ schemes:
       cyan: "0x89b482"
       white: "0xdfbf8e"
 
-  high_contrast: &high_contrast
+  high_contrast:
+    &high_contrast
     primary:
       background: "0x444444"
       foreground: "0xdddddd"
@@ -527,7 +548,8 @@ schemes:
       cyan: "0x00ffff"
       white: "0xffffff"
 
-  horizon-dark: &horizon-dark
+  horizon-dark:
+    &horizon-dark
     primary:
       background: "0x1c1e26"
       foreground: "0xe0e0e0"
@@ -550,7 +572,8 @@ schemes:
       cyan: "0x6be4e6"
       white: "0xd5d8da"
 
-  hyper: &hyper
+  hyper:
+    &hyper
     primary:
       background: "0x000000"
       foreground: "0xffffff"
@@ -576,7 +599,8 @@ schemes:
       cyan: "0x00ffff"
       white: "0xFFFFFF"
 
-  iterm_default: &iterm_default
+  iterm_default:
+    &iterm_default
     primary:
       background: "0x101421"
       foreground: "0xfffbf6"
@@ -599,7 +623,8 @@ schemes:
       cyan: "0x99faf2"
       white: "0xffffff"
 
-  konsole_linux: &konsole_linux
+  konsole_linux:
+    &konsole_linux
     primary:
       foreground: "0xe3e3e3"
       bright_foreground: "0xffffff"
@@ -645,7 +670,8 @@ schemes:
       cyan: "0x18b2b2"
       white: "0xb2b2b2"
 
-  low_contrast: &low_contrast
+  low_contrast:
+    &low_contrast
     primary:
       background: "0x333333"
       foreground: "0xdddddd"
@@ -671,7 +697,8 @@ schemes:
       cyan: "0x00bbbb"
       white: "0xbbbbbb"
 
-  material_theme: &material_theme
+  material_theme:
+    &material_theme
     primary:
       background: "0x1e282d"
       foreground: "0xc4c7d1"
@@ -694,7 +721,8 @@ schemes:
       cyan: "0x35434d"
       white: "0xffffff"
 
-  material_theme_mod: &material_theme_mod
+  material_theme_mod:
+    &material_theme_mod
     primary:
       background: "0x1e282d"
       foreground: "0xc4c7d1"
@@ -717,7 +745,8 @@ schemes:
       cyan: "0x35434d"
       white: "0xffffff"
 
-  nord: &nord
+  nord:
+    &nord
     primary:
       background: "0x2E3440"
       foreground: "0xD8DEE9"
@@ -740,7 +769,8 @@ schemes:
       cyan: "0x8FBCBB"
       white: "0xECEFF4"
 
-  oceanic_next: &oceanic_next
+  oceanic_next:
+    &oceanic_next
     primary:
       background: "0x1b2b34"
       foreground: "0xd8dee9"
@@ -763,7 +793,8 @@ schemes:
       cyan: "0x5fb3b3"
       white: "0xadb5c0"
 
-  omni: &omni
+  omni:
+    &omni
     primary:
       background: "0x191622"
       foreground: "0xe1e1e6"
@@ -798,7 +829,8 @@ schemes:
       cyan: "0x433364"
       white: "0x5f5f5f"
 
-  one_dark: &one_dark
+  one_dark:
+    &one_dark
     primary:
       background: "0x1e2127"
       foreground: "0xabb2bf"
@@ -821,7 +853,8 @@ schemes:
       cyan: "0x56b6c2"
       white: "0xffffff"
 
-  palenight: &palenight
+  palenight:
+    &palenight
     primary:
       background: "0x292d3e"
       foreground: "0xd0d0d0"
@@ -844,7 +877,8 @@ schemes:
       cyan: "0xa3f7ff"
       white: "0xffffff"
 
-  papercolor_light: &papercolor_light
+  papercolor_light:
+    &papercolor_light
     primary:
       background: "0xeeeeee"
       foreground: "0x878787"
@@ -870,7 +904,8 @@ schemes:
       cyan: "0x005faf"
       white: "0x005f87"
 
-  pencil_dark: &pencil_dark
+  pencil_dark:
+    &pencil_dark
     primary:
       background: "0x212121"
       foreground: "0xf1f1f1"
@@ -893,7 +928,8 @@ schemes:
       cyan: "0x4fb8cc"
       white: "0xf1f1f1"
 
-  pencil_light: &pencil_light
+  pencil_light:
+    &pencil_light
     primary:
       background: "0xf1f1f1"
       foreground: "0x424242"
@@ -916,7 +952,8 @@ schemes:
       cyan: "0x4fb8cc"
       white: "0xf1f1f1"
 
-  remedy_dark: &remedy_dark
+  remedy_dark:
+    &remedy_dark
     primary:
       background: "0x2c2b2a"
       foreground: "0xf9e7c4"
@@ -939,7 +976,8 @@ schemes:
       white: "0xc5c8c6"
       yellow: "0xf0c674"
 
-  snazzy: &snazzy
+  snazzy:
+    &snazzy
     primary:
       background: "0x282a36"
       foreground: "0xeff0eb"
@@ -962,7 +1000,8 @@ schemes:
       cyan: "0x9aedfe"
       white: "0xf1f1f0"
 
-  solarized_dark: &solarized_dark
+  solarized_dark:
+    &solarized_dark
     primary:
       background: "0x002b36"
       foreground: "0x839496"
@@ -985,7 +1024,8 @@ schemes:
       cyan: "0x93a1a1"
       white: "0xfdf6e3"
 
-  solarized_light: &solarized_light
+  solarized_light:
+    &solarized_light
     primary:
       background: "0xfdf6e3"
       foreground: "0x586e75"
@@ -1008,7 +1048,8 @@ schemes:
       cyan: "0x93a1a1"
       white: "0xfdf6e3"
 
-  taerminal: &taerminal
+  taerminal:
+    &taerminal
     primary:
       background: "0x26282a"
       foreground: "0xf0f0f0"
@@ -1034,7 +1075,8 @@ schemes:
       cyan: "0xc0e9f8"
       white: "0xffffff"
 
-  tango_dark: &tango_dark
+  tango_dark:
+    &tango_dark
     primary:
       background: "0x2e3436"
       foreground: "0xd3d7cf"
@@ -1057,7 +1099,8 @@ schemes:
       cyan: "0x34e2e2"
       white: "0xeeeeec"
 
-  tender: &tender
+  tender:
+    &tender
     primary:
       background: "0x282828"
       foreground: "0xeeeeee"
@@ -1080,7 +1123,8 @@ schemes:
       cyan: "0x73cef4"
       white: "0xfeffff"
 
-  terminal_app: &terminal_app
+  terminal_app:
+    &terminal_app
     primary:
       background: "0x000000"
       foreground: "0xb6b6b6"
@@ -1103,7 +1147,8 @@ schemes:
       cyan: "0x00e5e5"
       white: "0xe5e5e5"
 
-  thelovelace: &thelovelace
+  thelovelace:
+    &thelovelace
     primary:
       background: "0x1D1F28"
       foreground: "0xFDFDFD"
@@ -1126,7 +1171,8 @@ schemes:
       cyan: "0x3FDCEE"
       white: "0xBEBEC1"
 
-  tokyo-night: &tokyo-night
+  tokyo-night:
+    &tokyo-night
     primary:
       background: "0x1a1b26"
       foreground: "0xa9b1d6"
@@ -1149,7 +1195,8 @@ schemes:
       cyan: "0x0db9d7"
       white: "0xacb0d0"
 
-  tokyo-night-storm: &tokyo-night-storm
+  tokyo-night-storm:
+    &tokyo-night-storm
     primary:
       background: "0x24283b"
       foreground: "0xa9b1d6"
@@ -1172,7 +1219,8 @@ schemes:
       cyan: "0x0db9d7"
       white: "0xacb0d0"
 
-  tomorrow_night: &tomorrow_night
+  tomorrow_night:
+    &tomorrow_night
     primary:
       background: "0x1d1f21"
       foreground: "0xc5c8c6"
@@ -1198,7 +1246,8 @@ schemes:
       cyan: "0x54ced6"
       white: "0x282a2e"
 
-  tomorrow_night_bright: &tomorrow_night_bright
+  tomorrow_night_bright:
+    &tomorrow_night_bright
     primary:
       background: "0x000000"
       foreground: "0xeaeaea"
@@ -1221,7 +1270,8 @@ schemes:
       cyan: "0x54ced6"
       white: "0x2a2a2a"
 
-  wombat: &wombat
+  wombat:
+    &wombat
     primary:
       background: "0x1f1f1f"
       foreground: "0xe5e1d8"
@@ -1244,7 +1294,8 @@ schemes:
       cyan: "0xc2fefa"
       white: "0xffffff"
 
-  xterm: &xterm
+  xterm:
+    &xterm
     primary:
       background: "0x000000"
       foreground: "0xffffff"
@@ -1267,7 +1318,33 @@ schemes:
       cyan: "0x00ffff"
       white: "0xffffff"
 
-colors: *solarized_light
+colors:
+  name: Ivory Light
+  author: Baskerville
+  primary:
+    background: "#fef9ec"
+    foreground: "#6d727e"
+  cursor:
+    text: "#fef9ec"
+    cursor: "#6d727e"
+  normal:
+    black: "#c5c1b4"
+    red: "#e75c58"
+    green: "#00a250"
+    yellow: "#a08a00"
+    blue: "#208ffb"
+    magenta: "#d160c4"
+    cyan: "#00a4c1"
+    white: "#3e424d"
+  bright:
+    black: "#a1a6b2"
+    red: "#b22b31"
+    green: "#007427"
+    yellow: "#715f00"
+    blue: "#0065ca"
+    magenta: "#a03196"
+    cyan: "#007693"
+    white: "#282c36"
 
 env:
   TERM: xterm
@@ -1281,25 +1358,19 @@ hints:
   alphabet: "jfkdls;ahgurieowpq"
 
   # List with all available hints
-
   # Each hint must have any of `regex` or `hyperlinks` field and either an
   # `action` or a `command` field. The fields `mouse`, `binding` and
   # `post_processing` are optional.
-
   # The `hyperlinks` option will cause OSC 8 escape sequence hyperlinks to be
   # highlighted.
-
   # The fields `command`, `binding.key`, `binding.mods`, `binding.mode` and
   # `mouse.mods` accept the same values as they do in the `key_bindings` section.
-
   # The `mouse.enabled` field controls if the hint should be underlined while
   # the mouse with all `mouse.mods` keys held or the vi mode cursor is above it.
-
   # If the `post_processing` field is set to `true`, heuristics will be used to
   # shorten the match if there are characters likely not to be part of the hint
   # (e.g. a trailing `.`). This is most useful for URIs and applies only to
   # `regex` matches.
-
   # Values for `action`:
   #   - Copy
   #       Copy the hint's text to the clipboard.
@@ -1310,9 +1381,8 @@ hints:
   #   - MoveViModeCursor
   #       Move the vi mode cursor to the beginning of the hint.
   enabled:
-    - regex:
-        "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
-        [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+    - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|g\
+        it:|ssh:|ftp:)[^\0-\x1f-<>\"\\s{-}\\^⟨⟩`]+"
       hyperlinks: true
       command: xdg-open
       post_processing: true
@@ -1322,6 +1392,8 @@ hints:
       binding:
         key: U
         mods: Control|Shift
+theme: Baskerville-ivorylight
+
 # Mouse bindings
 #
 # Mouse bindings are specified as a list of objects, much like the key
