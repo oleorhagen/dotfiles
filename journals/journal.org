@@ -475,3 +475,30 @@ Add the repo to apt's search paths
 *** Run with --pdb
 
 *** Insert `import pytest; pytest.set_trace()
+
+
+* Debugging
+
+** GDB
+
+*** layout <src|...>
+
+Configure the layout of GDB
+
+*** rbreak .*
+
+Will break on all functions. Fine way to step through an execution flow.
+
+** Symbols
+
+This site is gold for symbols: https://sourceware.org/gdb/current/onlinedocs/gdb.html/Symbols.html
+
+Note
+
+*** ptype <var>
+
+*** whatis <var>
+
+*** display <exp>
+
+Show the value at every iteration
