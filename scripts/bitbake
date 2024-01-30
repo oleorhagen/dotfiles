@@ -1,0 +1,43 @@
+#! /bin/bash
+
+# A simple wrapper script in order to run bitbake from a container, which mounts
+# my filesystem
+
+# Build using Docker crops/poky and the Ubuntu image This way I don't have
+# to build locally, and have proper dependencies installed
+#
+# $@ - Passed on to the bitbake command line
+#
+
+# Start the container
+#
+# Give it a low priority in the scheduler (Since nicing doesn't help with
+# docker since it's not inherited from the current process)
+# set -x
+echo >&2 $(whoami)
+args="$@"
+echo >&2 "Got arguments: " "${args}"
+
+if [[ "$(whoami)" != "olepor" ]]; then
+
+    cd /home/olepor/yocto/mender
+    source poky/oe-init-build-env /home/olepor/yocto/mender/build
+    set -x
+    bitbake ${args}
+    set +x
+    echo >&2 "ran command 'bitbake ${args}'"
+
+else
+
+    docker run \
+           --rm \
+           --cpu-shares=256 \
+           --mount 'type=bind,src=/home/olepor,dst=/home/olepor/' \
+           --rm crops/poky:ubuntu-22.04 \
+           /home/olepor/dotfiles/scripts/bitbake "$@"
+
+fi
+
+# set +x
+
+# echo >&2 "Done writing to the container"
