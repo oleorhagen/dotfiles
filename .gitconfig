@@ -1,7 +1,14 @@
 [user]
 	email = ole.orhagen@northern.tech
-	name = Ole Petter
+	name = Ole P. Orhagen
 	signingkey = 399DBE0F4D4B02EB
+
+[sendemail]
+	smtpServer = smtp.gmail.com
+	smtpServerPort = 587
+    	smtpEncryption = tls
+    	smtpUser = ole.orhagen@northern.tech
+	#smtpPass = "fzoo npvf kluq hyuo"
 
 [alias]
 	lg = log --all --oneline --graph --decorate
