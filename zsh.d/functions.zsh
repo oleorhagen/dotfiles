@@ -334,3 +334,7 @@ function jwtd() {
 function read_kubeconfig_certificate() {
     cat ~/.kube/config | yq --raw-output '.clusters[0].cluster."certificate-authority-data"' | base64 -d | openssl x509 -text
 }
+
+function backup-status() {
+    duplicity collection-status /opt/backup
+}

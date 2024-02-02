@@ -82,15 +82,19 @@ setup_colors
 
 mount | grep /opt/backup || die "/opt/backup is not mounted!"
 
-export PASSPHRASE=$(pass show private/gpg-key)
-duplicity                       \
-    backup                      \
-    --full-if-older-than 1M     \
-    --exclude-other-filesystems \
-    --dry-run                   \
-    /home/olepor file:///opt/backup
+export PASSPHRASE="$(pass show private/gpg-key)"
+time nice -n 20 duplicity           \
+    backup                          \
+        --archive-dir /opt/backup   \
+        --full-if-older-than 1M     \
+        --exclude-other-filesystems \
+            /home/olepor            \
+            file:///opt/backup
 
-duplicity remove-older-than 6M --force file:///opt/backup
+time nice -n 20 duplicity           \
+     remove-older-than 6M           \
+          --archive-dir /opt/backup \
+          --force file:///opt/backup
 
 unset PASSPHRASE
 
