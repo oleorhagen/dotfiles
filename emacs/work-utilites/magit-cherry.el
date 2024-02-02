@@ -47,11 +47,36 @@ will have to resolve this manually yourself."
     ;; Helm (magit) get branch
     (magit-completing-read-multiple* "Cherry-pick to branch: " (magit-list-branch-names))
     ;; Get the commits
-    (magit-cherry-pick-read-args "Cherry-pick: ")))
-  (progn
-    (magit-run-git
-     "checkout" "-B" (format "cherry-%s" (car target-branch)) target-branch "--no-track")
-    (magit-run-git "cherry-pick" commits)
-    (magit-push-current (format "cherry-%s" (car target-branch)) target-branch)
-    ;; TODO - Use forge to automatically create a PR
-    (forge-create-pullreq source-branch target-branch)))
+    (car (magit-cherry-pick-read-args "Cherry-pick: ")))) ;; Ignore the transient arguments
+
+  (and
+    ;; Magit checkout
+   ;; (magit-git-success
+   ;;  "checkout" "-B" (format "cherry-%s" (car target-branch)) target-branch)
+   ;; (magit--branch-spinoff
+   ;;  (format "cherry-%s" (car target-branch))
+   ;;  (car target-branch)
+   ;;  t ;; Checkout the branch also
+   ;;  )
+
+   (message "yaaay")
+   (message commits)
+   ;; Cherry pick the given commits
+   (magit--cherry-pick commits nil)
+
+
+   (not (magit-cherry-in-progress-p)
+        (progn
+          (message "yay")
+          (magit-push-current (format "cherry-%s" (car target-branch)) (car target-branch))
+          ))
+
+    ;;
+    ;;; Push the branch upstream to my private remote
+    ;;
+    ;; (magit-push-current (format "cherry-%s" (car target-branch)) (car target-branch))
+    ;;
+    ;;; TODO - Use forge to automatically create a PR
+    ;;
+    ;; (forge-create-pullreq source-branch target-branch)
+    ))

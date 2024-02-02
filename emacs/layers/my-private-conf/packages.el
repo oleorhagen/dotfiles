@@ -35,6 +35,9 @@
     ;; (github-review :location local)
     ;; (md-to-jira-mode :location local)
     (git-conventional-commit-mode :location local)
+
+    ;; Treesitter-mode
+    devicetree-ts-mode
     )
   "The list of Lisp packages required by the my-private-conf layer.
 

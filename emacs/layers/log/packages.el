@@ -96,6 +96,13 @@ Each entry is either:
                      (levels . "RFC 5424"))
     ))
 
+
+;; TODO - In progress = not tested
+;; (defvar logview-unix-with-level
+  ;; '("PYTEST" . ((format . "[THREAD] IGNORED NAME")
+                ;; No levels set for the pytest module)))
+
+
 ;;(add-to-list 'logview-additional-submodes logview-unix-with-level)
 
 ;;
@@ -114,6 +121,7 @@ Each entry is either:
               ;; Add the custom submode for parsing our logs (mender)
               ;; (log/add-mender-log-submode)
 
+              ;; TODO - Re-enable adding these...
               ;;(add-to-list 'logview-additional-submodes logview-unix-with-level t)
 
               ;; (add-to-list 'logview-additional-submodes logview-mender-logs-format t)
