@@ -1,0 +1,70 @@
+github-cli
+
+# visualization
+graphviz # Handy util for creating graphs
+
+# build tools
+make
+nasm # assembly compiler
+
+# k8s
+kubectl
+kubectx # Manage kubernetes contexts
+helm
+
+# binary tools - and rev-ing
+fq # query binaries for information (handy for rev-ing)
+ltrace # library call tracing
+binutils
+checksec # Check binary security
+
+# rev-ing
+r2ghidra
+radare2
+
+# networking
+nmap
+
+# pdf reader
+okular
+
+# DB-tools:w
+postgresql
+
+#  Virtualization
+docker
+
+# languages
+go
+go-tools # developer tools for Go (digraph,goimports, etc...)
+r # Stats babeh
+
+# search
+ripgrep # find on steroids
+
+# standard tools
+sed
+gawk
+grep
+
+# Shell 
+shfmt # Code formatting for bash
+shellcheck # Bash codesmells smeller
+bashate # bash code formatting
+
+# debug utils
+valgrind
+gcc
+arp-scan # scan network on ARP level
+
+## network
+wireguard-tools
+wireguard-qt
+
+# query tools
+yq # toml query language
+jq # json query language
+
+# utils
+fzf # handy fuzzy matching
+

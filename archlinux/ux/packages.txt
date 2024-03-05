@@ -1,0 +1,27 @@
+
+# fonts
+otf-font-awesome
+otf-symbola
+terminus-font
+ttf-all-the-icons
+ttf-dejavu
+ttf-droid
+ttf-firacode-nerd
+ttf-font-awesome
+ttf-inconsalata
+ttf-liberation
+ttf-roboto
+ttf-symbola
+ttf-ubuntu-font-family
+ttf-victor-mono
+gnu-free-fonts
+
+
+# Window manager
+sway # 4 lyfe?
+swaylock
+swaygrab
+wl-clipboard
+dmenu # program launcher
+
+# 

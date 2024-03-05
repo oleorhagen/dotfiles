@@ -1,0 +1,73 @@
+# base install
+python
+lvm2
+modprobe-db # arch linux package install listing
+git
+sudo
+zsh
+
+# email reader
+thunderbird
+
+# Mah editor(s)
+emacs-wayland
+vim
+
+# arch linux AUR manager
+yay
+
+cowsay # Yaaz
+gawk
+intel-ucode # Microcode, and updates for intel
+sudo
+
+# man page stuff
+man-pages
+man-db
+texinfo
+tldr # man page tldr;s for lazy peeps
+
+# Keyboard remappings
+# interception-caps2esc | # interception-tools <- TODO Do I need this still?
+
+# IRC client
+irssi
+
+# ssh
+openssh
+
+# passwords
+pass
+
+# Utils
+direnv # Handy for navigating and sourcing env per dir
+
+# Sync
+rsync
+sshfs # Mount fs by ssh
+
+# compression
+unzip
+gzip
+
+# Shell
+zsh
+## Shell emulator
+alacritty # terminal emulator
+alacritty-themes
+## nice MOD on login
+archey3
+
+# utils
+bc # calculator
+file # list file type from magic number
+
+# bluetooth
+bluez
+bluetooth-utils
+
+# web-browser
+firefox
+google-chrome
+
+
