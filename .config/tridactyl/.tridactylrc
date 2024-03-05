@@ -211,3 +211,5 @@ bind ,g js -r .config/tridactyl/scripts/mendersoftware-gitlab-switch.js
 " bind ,g js let uri = document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git"); tri.native.run("cd ~/projects; git clone " + uri + "; cd \"$(basename \"" + uri + "\" .git)\"; st")
 "
 "
+" Approve a PR using the gh command line tool
+bind ;a composite js "gh pr review --approve " + document.location.href
