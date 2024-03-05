@@ -78,4 +78,5 @@ PROMPT='$(kube_ps1)'$PROMPT
 kubeoff # Don't add the prompt by default
 
 # Set the kubeconfig to handle all config file .kube/config & .kube/config.d/*.yaml|yml
-export KUBECONFIG="${HOME}/.kube/config$(for f in $(ls ${HOME}/.kube/config.d/); do echo -n ':'${HOME}/.kube/config.d/${f}; done)"
+# TODO - kubectx does not work with multiple configuration files atm. So for now we need to keep them all in the top-level config file
+# export KUBECONFIG="${HOME}/.kube/config$(for f in $(ls ${HOME}/.kube/config.d/); do echo -n ':'${HOME}/.kube/config.d/${f}; done)"

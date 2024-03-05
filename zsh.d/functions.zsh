@@ -338,3 +338,7 @@ function read_kubeconfig_certificate() {
 function backup-status() {
     duplicity collection-status /opt/backup
 }
+
+function fuck () {
+	sudo !!
+}
