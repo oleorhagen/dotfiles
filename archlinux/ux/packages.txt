@@ -15,6 +15,7 @@ ttf-symbola
 ttf-ubuntu-font-family
 ttf-victor-mono
 gnu-free-fonts
+materia-gtk-theme
 
 
 # Window manager
