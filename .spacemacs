@@ -125,7 +125,11 @@ This function should only modify configuration layer settings."
      (git
       :variables
       git-magit-status-fullscreen t
-      git-commit-major-mode 'git-conventional-commit-mode)
+      )
+     ;; (git
+     ;;  :variables
+     ;;  git-magit-status-fullscreen t
+     ;;  git-commit-major-mode 'git-conventional-commit-mode)
      (lsp :variables
           lsp-pyright-multi-root nil
           lsp-ui-remap-xref-keybindings nil
