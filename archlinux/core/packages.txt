@@ -1,5 +1,21 @@
 github-cli
 
+# DNS tool
+bind # dig
+
+# xorg support
+xorg-wayland
+
+# realtime-kit (D-Bus system service for user-process to change the scheduler policy to RR handling)
+rtkit
+
+# firmware
+## sound
+sof-firmware
+
+# Application launcher
+dmenu
+
 # visualization
 graphviz # Handy util for creating graphs
 
@@ -48,9 +64,12 @@ gawk
 grep
 
 # Shell 
+alacritty
 shfmt # Code formatting for bash
 shellcheck # Bash codesmells smeller
 bashate # bash code formatting
+direnv # smart hook loading per directory (.envrc)
+archey3 # pretty icon in terminal on startup (arch)
 
 # debug utils
 valgrind
@@ -68,3 +87,12 @@ jq # json query language
 # utils
 fzf # handy fuzzy matching
 
+# audio
+pipewire
+pipewire-audio
+pipewire-alsa
+pipewire-pulse
+wireplumber
+
+# utils
+wget

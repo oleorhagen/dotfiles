@@ -1,0 +1,17 @@
+#! /usr/bin/env bash
+
+# Install all the arch linux packages provided herein
+#
+
+# Package list to install (extracted from the provided files)
+packages=""
+
+for file in $(ls */**); do
+	for package in $(cat $file | grep -v '#'); do
+		echo >&2 "Installing package: $package..."
+		packages="$packages $package"
+		sudo pacman -Sy $package
+	done
+done
+
+#sudo pacman -Sy $packages
