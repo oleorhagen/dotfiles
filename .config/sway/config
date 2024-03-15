@@ -18,7 +18,7 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu dmenu_path | wmenu | xargs swaymsg exec --
 
 ### Output configuration
 #
@@ -200,17 +200,18 @@ bindsym $mod+r mode "resize"
 
 # Run a pure wayland session
 # xwayland disable
+xwayland enable
 
 include /etc/sway/config.d/*
 
  # Add volume control
- bindsym XF86AudioMute exec amixer -q sset Master toggle
- bindsym XF86AudioLowerVolume exec amixer -q sset Master 3%-
- bindsym XF86AudioRaiseVolume exec amixer -q sset Master 3%+
+ #bindsym XF86AudioMute exec amixer -q sset Master toggle
+ #bindsym XF86AudioLowerVolume exec amixer -q sset Master 3%-
+ #bindsym XF86AudioRaiseVolume exec amixer -q sset Master 3%+
 
  # Add brigthness control
- bindsym XF86MonBrightnessUp exec light -A 20
- bindsym XF86MonBrightnessDown exec light -U 20
+ #bindsym XF86MonBrightnessUp exec light -A 20
+ #bindsym XF86MonBrightnessDown exec light -U 20
 
 
 # Lock screen with swaylock
@@ -223,9 +224,9 @@ bindsym $mod+X exec ~/dotfiles/.config/sway/lock
 
 # Title is for wayloand
 # class is for X
-assign [title="firefox"] workspace number 8
+#assign [title="firefox"] workspace number 8
 # assign [class="firefox"] output DP-5
-assign [title="emacs"] workspace number 7
+#assign [title="emacs"] workspace number 7
 # assign [title="emacs"] output DP-4
 
 # work
