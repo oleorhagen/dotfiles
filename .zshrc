@@ -65,7 +65,7 @@ export UPDATE_ZSH_DAYS=10
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	      git
+	git
        	z
        	docker
        	docker-compose
@@ -73,7 +73,7 @@ plugins=(
        	colored-man-pages
        	per-directory-history
        	autoenv # .in and .out files to automatically setup an env when entering a directory
-	      kube-ps1
+	kube-ps1
         aws
 )
 
@@ -115,7 +115,7 @@ fpath=($HOME/.zsh-completions $fpath)
 #
 # Source .mender.rc
 #
-source ~/dotfiles/scripts/.mender.rc
+#source ~/dotfiles/scripts/.mender.rc
 
 # Emacsclient
 #
@@ -134,7 +134,7 @@ eval "$(direnv hook zsh)"
 #fi
 
 # Source all the individual configuration files
-for file in ~/dotfiles/zsh.d/*; do
+for file in ~/.files/zsh.d/*; do
     source $file
 done
 

@@ -342,3 +342,8 @@ function backup-status() {
 function fuck () {
 	sudo !!
 }
+
+# Battery status
+function battery() {
+	cat /sys/class/power_supply/BAT0/capacity
+}
