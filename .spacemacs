@@ -160,7 +160,7 @@ This function should only modify configuration layer settings."
                       auto-completion-complete-with-key-sequence-delay 0.1
                       auto-completion-idle-delay 0.0 ;; set to 0.0 for optimal results with lsp
                       auto-completion-minimum-prefix-length 1 ;; set to 1 for optimal results with lsp
-                      auto-completion-private-snippets-directory "/home/olepor/dotfiles/emacs/snippets/"
+                      auto-completion-private-snippets-directory "/home/olepor/.files/emacs/snippets/"
                       auto-completion-enable-snippets-in-popup nil
                       ;; auto-completion-enable-help-tooltip nil
                       auto-completion-use-company-box nil
