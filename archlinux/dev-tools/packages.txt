@@ -12,6 +12,15 @@ thunderbird
 # Mah editor(s)
 emacs-wayland
 vim
+## Editor tooling
+### LSPs
+yaml-language-server
+bash-language-server
+clang # C/C++
+gopls # GOlang
+jedi-language-server # Python (can also use pyls, or pyright?)
+vscode-json-languageserver # JSON
+
 
 # arch linux AUR manager
 yay
