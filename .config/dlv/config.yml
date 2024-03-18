@@ -36,12 +36,16 @@ aliases:
 substitute-path:
   # - {from: path, to: path}
   - {from: /app, to: /home/olepor/mimiro-io/mimiro-web-auth}
-  
+  - {from: /home/olepor/mimiro-io/mimiro-web-auth, to: /app}
+  # Go package debugging
+  - {from: /go/pkg/mod/, to: /home/olepor/go/pkg/mod/}
+  - {from: /home/olepor/go/pkg/mod/, to: /go/pkg/mod/}
+
 # Maximum number of elements loaded from an array.
 # max-array-values: 64
 
 # Maximum loaded string length.
-# max-string-len: 64
+max-string-len: 1000
 
 # Output evaluation.
 # max-variable-recurse: 1
@@ -50,7 +54,7 @@ substitute-path:
 # show-location-expr: true
 
 # Allow user to specify output syntax flavor of assembly, one of this list "intel"(default), "gnu", "go".
-# disassemble-flavor: intel
+disassemble-flavor: intel
 
 # List of directories to use when searching for separate debug info files.
 debug-info-directories: ["/usr/lib/debug/.build-id"]
