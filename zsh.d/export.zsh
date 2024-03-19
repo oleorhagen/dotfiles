@@ -46,3 +46,8 @@ export PYTHONDONTWRITEBYTECODE="true"
 # Set the kubeconfig to handle all config file .kube/config & .kube/config.d/*.yaml|yml
 # TODO - kubectx does not work with multiple configuration files atm. So for now we need to keep them all in the top-level config file
 # export KUBECONFIG="${HOME}/.kube/config$(for f in $(ls ${HOME}/.kube/config.d/); do echo -n ':'${HOME}/.kube/config.d/${f}; done)"
+
+# MIMIRO
+
+# Set aws-vault to use pass as the default backend
+export AWS_VAULT_BACKEND=pass
