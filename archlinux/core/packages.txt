@@ -1,5 +1,12 @@
 github-cli
 
+# general brightness and play pause functionality
+brightnessctl
+playerctl # play/pause
+
+# Sway bar
+waybar
+
 # DNS tool
 bind # dig
 
