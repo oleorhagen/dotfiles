@@ -201,6 +201,8 @@ bindsym $mod+r mode "resize"
 # Run a pure wayland session
 # xwayland disable
 xwayland enable
+# show whether or not a windos is running under X
+for_window [shell="xwayland"] title_format "[XWayland] %title"
 
 include /etc/sway/config.d/*
 
@@ -251,3 +253,15 @@ include ~/.config/sway/config.d/*
 
 # Needed for the xdg screen sharing, see: https://github.com/emersion/xdg-desktop-portal-wlr
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+# media buttons setup
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+# bindsym XF86Search exec bemenu-run
