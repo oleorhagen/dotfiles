@@ -92,7 +92,7 @@ function rate_line_englishness() {
             correct_words=$((correct_words + 1))
         fi
         ww="$(echo $@ | aspell list | wc -l)"
-        wrong_words=$((wrong_words - ww))
+        wrong_words=$((wrong_words + ww))
     done
     echo $((correct_words - wrong_words))
 }
