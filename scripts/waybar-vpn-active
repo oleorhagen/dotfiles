@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+
+ACTIVE="$(nmcli connection show --active | grep tun0)"
+
+if test -n "${ACTIVE}"; then
+   echo '{"text":"Connected","class":"connected","percentage":100}'
+else
+   echo '{"text":"Disconnected","class":"disconnected","percentage":0}'
+fi
