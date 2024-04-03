@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : mapstructure
+#key : ,mapstructure
+#contributor : Ole P. Orhagen
+# --
+\`mapstructure:"$1" ${2:validate:"required"}\`
