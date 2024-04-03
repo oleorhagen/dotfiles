@@ -7,7 +7,7 @@
 	smtpServer = smtp.gmail.com
 	smtpServerPort = 587
     	smtpEncryption = tls
-    	smtpUser = ole.orhagen@northern.tech
+    	smtpUser = ole@orhagen.no
 	#smtpPass = "fzoo npvf kluq hyuo"
 
 [alias]
