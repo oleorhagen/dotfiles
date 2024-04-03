@@ -18,7 +18,15 @@
         "custom/pacman-package-count"
     ],
     "modules-center": ["sway/workspaces",],
-    "modules-right": ["network", "cpu", "battery", "battery#bat2", "clock", "tray"],
+    "modules-right": [
+    "custom/vpn",
+    "network",
+    "cpu",
+    "battery",
+    "battery#bat2",
+    "clock",
+    "tray"
+    ],
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
@@ -153,9 +161,20 @@
       "format": ""
   },
 
+
+  "custom/vpn": {
+      "format": "VPN: {}",
+      "exec": "$HOME/.files/scripts/waybar-vpn-active",
+      "on-click": "$HOME/.files/scripts/waybar-vpn-active",
+      "return-type": "json",
+      "interval": 10
+      // "on-click": "/bin/ls"
+  },
+
+
   "custom/pacman-package-count": {
-      "format": "{}",
-      "exec": "echo `pacman -Qe | wc -l`",
+      "format": "Installed Pkgs: {}",
+      "exec": "echo $( pacman -Qe | wc -l )",
       "interval": 3600
   }
 }
