@@ -1,5 +1,7 @@
 github-cli
 
+# Firmware
+
 # general brightness and play pause functionality
 brightnessctl
 playerctl # play/pause
@@ -17,6 +19,10 @@ xorg-wayland
 rtkit
 
 # firmware
+
+## updates
+fwupd
+
 ## sound
 sof-firmware
 
@@ -93,6 +99,7 @@ jq # json query language
 
 # utils
 fzf # handy fuzzy matching
+the_silver_searcher # Search tool
 
 # audio
 pipewire
@@ -103,3 +110,5 @@ wireplumber
 
 # utils
 wget
+bc # calculator
+fzf # Fuzzy finder

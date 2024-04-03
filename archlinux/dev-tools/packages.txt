@@ -1,5 +1,9 @@
 # base install
 python
+
+## pip packages
+python-importmagic
+
 lvm2
 modprobe-db # arch linux package install listing
 git
@@ -20,6 +24,9 @@ clang # C/C++
 gopls # GOlang
 jedi-language-server # Python (can also use pyls, or pyright?)
 vscode-json-languageserver # JSON
+vscode-html-languageserver # HTML
+vscode-css-languageserver # CSS
+vscode-markdown-languageserver # Markdown
 
 
 # arch linux AUR manager
@@ -70,6 +77,7 @@ archey3
 # utils
 bc # calculator
 file # list file type from magic number
+pup # htlmq
 
 # bluetooth
 bluez
