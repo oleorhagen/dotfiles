@@ -148,7 +148,7 @@ This function should only modify configuration layer settings."
      (go :variables
             go-format-before-save t
             gofmt-command "goimports"
-            gofmt-args '("-local=github.com/mimiro")
+            gofmt-args '("-local=github.com/mimiro-io")
             go-use-golangci-lint t
             gofmt-show-errors nil ;; errors are already shown by flycheck
             godoc-at-point-function 'godoc-gogetdoc)
