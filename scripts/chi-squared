@@ -1,0 +1,67 @@
+#! /usr/bin/env python
+
+# Finds the chi-squared distance for the expected set
+#
+# d = Sum[ (A_i - E_i)^2 / E_i ]
+
+import sys
+
+from collections import Counter
+
+expected_frequency = {
+    "A": 8.2,
+    "B": 1.5,
+    "C": 2.8,
+    "D": 4.3,
+    "E": 12.7,
+    "F": 2.2,
+    "G": 2.0,
+    "H": 6.1,
+    "I": 7.0,
+    "J": 0.15,
+    "K": 0.77,
+    "L": 4.0,
+    "M": 2.4,
+    "N": 6.7,
+    "O": 7.5,
+    "P": 1.9,
+    "Q": 0.095,
+    "R": 6.0,
+    "S": 6.3,
+    "T": 9.1,
+    "U": 2.8,
+    "V": 0.98,
+    "W": 2.4,
+    "X": 0.15,
+    "Y": 2.0,
+    "Z": 0.074,
+}
+# Get the frequency between 0 - 1
+expected_frequency = {k: v / 100 for k, v in expected_frequency.items()}
+
+# alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+def chi_squared(inp):
+    # Filter out elements not in our alphabet
+    # inp = "".join(c for c in inp if c in alphabet)
+    inp = inp.replace(" ", "")
+
+    # Create the actual letter frequency
+    A = Counter(inp)
+
+    # Create the expected table
+    text_length = len(inp)
+    E = {l: text_length * expected_frequency[l] for l in A.keys()}
+
+    X = sum([(A[l] - E[l]) ** 2 / E[l] for l in A.keys()])
+    return X
+
+
+# assert len(sys.argv) > 1, "At least one argument required"
+# inp = sys.argv[1].upper()
+
+if __name__ == "__main__":
+    for line in sys.stdin:
+        X = chi_squared(line.upper().strip())
+        print(f"{X:.0f}\t{line}")
+
