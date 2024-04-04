@@ -163,11 +163,12 @@
 
 
   "custom/vpn": {
-      "format": "VPN: {}",
+      "format": "VPN: {icon}",
       "exec": "$HOME/.files/scripts/waybar-vpn-active",
-      "on-click": "$HOME/.files/scripts/waybar-vpn-active",
+      // "on-click": "$HOME/.files/scripts/waybar-vpn-active",
       "return-type": "json",
-      "interval": 10
+      "interval": 10,
+      "format-icons": [ "󰦞", "󰦝" ]
       // "on-click": "/bin/ls"
   },
 

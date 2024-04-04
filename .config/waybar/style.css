@@ -161,3 +161,10 @@ label:focus {
   min-width: 15px;
   background: #282a36;
 }
+
+
+#custom-vpn {
+  min-width: 65px;
+  background: #2e3440;
+  border: 0.2rem solid;
+}
