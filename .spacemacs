@@ -165,7 +165,6 @@ This function should only modify configuration layer settings."
                       ;; auto-completion-enable-help-tooltip nil
                       auto-completion-use-company-box nil
                       ;; auto-completion-enable-sort-by-usage t
-                      flycheck-check-syntax-automatically '()
                       )
      ;; ;; semantic
      ;; systemd
@@ -890,11 +889,13 @@ you should place your code here."
               (flycheck-select-checker 'c/c++-googlelint)
               (flycheck-add-next-checker 'c/c++-googlelint 'c/c++-cppcheck)))
   ;; Disable lsp as the standard flycheck checker
-  (setq lsp-diagnostic-package :none)
+  ;; (setq lsp-diagnostic-package :none)
 
   ;; Python lsp-pyright (Do not start it in all directories)
-  (advice-add 'lsp :before (lambda (&rest _args) (eval '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
-
+  (advice-add 'lsp
+              :before
+              (lambda (&rest _args)
+                (eval '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
 
   ;; https://github.com/syl20bnr/spacemacs/issues/13849#issuecomment-674560260
   (with-eval-after-load 'evil-iedit-state
@@ -912,9 +913,11 @@ you should place your code here."
   ;; lsp no ui on hover
   (setq lsp-ui-doc-enable nil)
 
-
   ;; Add shell script highligting to bbclass files (Yocto)
   ;; (add-to-list 'auto-mode-alist '(("\\.bbclass.*\\'") . shell-script-mode))
+
+  ;; Add Sagemath files as python mode file
+  (add-to-list 'auto-mode-alist '("\\.sage\\'" . python-mode))
 
   ;; Add bitbake.el as a syntax highlighter for bitbake files
   ;; TODO - fix regex!
@@ -951,23 +954,6 @@ you should place your code here."
   (defun add-B-to-ediff-mode-map () (define-key ediff-mode-map "B" 'ediff-copy-both-to-C))
   (add-hook 'ediff-keymap-setup-hook 'add-B-to-ediff-mode-map)
 
-  ;; Add a function for converting to jira markdown
-  ;; Then tie this in with a specific quit function button
-  ;; Ideally <spc> q j
-
-  (defun replace-buffer-contents-to-jira-markdown-on-save()
-    "A utility function which should be called as a hook when closing the tridactyl interaction buffer. And then transform the written markdown to Jira markdown using pandoc, and pandoc-mode."
-    (interactive)
-  ;;; Generate the Jira markdown from the markdown contents of the current buffer
-    (pandoc-run-pandoc)
-  ;;; Replace the contents of the current buffer with the Jira markdown
-    (replace-buffer-contents pandoc--output-buffer-name))
-
-  ;; Set the leader bindings
-  (spacemacs/set-leader-keys
-    "qj" '(lambda ()
-            (replace-buffer-contents-to-jira-markdown-on-save)
-            (spacemacs/frame-killer)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
