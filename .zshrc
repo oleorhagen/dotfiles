@@ -99,8 +99,8 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 if [[ ${RANDOM} -le 1000 ]]; then
-	echo >&2 "Updating the firmware... (TODO - install this!)"
-	#fwupdmgr update
+	echo >&2 "Updating the firmware..."
+	fwupdmgr update
 fi
 
 
