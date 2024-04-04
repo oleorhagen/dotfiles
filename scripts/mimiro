@@ -89,8 +89,6 @@ setup_colors
 
 if [[ ${args[0]} == "dev" ]]; then
     if [[ ${args[1]} == "db" ]]; then
-        #aws-vault exec Developer@OpenFarmDev -- aws ssm get-parameters --names /application/openfarm-aurora-cluster/db/mimiro_web_authadmin-password /application/openfarm-aurora-cluster/db/mimiro_web_authadmin-username /shared/aurora-cluster/db/url --with-decryption
-
         data="$(aws-vault exec Developer@OpenFarmDev -- aws ssm get-parameters \
                          --names \
                          /application/openfarm-aurora-cluster/db/mimiro_web_authadmin-password \
