@@ -801,6 +801,10 @@ you should place your code here."
   (spacemacs/set-leader-keys
     "ocb" 'comment-box)
 
+  (spacemacs/declare-prefix "os" "snippets")
+  (spacemacs/set-leader-keys
+    "os" 'yas-describe-tables)
+
   ;; ------ Go-Coverage ---------- TODO; Not working atm
   ;; (add-to-list 'load-path "~/.emacs.d/private/local/coverage/")
   ;; (require 'coverage)
