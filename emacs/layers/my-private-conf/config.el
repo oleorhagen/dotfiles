@@ -7,7 +7,7 @@
      (cpp        "https://github.com/tree-sitter/tree-sitter-cpp/" "master" "src")
      (cmake      "https://github.com/uyha/tree-sitter-cmake")
      (css        "https://github.com/tree-sitter/tree-sitter-css")
-     (dockerfile "file:///opt/src/github/tree-sitter-dockerfile" "main" "src")
+     (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile" "main" "src")
      (elisp      "https://github.com/Wilfred/tree-sitter-elisp")
      (elixir     "https://github.com/elixir-lang/tree-sitter-elixir" "main" "src")
      (erlang     "https://github.com/WhatsApp/tree-sitter-erlang" "main" "src")
@@ -22,12 +22,12 @@
      (make       "https://github.com/alemuller/tree-sitter-make")
      (markdown   "https://github.com/ikatyang/tree-sitter-markdown")
      (meson      "https://github.com/Decodetalkers/tree-sitter-meson" "master" "src")
-     (perl       "file:///opt/src/github/tree-sitter-perl" "master" "src")
+     (perl       "https://github.com/tree-sitter-perl/tree-sitter-perl" "master" "src")
      (python     "https://github.com/tree-sitter/tree-sitter-python")
      (ruby       "https://github.com/tree-sitter/tree-sitter-ruby" "master" "src")
      (rust       "https://github.com/tree-sitter/tree-sitter-rust" "master" "src")
      (toml       "https://github.com/tree-sitter/tree-sitter-toml")
-     (treesitter "https://github.com/joelspadin/tree-sitter-devicetree" "master" "src")
+     (treesitter "https://github.com/joelspadin/tree-sitter-devicetree" "main" "src")
      (tsx        "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
      (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
      (yaml       "https://github.com/ikatyang/tree-sitter-yaml")))
@@ -50,6 +50,10 @@
 (defvar my-treesit-font-lock-level-max 4)
 (customize-set-variable 'treesit-font-lock-level my-treesit-font-lock-level-max)
 
+(defun my-install-treesitter-grammars ()
+  "Install the given tree-sitter grammars from treesit-language-source-alist"
+  (interactive)
+  (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist)))
 
 ;; CFEngine3 mode indentation
 (customize-set-variable 'cfengine-indent 0) ;; 0 - column indent is required according to their spec
@@ -68,5 +72,35 @@ This is intended to be added to `post-command-hook'."
   (when (bound-and-true-p yas-minor-mode)
     (yas-expand)))
 
+
+
+;; save-restriction
+;; narrow-to-region
+;; (looking-back "\\b,\\w+" (point))
+
+;; (let (
+;;       (mw (current-word))
+;;       )
+;;   (message current-word)
+;;   (when (s-starts-with-p "," mw)
+;;     (yas-expand)))
+
+(defun my-test-expand ()
+  (interactive)
+  (message (current-word))
+  (let ( (mbyword (current-word)) )
+    (message mbyword)
+    (when (s-starts-with-p "," mbyword)
+      (message "yayy"))
+    )
+  )
+
+(defun my-test-looking-back ()
+  "docstring"
+  (interactive "P")
+  (looking-back )
+  )
+
+
 ;; Add the hook to post-insert hook
-(add-hook 'post-command-hook #'my-yas-try-expanding)
+;; (add-hook 'post-command-hook #'yas-try-expanding-auto-snippets )
