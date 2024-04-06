@@ -57,6 +57,7 @@ pass
 
 # Utils
 direnv # Handy for navigating and sourcing env per dir
+js-beautify # prettify js and json
 
 # Sync
 rsync

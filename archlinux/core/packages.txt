@@ -112,3 +112,4 @@ wireplumber
 wget
 bc # calculator
 fzf # Fuzzy finder
+tldr # man tldr
