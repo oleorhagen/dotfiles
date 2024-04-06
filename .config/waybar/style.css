@@ -168,3 +168,8 @@ label:focus {
   background: #2e3440;
   border: 0.2rem solid;
 }
+
+#custom-hackeriet {
+    min-width: 65px;
+    background: #2e3440;
+}

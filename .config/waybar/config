@@ -19,6 +19,7 @@
     ],
     "modules-center": ["sway/workspaces",],
     "modules-right": [
+    "custom/hackeriet",
     "custom/vpn",
     "network",
     "cpu",
@@ -170,6 +171,14 @@
       "interval": 10,
       "format-icons": [ "󰦞", "󰦝" ]
       // "on-click": "/bin/ls"
+  },
+
+  //  {"text": "$text", "alt": "$alt", "tooltip": "$tooltip", "class": "$class", "percentage": $percentage }
+  "custom/hackeriet": {
+      "format": "Hackeriet: {}",
+      "exec": "curl  -q -L hackeriet.no/door.json 2>/dev/null | sed 's/status/text/' | jq --unbuffered --compact-output",
+      "return-type": "json",
+      "interval": 60
   },
 
 
