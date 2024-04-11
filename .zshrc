@@ -20,7 +20,8 @@ export SCRIPT_DIR=/home/olepor/.i3blocks/i3blocks-contrib/
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="olepor" # sammy
+# ZSH_THEME="olepor" # sammy
+ZSH_THEME="sammy" # sammy
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -65,7 +66,7 @@ export UPDATE_ZSH_DAYS=10
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git
+        git
        	z
        	docker
        	docker-compose
@@ -73,7 +74,7 @@ plugins=(
        	colored-man-pages
        	per-directory-history
        	autoenv # .in and .out files to automatically setup an env when entering a directory
-	kube-ps1
+	      kube-ps1
         aws
 )
 
@@ -147,3 +148,5 @@ done
 #
 source <(kubectl completion zsh)
 
+# Use starship as the prompt provider
+eval "$(starship init zsh)"

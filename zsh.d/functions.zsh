@@ -347,3 +347,7 @@ function fuck () {
 function battery() {
 	cat /sys/class/power_supply/BAT0/capacity
 }
+
+function mimiro_vpn () {
+    /opt/awsvpnclient/AWS VPN Client &
+}
