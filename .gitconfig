@@ -50,13 +50,13 @@
 	program = gpg2
 
 [pager]
-    diff = delta
-    log = delta
-    reflog = delta
-    show = delta
+    #diff = delta
+    #log = delta
+    #reflog = delta
+    #show = delta
 
 [interactive]
-    diffFilter = delta --color-only --features=interactive
+    #diffFilter = delta --color-only --features=interactive
 
 [delta]
     features = decorations
