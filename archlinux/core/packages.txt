@@ -113,3 +113,13 @@ wget
 bc # calculator
 fzf # Fuzzy finder
 tldr # man tldr
+
+# arch build (PKGBUILD)
+namcap # Inspect PKGBUILD files
+
+# wallpapers
+wallutils
+
+# Fonts
+noto-fonts
+noto-fonts-emoji
