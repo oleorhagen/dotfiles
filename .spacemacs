@@ -142,6 +142,12 @@ This function should only modify configuration layer settings."
 
      ;; Emacs speaks statistics
      ess
+
+     (tree-sitter :variables
+                  ;; spacemacs-tree-sitter-hl-black-list nil
+                  tree-sitter-syntax-highlight-enable t
+                  tree-sitter-fold-enable t
+                  tree-sitter-fold-indicators-enable t)
      ;; ;; web-beautify
      ;; ;; The go-layer needs the auto-completion and syntax-checking layers
      ;; ;; TODO - add gotests function wrappers to the go-mode https://github.com/cweill/gotests
@@ -155,16 +161,16 @@ This function should only modify configuration layer settings."
      ;; Debugging
      (auto-completion :variables
                       auto-completion-return-key-behavior 'complete
-                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-tab-key-behavior 'nil
                       auto-completion-complete-with-key-sequence nil
                       auto-completion-complete-with-key-sequence-delay 0.1
                       auto-completion-idle-delay 0.0 ;; set to 0.0 for optimal results with lsp
                       auto-completion-minimum-prefix-length 1 ;; set to 1 for optimal results with lsp
-                      auto-completion-private-snippets-directory "/home/olepor/.files/emacs/snippets/"
-                      auto-completion-enable-snippets-in-popup nil
+                      auto-completion-private-snippets-directory nil
+                      auto-completion-enable-snippets-in-popup t
                       ;; auto-completion-enable-help-tooltip nil
                       auto-completion-use-company-box nil
-                      ;; auto-completion-enable-sort-by-usage t
+                      auto-completion-enable-sort-by-usage t
                       )
      ;; ;; semantic
      ;; systemd
