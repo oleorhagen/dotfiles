@@ -37,6 +37,8 @@ substitute-path:
   # - {from: path, to: path}
   - {from: /app, to: /home/olepor/mimiro-io/mimiro-web-auth}
   - {from: /home/olepor/mimiro-io/mimiro-web-auth, to: /app}
+  # - {from: /home/olepor/mimiro-io/mimiro-web-auth, to: .}
+  # - {from: ../../go/src/github.com/mimiro-io/mimiro-web-auth, to: .}
   # Go package debugging
   - {from: /go/pkg/mod/, to: /home/olepor/go/pkg/mod/}
   - {from: /home/olepor/go/pkg/mod/, to: /go/pkg/mod/}
