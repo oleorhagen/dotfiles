@@ -165,8 +165,24 @@ symbol = " "
 
 [kubernetes]
 format = 'on [ ($user on )($cluster in )$context \($namespace\)](dimmed green) '
-disabled = false
+disabled = true
 contexts = [
   { context_pattern = "dev.local.cluster.k8s", style = "green", symbol = " " },
 ]
+
+[shlvl]
+disabled = false
+format = '[$symbol$shlvl]($style)'
+repeat = true
+symbol = '❯'
+repeat_offset = 1
+threshold = 0
+
+[shell]
+fish_indicator = '󰈺 '
+powershell_indicator = '_'
+unknown_indicator = 'mystery shell'
+style = 'cyan bold'
+disabled = false
+
 # ~/.config/starship.toml

@@ -74,7 +74,6 @@ plugins=(
        	colored-man-pages
        	per-directory-history
        	autoenv # .in and .out files to automatically setup an env when entering a directory
-	      kube-ps1
         aws
 )
 

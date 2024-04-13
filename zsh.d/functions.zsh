@@ -290,10 +290,16 @@ function plot () {
 # kubectl wrapper to enable kubeon if it is off
 #
 function kubectl () {
-	if [[ "${KUBE_PS1_ENABLED}" != "on" ]]; then
-		kubeon
-	fi
+  starship toggle kubernetes disabled # Turn on the starship k8s prompt
 	/usr/bin/kubectl "$@"
+}
+
+function kubeon () {
+    starship toggle kubernetes disabled
+}
+
+function kubeoff () {
+    starship toggle kubernetes disabled
 }
 
 function simplestats () {
