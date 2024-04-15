@@ -27,10 +27,11 @@ set -ex
 #BLURTYPE="2x3"
 BLURTYPE="0x4"
 # Get the screenshot, add the blur and lock the screen with it
-IMAGE="$(swaygrab output)"
+IMAGE="$(grimshot save active)"
 cp $IMAGE /tmp/swaylock.png
 IMAGE_SLUG="/tmp/swaylock.png"
-convert $IMAGE_SLUG -blur $BLURTYPE $IMAGE_SLUG
+cp $IMAGE $IMAGE_SLUG
+#convert $IMAGE_SLUG -blur $BLURTYPE $IMAGE_SLUG
 swaylock -i "$IMAGE_SLUG"
 rm $IMAGE $IMAGE_SLUG
 
