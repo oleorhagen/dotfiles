@@ -41,35 +41,14 @@
 ;;; Code:
 
 (defconst log-packages
-  '((logview :location (recipe
+  '(
+
+    ;; We only require logview-mode
+    (logview :location (recipe
                         :fetcher github
-                        :repo "doublep/logview")))
-  "The list of Lisp packages required by the log layer.
+                        :repo "doublep/logview"))
 
-Each entry is either:
-
-1. A symbol, which is interpreted as a package to be installed, or
-
-2. A list of the form (PACKAGE KEYS...), where PACKAGE is the
-    name of the package to be installed or loaded, and KEYS are
-    any number of keyword-value-pairs.
-
-    The following keys are accepted:
-
-    - :excluded (t or nil): Prevent the package from being loaded
-      if value is non-nil
-
-    - :location: Specify a custom installation location.
-      The following values are legal:
-
-      - The symbol `elpa' (default) means PACKAGE will be
-        installed using the Emacs package manager.
-
-      - The symbol `local' directs Spacemacs to load the file at
-        `./local/PACKAGE/PACKAGE.el'
-
-      - A list beginning with the symbol `recipe' is a melpa
-        recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
+    ))
 
 
 ;;
@@ -79,8 +58,6 @@ Each entry is either:
 ;; (defvar logview-unix-with-level
 ;;   '("MENDER" . ((format . "TIMESTAMP THREAD NAME: TIMESTAMP level=LEVEL MESSAGE")
 ;;                 (levels . "RFC 5424 lowercase"))))
-
-
 
 ;;
 ;;; TODO - The UX should be so that all filter creation and edits is under one key
@@ -102,7 +79,6 @@ Each entry is either:
   ;; '("PYTEST" . ((format . "[THREAD] IGNORED NAME")
                 ;; No levels set for the pytest module)))
 
-
 ;;(add-to-list 'logview-additional-submodes logview-unix-with-level)
 
 ;;
@@ -118,92 +94,9 @@ Each entry is either:
     :defer t
     :config (progn
 
-              ;; Add the custom submode for parsing our logs (mender)
-              ;; (log/add-mender-log-submode)
-
-              ;; TODO - Re-enable adding these...
               ;;(add-to-list 'logview-additional-submodes logview-unix-with-level t)
 
-              ;; (add-to-list 'logview-additional-submodes logview-mender-logs-format t)
-
-              ;; TODO - how to use this properly (?)
-              ;;
-            ;;; Should I add it to the major mode ?
-              ;;
-            ;;; Or custom keybindings
-              ;;
-            ;;; One option is to 'evilify' the logview-key map
-              ;;
-            ;;; Another one is: Manually overriding the map
-            ;;; Using (evil-define-key)
-              ;;
-
-              ;; Use magit as inspiration
-              ;;
-              ;; (kbd "?") - should show all the keys
-
-              (evil-set-initial-state 'logview-mode 'emacs)
-
-              ;; (evilified-state-evilify-map logview-mode-map
-              ;;   :mode logview-mode
-              ;;   :bindings
-              ;;   ;; "j" 'logview-next-entry
-              ;;   ;; "k" 'logview-previous-entry
-              ;;   ;; "l" nil ;; <- Don't want to override this key (and some others)
-              ;;   ;; "L" nil
-              ;;   )
-              ;; Add the leader key to the logview-mode-map
-              (with-eval-after-load 'logview
-                (define-key logview-mode-map
-                  (kbd dotspacemacs-leader-key) spacemacs-default-map))
-
-
-              ;;; Define keymaps for evil emulation
-              (with-eval-after-load 'logview
-                (define-key logview-mode-map "/" 'evil-search-forward)
-                (define-key logview-mode-map ":" 'evil-ex)
-                ;; (define-key logview-mode-map "h" 'evil-backward-char)
-                (define-key logview-mode-map "j" 'evil-next-visual-line)
-                (define-key logview-mode-map "k" 'evil-previous-visual-line)
-                ;; (define-key logview-mode-map "l" 'evil-forward-char)
-                ;; (define-key logview-mode-map "n" 'evil-search-next)
-                ;; (define-key logview-mode-map "N" 'evil-search-previous)
-                ;; (define-key logview-mode-map "v" 'evil-visual-char)
-                ;; (define-key logview-mode-map "V" 'evil-visual-line)
-                ;; (define-key logview-mode-map "gg" 'evil-goto-first-line)
-                (define-key logview-mode-map "G" 'evil-goto-line)
-                (define-key logview-mode-map (kbd "C-f") 'evil-scroll-page-down)
-                (define-key logview-mode-map (kbd "C-b") 'evil-scroll-page-up)
-                (define-key logview-mode-map (kbd "C-e") 'evil-scroll-line-down)
-                (define-key logview-mode-map (kbd "C-y") 'evil-scroll-line-up)
-                (define-key logview-mode-map (kbd "C-d") 'evil-scroll-down)
-                (define-key logview-mode-map (kbd "C-u") 'evil-scroll-up)
-                (define-key logview-mode-map (kbd "C-o") 'evil-jump-backward)
-                )
-
-
-              (spacemacs/set-leader-keys-for-major-mode 'logview-mode
-                "fe" 'logview-edit-filters
-                "fn" 'logview-add-include-name-filter
-                "fN" 'logview-add-exclude-name-filter
-                "ft" 'logview-add-include-thread-filter
-                "fT" 'logview-add-exclude-thread-filter
-                "fr" 'logview-reset-all-filters-restrictions-and-hidings
-                "l" 'logview-show-all-levels
-
-                ;; Narrow
-                "nt" 'logview-narrow-to-thread
-                "t" 'logview-edit-threads
-                "w" 'logview-widen
-
-                ;; TODO - Views
-                "vs" 'logview-save-filters-as-view-for-submode
-                "ve" 'logview-edit-submode-views
-                "vd" 'logview-delete-submode-views
-                "vn" 'logview-set-navigation-view
-                "vh" 'logview-highlight-view-entries
-
-                )
+              ;; (evil-set-initial-state 'logview-mode 'emacs)
 
               ;; (evil-define-key 'normal logview-mode-map (kbd "j") 'logview-next-entry)
               ;; (evil-define-key 'normal logview-mode-map (kbd "k") 'logview-previous-entry)
