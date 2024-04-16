@@ -19,6 +19,7 @@
     ],
     "modules-center": ["sway/workspaces",],
     "modules-right": [
+    "custom/displays",
     "custom/hackeriet",
     "custom/vpn",
     "network",
@@ -179,6 +180,12 @@
       "exec": "curl  -q -L hackeriet.no/door.json 2>/dev/null | sed 's/status/text/' | jq --unbuffered --compact-output",
       "return-type": "json",
       "interval": 60
+  },
+
+
+  "custom/displays": {
+      "format": "󰨇",
+      "on-click": "wdisplays"
   },
 
 

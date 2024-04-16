@@ -173,3 +173,8 @@ label:focus {
     min-width: 65px;
     background: #2e3440;
 }
+
+#custom-displays {
+    min-width: 45px;
+    background: #2e3440;
+}
