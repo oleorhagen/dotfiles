@@ -79,6 +79,7 @@ archey3
 bc # calculator
 file # list file type from magic number
 pup # htlmq
+yamllint
 
 # bluetooth
 bluez
