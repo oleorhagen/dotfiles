@@ -64,20 +64,10 @@
 ;;;        as opposed to now, that it's under a,t,m etc
 ;;
 
-(defvar logview-unix-with-level
-  '("MENDER" . ((format . "TIMESTAMP THREAD NAME: IGNORED lvl=LEVEL")
-                (levels . "RFC 5424 lowercase"))))
-
-(defvar logview-mender-logs-format
-  '("MENDER-LOGS" . ((format . "TIMESTAMP [LEVEL]: >> THREAD-NAME")
-                     (levels . "RFC 5424"))
-    ))
-
-
 ;; TODO - In progress = not tested
 ;; (defvar logview-unix-with-level
-  ;; '("PYTEST" . ((format . "[THREAD] IGNORED NAME")
-                ;; No levels set for the pytest module)))
+;; '("PYTEST" . ((format . "[THREAD] IGNORED NAME")
+;; No levels set for the pytest module)))
 
 ;;(add-to-list 'logview-additional-submodes logview-unix-with-level)
 
@@ -92,12 +82,66 @@
 (defun log/init-logview ()
   (use-package logview
     :defer t
-    :config (progn
+    :config
 
-              ;;(add-to-list 'logview-additional-submodes logview-unix-with-level t)
+    (spacemacs/declare-prefix-for-mode 'logview-mode
+      "mf" "filter")
+    (spacemacs/set-leader-keys-for-major-mode 'logview-mode
+      "fe" 'logview-edit-filters
+      "fn" 'logview-add-include-name-filter
+      "fN" 'logview-add-exclude-name-filter
+      "ft" 'logview-add-include-thread-filter
+      "fT" 'logview-add-exclude-thread-filter
+      "fr" 'logview-reset-all-filters-restrictions-and-hidings)
 
-              ;; (evil-set-initial-state 'logview-mode 'emacs)
+    (spacemacs/declare-prefix-for-mode 'logview-mode
+      "ml" "Show all levels")
+    (spacemacs/set-leader-keys-for-major-mode 'logview-mode
+      "l" 'logview-show-all-levels)
 
-              ;; (evil-define-key 'normal logview-mode-map (kbd "j") 'logview-next-entry)
-              ;; (evil-define-key 'normal logview-mode-map (kbd "k") 'logview-previous-entry)
-              )))
+    (spacemacs/declare-prefix-for-mode 'logview-mode
+      "mn" "narrow")
+    (spacemacs/set-leader-keys-for-major-mode 'logview-mode
+      ;; Narrow
+      "nt" 'logview-narrow-to-thread
+      "t" 'logview-edit-threads
+      "w" 'logview-widen)
+
+    (spacemacs/declare-prefix-for-mode 'logview-mode
+      "mt" "threads")
+    (spacemacs/declare-prefix-for-mode 'logview-mode
+      "mt" "Edit threads")
+
+    (spacemacs/declare-prefix-for-mode 'logview-mode
+      "mv" "Views")
+    (spacemacs/set-leader-keys-for-major-mode 'logview-mode
+      ;; TODO - Views
+      "vs" 'logview-save-filters-as-view-for-submode
+      "ve" 'logview-edit-submode-views
+      "vd" 'logview-delete-submode-views
+      "vn" 'logview-set-navigation-view
+      "vh" 'logview-highlight-view-entries)
+
+    (spacemacs/set-leader-keys-for-major-mode 'logview-mode
+      ;; TODO - Views
+      "mvs" 'logview-save-filters-as-view-for-submode
+      "mve" 'logview-edit-submode-views
+      "mvd" 'logview-delete-submode-views
+      "mvn" 'logview-set-navigation-view
+      "mvh" 'logview-highlight-view-entries)
+
+    (spacemacs/declare-prefix-for-mode 'logview-mode "mf" "guru")
+    ;; (spacemacs/set-leader-keys-for-major-mode 'logview-mode
+    ;;   "f<" 'go-guru-callers
+    ;;   "f>" 'go-guru-callees
+    ;;   "fc" 'go-guru-peers
+    ;;   "fd" 'go-guru-describe
+    ;;   "fe" 'go-guru-whicherrs
+    ;;   "ff" 'go-guru-freevars
+    ;;   "fi" 'go-guru-implements
+    ;;   "fj" 'go-guru-definition
+    ;;   "fo" 'go-guru-set-scope
+    ;;   "fp" 'go-guru-pointsto
+    ;;   "fr" 'go-guru-referrers
+    ;;   "fs" 'go-guru-callstack)))
+    ))
