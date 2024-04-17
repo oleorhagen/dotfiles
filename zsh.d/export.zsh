@@ -5,6 +5,10 @@
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+# git
+## Which branch to use as the review base when running custom git commands
+export REVIEW_BASE="master"
+
 # alias runqemu="~/"
 # Used for compiling gcc-cross-compiler for OPOS
 #export PREFIX="$HOME/opt/cross"
