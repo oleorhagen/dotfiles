@@ -112,7 +112,7 @@ case "${args[0]}" in
 dev)
 	case "${args[1]}" in
 	db)
-		connnect_to_dev_db
+		connect_to_dev_db
 		;;
 	esac
 	;;
