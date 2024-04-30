@@ -38,6 +38,47 @@
 
     ;; Treesitter-mode
     devicetree-ts-mode
+
+    react-snippets
+
+    ;; coverage ;; add in-buffer test coverage for golang
+    ;; Install logview mode
+    ;; (logview :location
+    ;;          (recipe
+    ;;           :fetcher github
+    ;;           :repo "doublep/logview"))
+    ;; (bitbake :location
+    ;;          (recipe
+    ;;               :fetcher github
+    ;;               :repo "canatella/bitbake-el"))
+    ;; ox-jira
+    ;;
+    ;; K8s mode
+    (k8s-mode
+     :toggle
+     :location
+     (recipe
+      :fetcher github
+      :repo "TxGVNN/emacs-k8s-mode"))
+
+    ;; OPA policy language mode - https://www.openpolicyagent.org/docs/latest/policy-language/
+    (rego-mode
+     :toggle
+     :location
+     (recipe
+      :fetcher github
+      :repo "psibi/rego-mode"))
+
+    ;; TODO - CPP-insights mode
+
+    (flycheck-google-cpplint
+     :toggle
+     :location
+     (recipe
+      :fetcher github
+      :repo "flycheck/flycheck-google-cpplint"))
+
+
     )
   "The list of Lisp packages required by the my-private-conf layer.
 
@@ -75,8 +116,19 @@ Each entry is either:
 ;;; INPROGRESS - Add flyspell to the commit buffer
 ;;
 
-(defun my-private-conf/post-init-flyspell ()
+(defun my-private-conf/init-devicetree-ts-mode ())
+
+(defun my-private-conf/init-flyspell ()
   (spell-checking/add-flyspell-hook 'git-conventional-commit-mode-hook))
 
+(defun my-private-conf/init-k8s-mode ()
+  (use-package k8s-mode))
+
+(defun my-private-conf/init-react-snippets()
+  (use-package react-snippets))
+
+(defun my-private-conf/init-flycheck-google-cpplint ())
+
+(defun my-private-conf/init-rego-mode ())
 
 ;;; packages.el ends here

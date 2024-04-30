@@ -48,6 +48,8 @@ This function should only modify configuration layer settings."
 
      log
 
+     ;; kubernetes
+
      (sql
       :variables
       sql-backend 'lsp
@@ -233,27 +235,6 @@ This function should only modify configuration layer settings."
                                       ;;          (recipe
                                       ;;           :fetcher github
                                       ;;           :repo "syohex/emacs-go-impl"))
-                                      ;; coverage ;; add in-buffer test coverage for golang
-                                      ;; Install logview mode
-                                      ;; (logview :location
-                                      ;;          (recipe
-                                      ;;           :fetcher github
-                                      ;;           :repo "doublep/logview"))
-                                      ;; (bitbake :location
-                                      ;;          (recipe
-                                      ;;               :fetcher github
-                                      ;;               :repo "canatella/bitbake-el"))
-                                      ;; ox-jira
-                                      ;;
-                                      ;; K8s mode
-                                      (k8s-mode :location
-                                                (recipe
-                                                 :fetcher github
-                                                 :repo "TxGVNN/emacs-k8s-mode"))
-                                      (flycheck-google-cpplint :location
-                                                               (recipe
-                                                                :fetcher github
-                                                                :repo "flycheck/flycheck-google-cpplint"))
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -445,7 +426,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font or prioritized list of fonts.
    dotspacemacs-default-font '(
                                ("FiraCode Nerd Font"
-                                :size 16
+                                :size 20
                                 :weight normal
                                 :width normal)
                                ;; ("Cascadia Code"
