@@ -121,11 +121,9 @@ Each entry is either:
 (defun my-private-conf/init-flyspell ()
   (spell-checking/add-flyspell-hook 'git-conventional-commit-mode-hook))
 
-(defun my-private-conf/init-k8s-mode ()
-  (use-package k8s-mode))
+(defun my-private-conf/init-k8s-mode ())
 
-(defun my-private-conf/init-react-snippets()
-  (use-package react-snippets))
+(defun my-private-conf/init-react-snippets())
 
 (defun my-private-conf/init-flycheck-google-cpplint ())
 
