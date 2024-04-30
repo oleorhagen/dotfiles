@@ -1,0 +1,119 @@
+{
+    "$schema": "https://lnav.org/schemas/format-v1.schema.json",
+    "mimiro_events_log": {
+        "title": "Mimiro Events Log",
+        "description": "Format for the log of Mimiro k8s zerolog events",
+        "file-type": "json",
+        "json": true,
+        "timestamp-field": "ts",
+        "timestamp-divisor": 1000,
+        "level-field": "level",
+        "body-field": "msg",
+        "ordered-by-time": true,
+        "line-format": [
+            {
+                "field": "__timestamp__"
+            },
+            " | ",
+            {
+                "field": "level"
+            },
+            " | ",
+            {
+                "prefix": "'",
+                "suffix": "'",
+                "field": "msg",
+                "default-value": ""
+            },
+            " | ",
+            {
+                "prefix": "source: ",
+                "field": "source"
+            },
+            " | ",
+            {
+                "prefix": "logger: ",
+                "field": "logger"
+            },
+            " | ",
+            {
+                "prefix": "service: ",
+                "field": "service"
+            },
+            " | ",
+            {
+                "prefix": "name: ",
+                "field": "name"
+            },
+            " | ",
+            {
+                "prefix": "caller: ",
+                "field": "caller"
+            },
+            " | ",
+            {
+                "prefix": "duration: ",
+                "field": "duration"
+            },
+            " | ",
+            {
+                "prefix": "request: ",
+                "field": "request"
+            },
+            {
+                "prefix": "status: ",
+                "field": "status"
+            },
+          " | ",
+          {
+            "prefix": "user-agent: ",
+            "field": "user_agent"
+          },
+          " | ",
+          {
+            "prefix": "size: ",
+            "field": "size"
+          }
+
+        ],
+        "value": {
+            "msg": {
+                "kind": "string"
+            },
+            "source": {
+                "kind": "string"
+            },
+            "logger": {
+                "kind": "string"
+            },
+            "service": {
+                "kind": "string"
+            },
+            "name": {
+                "kind": "string"
+            },
+            "caller": {
+                "kind": "string"
+            },
+            "duration": {
+                "kind": "float"
+            },
+            "request": {
+                "kind": "string"
+            },
+            "status": {
+                "kind": "integer"
+            },
+          "user_agent": {
+            "kind": "string"
+          },
+          "size": {
+            "kind": "integer"
+          }
+        },
+        "sample": [{
+            "line": "{\"level\":\"warning\",\"service\":\"mimiro-web-auth\",\"source\":\"go\",\"name\":\"AccountSync\",\"ts\":1714226400423,\"caller\":\"account_sync.go:47\",\"ts\":1714226400423,\"msg\":\"failed to get identity for cd90bf0f-c328-4918-a538-7e7a8f1df906\"}",
+            "level": "warning"
+        }]
+    }
+}
