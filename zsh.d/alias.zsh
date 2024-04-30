@@ -100,3 +100,6 @@ alias fuck='sudo !!'
 
 # 1337 echo
 alias 3cho='echo'
+
+# Cal start on monday
+alias cal="cal --monday"
