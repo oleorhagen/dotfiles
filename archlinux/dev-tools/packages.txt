@@ -80,6 +80,7 @@ bc # calculator
 file # list file type from magic number
 pup # htlmq
 yamllint
+lnav # log file viewer
 
 # bluetooth
 bluez
