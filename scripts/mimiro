@@ -124,26 +124,29 @@ local)
 		;;
 	esac
 	;;
+secret)
+	aws ssm get-parameter --name ${args[1]} --with-decrypt | jq --raw-output .Parameter.Value
+	;;
 esac
 
-if [[ ${args[0]} == "dev" ]]; then
-	if [[ ${args[1]} == "db" ]]; then
-		data="$(aws-vault exec Developer@OpenFarmDev -- aws ssm get-parameters \
-			--names \
-			/application/openfarm-aurora-cluster/db/mimiro_web_authadmin-password \
-			/application/openfarm-aurora-cluster/db/mimiro_web_authadmin-username \
-			/shared/aurora-cluster/db/url \
-			--with-decryption)"
-		[[ -z "${data}" ]] && {
-			echo "Failed to retrieve the data"
-			exit 1
-		}
-		host="$(echo $data | jq --raw-output '.Parameters.[2].Value')"
-		username="$(echo $data | jq --raw-output '.Parameters.[1].Value')"
-		pwd="$(echo $data | jq --raw-output '.Parameters.[0].Value')"
-		PGPASSWORD="${pwd}" psql --host="${host}" --username="${username}" --dbname=postgres
-	fi
-fi
+# if [[ ${args[0]} == "dev" ]]; then
+# 	if [[ ${args[1]} == "db" ]]; then
+# 		data="$(aws-vault exec Developer@OpenFarmDev -- aws ssm get-parameters \
+# 			--names \
+# 			/application/openfarm-aurora-cluster/db/mimiro_web_authadmin-password \
+# 			/application/openfarm-aurora-cluster/db/mimiro_web_authadmin-username \
+# 			/shared/aurora-cluster/db/url \
+# 			--with-decryption)"
+# 		[[ -z "${data}" ]] && {
+# 			echo "Failed to retrieve the data"
+# 			exit 1
+# 		}
+# 		host="$(echo $data | jq --raw-output '.Parameters.[2].Value')"
+# 		username="$(echo $data | jq --raw-output '.Parameters.[1].Value')"
+# 		pwd="$(echo $data | jq --raw-output '.Parameters.[0].Value')"
+# 		PGPASSWORD="${pwd}" psql --host="${host}" --username="${username}" --dbname=postgres
+# 	fi
+# fi
 
 msg "${RED}Read parameters:${NOFORMAT}"
 msg "- flag: ${flag}"
