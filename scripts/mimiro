@@ -125,7 +125,7 @@ local)
 	esac
 	;;
 secret)
-	aws ssm get-parameter --name ${args[1]} --with-decrypt | jq --raw-output .Parameter.Value
+	aws-vault exec Developer@OpenFarmDev -- aws ssm get-parameter --name ${args[1]} --with-decrypt | jq --raw-output .Parameter.Value
 	;;
 esac
 
@@ -148,7 +148,7 @@ esac
 # 	fi
 # fi
 
-msg "${RED}Read parameters:${NOFORMAT}"
-msg "- flag: ${flag}"
-msg "- param: ${param}"
-msg "- arguments: ${args[*]-}"
+#msg "${RED}Read parameters:${NOFORMAT}"
+#msg "- flag: ${flag}"
+#msg "- param: ${param}"
+#msg "- arguments: ${args[*]-}"
