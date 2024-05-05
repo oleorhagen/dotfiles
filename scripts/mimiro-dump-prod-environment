@@ -1,0 +1,46 @@
+#! /usr/bin/env bash
+#
+
+# Check for correct number of arguments
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <namespace> <pod>"
+    exit 1
+fi
+
+NAMESPACE="$1"
+POD_NAME="$2"
+
+# Get env variables set directly in the pod spec
+echo "# Direct Environment Variables:"
+kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.spec.containers[*].env}' | \
+jq -r '.[] | "\(.name)=\"\(.value)\""'
+
+# Get ConfigMap names and keys used in the pod
+CONFIGMAPS=$(kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.spec.containers[*].envFrom[*].configMapRef.name}')
+if [ ! -z "$CONFIGMAPS" ]; then
+    echo -e "\n# ConfigMap Environment Variables:"
+    echo "$CONFIGMAPS" | tr ' ' '\n' | while read CM; do
+        if [ ! -z "$CM" ]; then
+            echo "# ConfigMap: $CM"
+            kubectl get configmap "$CM" -n $NAMESPACE -o jsonpath='{.data}' | \
+            jq -r 'to_entries|map("\(.key)=\"\(.value)\"")|.[]'
+        fi
+    done
+else
+    echo -e "\nNo ConfigMaps found."
+fi
+
+# Get Secret names and keys used in the pod
+echo -e "\n# Secret Environment Variables:"
+SECRET_NAMES=$(kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.spec.containers[*].envFrom[*].secretRef.name}' | xargs -n1 | sort -u)
+if [ ! -z "$SECRET_NAMES" ]; then
+    echo "$SECRET_NAMES" | while read SECRET_NAME; do
+        if [ ! -z "$SECRET_NAME" ]; then
+            echo "# Secret: $SECRET_NAME"
+            kubectl get secret "$SECRET_NAME" -n $NAMESPACE -o jsonpath='{.data}' | \
+            jq -r 'to_entries|map("\(.key)=\"\(.value|@base64d)\"")|.[]'
+        fi
+    done
+else
+    echo "No Secrets found."
+fi
