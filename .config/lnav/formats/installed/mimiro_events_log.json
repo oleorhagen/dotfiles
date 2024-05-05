@@ -10,8 +10,7 @@
         "level-field": "level",
         "body-field": "msg",
         "ordered-by-time": true,
-        "line-format": [
-            {
+        "line-format": [{
                 "field": "__timestamp__"
             },
             " | ",
@@ -24,6 +23,11 @@
                 "suffix": "'",
                 "field": "msg",
                 "default-value": ""
+            },
+            " | ",
+            {
+                "prefix: ": "function: ",
+                "field": "function"
             },
             " | ",
             {
@@ -64,16 +68,16 @@
                 "prefix": "status: ",
                 "field": "status"
             },
-          " | ",
-          {
-            "prefix": "user-agent: ",
-            "field": "user_agent"
-          },
-          " | ",
-          {
-            "prefix": "size: ",
-            "field": "size"
-          }
+            " | ",
+            {
+                "prefix": "user-agent: ",
+                "field": "user_agent"
+            },
+            " | ",
+            {
+                "prefix": "size: ",
+                "field": "size"
+            }
 
         ],
         "value": {
@@ -104,12 +108,16 @@
             "status": {
                 "kind": "integer"
             },
-          "user_agent": {
-            "kind": "string"
-          },
-          "size": {
-            "kind": "integer"
-          }
+            "user_agent": {
+                "kind": "string"
+            },
+            "size": {
+                "kind": "integer"
+            },
+            "function": {
+                "kind": "string"
+            }
+
         },
         "sample": [{
             "line": "{\"level\":\"warning\",\"service\":\"mimiro-web-auth\",\"source\":\"go\",\"name\":\"AccountSync\",\"ts\":1714226400423,\"caller\":\"account_sync.go:47\",\"ts\":1714226400423,\"msg\":\"failed to get identity for cd90bf0f-c328-4918-a538-7e7a8f1df906\"}",
