@@ -19,6 +19,7 @@ vim
 ## Editor tooling
 ### LSPs
 yaml-language-server
+sql-language-server
 bash-language-server
 clang # C/C++
 gopls # GOlang
@@ -28,6 +29,9 @@ vscode-html-languageserver # HTML
 vscode-css-languageserver # CSS
 vscode-markdown-languageserver # Markdown
 
+# formatters
+sql-formatter
+prettier # JS
 
 # arch linux AUR manager
 yay
