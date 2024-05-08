@@ -118,3 +118,7 @@ This is intended to be added to `post-command-hook'."
 
 ;; Add the hook to post-insert hook
 ;; (add-hook 'post-command-hook #'yas-try-expanding-auto-snippets )
+
+(add-hook 'yaml-mode-hook
+          (lambda ()
+            (indent-guide-mode)))
