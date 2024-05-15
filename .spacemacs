@@ -55,7 +55,7 @@ This function should only modify configuration layer settings."
       sql-backend 'lsp
       sql-lsp-sqls-workspace-config-path 'workspace
       sql-capitalize-keywords t
-      sql-auto-indent t
+      sql-auto-indent nil
       )
 
      ;; For changing the buffer format (hopefully)
@@ -874,6 +874,7 @@ you should place your code here."
     '(progn
        (require 'flycheck-google-cpplint))
     )
+
   (add-hook 'c++-mode-hook
             (lambda ()
               (message "C++ inintialisation hook...")

@@ -36,6 +36,8 @@
     ;; (md-to-jira-mode :location local)
     (git-conventional-commit-mode :location local)
 
+    (go-tagalign-fmt :location local)
+
     ;; Treesitter-mode
     devicetree-ts-mode
 
@@ -69,6 +71,19 @@
       :fetcher github
       :repo "psibi/rego-mode"))
 
+    ;; We do not want this mode - Use sqlformat instead
+    (sqlfmt-mode
+     :excluded t)
+
+    (sqlformat
+     :init
+     ;; (setq sqlformat-command 'pgformatter)
+     ;; (setq sqlformat-command 'sqlfmt)
+     :location
+     (recipe
+      :fetcher github
+      :repo github.com/purcell/sqlformat))
+
     ;; TODO - CPP-insights mode
 
     (flycheck-google-cpplint
@@ -77,9 +92,8 @@
      (recipe
       :fetcher github
       :repo "flycheck/flycheck-google-cpplint"))
-
-
     )
+
   "The list of Lisp packages required by the my-private-conf layer.
 
 Each entry is either:
@@ -109,7 +123,7 @@ Each entry is either:
 
 
 (defun my-private-conf/init-git-conventional-commit-mode ()
-   (use-package git-conventional-commit-mode))
+  (use-package git-conventional-commit-mode))
 
 
 ;;
@@ -128,5 +142,27 @@ Each entry is either:
 (defun my-private-conf/init-flycheck-google-cpplint ())
 
 (defun my-private-conf/init-rego-mode ())
+
+(defun my-private-conf/init-sqlformat ()
+  (use-package sqlformat
+    :commands sqlformat-buffer
+    :init
+     (setq sqlformat-command 'sqlfmt)
+    (spacemacs/declare-prefix-for-mode 'sql-mode "m=" "formatting")
+    (spacemacs/set-leader-keys-for-major-mode 'sql-mode
+      "=r" 'sqlformat-region
+      "==" 'sqlformat-buffer)))
+
+;;; TODO - Tagalign does not accept stdin input atm, only takes package
+;; (defun my-private-conf/init-go-tagalign-fmt ()
+;;   (use-package go-tagalign-fmt
+;;     :init
+;;     )
+;;   )
+
+
+;;; TODO - Add pgformatter to post-init-sqlfmt setup
+;; -- (setq sqlformat-command 'pgformatter)
+;; -- (setq sqlformat-args '("-s2" "-g"))
 
 ;;; packages.el ends here
