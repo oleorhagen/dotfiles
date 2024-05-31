@@ -7,6 +7,13 @@ set searchurls.ms https://github.com/mendersoftware/%s
 set searchurls.qa https://northerntech.atlassian.net/browse/QA-%s
 set searchurls.gl https://gitlab.com/Northern.tech/Mender/%s
 
+
+#
+# Mimiro config
+#
+set searchurls.auth https://github.com/mimiro-io/mimiri-web-auth
+set searchurls.moo  https://github.com/mimiro-io/eana360-moo-cli
+
 # open phrasebook [fr|de|la|es|hi|it...]
 set searchurls.phrasebook https://translate.google.co.uk/#en/%s/my%20hovercraft%20is%20full%20of%20eels
 
