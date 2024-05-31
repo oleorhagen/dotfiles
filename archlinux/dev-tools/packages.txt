@@ -98,3 +98,8 @@ google-chrome
 cmake
 llvm # Compiler toolchain
 python-cpplint
+
+# Debugging
+strace
+wireshark-cli
+wireshark-qt
