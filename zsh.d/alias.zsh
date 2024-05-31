@@ -106,3 +106,6 @@ alias cal="cal --monday"
 
 # Hackeriet password store alias
 alias hackerpass='PASSWORD_STORE_DIR="$HOME/.hackeriet_pass" pass'
+
+# Edit moo config
+alias mooconf="vim ~/.moo/config.hcl"
