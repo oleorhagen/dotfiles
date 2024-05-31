@@ -54,7 +54,7 @@ This function should only modify configuration layer settings."
       :variables
       sql-backend 'lsp
       sql-lsp-sqls-workspace-config-path 'workspace
-      sql-capitalize-keywords t
+      sql-capitalize-keywords nil
       sql-auto-indent nil
       )
 
