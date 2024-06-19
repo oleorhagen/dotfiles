@@ -22,3 +22,11 @@
 ;;                   (update-license-year))))))
 
 
+(defun my-switch-to-prod-file ()
+  "Switch to prod version of the k8s file if it exists"
+  (interactive)
+  (let ((current-buffer-name (buffer-file-name))
+        (other-file-name ""))
+    (cond
+      ((string-match ".*/prod/.*" current-buffer-name) (find-file (string-replace "prod" "dev" current-buffer-name) ))
+      ((string-match ".*/dev/.*" current-buffer-name) (find-file (string-replace "dev" "prod" current-buffer-name) )))))
