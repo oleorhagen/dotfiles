@@ -103,7 +103,7 @@ function connect_to_dev_db() {
 	host="$(echo $data | jq --raw-output '.Parameters.[2].Value')"
 	username="$(echo $data | jq --raw-output '.Parameters.[1].Value')"
 	pwd="$(echo $data | jq --raw-output '.Parameters.[0].Value')"
-	PGPASSWORD="${pwd}" psql --host="${host}" --username="${username}" --dbname=postgres
+	PGPASSWORD="${pwd}" psql --host="${host}" --username="${username}" --dbname=mimiro_web_auth
 }
 
 [[ ${#args[@]} == 2 ]] || usage
