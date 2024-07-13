@@ -147,7 +147,7 @@ Each entry is either:
   (use-package sqlformat
     :commands sqlformat-buffer
     :init
-     (setq sqlformat-command 'sqlfmt)
+    (setq sqlformat-command 'sqlfmt)
     (spacemacs/declare-prefix-for-mode 'sql-mode "m=" "formatting")
     (spacemacs/set-leader-keys-for-major-mode 'sql-mode
       "=r" 'sqlformat-region

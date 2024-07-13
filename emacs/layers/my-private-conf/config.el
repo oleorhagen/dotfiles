@@ -1,4 +1,3 @@
-
 ;; Treesitter language source list
 (setq treesit-language-source-alist
       '((bash       "https://github.com/tree-sitter/tree-sitter-bash")
@@ -72,49 +71,11 @@
 ;; CFEngine3 mode indentation
 (customize-set-variable 'cfengine-indent 0) ;; 0 - column indent is required according to their spec
 
-
-;; (defun yas-try-expanding-auto-snippets ()
-;;   "Expand snippets with the `auto' condition.
-;; This is intended to be added to `post-command-hook'."
-;;   (when (bound-and-true-p yas-minor-mode)
-;;     (let ((yas-buffer-local-condition ''(require-snippet-condition . auto)))
-;;       (yas-expand))))
-;;; Inspired by the above
 (defun yas-try-expanding-auto-snippets ()
   "Expand snippets automatically if starting a command with (,) comma.
 This is intended to be added to `post-command-hook'."
   (when (bound-and-true-p yas-minor-mode)
     (yas-expand)))
-
-
-
-;; save-restriction
-;; narrow-to-region
-;; (looking-back "\\b,\\w+" (point))
-
-;; (let (
-;;       (mw (current-word))
-;;       )
-;;   (message current-word)
-;;   (when (s-starts-with-p "," mw)
-;;     (yas-expand)))
-
-(defun my-test-expand ()
-  (interactive)
-  (message (current-word))
-  (let ( (mbyword (current-word)) )
-    (message mbyword)
-    (when (s-starts-with-p "," mbyword)
-      (message "yayy"))
-    )
-  )
-
-(defun my-test-looking-back ()
-  "docstring"
-  (interactive "P")
-  (looking-back )
-  )
-
 
 ;; Add the hook to post-insert hook
 ;; (add-hook 'post-command-hook #'yas-try-expanding-auto-snippets )
@@ -122,3 +83,17 @@ This is intended to be added to `post-command-hook'."
 (add-hook 'yaml-mode-hook
           (lambda ()
             (indent-guide-mode)))
+
+;;; Add the ruff linter as next after lsp
+(add-hook 'python-mode-hook
+          (lambda ()
+            (flycheck-add-next-checker 'lsp 'python-ruff)))
+
+;;; Make return follow link in info-mode
+(add-hook 'Info-mode-hook
+          (lambda ()
+            (define-key evil-motion-state-local-map
+                        (kbd "<return>") 'Info-follow-nearest-node)
+            (define-key evil-motion-state-local-map (kbd "n") 'Info-next)
+            (define-key evil-motion-state-local-map (kbd "H") 'Info-prev)
+            (define-key evil-motion-state-local-map (kbd "L") 'Info-next)))

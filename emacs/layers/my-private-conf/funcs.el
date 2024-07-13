@@ -1,4 +1,3 @@
-
 ;;
 ;;; This is a simple snippet to replace the license year header with the current
 ;;; year (EOL) - we no longer update the year of the License Header
@@ -25,8 +24,17 @@
 (defun my-switch-to-prod-file ()
   "Switch to prod version of the k8s file if it exists"
   (interactive)
-  (let ((current-buffer-name (buffer-file-name))
-        (other-file-name ""))
+  (let ((current-buffer-name (buffer-file-name)))
     (cond
-      ((string-match ".*/prod/.*" current-buffer-name) (find-file (string-replace "prod" "dev" current-buffer-name) ))
-      ((string-match ".*/dev/.*" current-buffer-name) (find-file (string-replace "dev" "prod" current-buffer-name) )))))
+     ((string-match ".*/prod/.*" current-buffer-name) (find-file (string-replace "prod" "dev" current-buffer-name) ))
+     ((string-match ".*/dev/.*" current-buffer-name) (find-file (string-replace "dev" "prod" current-buffer-name) )))))
+
+(defun advice-projectile-toggle (orig-func &rest args)
+  (interactive)
+  (if (symbolp 'in-k8s-repo)
+      (apply 'my-switch-to-prod-file nil)
+    (apply 'orig-func args)))
+
+;; "Adviced to change folders from prod <-> dev in k8s-flux repo (mimiro)"
+(advice-add 'projectile-toggle-between-implementation-and-test :around
+            #'advice-projectile-toggle)
