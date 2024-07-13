@@ -31,13 +31,17 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '("~/.layers/")
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(markdown
-     markdown
+   '(
+
+
+
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+
+     markdown
 
      ;; My private display package from ~/.layers
      ;; display
@@ -110,7 +114,7 @@ This function should only modify configuration layer settings."
 
      debug
      (latex :variables
-      latex-build-command "LaTeX")
+            latex-build-command "LaTeX")
      ;; ess ;; Layer for R statistical computing
      ;; erlang
      helm
@@ -154,12 +158,12 @@ This function should only modify configuration layer settings."
      ;; ;; The go-layer needs the auto-completion and syntax-checking layers
      ;; ;; TODO - add gotests function wrappers to the go-mode https://github.com/cweill/gotests
      (go :variables
-            go-format-before-save t
-            gofmt-command "goimports"
-            gofmt-args '("-local=github.com/mimiro-io")
-            go-use-golangci-lint t
-            gofmt-show-errors nil ;; errors are already shown by flycheck
-            godoc-at-point-function 'godoc-gogetdoc)
+         go-format-before-save t
+         gofmt-command "goimports"
+         gofmt-args '("-local=github.com/mimiro-io")
+         go-use-golangci-lint t
+         gofmt-show-errors nil ;; errors are already shown by flycheck
+         godoc-at-point-function 'godoc-gogetdoc)
      ;; Debugging
      (auto-completion :variables
                       auto-completion-return-key-behavior 'complete
@@ -189,8 +193,9 @@ This function should only modify configuration layer settings."
              python-lsp-server 'pyright
              python-pytest-runner 'pytest
              python-formatter 'black
+             pyton-sort-imports-on-save t
              python-enable-yapf-format-on-save nil
-             pyton-sort-imports-on-save t)
+             )
      ;; ;; (python :variables
      ;; ;;         python-backend 'anaconda
      ;; ;;         python-test-runner 'pytest
@@ -231,6 +236,7 @@ This function should only modify configuration layer settings."
                                       ;; ;; (coverage :location (recipe :fetcher github :repo "google/coverage"))
                                       ;;; Snippets for react when developing UI's
                                       (react-snippets)
+                                      (catppuccin-theme)
                                       ;; (go-impl :location
                                       ;;          (recipe
                                       ;;           :fetcher github
@@ -725,7 +731,7 @@ default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
   (spacemacs/load-spacemacs-env)
-)
+  )
 
 (defun dotspacemacs/user-init ()
   "Initialization for user code:
@@ -733,7 +739,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-)
+  )
 
 
 (defun dotspacemacs/user-load ()
@@ -741,7 +747,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-)
+  )
 
 
 (defun dotspacemacs/user-config ()
@@ -767,7 +773,7 @@ you should place your code here."
 
   ;; Set a random theme on startup
   (defun random-list-element (arg-list)
-	  (nth (random (length arg-list)) arg-list))
+    (nth (random (length arg-list)) arg-list))
   (spacemacs/load-theme (random-list-element  dotspacemacs-themes))
 
   ;; No smartparens plz
@@ -967,25 +973,25 @@ you should place your code here."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ignored-local-variable-values '((eval add-hook 'before-save-hook 'time-stamp)))
- '(org-agenda-files '("/home/olepor/Documents/journal/20230720"))
- '(package-selected-packages
-   '(devicetree-ts-mode dts-mode ccls cmake-mode lsp-docker doom-modeline nerd-icons flycheck-google-cpplint magit transient helm-ls-git helm helm-core hl-todo logview consult lsp-origami lsp-mode treemacs markdown-mode org-modern org-projectile org-project-capture org-category-capture yasnippet-snippets evil yapfify ws-butler writeroom-mode winum which-key wfnames web-mode web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen unicode-fonts undo-tree treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org term-cursor tagedit symon symbol-overlay string-inflection string-edit-at-point sqlup-mode sql-indent sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smeargle slim-mode shrink-path shfmt scss-mode sass-mode rjsx-mode restart-emacs realgud react-snippets rainbow-delimiters quickrun pytest pylookup pyenv-mode pydoc py-isort pug-mode prettier-js popwin poetry pippel pipenv pip-requirements pcre2el password-generator paradox pandoc-mode ox-pandoc ox-hugo ox-gfm overseer origami orgit-forge org-superstar org-rich-yank org-present org-pomodoro org-mime org-journal org-download org-contrib org-cliplink open-junk-file ob-cfengine3 npm-mode nose nodejs-repl nameless mustache-mode multi-line mmm-mode markdown-toc magit-section macrostep lsp-ui lsp-python-ms lsp-pyright lsp-latex lorem-ipsum livid-mode live-py-mode link-hint ligature k8s-mode json-reformat json-navigator json-mode js2-refactor js-doc inspector insert-shebang info+ indent-guide importmagic import-js impatient-mode hybrid-mode hungry-delete holy-mode highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-git-grep helm-descbinds helm-ctest helm-css-scss helm-company helm-c-yasnippet helm-ag goto-chg google-translate google-c-style golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link git-commit gh-md gendoxy fuzzy flyspell-correct-helm flycheck-ycmd flycheck-rtags flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flycheck-bashate flx-ido fish-mode fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-tex evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu ess-R-data-view emr emmet-mode elisp-slime-nav elisp-def ein editorconfig dumb-jump drag-stuff dotenv-mode dockerfile-mode docker disaster dired-quick-sort diminish devdocs define-word datetime dap-mode cython-mode cpp-auto-include company-ycmd company-web company-shell company-rtags company-reftex company-math company-go company-c-headers company-auctex company-anaconda column-enforce-mode code-cells clean-aindent-mode cfrs centered-cursor-mode blacken auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile all-the-icons aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell))
- '(safe-local-variable-values
-   '((flycheck-googlelint-filter "-whitespace,+whitespace/braces")
-     (flycheck-checker . c/c++-googlelint)
-     (javascript-backend . tide)
-     (javascript-backend . tern)
-     (javascript-backend . lsp))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(ignored-local-variable-values '((eval add-hook 'before-save-hook 'time-stamp)))
+   '(org-agenda-files '("/home/olepor/Documents/journal/20230720"))
+   '(package-selected-packages
+     '(devicetree-ts-mode dts-mode ccls cmake-mode lsp-docker doom-modeline nerd-icons flycheck-google-cpplint magit transient helm-ls-git helm helm-core hl-todo logview consult lsp-origami lsp-mode treemacs markdown-mode org-modern org-projectile org-project-capture org-category-capture yasnippet-snippets evil yapfify ws-butler writeroom-mode winum which-key wfnames web-mode web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen unicode-fonts undo-tree treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org term-cursor tagedit symon symbol-overlay string-inflection string-edit-at-point sqlup-mode sql-indent sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smeargle slim-mode shrink-path shfmt scss-mode sass-mode rjsx-mode restart-emacs realgud react-snippets rainbow-delimiters quickrun pytest pylookup pyenv-mode pydoc py-isort pug-mode prettier-js popwin poetry pippel pipenv pip-requirements pcre2el password-generator paradox pandoc-mode ox-pandoc ox-hugo ox-gfm overseer origami orgit-forge org-superstar org-rich-yank org-present org-pomodoro org-mime org-journal org-download org-contrib org-cliplink open-junk-file ob-cfengine3 npm-mode nose nodejs-repl nameless mustache-mode multi-line mmm-mode markdown-toc magit-section macrostep lsp-ui lsp-python-ms lsp-pyright lsp-latex lorem-ipsum livid-mode live-py-mode link-hint ligature k8s-mode json-reformat json-navigator json-mode js2-refactor js-doc inspector insert-shebang info+ indent-guide importmagic import-js impatient-mode hybrid-mode hungry-delete holy-mode highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-git-grep helm-descbinds helm-ctest helm-css-scss helm-company helm-c-yasnippet helm-ag goto-chg google-translate google-c-style golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link git-commit gh-md gendoxy fuzzy flyspell-correct-helm flycheck-ycmd flycheck-rtags flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flycheck-bashate flx-ido fish-mode fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-tex evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu ess-R-data-view emr emmet-mode elisp-slime-nav elisp-def ein editorconfig dumb-jump drag-stuff dotenv-mode dockerfile-mode docker disaster dired-quick-sort diminish devdocs define-word datetime dap-mode cython-mode cpp-auto-include company-ycmd company-web company-shell company-rtags company-reftex company-math company-go company-c-headers company-auctex company-anaconda column-enforce-mode code-cells clean-aindent-mode cfrs centered-cursor-mode blacken auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile all-the-icons aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell))
+   '(safe-local-variable-values
+     '((flycheck-googlelint-filter "-whitespace,+whitespace/braces")
+       (flycheck-checker . c/c++-googlelint)
+       (javascript-backend . tide)
+       (javascript-backend . tern)
+       (javascript-backend . lsp))))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
+  )
