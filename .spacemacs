@@ -341,7 +341,13 @@ It should only modify the values of Spacemacs settings."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style '(vim :variables
+                                    vim-style-visual-feedback t
+                                    vim-style-remap-Y-to-y$ t
+                                    vim-style-retain-visual-state-on-shift t
+                                    vim-style-visual-line-move-text t
+                                    vim-style-ex-substitute-global t)
+
 
    ;; If non-nil show the version string in the Spacemacs buffer. It will
    ;; appear as (spacemacs version)@(emacs version)
