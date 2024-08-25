@@ -30,10 +30,11 @@
      ((string-match ".*/dev/.*" current-buffer-name) (find-file (string-replace "dev" "prod" current-buffer-name) )))))
 
 (defun advice-projectile-toggle (orig-func &rest args)
+  "Advice function for running another function when 'in-k8s-repo' is defined"
   (interactive)
-  (if (symbolp 'in-k8s-repo)
+  (if (boundp 'in-k8s-repo)
       (apply 'my-switch-to-prod-file nil)
-    (apply 'orig-func args)))
+    (apply orig-func args)))
 
 ;; "Adviced to change folders from prod <-> dev in k8s-flux repo (mimiro)"
 (advice-add 'projectile-toggle-between-implementation-and-test :around
