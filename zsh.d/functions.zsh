@@ -357,3 +357,9 @@ function battery() {
 function mimiro_vpn () {
     /opt/awsvpnclient/AWS VPN Client &
 }
+
+function docker_rm_containers () {
+    local -r _containters="$(docker ps -aq)"
+    docker stop "${_containers}"
+    docker rm "${_containers}"
+}
