@@ -115,3 +115,6 @@ alias ko="KUBECONFIG=/home/olepor/.kube/k3s-orhagen.yaml kubectl"
 
 # hackeriet hackerpass
 alias hackerpass='PASSWORD_STORE_DIR="$HOME/.hackeriet_pass" pass'
+
+# Stop and remove all running docker containers
+alias dsr='docker stop $(docker ps -aq) && docker rm $(docker ps -aq)'
