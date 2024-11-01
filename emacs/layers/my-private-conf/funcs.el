@@ -29,12 +29,22 @@
      ((string-match ".*/prod/.*" current-buffer-name) (find-file (string-replace "prod" "dev" current-buffer-name) ))
      ((string-match ".*/dev/.*" current-buffer-name) (find-file (string-replace "dev" "prod" current-buffer-name) )))))
 
+
+(defun my-switch-to-js-css-file ()
+  "Switch to css file if it exists"
+  (interactive)
+  (let ((current-buffer-name (buffer-file-name)))
+    (cond
+     ((string-match ".*\.js" current-buffer-name) (find-file (string-replace "js" "css" current-buffer-name) ))
+     ((string-match ".*\.css" current-buffer-name) (find-file (string-replace "css" "js" current-buffer-name) )))))
+
 (defun advice-projectile-toggle (orig-func &rest args)
   "Advice function for running another function when 'in-k8s-repo' is defined"
   (interactive)
-  (if (boundp 'in-k8s-repo)
-      (apply 'my-switch-to-prod-file nil)
-    (apply orig-func args)))
+  (cond
+   ((boundp 'in-k8s-repo) (apply 'my-switch-to-prod-file nil))
+   ((boundp 'in-js-project) (apply 'my-switch-to-prod-file nil))
+   ((apply orig-func args))))
 
 ;; "Adviced to change folders from prod <-> dev in k8s-flux repo (mimiro)"
 (advice-add 'projectile-toggle-between-implementation-and-test :around
