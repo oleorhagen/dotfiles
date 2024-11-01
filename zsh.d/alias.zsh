@@ -124,3 +124,6 @@ alias lsusb='cyme'
 
 # Alias kop (k8s for my home k8s)
 alias kop='KUBECONFIG=/home/olepor/.kube/k3s-orhagen.yaml kubectl'
+
+# Alias for login to my self-hosted postgres
+PGPASSWORD="$(pass show private/home/proxmox/postgresql-postgres-account)" psql --host orhagen.no --username postgres
