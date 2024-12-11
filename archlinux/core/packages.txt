@@ -123,3 +123,6 @@ wallutils
 # Fonts
 noto-fonts
 noto-fonts-emoji
+
+# Backups
+restic
