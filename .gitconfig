@@ -1,7 +1,16 @@
 [user]
-	email = ole.petter.orhagen@mimiro.no
+	email = ole@orhagen.no
 	name = Ole P. Orhagen
 	signingkey = 399DBE0F4D4B02EB
+
+# TODO - https://git-scm.com/docs/git-config#_includes
+# Maybe I should start using this (?)
+[includeIf "gitdir:~/mimiro-io/**"]
+  path = ~/.config/git/work
+
+[includeIf "hasconfig:remote.*.url:git@github.com:mimiro-io/**"]
+  path = ~/.config/git/work
+
 
 [sendemail]
 	smtpServer = smtp.gmail.com
