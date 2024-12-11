@@ -15,7 +15,8 @@
         "custom/emailicon",
         "custom/unreademail",
         "custom/icon-cube",
-        "custom/pacman-package-count"
+        "custom/pacman-package-count",
+        "custom/cpuinfo",
     ],
     "modules-center": ["sway/workspaces",],
     "modules-right": [
@@ -193,5 +194,10 @@
       "format": "Installed Pkgs: {}",
       "exec": "echo $( pacman -Qe | wc -l )",
       "interval": 3600
+  },
+
+  "custom/cpuinfo": {
+      "exec": "gopsuinfo -c atm",
+      "interval": 30
   }
 }

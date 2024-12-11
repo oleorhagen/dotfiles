@@ -178,3 +178,8 @@ label:focus {
     min-width: 45px;
     background: #2e3440;
 }
+
+#custom-cpuinfo {
+    min-width: 45px;
+    background: #2e3440;
+}
