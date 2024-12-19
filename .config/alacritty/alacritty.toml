@@ -1,10 +1,3 @@
-# $HOME/.config/alacritty/alacritty.toml
-# by Ole P. Orhagen
-
-import = [
-"~/.config/alacritty/alacritty-theme/themes/github_light.toml",
-#"~/.config/alacritty/keybindings.toml",
-]
 
 [window]
 opacity = 0.9
@@ -15,7 +8,7 @@ padding.y = 10
 decorations = "None" # "Full"
 decorations_theme_variant = "Light" # "Dark"
 
-[shell]
+[terminal.shell]
 program="/bin/zsh"
 args = ["--login"]
 
@@ -37,6 +30,17 @@ duration=1 # Visual bell flash in milliseconds
 
 [selection]
 save_to_clipboard=true
+
+[general]
+# $HOME/.config/alacritty/alacritty.toml
+# by Ole P. Orhagen
+
+import = [
+"~/.config/alacritty/alacritty-theme/themes/github_light.toml",
+#"~/.config/alacritty/keybindings.toml",
+]
+
+[terminal]
 
 #    [[hints.enabled]]
 #    command = "xdg-open" # On Linux/BSD

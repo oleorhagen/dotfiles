@@ -1,5 +1,5 @@
-set $term foot
-set $browser google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland
+set $term alacritty
+set $browser MOZ_ENABLE_WAYLAND=1 firefox
 set $filemanager thunar
 set $editor emacs
 set $launcher nwg-drawer
