@@ -47,6 +47,12 @@ This function should only modify configuration layer settings."
      ;; display
      my-private-conf
 
+     (terraform :variables
+                terraform-auto-format-on-save t
+                terraform-backend 'lsp)
+
+     (llm-client :variables llm-client-enable-ellama t)
+
      ;; React baby
      (react)
 
@@ -416,8 +422,11 @@ It should only modify the values of Spacemacs settings."
 
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
-   ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(misterioso
+   ;; with 2 themes variants, one dark and one light). A theme from external
+   ;; package can be defined with `:package', or a theme can be defined with
+   ;; `:location' to download the theme package, refer the themes section in
+   ;; DOCUMENTATION.org for the full theme specifications.
+   dotspacemacs-themes '(spacemacs-dark
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -523,6 +532,10 @@ It should only modify the values of Spacemacs settings."
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
+   ;; It is also possible to use a posframe with the following cons cell
+   ;; `(posframe . position)' where position can be one of `center',
+   ;; `top-center', `bottom-center', `top-left-corner', `top-right-corner',
+   ;; `top-right-corner', `bottom-left-corner' or `bottom-right-corner'
    ;; (default 'bottom)
    dotspacemacs-which-key-position 'bottom
 
@@ -532,6 +545,22 @@ It should only modify the values of Spacemacs settings."
    ;; displays the buffer in a same-purpose window even if the buffer can be
    ;; displayed in the current window. (default nil)
    dotspacemacs-switch-to-buffer-prefers-purpose nil
+
+   ;; Whether side windows (such as those created by treemacs or neotree)
+   ;; are kept or minimized by `spacemacs/toggle-maximize-window' (SPC w m).
+   ;; (default t)
+   dotspacemacs-maximize-window-keep-side-windows t
+
+   ;; If nil, no load-hints enabled. If t, enable the `load-hints' which will
+   ;; put the most likely path on the top of `load-path' to reduce walking
+   ;; through the whole `load-path'. It's an experimental feature to speedup
+   ;; Spacemacs on Windows. Refer the FAQ.org "load-hints" session for details.
+   dotspacemacs-enable-load-hints nil
+
+   ;; If t, enable the `package-quickstart' feature to avoid full package
+   ;; loading, otherwise no `package-quickstart' attemption (default nil).
+   ;; Refer the FAQ.org "package-quickstart" section for details.
+   dotspacemacs-enable-package-quickstart nil
 
    ;; If non-nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
@@ -548,8 +577,8 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
-   ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   ;; (default t) (Emacs 24.4+ only)
+   dotspacemacs-maximized-at-startup t
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' to obtain fullscreen
@@ -657,6 +686,13 @@ It should only modify the values of Spacemacs settings."
    ;; (default '("rg" "ag" "pt" "ack" "grep"))
    dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
 
+   ;; The backend used for undo/redo functionality. Possible values are
+   ;; `undo-fu', `undo-redo' and `undo-tree' see also `evil-undo-system'.
+   ;; Note that saved undo history does not get transferred when changing
+   ;; your undo system. The default is currently `undo-fu' as `undo-tree'
+   ;; is not maintained anymore and `undo-redo' is very basic."
+   dotspacemacs-undo-system 'undo-fu
+
    ;; Format specification for setting the frame title.
    ;; %a - the `abbreviated-file-name', or `buffer-name'
    ;; %t - `projectile-project-name'
@@ -692,6 +728,9 @@ It should only modify the values of Spacemacs settings."
    ;; to aggressively delete empty line and long sequences of whitespace,
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
+   ;; The variable `global-spacemacs-whitespace-cleanup-modes' controls
+   ;; which major modes have whitespace cleanup enabled or disabled
+   ;; by default.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
 
@@ -761,6 +800,15 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  ;;
+  ;;; sql-interactive-mode
+  ;; No truncate lines
+  ;;
+
+  (add-hook 'sql-interactive-mode-hook
+            (lambda ()
+              (toggle-truncate-lines t)))
 
   ;;
   ;;; Helm-projectil Make
@@ -987,12 +1035,41 @@ This function is called at the very end of Spacemacs initialization."
    '(package-selected-packages
      '(compat catppuccin-theme async bind-map lv hydra avy s dash f pythonic anaconda-mode auctex ht yasnippet spinner clang-format emacsql closql with-editor a treepy ghub deferred yaml forge emojify code-review company lua-mode company-lua math-symbol-lists rtags company-statistics web-completion-data request request-deferred epl pkg-info ycmd bui pfuture posframe lsp-treemacs disable-mouse aio tablist popup websocket anaphora polymode elisp-demos list-utils paredit projectile iedit ess ctable anzu smartparens annalist flx flycheck package-lint pos-tip flyspell-correct go-mode haml-mode helm-comint imenu-list window-purpose parent-mode htmlize simple-httpd grizzl concurrent epc js2-mode multiple-cursors json-snatcher hierarchy yaml-mode skewer-mode extmap shut-up org gntp log4e alert orgit tomelr persp-mode pyvenv load-env-vars load-relative loc-changes test-simple reformatter rego-mode powerline sqlformat tsc tree-sitter tree-sitter-langs fringe-helper ts-fold undo-fu undo-fu-session pcache persistent-soft font-utils ucs-utils vundo visual-fill-column devicetree-ts-mode dts-mode ccls cmake-mode lsp-docker doom-modeline nerd-icons flycheck-google-cpplint magit transient helm-ls-git helm helm-core hl-todo logview consult lsp-origami lsp-mode treemacs markdown-mode org-modern org-projectile org-project-capture org-category-capture yasnippet-snippets evil yapfify ws-butler writeroom-mode winum which-key wfnames web-mode web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen unicode-fonts undo-tree treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org term-cursor tagedit symon symbol-overlay string-inflection string-edit-at-point sqlup-mode sql-indent sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smeargle slim-mode shrink-path shfmt scss-mode sass-mode rjsx-mode restart-emacs realgud react-snippets rainbow-delimiters quickrun pytest pylookup pyenv-mode pydoc py-isort pug-mode prettier-js popwin poetry pippel pipenv pip-requirements pcre2el password-generator paradox pandoc-mode ox-pandoc ox-hugo ox-gfm overseer origami orgit-forge org-superstar org-rich-yank org-present org-pomodoro org-mime org-journal org-download org-contrib org-cliplink open-junk-file ob-cfengine3 npm-mode nose nodejs-repl nameless mustache-mode multi-line mmm-mode markdown-toc magit-section macrostep lsp-ui lsp-python-ms lsp-pyright lsp-latex lorem-ipsum livid-mode live-py-mode link-hint ligature k8s-mode json-reformat json-navigator json-mode js2-refactor js-doc inspector insert-shebang info+ indent-guide importmagic import-js impatient-mode hybrid-mode hungry-delete holy-mode highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-git-grep helm-descbinds helm-ctest helm-css-scss helm-company helm-c-yasnippet helm-ag goto-chg google-translate google-c-style golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link git-commit gh-md gendoxy fuzzy flyspell-correct-helm flycheck-ycmd flycheck-rtags flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flycheck-bashate flx-ido fish-mode fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-tex evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu ess-R-data-view emr emmet-mode elisp-slime-nav elisp-def ein editorconfig dumb-jump drag-stuff dotenv-mode dockerfile-mode docker disaster dired-quick-sort diminish devdocs define-word datetime dap-mode cython-mode cpp-auto-include company-ycmd company-web company-shell company-rtags company-reftex company-math company-go company-c-headers company-auctex company-anaconda column-enforce-mode code-cells clean-aindent-mode cfrs centered-cursor-mode blacken auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile all-the-icons aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell))
    '(safe-local-variable-values
-     '((in-k8s-repo . t)
+     '((sql-connection-alist quote
+                             ((golfdb
+                               (sql-product 'postgres)
+                               (sql-port 5432)
+                               (sql-server "localhost")
+                               (sql-user "postgres")
+                               (sql-database "golf_db"))
+                              (server2
+                               (sql-product 'postgres)
+                               (sql-port 5432)
+                               (sql-server "localhost")
+                               (sql-user "user")
+                               (sql-database "db2"))))
+       (in-k8s-repo . t)
        (flycheck-googlelint-filter "-whitespace,+whitespace/braces")
        (flycheck-checker . c/c++-googlelint)
        (javascript-backend . tide)
        (javascript-backend . tern)
-       (javascript-backend . lsp))))
+       (javascript-backend . lsp)))
+   '(sql-connection-alist
+     '(("golfdb"
+        (sql-product 'postgres)
+        (sql-user "postgres")
+        (sql-database "golf_db")
+        (sql-server "localhost")
+        (sql-port 5432)
+        (sql-password "password"))
+       ("golfdbconnection"
+        (sql-product 'postgres)
+        (sql-user "postgres")
+        (sql-database "golf_db")
+        (sql-server "localhost")
+        (sql-port 5432)
+        (sql-password "password")
+        ))))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.

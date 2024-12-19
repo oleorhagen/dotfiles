@@ -49,3 +49,13 @@
 ;; "Adviced to change folders from prod <-> dev in k8s-flux repo (mimiro)"
 (advice-add 'projectile-toggle-between-implementation-and-test :around
             #'advice-projectile-toggle)
+
+
+;; A simple function to copy the buffer from part I to II during AOC
+(defun my-aoc-part-ii ()
+  "Create part II from the part I buffer"
+  (interactive)
+  ;; Write the whole current buffer to part2.cpp
+  (write-region nil nil "part2.cpp")
+  (find-file "part2.cpp")
+  (save-buffer))

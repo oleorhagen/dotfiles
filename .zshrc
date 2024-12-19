@@ -149,3 +149,6 @@ source <(kubectl completion zsh)
 
 # Use starship as the prompt provider
 eval "$(starship init zsh)"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/mcli mcli
