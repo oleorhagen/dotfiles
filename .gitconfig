@@ -3,6 +3,9 @@
 	name = Ole P. Orhagen
 	signingkey = 399DBE0F4D4B02EB
 
+[commit]
+  gpgsign = true
+
 # TODO - https://git-scm.com/docs/git-config#_includes
 # Maybe I should start using this (?)
 [includeIf "gitdir:~/mimiro-io/**"]
@@ -39,15 +42,19 @@
 
 [color]
 	ui = auto
+
 [github]
 	oauth-token = 5f9db8b96623a199d3c30afaddbcc00f7418dac8
 	user = oleorhagen
+
 [commit]
 	gpgsign = true
 	template = /home/olepor/.files/git-commit-template.txt
+
 [core]
 	editor = vim
 	excludesFile = ~/.gitignore
+
 [init]
 	templatedir = ~/.git_templates/template
 
@@ -55,6 +62,7 @@
 	#fetch = +refs/pull/*/head:refs/remotes/mendersoftware/pr/*
 [mailmap]
 	file = /home/olepor/release/3.3.0/integration/extra/gitdm/mailmap
+
 [gpg]
 	program = gpg2
 
