@@ -805,7 +805,6 @@ you should place your code here."
   ;;; sql-interactive-mode
   ;; No truncate lines
   ;;
-
   (add-hook 'sql-interactive-mode-hook
             (lambda ()
               (toggle-truncate-lines t)))
@@ -820,6 +819,7 @@ you should place your code here."
 
   ;; C++ (Mender) State-machine alignment hack
   (defun align-statemachine-states (start end)
+    "Align the states in the Mender client statemachine"
     (interactive "r\n")
     (align-regexp start end ",\\(\\s-*\\)[a-z_.]+" 1 2 t))
 
@@ -832,9 +832,9 @@ you should place your code here."
   (spacemacs/toggle-smartparens-globally-off)
 
   ;; modify the misterioso background-color for line-highlight
-  (custom-theme-set-faces
-   'misterioso
-   '(hl-line ((t (:background "#292b2e")))))
+  ;; (custom-theme-set-faces
+  ;;  'misterioso
+  ;;  '(hl-line ((t (:background "#292b2e")))))
 
   ;; evaluate sexpressions with ee
   (spacemacs/set-leader-keys
@@ -850,19 +850,6 @@ you should place your code here."
   (spacemacs/set-leader-keys
     "os" 'yas-describe-tables)
 
-  ;; ------ Go-Coverage ---------- TODO; Not working atm
-  ;; (add-to-list 'load-path "~/.emacs.d/private/local/coverage/")
-  ;; (require 'coverage)
-  ;; TODO - why is this not set with package macro in (go :variables ?)
-
-  ;; ;; bind keys for the github.com/google/coverage code coverage for go in buffer package
-  ;; (spacemacs/set-leader-keys
-  ;;   "cg" 'cov-gen ;; runs compilation that generates coverage profile for the
-  ;;   ;;           file. Compilation hooks refresh all affected buffers.)
-  ;;   "cs" 'cov-show
-  ;;   "ch" 'cov-hide
-  ;;   )
-
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;;; Evil fix, for key consistency
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -877,41 +864,6 @@ you should place your code here."
 
   ;; (setq sh-basic-offset 2)
 
-
-  ;; ;; TODO - now opens go-guru in laptop display, also add functionality for all compilation buffers
-  ;; (defun open-go-guru-laptop-display (buffer alist)
-  ;;   (if  (string-equal (cdaar (display-monitor-attributes-list)) "eDP-1")
-  ;;       (progn (message "Found the laptop display")
-  ;;              (message "%s" (cadar (cdr (cdddar (display-monitor-attributes-list)))))
-  ;;              (window--display-buffer buffer (frame-root-window (cadar (cdr (cdddar (display-monitor-attributes-list))))) 'reuse))
-  ;;     (message "%s" (cdaar (display-monitor-attributes-list)))))
-
-  ;; display-buffer-alist
-
-  ;; (add-to-list
-  ;;  'display-buffer-alist
-  ;;  '("\\*go-guru-output\\*"
-  ;;    open-go-guru-laptop-display
-  ;;    display-buffer-reuse-window))
-
-  ;; TODO - Instead of having a dedicated window, use a popwin
-  ;; (add-to-list 'popwin:special-display-config '("*go-guru-output*" :tail t :dedicated t :position bottom :stick t))
-
-  ;; TODO - implement a checker function, so that if in the *go-guru-output* buffer, open
-  ;; buffer in last used window
-  ;; TODO - also make the font larger by default on the laptop display
-
-
-  ;; Bind clang-format-buffer to tab on the c++-mode only:
-  ;; (add-hook 'c-c++-mode-hook 'clang-format-bindings ;; NOTE Not using as we format on save atm
-  ;;           (defun clang-format-bindings ()
-  ;;             (define-key c-mode-map [tab] 'clang-format-buffer)))
-
-  ;; C-C++ format buffer binding for c-c++-mode
-  ;; (spacemacs/set-leader-keys-for-major-mode 'c-c++-mode
-  ;;   "pc" 'clang-format-region)
-  ;; ;; (spacemacs/declare-prefix-for-mode 'c-c++-mode "c" "port/paste")
-  ;; (spacemacs/declare-prefix-for-mode 'c-c++-mode "cr" "clang-format-region")
 
   ;; Global only run flycheck when prompted
   (spacemacs/declare-prefix
@@ -963,26 +915,8 @@ you should place your code here."
   ;; lsp no ui on hover
   (setq lsp-ui-doc-enable nil)
 
-  ;; Add shell script highligting to bbclass files (Yocto)
-  ;; (add-to-list 'auto-mode-alist '(("\\.bbclass.*\\'") . shell-script-mode))
-
   ;; Add Sagemath files as python mode file
   (add-to-list 'auto-mode-alist '("\\.sage\\'" . python-mode))
-
-  ;; Add bitbake.el as a syntax highlighter for bitbake files
-  ;; TODO - fix regex!
-  ;; (add-to-list 'auto-mode-alist '(".bbclass\\|.inc\\|.bb\\|.bbappend" . bitbake-mode))
-  ;; (add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
-  ;; (add-to-list 'auto-mode-alist '("\\.scm\\'" . prettify-symbols-mode))
-  ;; (add-to-list 'auto-mode-alist '("\\.amb" . scheme-mode))
-
-  ;; ("\\.el\\'" . emacs-lisp-mode)
-  ;; (setq mmm-global-mode 'auto) -- NOTE : try to fix bitbake highlighting.
-
-  ;;
-  ;;; Org archive all tasks marked as DONE
-  ;;; And add them to a key in org-mode
-  ;;
 
   (defun org-archive-done-tasks ()
     (interactive)

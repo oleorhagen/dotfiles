@@ -58,4 +58,5 @@
   ;; Write the whole current buffer to part2.cpp
   (write-region nil nil "part2.cpp")
   (find-file "part2.cpp")
+  (replace-string-in-region "part1" "part2" (point-min) (line-end-position))
   (save-buffer))
