@@ -84,6 +84,9 @@ This function should only modify configuration layer settings."
 
      import-js
 
+     ;; Get started on Prolog
+     prolog
+
      (javascript :variables
                  javascript-backend 'lsp
                  javascript-lsp-linter nil
