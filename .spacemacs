@@ -940,6 +940,9 @@ you should place your code here."
   (defun add-B-to-ediff-mode-map () (define-key ediff-mode-map "B" 'ediff-copy-both-to-C))
   (add-hook 'ediff-keymap-setup-hook 'add-B-to-ediff-mode-map)
 
+  ;;; Do not prompt for file deletion
+  (setq spacemacs-keep-legacy-current-buffer-delete-bindings nil)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
