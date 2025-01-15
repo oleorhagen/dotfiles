@@ -106,7 +106,7 @@ This function should only modify configuration layer settings."
      ;; TODO - setup DAP for c++
      dap
      (c-c++ :variables
-            c-c++-backend 'rtags
+            c-c++-backend 'lsp
             c-c++-enable-clang-support t
             c-c++-enable-clang-format-on-save t
             c-c++-enable-rtags-support t
