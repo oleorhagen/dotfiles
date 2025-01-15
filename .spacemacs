@@ -68,8 +68,7 @@ This function should only modify configuration layer settings."
       sql-backend 'lsp
       sql-lsp-sqls-workspace-config-path 'workspace
       sql-capitalize-keywords nil
-      sql-auto-indent nil
-      )
+      sql-auto-indent nil)
 
      ;; For changing the buffer format (hopefully)
      (pandoc :variables
