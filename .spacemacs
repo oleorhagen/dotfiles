@@ -168,9 +168,12 @@ This function should only modify configuration layer settings."
          gofmt-command "goimports"
          gofmt-args '("-local=github.com/mimiro-io")
          go-use-golangci-lint t
+         go-backend 'lsp
          gofmt-show-errors nil ;; errors are already shown by flycheck
          godoc-at-point-function 'godoc-gogetdoc)
+
      ;; Debugging
+
      (auto-completion :variables
                       auto-completion-return-key-behavior 'complete
                       auto-completion-tab-key-behavior 'nil
