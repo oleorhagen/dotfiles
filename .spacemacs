@@ -846,9 +846,11 @@ you should place your code here."
   (spacemacs/set-leader-keys
     "ocb" 'comment-box)
 
-  (spacemacs/declare-prefix "os" "snippets")
   (spacemacs/set-leader-keys
     "os" 'yas-describe-tables)
+
+  (spacemacs/set-leader-keys
+    "ow" 'whitespace-cleanup)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;;; Evil fix, for key consistency
