@@ -51,7 +51,7 @@ This function should only modify configuration layer settings."
                 terraform-auto-format-on-save t
                 terraform-backend 'lsp)
 
-     (llm-client :variables llm-client-enable-ellama t)
+     ;; (llm-client :variables llm-client-enable-ellama t)
 
      ;; React baby
      (react)
@@ -141,20 +141,15 @@ This function should only modify configuration layer settings."
      emacs-lisp
      (git
       :variables
-      git-magit-status-fullscreen t
-      )
-     ;; (git
-     ;;  :variables
-     ;;  git-magit-status-fullscreen t
-     ;;  git-commit-major-mode 'git-conventional-commit-mode)
+      git-magit-status-fullscreen t)
+
      (lsp :variables
           lsp-pyright-multi-root nil
           lsp-ui-remap-xref-keybindings nil
           lsp-ui-doc-enable             nil
           lsp-ui-doc-include-signature  nil
           lsp-ui-sideline-enable        nil
-          lsp-ui-sideline-show-symbol   nil
-          )
+          lsp-ui-sideline-show-symbol   nil)
      cfengine
 
      ;; Emacs speaks statistics
