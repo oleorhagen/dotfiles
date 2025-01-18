@@ -230,6 +230,11 @@ This function should only modify configuration layer settings."
      ;; ;; version-control
      ;; (rust :variables
      ;;       rust-format-on-save t)
+
+     (spacemacs-evil :variables
+                     spacemacs-evil-collection-allowed-list
+                     '(edebug))
+
      )
 
    ;; List of additional packages that will be installed without being
