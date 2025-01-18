@@ -164,11 +164,11 @@ This function should only modify configuration layer settings."
      ;; ;; The go-layer needs the auto-completion and syntax-checking layers
      ;; ;; TODO - add gotests function wrappers to the go-mode https://github.com/cweill/gotests
      (go :variables
+         go-backend 'lsp
          go-format-before-save t
          gofmt-command "goimports"
          gofmt-args '("-local=github.com/mimiro-io")
          go-use-golangci-lint t
-         go-backend 'lsp
          gofmt-show-errors nil ;; errors are already shown by flycheck
          godoc-at-point-function 'godoc-gogetdoc)
 
@@ -185,8 +185,7 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-snippets-in-popup t
                       ;; auto-completion-enable-help-tooltip nil
                       auto-completion-use-company-box nil
-                      auto-completion-enable-sort-by-usage t
-                      )
+                      auto-completion-enable-sort-by-usage t)
      ;; ;; semantic
      ;; systemd
      syntax-checking
