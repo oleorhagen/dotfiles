@@ -71,15 +71,7 @@
 ;; CFEngine3 mode indentation
 (customize-set-variable 'cfengine-indent 0) ;; 0 - column indent is required according to their spec
 
-(defun yas-try-expanding-auto-snippets ()
-  "Expand snippets automatically if starting a command with (,) comma.
-This is intended to be added to `post-command-hook'."
-  (when (bound-and-true-p yas-minor-mode)
-    (yas-expand)))
-
-;; Add the hook to post-insert hook
-;; (add-hook 'post-command-hook #'yas-try-expanding-auto-snippets )
-
+;; Enable indent guides in YAML (sort of required on big files)
 (add-hook 'yaml-mode-hook
           (lambda ()
             (indent-guide-mode)))
