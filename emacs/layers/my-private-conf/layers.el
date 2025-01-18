@@ -9,6 +9,6 @@
 
   )
 
-;; Allow creating missing test-files using projectil
+;; Allow creating missing test-files using projectile
 (when (configuration-layer/package-used-p 'spacemacs-project)
   (customize-set-variable 'projectile-create-missing-test-files t))
