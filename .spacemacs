@@ -47,6 +47,8 @@ This function should only modify configuration layer settings."
      ;; display
      my-private-conf
 
+     evil-treesitter-utils
+
      (terraform :variables
                 terraform-auto-format-on-save t
                 terraform-backend 'lsp)
