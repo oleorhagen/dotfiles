@@ -87,7 +87,8 @@ This function should only modify configuration layer settings."
      import-js
 
      ;; Get started on Prolog
-     prolog
+     (prolog :variables
+             ediprolog-system 'swi)
 
      (javascript :variables
                  javascript-backend 'lsp
