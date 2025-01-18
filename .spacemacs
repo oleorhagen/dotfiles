@@ -244,6 +244,10 @@ This function should only modify configuration layer settings."
                                       ;;          (recipe
                                       ;;           :fetcher github
                                       ;;           :repo "syohex/emacs-go-impl"))
+                                      (sops :location
+                                            (recipe
+                                             :fetcher github
+                                             :repo "djgoku/sops"))
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
