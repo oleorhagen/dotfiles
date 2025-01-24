@@ -234,7 +234,6 @@ This function should only modify configuration layer settings."
      (spacemacs-evil :variables
                      spacemacs-evil-collection-allowed-list
                      '(edebug))
-
      )
 
    ;; List of additional packages that will be installed without being
@@ -979,6 +978,8 @@ This function is called at the very end of Spacemacs initialization."
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
+   '(custom-safe-themes
+     '("0a2168af143fb09b67e4ea2a7cef857e8a7dad0ba3726b500c6a579775129635" "7fd8b914e340283c189980cd1883dbdef67080ad1a3a9cc3df864ca53bdc89cf" "a0ac98a1bde5d6336295fd350155a4aac1d63c53c1b3773062271074d16ebeb5" default))
    '(ignored-local-variable-values '((eval add-hook 'before-save-hook 'time-stamp)))
    '(org-agenda-files '("/home/olepor/Documents/journal/20230720"))
    '(package-selected-packages
