@@ -41,6 +41,11 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
 
+     ;; NixOS
+     (nixos :variables
+            nix-backend 'lsp
+            nixos-format-on-save t)
+
      markdown
 
      ;; My private display package from ~/.layers
