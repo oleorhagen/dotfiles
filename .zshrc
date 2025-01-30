@@ -66,7 +66,7 @@ export UPDATE_ZSH_DAYS=10
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -83,6 +83,8 @@ plugins=(
     autoenv # .in and .out files to automatically setup an env when entering a directory
     aws
 )
+
+source $ZSH/oh-my-zsh.sh
 
 
 # User configuration
