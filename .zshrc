@@ -3,9 +3,14 @@
 #
 
 #
-# Show archey3 (Arch logo on login shell)
+# Show Logo on login shell
 #
-archey3 --color=green
+if cat /etc/os-release | grep -i nixos &>/dev/null; then
+    echo "Welcome to NixOS! (Time to get a pretty logo)"
+else
+    # Assume Arch Linux
+    archey3 --color=green
+fi
 
 # source .profile to enable the remapping of return and caps-lock
 source ~/.profile # Consider adding this to an autorun-login shell-script
@@ -13,7 +18,7 @@ source ~/.profile # Consider adding this to an autorun-login shell-script
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/$USER/.oh-my-zsh
+# export ZSH=/home/$USER/.oh-my-zsh
 
 export SCRIPT_DIR=/home/olepor/.i3blocks/i3blocks-contrib/
 
@@ -61,25 +66,24 @@ export UPDATE_ZSH_DAYS=10
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+source $ZSH/oh-my-zsh.sh
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-        git
-       	z
-       	docker
-       	docker-compose
-       	golang
-       	colored-man-pages
-       	per-directory-history
-       	autoenv # .in and .out files to automatically setup an env when entering a directory
-        aws
+    git
+    z
+    docker
+    docker-compose
+    golang
+    colored-man-pages
+    per-directory-history
+    autoenv # .in and .out files to automatically setup an env when entering a directory
+    aws
 )
 
-#source /home/olepor/dotfiles/zsh-deps/gcloud-ps1/gcloud-ps1.sh
-
-source $ZSH/oh-my-zsh.sh
 
 # User configuration
 

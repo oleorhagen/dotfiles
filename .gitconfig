@@ -49,7 +49,7 @@
 
 [commit]
 	gpgsign = true
-	template = /home/olepor/.files/git-commit-template.txt
+	template = ~/.files/git-commit-template.txt
 
 [core]
 	editor = vim

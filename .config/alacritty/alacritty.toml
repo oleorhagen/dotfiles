@@ -9,7 +9,7 @@ decorations = "None" # "Full"
 decorations_theme_variant = "Light" # "Dark"
 
 [terminal.shell]
-program="/bin/zsh"
+program="zsh"
 args = ["--login"]
 
 [env]
