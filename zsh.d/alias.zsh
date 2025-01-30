@@ -18,9 +18,9 @@ alias lsa="ls -a"
 alias dockdev='BUILDDIR=/home/opus/ docker-compose -f docker-compose.yml -f docker-compose.storage.minio.yml -f docker-compose.demo.yml -f docker-compose.client.yml -f docker-compose.client-dev.yml run mender-client'
 # add user to the integration test environment through the mender-useradm microservice
 alias addusr='sudo docker-compose exec mender-useradm \
-                         /usr/bin/useradm \
-                         create-user \
-                         --username=user@host.com \
+                         /usr/bin/useradm             \
+                         create-user                  \
+                         --username=user@host.com     \
                          --password=rootpass'
 alias bb='bitbake'
 alias open='xdg-open'
