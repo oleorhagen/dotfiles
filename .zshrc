@@ -6,7 +6,7 @@
 # Show Logo on login shell
 #
 if cat /etc/os-release | grep -i nixos &>/dev/null; then
-    echo "Welcome to NixOS! (Time to get a pretty logo)"
+    echo "Welcome to NixOS!" | cowsay | lolcat
 else
     # Assume Arch Linux
     archey3 --color=green
