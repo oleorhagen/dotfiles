@@ -95,6 +95,9 @@
     gcc
     clang
 
+    # Encryption
+    sops
+
     # Search
     ripgrep
     postgresql # Really only need psql
