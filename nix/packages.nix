@@ -87,6 +87,7 @@
     yamlfmt
     # yamlfix # Another formatter
     yamllint
+    yq # jq for yaml
 
     #
     ## Tools
