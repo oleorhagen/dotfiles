@@ -1,4 +1,4 @@
-#! /bin/bash -e
+#! /usr/bin/envbash -e
 
 
 usage() {

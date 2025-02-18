@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/envbash
 
 if [[ -e ~/.engkey ]]; then
 	source ~/dotfiles/scripts/norsk

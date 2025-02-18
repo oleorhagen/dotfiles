@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/envbash
 
 if [ -z "$1" ]; then
     # Requires at least one argument, otherwise it will rewrite history since the dawn of time.

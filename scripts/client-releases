@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/envbash
 
 declare -A CLIENT_MENDER_MAP=(
   [2.6.0]="Mender Project 2.7.0"

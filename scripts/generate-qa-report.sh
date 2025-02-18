@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/envbash
 
 #
 # TODO - make functions out of the repetetive code here

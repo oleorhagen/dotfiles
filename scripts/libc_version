@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/envbash
 
 GCC_FEATURES=$(gcc -dM -E - <<< "#include <features.h>")
 

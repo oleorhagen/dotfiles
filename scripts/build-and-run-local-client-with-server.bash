@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/envbash
 
 # Make sure the build environment is setup
 cd ~/yocto/qemu-setup/

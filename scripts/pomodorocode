@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/envbash
 
 trap 'echo SIGUSR1 received' SIGUSR1
 while :

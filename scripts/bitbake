@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/envbash
 
 # A simple wrapper script in order to run bitbake from a container, which mounts
 # my filesystem

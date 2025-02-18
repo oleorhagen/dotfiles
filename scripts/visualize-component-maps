@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/envbash
 
 echo >&2 "TODO - script development in progress"
 

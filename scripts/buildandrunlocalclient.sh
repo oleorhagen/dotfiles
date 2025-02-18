@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/envbash
 
 set -ex
 # First cd to the yocto build directory and build the newest thud environment

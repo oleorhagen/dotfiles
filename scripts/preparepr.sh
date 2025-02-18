@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/envbash
 
 echo "Building..."
 make build

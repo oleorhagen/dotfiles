@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/envbash
 
 help() {
   cat <<EOF

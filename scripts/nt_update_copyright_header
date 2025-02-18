@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/envbash
 
 #GOFILES = $(find . -name "*.go" -not -path "./vendor/*" | sed 's:./::')
 # EOH_LNR=$(grep package -n $1 | cut -d':' -f1)

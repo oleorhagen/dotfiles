@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/envbash
 
 if [ -n "${NO_CLIENT}" ]; then
 	echo "YAY"

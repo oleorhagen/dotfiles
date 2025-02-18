@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/envbash
 
 if [ $(docker ps -a -q -f status=exited | wc -l) -gt 0 ]; then
   echo "removing containers..."

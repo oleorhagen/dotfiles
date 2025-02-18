@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/envbash
 
 bash <(curl -s https://codecov.io/bash) -t $(pass show codecov) | tee codecov.out
 

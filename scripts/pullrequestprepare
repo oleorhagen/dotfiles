@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/envbash
 
 echo "Piping command output to 'pull.out'"
 echo "Building..."

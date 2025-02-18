@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/envbash
 JOBNR=$1
 BUILD_URL="https://mender-jenkins.mender.io/job/mender-builder/${JOBNR}"
 while true;

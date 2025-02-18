@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/envbash
 
 while : ; do
 	echo >&2 "Sleeping..."
