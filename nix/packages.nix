@@ -3,10 +3,17 @@
 {
 
   environment.systemPackages = with pkgs; [
+
+    # Zsh plugins
+    zsh-autoenv
+
     # Man pages (Duh!)
     man-db
 
+    # Browsers
     firefox-wayland
+    google-chrome
+
     git
 
     # Editor setup
@@ -78,6 +85,7 @@
 
     # For formatting SQL files
     python312Packages.sqlfmt
+    sqlfluff
 
     # Golang
     go
@@ -101,6 +109,7 @@
 
     # Search
     ripgrep
+    silver-searcher # Also known as ag
     postgresql # Really only need psql
 
     # Network
@@ -126,6 +135,12 @@
     alacritty-theme
 
   ];
+
+  # nixpkgs.config.allowUnfreePredicate =
+  #   pkg:
+  #   builtins.elem (lib.getName pkg) [
+  #     "google-chrome"
+  #   ];
 
   services.tailscale.enable = true;
 
