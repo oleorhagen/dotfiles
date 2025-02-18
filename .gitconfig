@@ -20,7 +20,6 @@
 	smtpServerPort = 587
     	smtpEncryption = tls
     	smtpUser = ole@orhagen.no
-	#smtpPass = "fzoo npvf kluq hyuo"
 
 [alias]
 	lg = log --all --oneline --graph --decorate
