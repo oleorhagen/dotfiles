@@ -7,6 +7,8 @@
 #
 if cat /etc/os-release | grep -i nixos &>/dev/null; then
     echo "Welcome to NixOS!" | cowsay | lolcat
+elif cat /etc/os-release | grep -i ubuntu &>/dev/null; then
+    echo "Welcome to work!"
 else
     # Assume Arch Linux
     archey3 --color=green
