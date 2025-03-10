@@ -36,7 +36,7 @@
     ;; (md-to-jira-mode :location local)
     (git-conventional-commit-mode :location local)
 
-    (go-tagalign-fmt :location local)
+    ;; (go-tagalign-fmt :location local)
 
     ;; Treesitter-mode
     devicetree-ts-mode

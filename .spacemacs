@@ -114,18 +114,20 @@ This function should only modify configuration layer settings."
      ;; TODO - setup DAP for c++
      dap
      (c-c++ :variables
-            c-c++-backend 'lsp
+            c-c++-backend 'lsp-clangd
             c-c++-enable-clang-support t
-            c-c++-enable-clang-format-on-save t
-            c-c++-enable-rtags-support t
+            c-c++-enable-clang-format-on-save nil
+            c-c++-enable-rtags-support nil
             c-c++-enable-organize-includes-on-save nil
             c-c++-lsp-enable-semantic-highlight 'rainbow
             c-c++-default-mode-for-headers 'c++-mode ;; Ideally, should be project local
             c-c++-adopt-subprojects t
             :init
             ;; Set up DAP for C++
-            (require 'dap-cpptools)
-            )
+            (require 'dap-cpptools))
+
+     ;;; Cscope code navigation in C/C++
+     cscope
 
      ;; Enable ligatures <3 and using unicode fonts
      (unicode-fonts :variables
@@ -186,17 +188,17 @@ This function should only modify configuration layer settings."
                       auto-completion-return-key-behavior 'complete
                       auto-completion-tab-key-behavior 'nil
                       auto-completion-complete-with-key-sequence nil
-                      auto-completion-complete-with-key-sequence-delay 0.1
-                      auto-completion-idle-delay 0.2 ;; set to 0.0 for optimal results with lsp
-                      auto-completion-minimum-prefix-length 1 ;; set to 1 for optimal results with lsp
+                      auto-completion-complete-with-key-sequence-delay 0.2
+                      auto-completion-idle-delay 0.5 ;; set to 0.0 for optimal results with lsp -- For now, set a little higher, since it's slow on main (large repo)
+                      auto-completion-minimum-prefix-length 3 ;; set to 1 for optimal results with lsp
                       auto-completion-private-snippets-directory nil
                       auto-completion-enable-snippets-in-popup t
-                      ;; auto-completion-enable-help-tooltip nil
+                      auto-completion-enable-help-tooltip nil
                       auto-completion-use-company-box nil
                       auto-completion-enable-sort-by-usage t)
      ;; ;; semantic
      ;; systemd
-     syntax-checking
+     ;; syntax-checking
      ;; (markdown :variables
      ;;           markdown-live-preview-engine 'vmd
      ;;           markdown-mmm-auto-modes '("c" "c++" "python" "scala" "bash" ("elisp" "emacs-lisp")))
@@ -207,11 +209,11 @@ This function should only modify configuration layer settings."
 
      (python :variables
              python-backend 'lsp
-             python-lsp-server 'pyright
+             ;; python-lsp-server 'python-lsp-server
              python-pytest-runner 'pytest
              python-formatter 'black
-             python-format-on-save t
-             pyton-sort-imports-on-save t)
+             python-format-on-save nil
+             python-sort-imports-on-save nil)
 
      ;; ;; gtags
      ;; (scheme
@@ -330,7 +332,7 @@ It should only modify the values of Spacemacs settings."
    ;; Setting this >= 1 MB should increase performance for lsp servers
    ;; in emacs 27.
    ;; (default (* 1024 1024))
-   dotspacemacs-read-process-output-max (* 1024 1024)
+   dotspacemacs-read-process-output-max (* 1024 1024 100) ;; 100 Mib
 
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
@@ -441,7 +443,9 @@ It should only modify the values of Spacemacs settings."
    ;; package can be defined with `:package', or a theme can be defined with
    ;; `:location' to download the theme package, refer the themes section in
    ;; DOCUMENTATION.org for the full theme specifications.
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(
+                         monokai-pro
+                         spacemacs-dark
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -459,18 +463,27 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font or prioritized list of fonts.
    dotspacemacs-default-font '(
-                               ("FiraCode Nerd Font"
-                                :size 24
-                                :weight normal
-                                :width normal)
+                               ;; ("FiraCode Nerd Font"
+                               ;;  :size 30
+                               ;;  :weight normal
+                               ;;  :width normal)
                                ;; ("Cascadia Code"
                                ;;  :size 16
                                ;;  :weight normal
                                ;;  :width normal)
-                               ;; ("Source Code Pro"
-                               ;; :size 16
-                               ;; :weight normal
-                               ;; :width normal)
+                               ("Source Code Pro"
+                                :size 16
+                                :weight normal
+                                :width normal)
+                               ;; ("Monaco"
+                               ;;  :size 24
+                               ;;  :weight normal
+                               ;;  :width normal
+                               ;;  )
+                               ;; ("DejaVu Sans Mono"
+                               ;;  :size 24
+                               ;;  :weight normal
+                               ;;  :width normal)
                                )
 
 
@@ -629,11 +642,11 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters point
    ;; when it reaches the top or bottom of the screen. (default t)
-   dotspacemacs-smooth-scrolling t
+   dotspacemacs-smooth-scrolling nil
 
    ;; Show the scroll bar while scrolling. The auto hide time can be configured
    ;; by setting this variable to a number. (default t)
-   dotspacemacs-scroll-bar-while-scrolling t
+   dotspacemacs-scroll-bar-while-scrolling nil
 
    ;; Control line numbers activation.
    ;; If set to `t', `relative' or `visual' then line numbers are enabled in all
@@ -754,7 +767,7 @@ It should only modify the values of Spacemacs settings."
    ;; indent handling like has been reported for `go-mode'.
    ;; If it does deactivate it here.
    ;; (default t)
-   dotspacemacs-use-clean-aindent-mode t
+   dotspacemacs-use-clean-aindent-mode nil
 
    ;; Accept SPC as y for prompts if non-nil. (default nil)
    dotspacemacs-use-SPC-as-y nil
@@ -828,15 +841,21 @@ you should place your code here."
   ;;; Helm-projectil Make
   ;;
   ;; Default to two processes when calling Make from Helm
-  (setq-default helm-make-nproc 2)
-  ;; Make the process nice
-  (setq-default helm-make-niceness 20)
+  (setq-default
+   helm-make-nproc 2
+   ;; Make the process nice
+   helm-make-niceness 20)
+
+  ;; No byte compilation
+  (setq-default no-byte-compile t)
 
   ;; C++ (Mender) State-machine alignment hack
   (defun align-statemachine-states (start end)
     "Align the states in the Mender client statemachine"
     (interactive "r\n")
     (align-regexp start end ",\\(\\s-*\\)[a-z_.]+" 1 2 t))
+
+  ;; c-basic-offset - default to 4
 
   ;; Set a random theme on startup
   (defun random-list-element (arg-list)
@@ -934,6 +953,9 @@ you should place your code here."
   ;; Add Sagemath files as python mode file
   (add-to-list 'auto-mode-alist '("\\.sage\\'" . python-mode))
 
+  ;; Add Cisco genmake.def files to python mode
+  (add-to-list 'auto-mode-alist '("\\.def\\'" . python-mode))
+
   (defun org-archive-done-tasks ()
     (interactive)
     (org-map-entries
@@ -956,6 +978,12 @@ you should place your code here."
 
   ;;; Do not prompt for file deletion
   (setq spacemacs-keep-legacy-current-buffer-delete-bindings nil)
+
+  ;; Turn off mouse support. I don't use it
+  (setq-default mouse-support nil)
+
+  ;; Disable animations
+  (set-variable 'animation-speed 0)
 
   )
 
@@ -988,7 +1016,7 @@ This function is called at the very end of Spacemacs initialization."
    '(ignored-local-variable-values '((eval add-hook 'before-save-hook 'time-stamp)))
    '(org-agenda-files '("/home/olepor/Documents/journal/20230720"))
    '(package-selected-packages
-     '(pg compat catppuccin-theme async bind-map lv hydra avy s dash f pythonic anaconda-mode auctex ht yasnippet spinner clang-format emacsql closql with-editor a treepy ghub deferred yaml forge emojify code-review company lua-mode company-lua math-symbol-lists rtags company-statistics web-completion-data request request-deferred epl pkg-info ycmd bui pfuture posframe lsp-treemacs disable-mouse aio tablist popup websocket anaphora polymode elisp-demos list-utils paredit projectile iedit ess ctable anzu smartparens annalist flx flycheck package-lint pos-tip flyspell-correct go-mode haml-mode helm-comint imenu-list window-purpose parent-mode htmlize simple-httpd grizzl concurrent epc js2-mode multiple-cursors json-snatcher hierarchy yaml-mode skewer-mode extmap shut-up org gntp log4e alert orgit tomelr persp-mode pyvenv load-env-vars load-relative loc-changes test-simple reformatter rego-mode powerline sqlformat tsc tree-sitter tree-sitter-langs fringe-helper ts-fold undo-fu undo-fu-session pcache persistent-soft font-utils ucs-utils vundo visual-fill-column devicetree-ts-mode dts-mode ccls cmake-mode lsp-docker doom-modeline nerd-icons flycheck-google-cpplint magit transient helm-ls-git helm helm-core hl-todo logview consult lsp-origami lsp-mode treemacs markdown-mode org-modern org-projectile org-project-capture org-category-capture yasnippet-snippets evil yapfify ws-butler writeroom-mode winum which-key wfnames web-mode web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen unicode-fonts undo-tree treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org term-cursor tagedit symon symbol-overlay string-inflection string-edit-at-point sqlup-mode sql-indent sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smeargle slim-mode shrink-path shfmt scss-mode sass-mode rjsx-mode restart-emacs realgud react-snippets rainbow-delimiters quickrun pytest pylookup pyenv-mode pydoc py-isort pug-mode prettier-js popwin poetry pippel pipenv pip-requirements pcre2el password-generator paradox pandoc-mode ox-pandoc ox-hugo ox-gfm overseer origami orgit-forge org-superstar org-rich-yank org-present org-pomodoro org-mime org-journal org-download org-contrib org-cliplink open-junk-file ob-cfengine3 npm-mode nose nodejs-repl nameless mustache-mode multi-line mmm-mode markdown-toc magit-section macrostep lsp-ui lsp-python-ms lsp-pyright lsp-latex lorem-ipsum livid-mode live-py-mode link-hint ligature k8s-mode json-reformat json-navigator json-mode js2-refactor js-doc inspector insert-shebang info+ indent-guide importmagic import-js impatient-mode hybrid-mode hungry-delete holy-mode highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-git-grep helm-descbinds helm-ctest helm-css-scss helm-company helm-c-yasnippet helm-ag goto-chg google-translate google-c-style golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link git-commit gh-md gendoxy fuzzy flyspell-correct-helm flycheck-ycmd flycheck-rtags flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flycheck-bashate flx-ido fish-mode fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-tex evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu ess-R-data-view emr emmet-mode elisp-slime-nav elisp-def ein editorconfig dumb-jump drag-stuff dotenv-mode dockerfile-mode docker disaster dired-quick-sort diminish devdocs define-word datetime dap-mode cython-mode cpp-auto-include company-ycmd company-web company-shell company-rtags company-reftex company-math company-go company-c-headers company-auctex company-anaconda column-enforce-mode code-cells clean-aindent-mode cfrs centered-cursor-mode blacken auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile all-the-icons aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell))
+     '(nerd-icons-completion pg compat catppuccin-theme async bind-map lv hydra avy s dash f pythonic anaconda-mode auctex ht yasnippet spinner clang-format emacsql closql with-editor a treepy ghub deferred yaml forge emojify code-review company lua-mode company-lua math-symbol-lists rtags company-statistics web-completion-data request request-deferred epl pkg-info ycmd bui pfuture posframe lsp-treemacs disable-mouse aio tablist popup websocket anaphora polymode elisp-demos list-utils paredit projectile iedit ess ctable anzu smartparens annalist flx flycheck package-lint pos-tip flyspell-correct go-mode haml-mode helm-comint imenu-list window-purpose parent-mode htmlize simple-httpd grizzl concurrent epc js2-mode multiple-cursors json-snatcher hierarchy yaml-mode skewer-mode extmap shut-up org gntp log4e alert orgit tomelr persp-mode pyvenv load-env-vars load-relative loc-changes test-simple reformatter rego-mode powerline sqlformat tsc tree-sitter tree-sitter-langs fringe-helper ts-fold undo-fu undo-fu-session pcache persistent-soft font-utils ucs-utils vundo visual-fill-column devicetree-ts-mode dts-mode ccls cmake-mode lsp-docker doom-modeline nerd-icons flycheck-google-cpplint magit transient helm-ls-git helm helm-core hl-todo logview consult lsp-origami lsp-mode treemacs markdown-mode org-modern org-projectile org-project-capture org-category-capture yasnippet-snippets evil yapfify ws-butler writeroom-mode winum which-key wfnames web-mode web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen unicode-fonts undo-tree treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org term-cursor tagedit symon symbol-overlay string-inflection string-edit-at-point sqlup-mode sql-indent sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smeargle slim-mode shrink-path shfmt scss-mode sass-mode rjsx-mode restart-emacs realgud react-snippets rainbow-delimiters quickrun pytest pylookup pyenv-mode pydoc py-isort pug-mode prettier-js popwin poetry pippel pipenv pip-requirements pcre2el password-generator paradox pandoc-mode ox-pandoc ox-hugo ox-gfm overseer origami orgit-forge org-superstar org-rich-yank org-present org-pomodoro org-mime org-journal org-download org-contrib org-cliplink open-junk-file ob-cfengine3 npm-mode nose nodejs-repl nameless mustache-mode multi-line mmm-mode markdown-toc magit-section macrostep lsp-ui lsp-python-ms lsp-pyright lsp-latex lorem-ipsum livid-mode live-py-mode link-hint ligature k8s-mode json-reformat json-navigator json-mode js2-refactor js-doc inspector insert-shebang info+ indent-guide importmagic import-js impatient-mode hybrid-mode hungry-delete holy-mode highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-git-grep helm-descbinds helm-ctest helm-css-scss helm-company helm-c-yasnippet helm-ag goto-chg google-translate google-c-style golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link git-commit gh-md gendoxy fuzzy flyspell-correct-helm flycheck-ycmd flycheck-rtags flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flycheck-bashate flx-ido fish-mode fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-tex evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu ess-R-data-view emr emmet-mode elisp-slime-nav elisp-def ein editorconfig dumb-jump drag-stuff dotenv-mode dockerfile-mode docker disaster dired-quick-sort diminish devdocs define-word datetime dap-mode cython-mode cpp-auto-include company-ycmd company-web company-shell company-rtags company-reftex company-math company-go company-c-headers company-auctex company-anaconda column-enforce-mode code-cells clean-aindent-mode cfrs centered-cursor-mode blacken auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile all-the-icons aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell))
    '(safe-local-variable-values
      '((etags-regen-ignores "test/manual/etags/")
        (etags-regen-regexp-alist
