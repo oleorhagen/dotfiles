@@ -32,7 +32,6 @@
     (reverse subcommands)))
 
 
-
 (defun my-get-build-target-list ()
   (interactive)
   (process-lines "build" "--list-targets"))
@@ -52,12 +51,15 @@
          (additional-args nil))
 
     ;; First select a subcommand if available
-    (when subcommands
-      (setq selected-subcommand
-            (completing-read "Select subcommand (optional): "
-                             (cons "" subcommands) nil t))
-      (when (string= selected-subcommand "")
-        (setq selected-subcommand nil)))
+    ;; (when subcommands
+    ;;   (setq selected-subcommand
+    ;;         (completing-read "Select subcommand (optional): "
+    ;;                          (cons "" subcommands) nil t))
+    ;;   (when (string= selected-subcommand "")
+    ;;     (setq selected-subcommand nil)))
+
+    ;; First select the target
+    (setq selected-subcommand (concat "-t " (completing-read "Select the build target: " (my-get-build-target-list) nil t) ))
 
     ;; Select options
     (while (not (string= " " (setq option
@@ -109,6 +111,8 @@
              (interactively-build-cli-command ,command-name)))
     func-name))
 
+
+;; Now I need to make this work with rbuild
 
 
 (create-cli-wrapper "build")
