@@ -89,6 +89,67 @@
             (push option options)))))
     (reverse options)))
 
+(defun extract-options-with-details-from-help (help-output)
+  "Extract command line options from HELP-OUTPUT with details about each option.
+Returns a list of plists with properties :name, :description, and :needs-value."
+  (let ((options '())
+        (lines (split-string help-output "\n"))
+        (current-line 0)
+        (total-lines (length (split-string help-output "\n"))))
+
+    (while (< current-line total-lines)
+      (let* ((line (nth current-line lines))
+             (next-line (when (< (1+ current-line) total-lines)
+                          (nth (1+ current-line) lines)))
+             (option nil)
+             (description "")
+             (needs-value nil))
+
+        ;; Match different option patterns
+        (cond
+         ;; Match pattern: -o, --option[=VALUE]
+         ((string-match "\\s-+\\(-[a-zA-Z],\\s+\\)?\\(--[a-zA-Z0-9][-a-zA-Z0-9]*\\)\\(\\[?=[A-Z]+\\]?\\)?" line)
+          (setq option (match-string 2 line))
+          (when (match-string 3 line)
+            (setq needs-value t))
+          (setq description (replace-regexp-in-string "^\\s-+\\(\\(-[a-zA-Z],\\s+\\)?--[^\\s-]+\\([^\\s-]?=[^\\s-]+\\)?\\)\\s-*" "" line)))
+
+         ;; Match pattern: --option (simple long flag)
+         ((string-match "\\s-+\\(--[a-zA-Z0-9][-a-zA-Z0-9]*\\)\\s-+" line)
+          (setq option (match-string 1 line))
+          (setq description (replace-regexp-in-string "^\\s-+--[^\\s-]+\\s-*" "" line)))
+
+         ;; Match pattern: -o (simple short flag)
+         ((string-match "\\s-+\\(-[a-zA-Z]\\)\\s-+" line)
+          (setq option (match-string 1 line))
+          (setq description (replace-regexp-in-string "^\\s-+-[^\\s-]+\\s-*" "" line))))
+
+        ;; If we found an option
+        (when option
+          ;; Look for additional description in next line if it's indented
+          (when (and next-line (string-match "^\\s-+\\s-+\\([^-].*\\)" next-line))
+            (setq description (concat description " " (match-string 1 next-line)))
+            (setq current-line (1+ current-line)))
+
+          ;; Check description for value indicators
+          (when (or (string-match "<[^>]+>" description)
+                    (string-match "\\bARG\\b" description)
+                    (string-match "\\bVALUE\\b" description)
+                    (string-match "\\bFILE\\b" description)
+                    (string-match "\\bPATH\\b" description)
+                    (string-match "\\bDIR\\b" description))
+            (setq needs-value t))
+
+          ;; Add to options list
+          (push (list :name option
+                      :description description
+                      :needs-value needs-value)
+                options)))
+
+      (setq current-line (1+ current-line)))
+
+    (nreverse options)))
+
 
 (defun extract-subcommands-from-help (help-output)
   "Extract subcommands from HELP-OUTPUT."
@@ -110,12 +171,23 @@
   (interactive)
   (process-lines "build" "--list-targets"))
 
-(defun translate-to-rbuild-command (build-command)
-  "Translates from the generated build command to rbuild"
-  (interactive)
-  (let ((rbuild-command '("rbuild" "-p ~/src/main" "-i buildmachine")))
-    ;; Now append all options with a prefixed -o (except -t)
-    ))
+(defun format-option-for-display (option-plist)
+  "Format an option for display in completion."
+  (let ((name (plist-get option-plist :name))
+        (desc (plist-get option-plist :description))
+        (needs-value (plist-get option-plist :needs-value)))
+    (format "%s%s - %s"
+            name
+            (if needs-value "=VALUE" "")
+            (if (> (length desc) 50)
+                (concat (substring desc 0 47) "...")
+              desc))))
+
+(defun option-plist-from-display (display option-plists)
+  "Get the original option plist from a display string."
+  (let* ((name (car (split-string display " - ")))
+         (base-name (car (split-string name "="))))
+    (cl-find base-name option-plists :key (lambda (plist) (plist-get plist :name)) :test 'string=)))
 
 
 (defun interactively-build-cli-command (cmd)
@@ -129,7 +201,9 @@
          (use-history (and cmd-history
                            (y-or-n-p "Use command history? ")))
          (help-output (shell-command-to-string (concat cmd " --help")))
-         (options (extract-options-from-help help-output))
+         (options (extract-options-from-help help-output)) ;; TODO - remove once the plist is working
+         (option-plists (extract-options-with-details-from-help help-output))
+         (option-displays (mapcar #'format-option-for-display option-plists))
          (subcommands (extract-subcommands-from-help help-output))
          (selected-options '())
          (selected-subcommand nil)
@@ -146,23 +220,35 @@
       ;;
 
       ;; First select the target
-      (setq selected-subcommand (concat "-t " (completing-read "Select the build target: " (my-get-build-target-list) nil t) ))
+      (setq selected-subcommand
+            (concat "-t "
+                    (completing-read "Select the build target: " (my-get-build-target-list) nil t)))
 
       ;; Select options
-      (while (not (string= " " (setq option
-                                     (completing-read "Add option (RET to finish): "
-                                                      options nil nil))))
-        (let ((value ""))
-          ;; If option might need a value, prompt for it
-          (when (string-match "^--" option)
-            (setq value (read-string (format "Value for %s (leave empty for flag): " option))))
+      ;;; TODO - Could possibly move towards using completing-read-multiple ?
+      (let ((option-display ""))
+        (while (not (string= "done" (setq option-display
+                                          (completing-read "Add option (RET to finish): "
+                                                           `("done" ,@option-displays ) nil nil))))
+          (let* ((option-plist (option-plist-from-display option-display option-plists))
+                 (option-name (plist-get option-plist :name))
+                 (needs-value (plist-get option-plist :needs-value))
+                 (value ""))
 
-          (if (string= value "")
-              (push option selected-options)
-            (push (format "%s=%s" option value) selected-options))
+            ;; Remove selected option from available options
+            (setq option-displays
+                  (delete option-display option-displays))
 
-          ;; Remove the selected option from options list
-          (setq options (delete option options))))
+            ;; If option needs a value, prompt for it
+            (when needs-value
+              (setq value (read-string
+                           (format "Value for %s: " option-name))))
+
+            ;; Add to selected options
+            (if (and needs-value (not (string= value "")))
+                (push (format "%s=%s" option-name value) selected-options)
+              (push option-name selected-options)))))
+
 
       ;; Ask for any additional arguments
       ;; (setq additional-args
