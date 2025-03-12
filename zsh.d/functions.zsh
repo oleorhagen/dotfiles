@@ -291,7 +291,7 @@ function plot () {
 #
 function kubectl () {
   starship toggle kubernetes disabled # Turn on the starship k8s prompt
-	/run/current-system/sw/bin/kubectl "$@"
+	/usr/bin/env kubectl "$@"
 }
 
 function kubeon () {
