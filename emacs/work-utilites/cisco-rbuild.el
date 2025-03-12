@@ -251,8 +251,8 @@ Returns a list of plists with properties :name, :description, and :needs-value."
 
 
       ;; Ask for any additional arguments
-      ;; (setq additional-args
-      ;;       (read-string "Additional arguments: "))
+      (setq additional-args
+            (read-string "Additional arguments: "))
 
       ;; Build the final command
       (let ((final-command (concat "rbuild"
