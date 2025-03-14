@@ -276,7 +276,7 @@ Returns a list of plists with properties :name, :description, and :needs-value."
           ;; Add to history
           (cli-wrapper-add-to-history cmd confirm)
 
-          confirm)))))
+          (compile confirm))))) )
 
 
 ;; Define a function to create specific wrappers
@@ -300,7 +300,19 @@ Returns a list of plists with properties :name, :description, and :needs-value."
 ;; Load history on initialization if available
 (cli-wrapper-load-history)
 
-(advice-add 'compilation-read-command :around #'my-cisco-main-compile-command-advice)
+;; (advice-add 'compilation-read-command :around #'my-cisco-main-compile-command-advice)
+;; (advice-remove 'compilation-read-command #'my-cisco-main-compile-command-advice)
+
+(defun my-interactive-compile-advice (orig-fun &optional command comint)
+  "Advice to make compile interactive."
+  (interactive)
+  (let* ((dir (or default-directory (read-directory-name "Directory: " nil default-directory)))
+         (default-directory dir)
+         (cmd (read-string "Compile command: " (or command (interactively-build-cli-command "build")))))
+    (setq compile-command cmd)
+    (funcall orig-fun cmd comint)))
+
+(advice-add 'compile :around #'my-interactive-compile-advice)
 
 ;; Example usage:
 ;; (create-cli-wrapper "git")
