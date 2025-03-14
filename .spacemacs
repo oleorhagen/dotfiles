@@ -886,6 +886,13 @@ you should place your code here."
   (spacemacs/set-leader-keys
     "ow" 'whitespace-cleanup)
 
+  (defun my-split-line-on-spaces (begin end)
+    (interactive "r")
+    (replace-regexp "\\([^ ]+\\) " "\\1\n" nil begin end))
+
+  (spacemacs/set-leader-keys
+    "os" 'my-split-line-on-spaces)
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;;; Evil fix, for key consistency
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
