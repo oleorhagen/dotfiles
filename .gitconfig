@@ -1,19 +1,16 @@
 [user]
 	email = ole@orhagen.no
 	name = Ole P. Orhagen
-	signingkey = 399DBE0F4D4B02EB
+	# signingkey = 399DBE0F4D4B02EB
 
 [commit]
-  gpgsign = true
+	gpgsign = false
+	template = ~/.files/git-commit-template.txt
 
 # TODO - https://git-scm.com/docs/git-config#_includes
 # Maybe I should start using this (?)
-[includeIf "gitdir:~/mimiro-io/**"]
-  path = ~/.config/git/work
-
-[includeIf "hasconfig:remote.*.url:git@github.com:mimiro-io/**"]
-  path = ~/.config/git/work
-
+[includeIf "gitdir:~/src/**"]
+  path = ~/.config/git/cisco
 
 [sendemail]
 	smtpServer = smtp.gmail.com
@@ -45,10 +42,6 @@
 [github]
 	oauth-token = 5f9db8b96623a199d3c30afaddbcc00f7418dac8
 	user = oleorhagen
-
-[commit]
-	gpgsign = true
-	template = ~/.files/git-commit-template.txt
 
 [core]
 	editor = vim
@@ -120,3 +113,12 @@
 	autoSquash = true
 	autoStash = true
 	updateRefs = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[blame]
+	markIgnoredLines = true
+	markUnblamableLines = true

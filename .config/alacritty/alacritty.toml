@@ -1,6 +1,9 @@
+import = [
+"/home/oorhagen/.config/alacritty/alacritty-theme-ghub/themes/github_light.toml",
+]
 
 [window]
-opacity = 0.9
+opacity = 0.8
 
 padding.x = 10
 padding.y = 10
@@ -8,21 +11,21 @@ padding.y = 10
 decorations = "None" # "Full"
 decorations_theme_variant = "Light" # "Dark"
 
-[terminal.shell]
-program="zsh"
-args = ["--login"]
+#[terminal.shell]
+#program="zsh"
+#args = ["--login"]
 
 [env]
 #SOME_ENV_VARIABLE="foobar"
 
-#[font]
-#
-#normal.family = "Cascadia Code PL"
-#bold.family = "Cascadia Code PL"
-#italic.family = "Cascadia Code PL"
-#bold_italic.family = "Cascadia Code PL"
-#
-#size = 15.0
+[font]
+
+normal.family = "DejaVu Sans Mono"
+bold.family = "DejaVu Sans Mono"
+italic.family = "DejaVu Sans Mono"
+bold_italic.family = "DejaVu Sans Mono"
+
+size = 15.0
 
 [bell]
 animation="Linear"
@@ -31,14 +34,6 @@ duration=1 # Visual bell flash in milliseconds
 [selection]
 save_to_clipboard=true
 
-[general]
-# $HOME/.config/alacritty/alacritty.toml
-# by Ole P. Orhagen
-
-import = [
-"~/.config/alacritty/alacritty-theme/themes/github_light.toml",
-#"~/.config/alacritty/keybindings.toml",
-]
 
 [terminal]
 

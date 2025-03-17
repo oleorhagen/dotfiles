@@ -68,7 +68,7 @@ export UPDATE_ZSH_DAYS=10
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# source $ZSH/oh-my-zsh.sh
+source $HOME/.oh-my-zsh/oh-my-zsh.sh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -86,8 +86,6 @@ plugins=(
     aws
 )
 
-source $ZSH/oh-my-zsh.sh
-
 
 # User configuration
 
@@ -96,12 +94,12 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+#Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='vim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -110,7 +108,6 @@ if [[ ${RANDOM} -le 1000 ]]; then
 	echo >&2 "Updating the firmware..."
 	fwupdmgr update
 fi
-
 
 ###############################################################################
 #                 ZSH auto-completion stuff and configurations                #
@@ -145,6 +142,9 @@ eval "$(direnv hook zsh)"
 for file in ~/.files/zsh.d/*; do
     source $file
 done
+
+# Starship setup
+eval "$(starship init zsh)"
 
 #
 # K8s config

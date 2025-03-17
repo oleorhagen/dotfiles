@@ -1,3 +1,6 @@
 [submodule "zsh-deps/gcloud-ps1"]
 	path = zsh-deps/gcloud-ps1
 	url = git@github.com:ShunHsiangYu/gcloud-ps1.git
+[submodule ".config/alacritty/alacritty-theme-ghub"]
+	path = .config/alacritty/alacritty-theme-ghub
+	url = git@github.com:alacritty/alacritty-theme.git

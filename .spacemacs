@@ -472,7 +472,7 @@ It should only modify the values of Spacemacs settings."
                                ;;  :weight normal
                                ;;  :width normal)
                                ("Source Code Pro"
-                                :size 16
+                                :size 20
                                 :weight normal
                                 :width normal)
                                ;; ("Monaco"
