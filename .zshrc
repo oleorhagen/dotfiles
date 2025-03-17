@@ -19,8 +19,9 @@ source ~/.profile # Consider adding this to an autorun-login shell-script
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-# export ZSH=/home/$USER/.oh-my-zsh
+
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
 export SCRIPT_DIR=/home/olepor/.i3blocks/i3blocks-contrib/
 
@@ -68,8 +69,6 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-source $HOME/.oh-my-zsh/oh-my-zsh.sh
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -85,6 +84,8 @@ plugins=(
     autoenv # .in and .out files to automatically setup an env when entering a directory
     aws
 )
+
+source $ZSH/oh-my-zsh.sh
 
 
 # User configuration
@@ -142,9 +143,6 @@ eval "$(direnv hook zsh)"
 for file in ~/.files/zsh.d/*; do
     source $file
 done
-
-# Starship setup
-eval "$(starship init zsh)"
 
 #
 # K8s config
