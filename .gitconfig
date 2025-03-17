@@ -112,7 +112,7 @@
 [rebase]
 	autoSquash = true
 	autoStash = true
-	updateRefs = true
+	#updateRefs = true
 [credential "https://github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
