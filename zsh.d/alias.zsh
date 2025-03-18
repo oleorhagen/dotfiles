@@ -107,9 +107,6 @@ alias cal="cal --monday"
 # Hackeriet password store alias
 alias hackerpass='PASSWORD_STORE_DIR="$HOME/.hackeriet_pass" pass'
 
-# Edit moo config
-alias mooconf="vim ~/.moo/config.hcl"
-
 # orhagen k8s
 alias ko="KUBECONFIG=/home/olepor/.kube/k3s-orhagen.yaml kubectl"
 
@@ -126,6 +123,8 @@ alias lsusb='cyme'
 alias kop='KUBECONFIG=/home/olepor/.kube/k3s-orhagen.yaml kubectl'
 
 # Alias for login to my self-hosted postgres
-alias pgsqlop='PGPASSWORD="$(pass show private/home/proxmox/postgresql-postgres-account)" psql --host orhagen.no --username postgres'
+alias psqlop='PGPASSWORD="$(pass show private/home/proxmox/postgresql-postgres-account)" psql --host orhagen.no --username postgres'
 
 alias drm='docker stop "$(docker ps -aq)" && docker rm "$(docker ps -aq)"'
+
+alias roombar_all_log='ssh my-roombar "tail -f /var/log/eventlog/all.log"'
