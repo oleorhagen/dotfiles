@@ -870,29 +870,6 @@ you should place your code here."
   ;;  'misterioso
   ;;  '(hl-line ((t (:background "#292b2e")))))
 
-  ;; evaluate sexpressions with ee
-  (spacemacs/set-leader-keys
-    "ee" 'eval-last-sexp
-    "eb" 'eval-buffer)
-
-  ;; Comment box binding on '<leader> o c b'
-  (spacemacs/declare-prefix "oc" "comment")
-  (spacemacs/set-leader-keys
-    "ocb" 'comment-box)
-
-  (spacemacs/set-leader-keys
-    "os" 'yas-describe-tables)
-
-  (spacemacs/set-leader-keys
-    "ow" 'whitespace-cleanup)
-
-  (defun my-split-line-on-spaces (begin end)
-    (interactive "r")
-    (replace-regexp "\\([^ ]+\\) " "\\1\n" nil begin end))
-
-  (spacemacs/set-leader-keys
-    "os" 'my-split-line-on-spaces)
-
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;;; Evil fix, for key consistency
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -907,16 +884,6 @@ you should place your code here."
 
   ;; (setq sh-basic-offset 2)
 
-
-  ;; Global only run flycheck when prompted
-  (spacemacs/declare-prefix
-    "eb" "flycheck-buffer")
-  (spacemacs/set-leader-keys
-    "eb" '(lambda ()
-            (interactive)
-            ;; Enable flycheck if it is not enabled
-            (flycheck-mode 1)
-            (call-interactively #'flycheck-buffer)))
 
   ;; Don't kill the emacs-server on exit
   (evil-leader/set-key
@@ -933,6 +900,7 @@ you should place your code here."
               (message "C++ inintialisation hook...")
               (flycheck-select-checker 'c/c++-googlelint)
               (flycheck-add-next-checker 'c/c++-googlelint 'c/c++-cppcheck)))
+
   ;; Disable lsp as the standard flycheck checker
   ;; (setq lsp-diagnostic-package :none)
 
