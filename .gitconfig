@@ -1,19 +1,16 @@
 [user]
 	email = ole@orhagen.no
 	name = Ole P. Orhagen
-	signingkey = 399DBE0F4D4B02EB
+	# signingkey = 399DBE0F4D4B02EB
 
 [commit]
-  gpgsign = true
+	gpgsign = false
+	template = ~/.files/git-commit-template.txt
 
 # TODO - https://git-scm.com/docs/git-config#_includes
 # Maybe I should start using this (?)
-[includeIf "gitdir:~/mimiro-io/**"]
-  path = ~/.config/git/work
-
-[includeIf "hasconfig:remote.*.url:git@github.com:mimiro-io/**"]
-  path = ~/.config/git/work
-
+[includeIf "gitdir:~/src/**"]
+  path = ~/.config/git/cisco
 
 [sendemail]
 	smtpServer = smtp.gmail.com
@@ -46,16 +43,15 @@
 	oauth-token = 5f9db8b96623a199d3c30afaddbcc00f7418dac8
 	user = oleorhagen
 
-[commit]
-	gpgsign = true
-	template = ~/.files/git-commit-template.txt
-
 [core]
 	editor = vim
 	excludesFile = ~/.gitignore
+	fsmonitor = true
+	untrackedCache = true
 
 [init]
 	templatedir = ~/.git_templates/template
+	defaultBranch = master
 
 # [remote "mendersoftware"]
 	#fetch = +refs/pull/*/head:refs/remotes/mendersoftware/pr/*
@@ -88,6 +84,41 @@
     hunk-header-file-style = red
     hunk-header-line-number-style = "#067a00"
     hunk-header-style = file line-number syntax
+
 [pull]
 	ff = only
 	rebase = true
+
+# All from https://blog.gitbutler.com/how-git-core-devs-configure-git/
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[diff]
+	# A better patient algorithm
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[push]
+	default = simple
+	autoSetupRemote = true # Create the branch on the remote if it does not exist
+	# followTags = true # Automatically pushes tags
+[rerere]
+	enabled = true
+	autoupdate = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+	#updateRefs = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[blame]
+	markIgnoredLines = true
+	markUnblamableLines = true

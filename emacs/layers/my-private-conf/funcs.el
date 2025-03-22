@@ -60,3 +60,7 @@
   (find-file "part2.cpp")
   (replace-string-in-region "part1" "part2" (point-min) (line-end-position))
   (save-buffer))
+
+(defun my-split-line-on-spaces (begin end)
+  (interactive "r")
+  (replace-regexp "\\([^ ]+\\) " "\\1\n" nil begin end))

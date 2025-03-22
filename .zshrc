@@ -7,6 +7,8 @@
 #
 if cat /etc/os-release | grep -i nixos &>/dev/null; then
     echo "Welcome to NixOS!" | cowsay | lolcat
+elif cat /etc/os-release | grep -i ubuntu &>/dev/null; then
+    echo "Welcome to work!"
 else
     # Assume Arch Linux
     archey3 --color=green
@@ -17,8 +19,9 @@ source ~/.profile # Consider adding this to an autorun-login shell-script
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-# export ZSH=/home/$USER/.oh-my-zsh
+
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
 export SCRIPT_DIR=/home/olepor/.i3blocks/i3blocks-contrib/
 
@@ -51,7 +54,7 @@ export UPDATE_ZSH_DAYS=10
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -65,8 +68,6 @@ export UPDATE_ZSH_DAYS=10
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
-
-# source $ZSH/oh-my-zsh.sh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -94,12 +95,12 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+#Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='vim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -108,7 +109,6 @@ if [[ ${RANDOM} -le 1000 ]]; then
 	echo >&2 "Updating the firmware..."
 	fwupdmgr update
 fi
-
 
 ###############################################################################
 #                 ZSH auto-completion stuff and configurations                #
