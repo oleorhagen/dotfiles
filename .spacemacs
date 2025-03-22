@@ -68,7 +68,7 @@ This function should only modify configuration layer settings."
 
      log
 
-     ;; kubernetes
+     kubernetes
 
      (sql
       :variables
