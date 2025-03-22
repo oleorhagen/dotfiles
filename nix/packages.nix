@@ -34,6 +34,7 @@
     tree
     file
     bind # dig
+    w3m # Text web-browser
 
     # Debug
     wireshark
@@ -71,6 +72,14 @@
     #
     ## Tools and Utils
     #
+
+    # IRC reader
+    irssi
+
+    # Log viewer
+    lnav
+
+    # QR code creator
     qrencode
 
     gnucash # Accounting software
@@ -103,6 +112,7 @@
     binutils
     gcc
     clang
+    clang-tools
 
     # Encryption
     sops
@@ -115,6 +125,7 @@
     # Network
     whois
     wireshark
+    traceroute
 
     #
     # # NixOS Build
