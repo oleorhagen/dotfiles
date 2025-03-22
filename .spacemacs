@@ -127,7 +127,7 @@ This function should only modify configuration layer settings."
             (require 'dap-cpptools))
 
      ;;; Cscope code navigation in C/C++
-     cscope
+     ;; cscope
 
      ;; Enable ligatures <3 and using unicode fonts
      (unicode-fonts :variables
