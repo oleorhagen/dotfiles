@@ -1,5 +1,5 @@
-import = [
-"/home/oorhagen/.config/alacritty/alacritty-theme-ghub/themes/github_light.toml",
+general.import = [
+               "/home/oorhagen/.config/alacritty/github_light.toml",
 ]
 
 [window]
