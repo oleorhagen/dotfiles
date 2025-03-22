@@ -86,13 +86,23 @@
 
     ;; TODO - CPP-insights mode
 
-    (flycheck-google-cpplint
+    ;; (flycheck-google-cpplint
+    ;;  :toggle
+    ;;  :location
+    ;;  (recipe
+    ;;   :fetcher github
+    ;;   :repo "flycheck/flycheck-google-cpplint"))
+
+    ;;; auto-expand-snippets
+    (auto-expand-snippet-mode
      :toggle
      :location
      (recipe
       :fetcher github
-      :repo "flycheck/flycheck-google-cpplint"))
+      :repo "oleorhagen/auto-expand-snippet-mode"))
+
     )
+  )
 
   "The list of Lisp packages required by the my-private-conf layer.
 
@@ -139,7 +149,11 @@ Each entry is either:
 
 (defun my-private-conf/init-react-snippets())
 
-(defun my-private-conf/init-flycheck-google-cpplint ())
+;; (defun my-private-conf/init-flycheck-google-cpplint ())
+
+
+(defun my-private-conf/init-auto-expand-snippet-mode ()
+  (use-package auto-expand-snippet-mode))
 
 (defun my-private-conf/init-rego-mode ())
 
