@@ -73,6 +73,9 @@
     ## Tools and Utils
     #
 
+    # CLI tools 4 openssl
+    openssl
+
     # IRC reader
     irssi
 
