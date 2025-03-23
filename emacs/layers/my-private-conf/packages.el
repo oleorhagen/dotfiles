@@ -102,7 +102,6 @@
       :repo "oleorhagen/auto-expand-snippet-mode"))
 
     )
-  )
 
   "The list of Lisp packages required by the my-private-conf layer.
 
