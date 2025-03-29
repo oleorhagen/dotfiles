@@ -11,7 +11,6 @@
         (elixir     "https://github.com/elixir-lang/tree-sitter-elixir" "main" "src")
         (erlang     "https://github.com/WhatsApp/tree-sitter-erlang" "main" "src")
         (go         "https://github.com/tree-sitter/tree-sitter-go")
-        (go-mod      "https://github.com/camdencheek/tree-sitter-go-mod" "main" "src")
         (haskell    "https://github.com/tree-sitter/tree-sitter-haskell" "master" "src")
         (html       "https://github.com/tree-sitter/tree-sitter-html")
         (java       "https://github.com/tree-sitter/tree-sitter-java" "master" "src")
@@ -30,6 +29,7 @@
         (treesitter "https://github.com/joelspadin/tree-sitter-devicetree" "main" "src")
         (tsx        "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
         (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+        (php        "https://github.com/tree-sitter/tree-sitter-php" "master" "php/src")
         (yaml       "https://github.com/ikatyang/tree-sitter-yaml")))
 
 ;; Emacs defaults to using the non-suffixed *-ts-mode modes, let's remap the

@@ -21,7 +21,8 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 
 # Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# For nixos, do not set this, as it is download to /usr/nix
+#export ZSH="$HOME/.oh-my-zsh"
 
 export SCRIPT_DIR=/home/olepor/.i3blocks/i3blocks-contrib/
 
@@ -119,25 +120,10 @@ fpath=($HOME/.zsh-completions $fpath)
 
 
 #
-# Source .mender.rc
-#
-#source ~/dotfiles/scripts/.mender.rc
-
-# Emacsclient
-#
-
-#
 # Load direnv
 #
 eval "$(direnv hook zsh)"
 
-#
-# Mender client releases
-#
-#if [ ! -e /tmp/client-releases-printed ]; then
-#    ~/dotfiles/scripts/client-releases
-#    touch /tmp/client-releases-printed
-#fi
 
 # Source all the individual configuration files
 for file in ~/.files/zsh.d/*; do

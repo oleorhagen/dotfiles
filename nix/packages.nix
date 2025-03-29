@@ -73,6 +73,11 @@
     ## Tools and Utils
     #
 
+    # Python
+
+    # Formatter
+    black
+
     # CLI tools 4 openssl
     openssl
 
@@ -95,6 +100,9 @@
     #
     python3Full
 
+    # Virtualenv manager
+    pipenv
+
     # For formatting SQL files
     python312Packages.sqlfmt
     sqlfluff
@@ -112,6 +120,7 @@
     #
     ## Tools
     #
+    gnumake
     binutils
     gcc
     clang

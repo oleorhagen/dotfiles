@@ -128,3 +128,6 @@ alias psqlop='PGPASSWORD="$(pass show private/home/proxmox/postgresql-postgres-a
 alias drm='docker stop "$(docker ps -aq)" && docker rm "$(docker ps -aq)"'
 
 alias roombar_all_log='ssh my-roombar "tail -f /var/log/eventlog/all.log"'
+
+# Add an alias for hackerpass
+alias hp='hackerpass'

@@ -244,14 +244,14 @@ function calc () {
 # $1 - the file(s) to format with shfmt
 # Currently supports our mender required format.
 function shell-format() { shfmt \
-        -ln bash \
-        -i 4 \
-        -l \
-        -sr \
-        -ci \
-        -kp \
-        -bn \
-        -w \
+        -ln bash                \
+        -i 4                    \
+        -l                      \
+        -sr                     \
+        -ci                     \
+        -kp                     \
+        -bn                     \
+        -w                      \
         $1
 }
 
@@ -352,10 +352,6 @@ function fuck () {
 # Battery status
 function battery() {
 	cat /sys/class/power_supply/BAT0/capacity
-}
-
-function mimiro_vpn () {
-    /opt/awsvpnclient/AWS VPN Client &
 }
 
 function docker_rm_containers () {
