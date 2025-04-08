@@ -5,7 +5,7 @@
 
 [commit]
 	gpgsign = false
-	template = ~/.files/git-commit-template.txt
+	#template = ~/.files/git-commit-template.txt
 
 # TODO - https://git-scm.com/docs/git-config#_includes
 # Maybe I should start using this (?)

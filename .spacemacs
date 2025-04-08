@@ -463,14 +463,14 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font or prioritized list of fonts.
    dotspacemacs-default-font '(
-                               ;; ("FiraCode Nerd Font"
-                               ;;  :size 30
-                               ;;  :weight normal
-                               ;;  :width normal)
-                               ;; ("Cascadia Code"
-                               ;;  :size 16
-                               ;;  :weight normal
-                               ;;  :width normal)
+                               ("FiraCode Nerd Font"
+                                :size 20
+                                :weight normal
+                                :width normal)
+                               ("Cascadia Code"
+                                :size 20
+                                :weight normal
+                                :width normal)
                                ("Source Code Pro"
                                 :size 20
                                 :weight normal
@@ -890,16 +890,16 @@ you should place your code here."
     "q q" 'spacemacs/frame-killer)
 
   ;; c-c++-mode hook for google-cpplint flycheck
-  (eval-after-load 'flycheck
-    '(progn
-       (require 'flycheck-google-cpplint))
-    )
+  ;; (eval-after-load 'flycheck
+  ;;   '(progn
+  ;;      (require 'flycheck-google-cpplint))
+  ;;   )
 
-  (add-hook 'c++-mode-hook
-            (lambda ()
-              (message "C++ inintialisation hook...")
-              (flycheck-select-checker 'c/c++-googlelint)
-              (flycheck-add-next-checker 'c/c++-googlelint 'c/c++-cppcheck)))
+  ;; (add-hook 'c++-mode-hook
+  ;;           (lambda ()
+  ;;             (message "C++ inintialisation hook...")
+  ;;             (flycheck-select-checker 'c/c++-googlelint)
+  ;;             (flycheck-add-next-checker 'c/c++-googlelint 'c/c++-cppcheck)))
 
   ;; Disable lsp as the standard flycheck checker
   ;; (setq lsp-diagnostic-package :none)

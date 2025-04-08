@@ -34,6 +34,7 @@
     ;; Personal packages
     ;; (github-review :location local)
     ;; (md-to-jira-mode :location local)
+    magit
     (git-conventional-commit-mode :location local)
 
     ;; (go-tagalign-fmt :location local)
@@ -94,42 +95,15 @@
     ;;   :repo "flycheck/flycheck-google-cpplint"))
 
     ;;; auto-expand-snippets
-    (auto-expand-snippet-mode
-     :toggle
-     :location
-     (recipe
-      :fetcher github
-      :repo "oleorhagen/auto-expand-snippet-mode"))
+    ;; (auto-expand-snippet-mode
+    ;;  :toggle
+    ;;  :location
+    ;;  (recipe
+    ;;   :fetcher github
+    ;;   :repo "oleorhagen/auto-expand-snippet-mode"))
 
-    )
-  )
+    ))
 
-  "The list of Lisp packages required by the my-private-conf layer.
-
-Each entry is either:
-
-1. A symbol, which is interpreted as a package to be installed, or
-
-2. A list of the form (PACKAGE KEYS...), where PACKAGE is the
-    name of the package to be installed or loaded, and KEYS are
-    any number of keyword-value-pairs.
-
-    The following keys are accepted:
-
-    - :excluded (t or nil): Prevent the package from being loaded
-      if value is non-nil
-
-    - :location: Specify a custom installation location.
-      The following values are legal:
-
-      - The symbol `elpa' (default) means PACKAGE will be
-        installed using the Emacs package manager.
-
-      - The symbol `local' directs Spacemacs to load the file at
-        `./local/PACKAGE/PACKAGE.el'
-
-      - A list beginning with the symbol `recipe' is a melpa
-        recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
 
 (defun my-private-conf/init-git-conventional-commit-mode ()
@@ -152,8 +126,8 @@ Each entry is either:
 ;; (defun my-private-conf/init-flycheck-google-cpplint ())
 
 
-(defun my-private-conf/init-auto-expand-snippet-mode ()
-  (use-package auto-expand-snippet-mode))
+;; (defun my-private-conf/init-auto-expand-snippet-mode ()
+;;   (use-package auto-expand-snippet-mode))
 
 (defun my-private-conf/init-rego-mode ())
 
@@ -167,6 +141,13 @@ Each entry is either:
     (spacemacs/set-leader-keys-for-major-mode 'sql-mode
       "=r" 'sqlformat-region
       "==" 'sqlformat-buffer)))
+
+
+(defun my-private-conf/post-init-magit ()
+  (add-hook 'git-commit-mode-hook (lambda ()
+                                    (message "Set git commit fill column to 70")
+                                    (auto-fill-mode 1) ;; Automatically break lines
+                                    (setq fill-column 70))))
 
 ;;; TODO - Tagalign does not accept stdin input atm, only takes package
 ;; (defun my-private-conf/init-go-tagalign-fmt ()
