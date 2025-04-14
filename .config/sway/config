@@ -209,9 +209,9 @@ for_window [shell="xwayland"] title_format "[XWayland] %title"
 include /etc/sway/config.d/*
 
  # Add volume control
- #bindsym XF86AudioMute exec amixer -q sset Master toggle
- #bindsym XF86AudioLowerVolume exec amixer -q sset Master 3%-
- #bindsym XF86AudioRaiseVolume exec amixer -q sset Master 3%+
+bindsym XF86AudioMute exec amixer -q sset Master toggle
+bindsym XF86AudioLowerVolume exec amixer -q sset Master 3%-
+bindsym XF86AudioRaiseVolume exec amixer -q sset Master 3%+
 
  # Add brigthness control
  #bindsym XF86MonBrightnessUp exec light -A 20
@@ -257,10 +257,10 @@ include ~/.config/sway/config.d/*
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # media buttons setup
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+# bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+# bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+# bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+# bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 bindsym XF86AudioPlay exec playerctl play-pause
