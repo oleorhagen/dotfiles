@@ -67,10 +67,10 @@
 (defun cli-wrapper-load-history ()
   "Load CLI wrapper command history from a file."
   (interactive)
-  (when (file-exists-p cli-wrapper-history-file)
-    (condition-case err
-        (load-file cli-wrapper-history-file)
-      (error (message "Error loading CLI wrapper history: %s" err)))
+  (if (file-exists-p cli-wrapper-history-file)
+      (condition-case err
+          (load-file cli-wrapper-history-file)
+        (error (message "Error loading CLI wrapper history: %s" err)))
     (message "CLI wrapper history loaded from %s" cli-wrapper-history-file)))
 
 
@@ -273,10 +273,7 @@ Returns a list of plists with properties :name, :description, and :needs-value."
                         (format "Execute command (edit if needed):\n%s\n: " final-command)
                         final-command)))
 
-          ;; Add to history
-          (cli-wrapper-add-to-history cmd confirm)
-
-          (compile confirm))))) )
+          confirm)))))
 
 
 ;; Define a function to create specific wrappers
@@ -290,25 +287,20 @@ Returns a list of plists with properties :name, :description, and :needs-value."
              (interactively-build-cli-command ,command-name)))
     func-name))
 
-(defun my-cisco-main-compile-command-advice (orig-fun &optional command comint)
-  "Advice to make compile interactive."
-  (interactive)
-  ;; TODO - Add history
-  (interactively-build-cli-command "build")) ;; require-match
-
-
 ;; Load history on initialization if available
 (cli-wrapper-load-history)
-
-;; (advice-add 'compilation-read-command :around #'my-cisco-main-compile-command-advice)
-;; (advice-remove 'compilation-read-command #'my-cisco-main-compile-command-advice)
 
 (defun my-interactive-compile-advice (orig-fun &optional command comint)
   "Advice to make compile interactive."
   (interactive)
-  (let* ((dir (or default-directory (read-directory-name "Directory: " nil default-directory)))
+  (let* ((dir "~/src/main")
          (default-directory dir)
          (cmd (read-string "Compile command: " (or command (interactively-build-cli-command "build")))))
+
+    ;; Add to history
+    (message "Adding to history: " cmd)
+    (cli-wrapper-add-to-history "build" cmd)
+
     (setq compile-command cmd)
     (funcall orig-fun cmd comint)))
 
