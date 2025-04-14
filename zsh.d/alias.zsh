@@ -128,3 +128,7 @@ alias psqlop='PGPASSWORD="$(pass show private/home/proxmox/postgresql-postgres-a
 alias drm='docker stop "$(docker ps -aq)" && docker rm "$(docker ps -aq)"'
 
 alias roombar_all_log='ssh my-roombar "tail -f /var/log/eventlog/all.log"'
+
+# Aliases for ssh'ing to my Cisco devices
+alias mr='ssh my-roombar'
+alias mn='ssh my-navigator'
