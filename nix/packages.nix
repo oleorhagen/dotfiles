@@ -109,6 +109,9 @@
 
     # Golang
     go
+    gopkgs
+    gotools
+    gopls
 
     # Yaml
     yaml-language-server
@@ -133,11 +136,13 @@
     ripgrep
     silver-searcher # Also known as ag
     postgresql # Really only need psql
+    perl540Packages.TAPParserSourceHandlerpgTAP # postregresql unit testing using pg_prove
 
     # Network
     whois
     wireshark
     traceroute
+    tcpdump
 
     #
     # # NixOS Build
@@ -156,6 +161,11 @@
 
     # Alacritty themes
     alacritty-theme
+
+    # Video
+    wf-recorder # Screen recording utility
+    ffmpeg # Multimedia swiss army knife
+    vlc # Video player
 
   ];
 
