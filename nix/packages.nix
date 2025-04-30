@@ -35,6 +35,8 @@
     file
     bind # dig
     w3m # Text web-browser
+    kdePackages.okular # pdf reader
+    img2pdf # convert imgs to pdf
 
     # Debug
     wireshark
@@ -137,6 +139,7 @@
     silver-searcher # Also known as ag
     postgresql # Really only need psql
     perl540Packages.TAPParserSourceHandlerpgTAP # postregresql unit testing using pg_prove
+    pgformatter # Code formatter for postgresql
 
     # Network
     whois
