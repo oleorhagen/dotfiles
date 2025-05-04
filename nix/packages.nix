@@ -138,6 +138,7 @@
     ripgrep
     silver-searcher # Also known as ag
     postgresql # Really only need psql
+    postgres-lsp # Language server
     perl540Packages.TAPParserSourceHandlerpgTAP # postregresql unit testing using pg_prove
     pgformatter # Code formatter for postgresql
 
