@@ -102,6 +102,9 @@
     #
     python3Full
 
+    # NASM compiler (Assembler)
+    nasm
+
     # Virtualenv manager
     pipenv
 
@@ -128,8 +131,10 @@
     gnumake
     binutils
     gcc
+    gdb
     clang
     clang-tools
+    include-what-you-use
 
     # Encryption
     sops
@@ -147,6 +152,7 @@
     wireshark
     traceroute
     tcpdump
+    nmap
 
     #
     # # NixOS Build
