@@ -9,6 +9,9 @@
 
     # Man pages (Duh!)
     man-db
+    linux-manual
+    man-pages
+    man-pages-posix
 
     # Browsers
     firefox-wayland
