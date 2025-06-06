@@ -78,6 +78,9 @@
     ## Tools and Utils
     #
 
+    # AI
+    aider-chat
+
     # Python
 
     # Formatter
