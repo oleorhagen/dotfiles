@@ -363,3 +363,8 @@ function docker_rm_containers () {
     docker stop "${_containers}"
     docker rm "${_containers}"
 }
+
+function get_pictoris_all_log () {
+    mkdir -p ~/.debug-logs/pictoris
+    scp my-pictoris:'/var/log/eventlog/*' ~/.debug-logs/pictoris/
+}
