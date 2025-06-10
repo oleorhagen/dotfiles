@@ -89,3 +89,34 @@
             (define-key evil-motion-state-local-map (kbd "n") 'Info-next)
             (define-key evil-motion-state-local-map (kbd "H") 'Info-prev)
             (define-key evil-motion-state-local-map (kbd "L") 'Info-next)))
+
+
+;;; Load the cisco-rbuild compilation util
+(load-file "/home/oorhagen/.files/emacs/work-utilites/cisco-rbuild.el")
+
+
+;;
+;;; LSP Mode, wrap with LSP booster
+;;
+(setq lsp-clients-clangd-executable
+      "/home/oorhagen/.cargo/bin/emacs-lsp-booster")
+
+;; ;; Customize how clangd is started
+(setq lsp-clients-clangd-args '(
+                                "--disable-bytecode"
+                                "--"
+                                "clangd"
+                                "--log=verbose"
+                                "--background-index"
+                                "--background-index-priority=low"
+                                "--clang-tidy"
+                                "--header-insertion=never" ;; Never insert #include directives as part of completion
+                                "--header-insertion-decorators=0"
+                                "-j" ;; Nr of cores atm
+                                "8"
+                                "--enable-config" ;; Allow reading local config files
+                                "--malloc-trim" ;; Periodically release memory
+                                ))
+;;
+;;; END LSP Config
+;;
