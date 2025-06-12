@@ -368,3 +368,14 @@ function get_pictoris_all_log () {
     mkdir -p ~/.debug-logs/pictoris
     scp my-pictoris:'/var/log/eventlog/*' ~/.debug-logs/pictoris/
 }
+
+
+# Alias lsusb to cyme
+function lsusb() {
+    if which cyme; then
+        cyme
+    else
+        lsusb
+    fi
+}
+

@@ -116,9 +116,6 @@ alias hackerpass='PASSWORD_STORE_DIR="$HOME/.hackeriet_pass" pass'
 # Stop and remove all running docker containers
 alias dsr='docker stop $(docker ps -aq) && docker rm $(docker ps -aq)'
 
-# Alias lsusb to cyme
-alias lsusb='cyme'
-
 # Alias kop (k8s for my home k8s)
 alias kop='KUBECONFIG=/home/olepor/.kube/k3s-orhagen.yaml kubectl'
 
