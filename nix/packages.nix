@@ -4,6 +4,9 @@
 
   environment.systemPackages = with pkgs; [
 
+    # Cursor theme
+    phinger-cursors
+
     # Zsh plugins
     zsh-autoenv
 
@@ -15,12 +18,16 @@
 
     # Browsers
     firefox-wayland
+    firefox-devedition
     google-chrome
 
     git
 
+    # Code AI
+    claude-code
+
     # Editor setup
-    emacs
+    emacs-pgtk
     # Language server for the Nix layer
     nixd # https://github.com/nix-community/nixd
     # Prettify nix code
@@ -107,6 +114,14 @@
     # Languages
     #
     python3Full
+
+    # Haskell
+    ghc
+    hlint # Linter
+    haskellPackages.apply-refact
+    stylish-haskell # Formatter
+    haskellPackages.hasktags # Haskell ctags
+    haskellPackages.hoogle # Haskell API search
 
     # NASM compiler (Assembler)
     nasm
