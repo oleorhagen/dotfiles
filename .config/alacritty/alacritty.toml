@@ -53,3 +53,16 @@ save_to_clipboard=true
 #{ key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
 #{ key = "L", mods = "Control|Shift", chars = "l" },
 #]
+
+[[hints.enabled]]
+regex = '([^\s]+\.[ch]pp):?(\d+)?:?(\d+)?'
+command = "emacsclient"
+post_processing = true
+
+[hints.enabled.mouse]
+enabled = true
+mods = "Control"
+
+[hints.enabled.binding]
+key = "E"
+mods = "Control|Shift"
