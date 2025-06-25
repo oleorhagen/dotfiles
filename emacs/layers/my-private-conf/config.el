@@ -60,8 +60,8 @@
 ;;       ))
 
 ;; Font lock all the things
-(defvar my-treesit-font-lock-level-max 4)
-(customize-set-variable 'treesit-font-lock-level my-treesit-font-lock-level-max)
+;; (defvar my-treesit-font-lock-level-max 4)
+;; (customize-set-variable 'treesit-font-lock-level my-treesit-font-lock-level-max)
 
 (defun my-install-treesitter-grammars ()
   "Install the given tree-sitter grammars from treesit-language-source-alist"
