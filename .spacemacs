@@ -203,7 +203,7 @@ This function should only modify configuration layer settings."
      github-copilot
 
      ;; ;; semantic
-     ;; systemd
+     systemd
      ;; syntax-checking
      ;; (markdown :variables
      ;;           markdown-live-preview-engine 'vmd
