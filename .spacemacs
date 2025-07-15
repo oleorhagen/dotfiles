@@ -52,7 +52,7 @@ This function should only modify configuration layer settings."
      ;; display
      my-private-conf
 
-     evil-treesitter-utils
+     ;;evil-treesitter-utils
 
      (terraform :variables
                 terraform-auto-format-on-save t
@@ -66,7 +66,7 @@ This function should only modify configuration layer settings."
      ;;; Lua
      lua
 
-     log
+     ;;log
 
      kubernetes
 
@@ -103,6 +103,11 @@ This function should only modify configuration layer settings."
                  javascript-fmt-on-save t)
      react
      prettier
+
+     ;;; Haskell
+     haskell
+
+     graphql
 
      (html :variables
            web-fmt-tool 'prettier
@@ -262,7 +267,17 @@ This function should only modify configuration layer settings."
                                             (recipe
                                              :fetcher github
                                              :repo "djgoku/sops"))
-                                      )
+
+                                      (claude-code
+                                       :location
+                                       (recipe
+                                        :fetcher github
+                                        :repo "/stevemolitor/claude-code.el")
+                                       :config (claude-code-mode)
+                                       :bind-keymap ("C-c c" . claude-code-command-map)
+                                       :init
+                                       (setq claude-code-terminal-backend 'vterm)
+                                       ))
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -890,16 +905,16 @@ you should place your code here."
     "q q" 'spacemacs/frame-killer)
 
   ;; c-c++-mode hook for google-cpplint flycheck
-  (eval-after-load 'flycheck
-    '(progn
-       (require 'flycheck-google-cpplint))
-    )
+  ;; (eval-after-load 'flycheck
+  ;;   '(progn
+  ;;      (require 'flycheck-google-cpplint))
+  ;;   )
 
-  (add-hook 'c++-mode-hook
-            (lambda ()
-              (message "C++ inintialisation hook...")
-              (flycheck-select-checker 'c/c++-googlelint)
-              (flycheck-add-next-checker 'c/c++-googlelint 'c/c++-cppcheck)))
+  ;; (add-hook 'c++-mode-hook
+  ;;           (lambda ()
+  ;;             (message "C++ inintialisation hook...")
+  ;;             (flycheck-select-checker 'c/c++-googlelint)
+  ;;             (flycheck-add-next-checker 'c/c++-googlelint 'c/c++-cppcheck)))
 
   ;; Disable lsp as the standard flycheck checker
   ;; (setq lsp-diagnostic-package :none)
