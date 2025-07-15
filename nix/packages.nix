@@ -8,6 +8,7 @@
     phinger-cursors
 
     # Zsh plugins
+    autoenv
     zsh-autoenv
 
     # Man pages (Duh!)
@@ -28,6 +29,7 @@
 
     # Editor setup
     emacs-pgtk
+    emacsPackages.lsp-haskell
     # Language server for the Nix layer
     nixd # https://github.com/nix-community/nixd
     # Prettify nix code
@@ -86,7 +88,7 @@
     #
 
     # AI
-    aider-chat
+    # aider-chat
 
     # Python
 
@@ -114,6 +116,8 @@
     # Languages
     #
     python3Full
+
+    nodejs_24
 
     # Haskell
     ghc
