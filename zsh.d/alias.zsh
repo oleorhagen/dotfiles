@@ -123,7 +123,7 @@ alias lsusb='cyme'
 alias kop='KUBECONFIG=/home/olepor/.kube/k3s-orhagen.yaml kubectl'
 
 # Alias for login to my self-hosted postgres
-alias psqlop='PGPASSWORD="$(pass show private/home/proxmox/postgresql-postgres-account)" psql --host orhagen.no --username postgres'
+alias psqlop='PGPASSWORD="$(pass show private/home/proxmox/postgresql-postgres-account | head -1)" psql --host orhagen.no --username postgres'
 
 alias drm='docker stop "$(docker ps -aq)" && docker rm "$(docker ps -aq)"'
 
