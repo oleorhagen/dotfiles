@@ -152,6 +152,7 @@
     # yamlfix # Another formatter
     yamllint
     yq # jq for yaml
+    pup # Parse html
 
     #
     ## Tools
