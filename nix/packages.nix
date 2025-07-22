@@ -11,6 +11,9 @@
     autoenv
     zsh-autoenv
 
+    # oil shell
+    oils-for-unix
+
     # Man pages (Duh!)
     man-db
     linux-manual
