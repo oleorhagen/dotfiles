@@ -56,6 +56,9 @@
     # Debug
     wireshark
 
+    # Hardware
+    kicad
+
     # GTK conf
     lxappearance
 
@@ -164,6 +167,10 @@
     clang
     clang-tools
     include-what-you-use
+    parallel-full # Parallelize cli operations
+    moreutils # growing collection of unix tools no-one thought to write in the beginning
+
+    sshpass # Automatically feed passwords to ssh
 
     # Encryption
     sops
