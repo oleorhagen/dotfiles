@@ -169,6 +169,10 @@
     include-what-you-use
     parallel-full # Parallelize cli operations
     moreutils # growing collection of unix tools no-one thought to write in the beginning
+    tldr # Community managed manpages
+
+    # Cracking
+    dirbuster
 
     sshpass # Automatically feed passwords to ssh
 

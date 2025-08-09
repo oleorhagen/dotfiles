@@ -66,7 +66,7 @@ alias release_tool=release_tool.py
 alias rt=release_tool.py
 
 # pwndbg
-alias pwndbg='gdb -x /usr/share/pwndbg/gdbinit.py'
+# alias pwndbg='gdb -x /usr/share/pwndbg/gdbinit.py'
 
 # by default, only ping 3 times for good luck
 alias ping='ping -c 3'
