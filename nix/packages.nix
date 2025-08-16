@@ -93,6 +93,8 @@
     ## Tools and Utils
     #
 
+    cutter # rev-ing
+
     # AI
     # aider-chat
 
@@ -122,6 +124,9 @@
     # Languages
     #
     python3Full
+    python313Packages.pwntools
+    python312Packages.pwntools
+    pwntools
 
     nodejs_24
 
@@ -170,6 +175,11 @@
     parallel-full # Parallelize cli operations
     moreutils # growing collection of unix tools no-one thought to write in the beginning
     tldr # Community managed manpages
+    inetutils # common network programs
+    ncftp # FTP client
+
+    # Terraform client
+    terraform
 
     # Cracking
     dirbuster
