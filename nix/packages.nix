@@ -177,6 +177,7 @@
     tldr # Community managed manpages
     inetutils # common network programs
     ncftp # FTP client
+    restic # Backups
 
     # Terraform client
     terraform
