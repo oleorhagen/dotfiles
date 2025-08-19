@@ -179,6 +179,9 @@
     ncftp # FTP client
     restic # Backups
 
+    # Shell format util
+    shfmt
+
     # Terraform client
     terraform
 
