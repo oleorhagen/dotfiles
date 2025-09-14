@@ -152,6 +152,7 @@ This function should only modify configuration layer settings."
      ;; ;; better-defaults
      ;; (shell :variables shell-default-shell 'ansi-term
      ;;        shell-default-term-shell "/bin/zsh")
+     shell
      (shell-scripts :variables shell-scripts-backend 'lsp)
      emacs-lisp
      (git
@@ -267,17 +268,25 @@ This function should only modify configuration layer settings."
                                             (recipe
                                              :fetcher github
                                              :repo "djgoku/sops"))
-
-                                      (claude-code
+                                      ;; (claude-code
+                                      ;;  :location
+                                      ;;  (recipe
+                                      ;;   :fetcher github
+                                      ;;   :repo "/stevemolitor/claude-code.el")
+                                      ;;  :config (claude-code-mode)
+                                      ;;  :bind-keymap ("C-c c" . claude-code-command-map)
+                                      ;;  :init
+                                      ;;  (setq claude-code-terminal-backend 'vterm)
+                                      ;;  )
+                                      (claude-code-ide
                                        :location
                                        (recipe
                                         :fetcher github
-                                        :repo "/stevemolitor/claude-code.el")
-                                       :config (claude-code-mode)
-                                       :bind-keymap ("C-c c" . claude-code-command-map)
-                                       :init
-                                       (setq claude-code-terminal-backend 'vterm)
-                                       ))
+                                        :repo "manzaltu/claude-code-ide.el")
+                                       :bind ("C-c C-'" . claude-code-ide-menu) ; Set your favorite keybinding
+                                       :config
+                                       (claude-code-ide-emacs-tools-setup)) ; Optionally enable Emacs MCP tools
+                                      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
