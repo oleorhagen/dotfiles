@@ -46,11 +46,13 @@
     unzip
     jq
     tree
+    tree-sitter # Handy parser for source-code
     file
     bind # dig
     w3m # Text web-browser
     kdePackages.okular # pdf reader
     img2pdf # convert imgs to pdf
+    btop # Better top
 
     # Debug
     wireshark
