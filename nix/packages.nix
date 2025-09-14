@@ -32,7 +32,6 @@
 
     # Editor setup
     emacs-pgtk
-    emacsPackages.lsp-haskell
     # Language server for the Nix layer
     nixd # https://github.com/nix-community/nixd
     # Prettify nix code
@@ -123,9 +122,8 @@
     #
     # Languages
     #
-    python3Full
+    python313
     python313Packages.pwntools
-    python312Packages.pwntools
     pwntools
 
     nodejs_24
@@ -178,6 +176,8 @@
     inetutils # common network programs
     ncftp # FTP client
     restic # Backups
+
+    cmake # build tools for C/C++
 
     # Shell format util
     shfmt
