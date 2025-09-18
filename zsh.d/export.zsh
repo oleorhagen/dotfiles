@@ -34,8 +34,11 @@ export PATH="/usr/lib/ccache/bin:$PATH"
 # Add dotfiles/scripts to PATH
 export PATH=$HOME/.files/scripts:$PATH
 
+# Add cisco scripts to PATH
+export PATH=$PATH:/home/$(whoami)/.files/scripts/cisco
+
 # Add the misc/scripts folder to PATH
-export PATH=$PATH:/home/olepor/misc/scripts
+export PATH=$PATH:/home/$(whoami)/misc/scripts
 
 # Add ~/code/scripts to the PATH
 export PATH=${HOME}/code/scripts:$PATH

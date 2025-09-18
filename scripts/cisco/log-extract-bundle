@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Description: Extract a bundle of log files from a directory and its subdirectories
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <logbundle>" >&2
+    exit 1
+fi
+
+readonly logbundle="$1"
+
+
+echo >&2 "Existing directories in ~/Downloads/logs: "
+ls -l ~/Downloads/logs
+read -p "Enter the name of the directory to create for the log extration: " dir_name
+
+mkdir -p ~/Downloads/logs/"$dir_name"
+
+echo >&2 "Creating the directory ~/Downloads/logs/$dir_name"
+mkdir -p ~/Downloads/logs/"$dir_name"
+
+echo >&2 "Extracting the log files to ~/Downloads/logs/$dir_name"
+tar xvzf "$logbundle" -C ~/Downloads/logs/"$dir_name"
+
+echo >&2 "Extraction complete. Extracted files are in ~/Downloads/logs/$dir_name"
+cd ~/Downloads/logs/"$dir_name"
+
+

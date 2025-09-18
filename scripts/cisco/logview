@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+
+# Description: View logs using lnav
+
+
+# 1. Build the command line (files) to view through lnav
+# readonly files="$(fzf --multi)"
+
+
+# 2. eval the command
+# eval "lnav $files"
+
+fzf --multi | xargs lnav
