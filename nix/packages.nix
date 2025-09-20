@@ -107,6 +107,9 @@
     # CLI tools 4 openssl
     openssl
 
+    # Markup transpiler
+    pandoc
+
     # IRC reader
     irssi
 
