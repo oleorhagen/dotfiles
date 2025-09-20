@@ -82,26 +82,24 @@
      :location
      (recipe
       :fetcher github
-      :repo github.com/purcell/sqlformat))
+      :repo "github.com/purcell/sqlformat"))
 
     ;; TODO - CPP-insights mode
 
     ;; (flycheck-google-cpplint
-    ;;  :toggle
     ;;  :location
     ;;  (recipe
     ;;   :fetcher github
     ;;   :repo "flycheck/flycheck-google-cpplint"))
-
-    ;;; auto-expand-snippets
     (auto-expand-snippet-mode
-     :toggle
      :location
      (recipe
       :fetcher github
-      :repo "oleorhagen/auto-expand-snippet-mode"))
-
-    )
+      :repo "oleorhagen/auto-expand-snippet-mode")
+     :init
+     (message "Attempting to load auto-expand-snippet-mode")
+     :config
+     (message "auto-expand-snippet-mode loaded successfully")))
 
   "The list of Lisp packages required by the my-private-conf layer.
 
