@@ -43,6 +43,9 @@ export PATH=$PATH:/home/$(whoami)/misc/scripts
 # Add ~/code/scripts to the PATH
 export PATH=${HOME}/code/scripts:$PATH
 
+# Add go bin to the PATH
+export PATH=$PATH:$(go env GOPATH)/bin
+
 # No python bytecode plz
 export PYTHONDONTWRITEBYTECODE="true"
 
