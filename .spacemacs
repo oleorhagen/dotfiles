@@ -269,10 +269,10 @@ This function should only modify configuration layer settings."
                                              :fetcher github
                                              :repo "djgoku/sops"))
                                       ;;; Needed, as the current installed transient package is too old atm
-                                      (transient :location
-                                                 (recipe
-                                                  :fetcher github
-                                                  :repo "magit/transient"))
+                                      ;; (transient :location
+                                      ;;            (recipe
+                                      ;;             :fetcher github
+                                      ;;             :repo "magit/transient"))
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
