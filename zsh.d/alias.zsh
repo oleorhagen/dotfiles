@@ -102,7 +102,7 @@ alias fuck='sudo !!'
 alias 3cho='echo'
 
 # Cal start on monday
-alias cal="cal --monday"
+# alias cal="cal --monday"
 
 # Hackeriet password store alias
 alias hackerpass='PASSWORD_STORE_DIR="$HOME/.hackeriet_pass" pass'
@@ -129,3 +129,8 @@ alias roombar_all_log='ssh my-roombar "tail -f /var/log/eventlog/all.log"'
 # Aliases for ssh'ing to my Cisco devices
 alias mr='ssh my-roombar'
 alias mn='ssh my-navigator'
+
+# Set up zen aliases
+# echo "alias breath='zenta now --quick'" >> ~/.zshrc
+# echo "alias breathe='zenta now'" >> ~/.zshrc
+# echo "alias reflect='zenta reflect'" >> ~/.zshrc
