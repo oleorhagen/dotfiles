@@ -25,6 +25,6 @@ echo >&2 "Extracting the log files to ~/Downloads/logs/$dir_name"
 tar xvzf "$logbundle" -C ~/Downloads/logs/"$dir_name"
 
 echo >&2 "Extraction complete. Extracted files are in ~/Downloads/logs/$dir_name"
-cd ~/Downloads/logs/"$dir_name"
+# cd ~/Downloads/logs/"$dir_name"
 
 
