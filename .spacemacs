@@ -477,7 +477,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font or prioritized list of fonts.
    dotspacemacs-default-font '(
                                ("FiraCode Nerd Font"
-                                :size 20
+                                :size 16
                                 :weight normal
                                 :width normal)
                                ("Cascadia Code"
