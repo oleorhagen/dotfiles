@@ -64,3 +64,16 @@
 (defun my-split-line-on-spaces (begin end)
   (interactive "r")
   (replace-regexp "\\([^ ]+\\) " "\\1\n" nil begin end))
+
+(defun my/create-branch-from-main (branch-name)
+  "Fetch all remotes, checkout origin/main, and create a new branch.
+BRANCH-NAME is prompted for interactively."
+  (interactive "sBranch name: ")
+  (message "Fetching all remotes...")
+  (magit-git "fetch" "--all")
+  (message "Checking out origin/main...")
+  (magit-checkout "origin/main")
+  (message "Creating branch %s..." branch-name)
+  (magit-create-branch branch-name "origin/main")
+  (magit-checkout branch-name)
+  (message "Done!"))
