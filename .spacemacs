@@ -860,12 +860,6 @@ you should place your code here."
   ;; No byte compilation
   (setq-default no-byte-compile t)
 
-  ;; C++ (Mender) State-machine alignment hack
-  (defun align-statemachine-states (start end)
-    "Align the states in the Mender client statemachine"
-    (interactive "r\n")
-    (align-regexp start end ",\\(\\s-*\\)[a-z_.]+" 1 2 t))
-
   ;; c-basic-offset - default to 4
 
   ;; Set a random theme on startup
