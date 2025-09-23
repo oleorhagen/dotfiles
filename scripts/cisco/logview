@@ -10,4 +10,17 @@
 # 2. eval the command
 # eval "lnav $files"
 
-fzf --multi | xargs lnav
+# This adds the command should be added to the history
+fzf_lnav() {
+    local files=($(fzf --multi))
+    if [[ ${#files[@]} -gt 0 ]]; then
+        local cmd="lnav ${files[*]}"
+        # print -s "$cmd"  # zsh history
+        # history -s "$cmd"  # bash history
+        echo >&2 "$cmd"  # print
+        lnav "${files[@]}"
+    fi
+}
+
+# fzf --multi | xargs lnav
+fzf_lnav
