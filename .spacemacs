@@ -48,6 +48,8 @@ This function should only modify configuration layer settings."
 
      markdown
 
+     puppet ;; Config my machine
+
      ;; My private display package from ~/.layers
      ;; display
      my-private-conf
