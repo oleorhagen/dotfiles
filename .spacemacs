@@ -154,7 +154,7 @@ This function should only modify configuration layer settings."
       git-magit-status-fullscreen t)
 
      (lsp :variables
-          lsp-manage-backends-manually  '(c++-mode)
+          lsp-manage-backends-manually  nil
           lsp-pyright-multi-root        nil
           lsp-use-lsp-ui                nil
           lsp-ui-remap-xref-keybindings nil
