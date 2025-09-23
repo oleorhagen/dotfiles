@@ -78,8 +78,9 @@
 
 ;;; Add the ruff linter as next after lsp
 (add-hook 'python-mode-hook
-          (lambda ()
-            (flycheck-add-next-checker 'lsp 'python-ruff)))
+          (with-eval-after-load 'lsp-mode
+            (lambda ()
+              (flycheck-add-next-checker 'lsp 'python-ruff))))
 
 ;;; Make return follow link in info-mode
 (add-hook 'Info-mode-hook
