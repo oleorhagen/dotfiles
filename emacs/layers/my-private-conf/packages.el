@@ -95,14 +95,11 @@
     ;;   :repo "flycheck/flycheck-google-cpplint"))
 
     ;;; auto-expand-snippets
-    ;; (auto-expand-snippet-mode
-    ;;  :toggle
-    ;;  :location
-    ;;  (recipe
-    ;;   :fetcher github
-    ;;   :repo "oleorhagen/auto-expand-snippet-mode"))
-
-    ))
+    (auto-expand-snippet-mode
+     :location
+     (recipe
+      :fetcher github
+      :repo "oleorhagen/auto-expand-snippet-mode"))))
 
 
 
