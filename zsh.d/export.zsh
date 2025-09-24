@@ -65,3 +65,11 @@ export AUTOENV_ENV_LEAVE_FILENAME=.out
 
 # Set aws-vault to use pass as the default backend
 export AWS_VAULT_BACKEND=pass
+
+#
+# Claude code export variables
+#
+export CLAUDE_CODE_USE_BEDROCK=1  # configure Claude to use Bedrock
+export CLAUDE_CODE_SKIP_BEDROCK_AUTH=1  # don't use AWS IAM auth to access Bedrock
+export ANTHROPIC_BEDROCK_BASE_URL=https://llm-proxy.us-east-2.ops.infra.intelligence.webex.com/bedrock/v1
+# CLAUDE_CODE_API_KEY_HELPER_TTL_MS=300000  # 5 minutes
