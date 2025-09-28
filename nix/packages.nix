@@ -54,6 +54,10 @@
     img2pdf # convert imgs to pdf
     btop # Better top
 
+    ## 4 kernel dev
+    qemu # The quick emulator
+    dracut
+
     # Debug
     wireshark
 
@@ -131,6 +135,13 @@
     python313Packages.pwntools
     pwntools
 
+    # Rust
+    rustc
+    cargo
+    rustfmt
+    rust-analyzer
+    clippy
+
     nodejs_24
 
     # Haskell
@@ -181,6 +192,7 @@
     inetutils # common network programs
     ncftp # FTP client
     restic # Backups
+    graphviz # Visualize graphs
 
     cmake # build tools for C/C++
 
