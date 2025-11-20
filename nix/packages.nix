@@ -21,7 +21,7 @@
     man-pages-posix
 
     # Browsers
-    firefox-wayland
+    firefox
     firefox-devedition
     google-chrome
 
@@ -53,6 +53,9 @@
     kdePackages.okular # pdf reader
     img2pdf # convert imgs to pdf
     btop # Better top
+
+    # tracing
+    ltrace
 
     ## 4 kernel dev
     qemu # The quick emulator
@@ -146,8 +149,9 @@
 
     # Haskell
     ghc
+    cabal-install
     hlint # Linter
-    haskellPackages.apply-refact
+    # haskellPackages.apply-refact  # Marked as broken
     stylish-haskell # Formatter
     haskellPackages.hasktags # Haskell ctags
     haskellPackages.hoogle # Haskell API search
@@ -214,7 +218,7 @@
     ripgrep
     silver-searcher # Also known as ag
     postgresql # Really only need psql
-    postgres-lsp # Language server
+    postgres-language-server
     perl540Packages.TAPParserSourceHandlerpgTAP # postregresql unit testing using pg_prove
     pgformatter # Code formatter for postgresql
 
@@ -247,6 +251,9 @@
     wf-recorder # Screen recording utility
     ffmpeg # Multimedia swiss army knife
     vlc # Video player
+
+    # Devenv
+    devenv
 
   ];
 
