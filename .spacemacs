@@ -734,9 +734,9 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-persistent-server t
 
    ;; List of search tool executable names. Spacemacs uses the first installed
-   ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
+   ;; tool of the list. Supported tools are `rg', `ag', `ack' and `grep'.
    ;; (default '("rg" "ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("rg" "ag" "ack" "grep")
 
    ;; The backend used for undo/redo functionality. Possible values are
    ;; `undo-fu', `undo-redo' and `undo-tree' see also `evil-undo-system'.
@@ -1011,49 +1011,102 @@ This function is called at the very end of Spacemacs initialization."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(custom-safe-themes
-     '("0a2168af143fb09b67e4ea2a7cef857e8a7dad0ba3726b500c6a579775129635" "7fd8b914e340283c189980cd1883dbdef67080ad1a3a9cc3df864ca53bdc89cf" "a0ac98a1bde5d6336295fd350155a4aac1d63c53c1b3773062271074d16ebeb5" default))
+     '("0a2168af143fb09b67e4ea2a7cef857e8a7dad0ba3726b500c6a579775129635"
+       "7fd8b914e340283c189980cd1883dbdef67080ad1a3a9cc3df864ca53bdc89cf"
+       "a0ac98a1bde5d6336295fd350155a4aac1d63c53c1b3773062271074d16ebeb5" default))
    '(ignored-local-variable-values '((eval add-hook 'before-save-hook 'time-stamp)))
    '(org-agenda-files '("/home/olepor/Documents/journal/20230720"))
    '(package-selected-packages
-     '(nerd-icons-completion pg compat catppuccin-theme async bind-map lv hydra avy s dash f pythonic anaconda-mode auctex ht yasnippet spinner clang-format emacsql closql with-editor a treepy ghub deferred yaml forge emojify code-review company lua-mode company-lua math-symbol-lists rtags company-statistics web-completion-data request request-deferred epl pkg-info ycmd bui pfuture posframe lsp-treemacs disable-mouse aio tablist popup websocket anaphora polymode elisp-demos list-utils paredit projectile iedit ess ctable anzu smartparens annalist flx flycheck package-lint pos-tip flyspell-correct go-mode haml-mode helm-comint imenu-list window-purpose parent-mode htmlize simple-httpd grizzl concurrent epc js2-mode multiple-cursors json-snatcher hierarchy yaml-mode skewer-mode extmap shut-up org gntp log4e alert orgit tomelr persp-mode pyvenv load-env-vars load-relative loc-changes test-simple reformatter rego-mode powerline sqlformat tsc tree-sitter tree-sitter-langs fringe-helper ts-fold undo-fu undo-fu-session pcache persistent-soft font-utils ucs-utils vundo visual-fill-column devicetree-ts-mode dts-mode ccls cmake-mode lsp-docker doom-modeline nerd-icons flycheck-google-cpplint magit transient helm-ls-git helm helm-core hl-todo logview consult lsp-origami lsp-mode treemacs markdown-mode org-modern org-projectile org-project-capture org-category-capture yasnippet-snippets evil yapfify ws-butler writeroom-mode winum which-key wfnames web-mode web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen unicode-fonts undo-tree treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org term-cursor tagedit symon symbol-overlay string-inflection string-edit-at-point sqlup-mode sql-indent sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smeargle slim-mode shrink-path shfmt scss-mode sass-mode rjsx-mode restart-emacs realgud react-snippets rainbow-delimiters quickrun pytest pylookup pyenv-mode pydoc py-isort pug-mode prettier-js popwin poetry pippel pipenv pip-requirements pcre2el password-generator paradox pandoc-mode ox-pandoc ox-hugo ox-gfm overseer origami orgit-forge org-superstar org-rich-yank org-present org-pomodoro org-mime org-journal org-download org-contrib org-cliplink open-junk-file ob-cfengine3 npm-mode nose nodejs-repl nameless mustache-mode multi-line mmm-mode markdown-toc magit-section macrostep lsp-ui lsp-python-ms lsp-pyright lsp-latex lorem-ipsum livid-mode live-py-mode link-hint ligature k8s-mode json-reformat json-navigator json-mode js2-refactor js-doc inspector insert-shebang info+ indent-guide importmagic import-js impatient-mode hybrid-mode hungry-delete holy-mode highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-git-grep helm-descbinds helm-ctest helm-css-scss helm-company helm-c-yasnippet helm-ag goto-chg google-translate google-c-style golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link git-commit gh-md gendoxy fuzzy flyspell-correct-helm flycheck-ycmd flycheck-rtags flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flycheck-bashate flx-ido fish-mode fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-tex evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu ess-R-data-view emr emmet-mode elisp-slime-nav elisp-def ein editorconfig dumb-jump drag-stuff dotenv-mode dockerfile-mode docker disaster dired-quick-sort diminish devdocs define-word datetime dap-mode cython-mode cpp-auto-include company-ycmd company-web company-shell company-rtags company-reftex company-math company-go company-c-headers company-auctex company-anaconda column-enforce-mode code-cells clean-aindent-mode cfrs centered-cursor-mode blacken auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile all-the-icons aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell))
+     '(a ac-ispell ace-jump-helm-line ace-link ace-window aggressive-indent aio alert
+         all-the-icons anaconda-mode anaphora annalist anzu async auctex
+         auto-compile auto-dictionary auto-expand-snippet-mode
+         auto-highlight-symbol auto-yasnippet avy bind-map blacken bui
+         catppuccin-theme ccls centered-cursor-mode cfrs clang-format
+         clean-aindent-mode closql cmake-mode code-cells code-review
+         column-enforce-mode company company-anaconda company-auctex
+         company-c-headers company-go company-lua company-math company-reftex
+         company-rtags company-shell company-statistics company-web company-ycmd
+         compat concurrent consult cpp-auto-include ctable cython-mode dap-mode
+         dash datetime deferred define-word devdocs devicetree-ts-mode diminish
+         dired-quick-sort disable-mouse disaster docker dockerfile-mode
+         doom-modeline dotenv-mode drag-stuff dts-mode dumb-jump editorconfig ein
+         elisp-def elisp-demos elisp-slime-nav emacsql emmet-mode emojify emr epc
+         epl ess ess-R-data-view eval-sexp-fu evil evil-anzu evil-args
+         evil-cleverparens evil-collection evil-easymotion evil-escape
+         evil-evilified-state evil-exchange evil-goggles evil-iedit-state
+         evil-indent-plus evil-lion evil-lisp-state evil-matchit
+         evil-nerd-commenter evil-numbers evil-org evil-surround evil-tex
+         evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode
+         evil-visualstar expand-region extmap eyebrowse f fancy-battery fish-mode
+         flx flx-ido flycheck flycheck-bashate flycheck-elsa
+         flycheck-golangci-lint flycheck-google-cpplint flycheck-package
+         flycheck-pos-tip flycheck-rtags flycheck-ycmd flyspell-correct
+         flyspell-correct-helm font-utils forge fringe-helper fuzzy gendoxy gh-md
+         ghub git-commit git-link git-messenger git-modes git-timemachine
+         gitignore-templates gntp gnuplot go-eldoc go-fill-struct go-gen-test
+         go-guru go-impl go-mode go-rename go-tag godoctor golden-ratio
+         google-c-style google-translate goto-chg grizzl haml-mode helm helm-ag
+         helm-c-yasnippet helm-comint helm-company helm-core helm-css-scss
+         helm-ctest helm-descbinds helm-git-grep helm-ls-git helm-lsp helm-make
+         helm-mode-manager helm-org helm-org-rifle helm-projectile helm-purpose
+         helm-pydoc helm-rtags helm-swoop helm-themes helm-xref hide-comnt
+         hierarchy highlight-indentation highlight-numbers highlight-parentheses
+         hl-todo holy-mode ht htmlize hungry-delete hybrid-mode hydra iedit
+         imenu-list impatient-mode import-js importmagic indent-guide info+
+         insert-shebang inspector js-doc js2-mode js2-refactor json-mode
+         json-navigator json-reformat json-snatcher k8s-mode ligature link-hint
+         list-utils live-py-mode livid-mode load-env-vars load-relative
+         loc-changes log4e logview lorem-ipsum lsp-docker lsp-latex lsp-mode
+         lsp-origami lsp-pyright lsp-python-ms lsp-treemacs lsp-ui lua-mode lv
+         macrostep magit magit-section markdown-mode markdown-toc
+         math-symbol-lists mmm-mode multi-line multiple-cursors mustache-mode
+         nameless nerd-icons nerd-icons-completion nodejs-repl nose npm-mode
+         ob-cfengine3 open-junk-file org org-category-capture org-cliplink
+         org-contrib org-download org-journal org-mime org-modern org-pomodoro
+         org-present org-project-capture org-projectile org-rich-yank
+         org-superstar orgit orgit-forge origami overseer ox-gfm ox-hugo ox-pandoc
+         package-lint pandoc-mode paradox paredit parent-mode password-generator
+         pcache pcre2el persistent-soft persp-mode pfuture pg pip-requirements
+         pipenv pippel pkg-info poetry polymode popup popwin pos-tip posframe
+         powerline prettier-js projectile pug-mode py-isort pydoc pyenv-mode
+         pylookup pytest pythonic pyvenv quickrun rainbow-delimiters
+         react-snippets realgud reformatter rego-mode request request-deferred
+         restart-emacs rjsx-mode rtags s sass-mode scss-mode shfmt shrink-path
+         shut-up simple-httpd skewer-mode slim-mode smartparens smeargle space-doc
+         spaceline spacemacs-purpose-popwin spacemacs-whitespace-cleanup
+         sphinx-doc spinner sql-indent sqlformat sqlup-mode string-edit-at-point
+         string-inflection symbol-overlay symon tablist tagedit term-cursor
+         test-simple toc-org tomelr transient tree-sitter tree-sitter-langs
+         treemacs treemacs-evil treemacs-icons-dired treemacs-magit treemacs-persp
+         treemacs-projectile treepy ts-fold tsc ucs-utils undo-fu undo-fu-session
+         undo-tree unicode-fonts uuidgen vi-tilde-fringe vim-powerline
+         visual-fill-column volatile-highlights vundo web-beautify
+         web-completion-data web-mode websocket wfnames which-key window-purpose
+         winum with-editor writeroom-mode ws-butler yaml yaml-mode yapfify
+         yasnippet yasnippet-snippets ycmd))
    '(safe-local-variable-values
      '((etags-regen-ignores "test/manual/etags/")
        (etags-regen-regexp-alist
-        (("c" "objc")
-         "/[ \11]*DEFVAR_[A-Z_ \11(]+\"\\([^\"]+\\)\"/\\1/" "/[ \11]*DEFVAR_[A-Z_ \11(]+\"[^\"]+\",[ \11]\\([A-Za-z0-9_]+\\)/\\1/"))
+        (("c" "objc") "/[ \11]*DEFVAR_[A-Z_ \11(]+\"\\([^\"]+\\)\"/\\1/"
+         "/[ \11]*DEFVAR_[A-Z_ \11(]+\"[^\"]+\",[ \11]\\([A-Za-z0-9_]+\\)/\\1/"))
        (sql-connection-alist quote
-                             ((golfdb
-                               (sql-product 'postgres)
-                               (sql-port 5432)
-                               (sql-server "localhost")
-                               (sql-user "postgres")
-                               (sql-database "golf_db"))
-                              (server2
-                               (sql-product 'postgres)
-                               (sql-port 5432)
-                               (sql-server "localhost")
-                               (sql-user "user")
-                               (sql-database "db2"))))
+                             ((golfdb (sql-product 'postgres) (sql-port 5432)
+                                      (sql-server "localhost")
+                                      (sql-user "postgres")
+                                      (sql-database "golf_db"))
+                              (server2 (sql-product 'postgres) (sql-port 5432)
+                                       (sql-server "localhost") (sql-user "user")
+                                       (sql-database "db2"))))
        (in-k8s-repo . t)
        (flycheck-googlelint-filter "-whitespace,+whitespace/braces")
-       (flycheck-checker . c/c++-googlelint)
-       (javascript-backend . tide)
-       (javascript-backend . tern)
-       (javascript-backend . lsp)))
+       (flycheck-checker . c/c++-googlelint) (javascript-backend . tide)
+       (javascript-backend . tern) (javascript-backend . lsp)))
    '(sql-connection-alist
-     '(("golfdb"
-        (sql-product 'postgres)
-        (sql-user "postgres")
-        (sql-database "golf_db")
-        (sql-server "localhost")
-        (sql-port 5432)
+     '(("golfdb" (sql-product 'postgres) (sql-user "postgres")
+        (sql-database "golf_db") (sql-server "localhost") (sql-port 5432)
         (sql-password "password"))
-       ("golfdbconnection"
-        (sql-product 'postgres)
-        (sql-user "postgres")
-        (sql-database "golf_db")
-        (sql-server "localhost")
-        (sql-port 5432)
+       ("golfdbconnection" (sql-product 'postgres) (sql-user "postgres")
+        (sql-database "golf_db") (sql-server "localhost") (sql-port 5432)
         (sql-password "password")))))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
