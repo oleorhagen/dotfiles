@@ -1,5 +1,5 @@
 general.import = [
-               "/home/oorhagen/.config/alacritty/github_light.toml",
+               "/home/oleorhagen/.config/alacritty/github_light.toml",
 ]
 
 [window]
@@ -9,7 +9,8 @@ padding.x = 10
 padding.y = 10
 
 decorations = "None" # "Full"
-decorations_theme_variant = "Light" # "Dark"
+#decorations_theme_variant = "Light" # "Dark"
+decorations_theme_variant = "Dark"
 
 #[terminal.shell]
 #program="zsh"

@@ -1392,7 +1392,7 @@ hints:
       binding:
         key: U
         mods: Control|Shift
-theme: Baskerville-ivorylight
+theme: Baskerville-ivorydark
 
 # Mouse bindings
 #
