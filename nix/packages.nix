@@ -37,7 +37,6 @@
     # Prettify nix code
     nixfmt-rfc-style
     # Prettify html and js
-    nodePackages.prettier
 
     # docker
     docker
@@ -53,6 +52,7 @@
     kdePackages.okular # pdf reader
     img2pdf # convert imgs to pdf
     btop # Better top
+    usbutils # lsusb etc
 
     # tracing
     ltrace
@@ -219,7 +219,7 @@
     silver-searcher # Also known as ag
     postgresql # Really only need psql
     postgres-language-server
-    perl540Packages.TAPParserSourceHandlerpgTAP # postregresql unit testing using pg_prove
+    # perl540Packages.TAPParserSourceHandlerpgTAP # postregresql unit testing using pg_prove
     pgformatter # Code formatter for postgresql
 
     # Network

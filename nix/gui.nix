@@ -79,4 +79,14 @@
     ]
     ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
+#  services.greetd = {
+#    enable = true;
+#    settings = {
+#      default_session = {
+#        command = "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -c sway";
+#        user = "greeter";
+#      };
+#    };
+#  };
+#
 }
