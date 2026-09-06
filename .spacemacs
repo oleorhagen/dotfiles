@@ -41,6 +41,8 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
 
+     groovy
+
      ;; NixOS
      (nixos :variables
             nix-backend 'lsp
@@ -1033,8 +1035,8 @@ This function is called at the very end of Spacemacs initialization."
          elisp-def elisp-demos elisp-slime-nav emacsql emmet-mode emojify emr epc
          epl ess ess-R-data-view eval-sexp-fu evil evil-anzu evil-args
          evil-cleverparens evil-collection evil-easymotion evil-escape
-         evil-evilified-state evil-exchange evil-goggles evil-iedit-state
-         evil-indent-plus evil-lion evil-lisp-state evil-matchit
+         evil-evilified-state evil-exchange evil-ghostel evil-goggles
+         evil-iedit-state evil-indent-plus evil-lion evil-lisp-state evil-matchit
          evil-nerd-commenter evil-numbers evil-org evil-surround evil-tex
          evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode
          evil-visualstar expand-region extmap eyebrowse f fancy-battery fish-mode
@@ -1042,48 +1044,49 @@ This function is called at the very end of Spacemacs initialization."
          flycheck-golangci-lint flycheck-google-cpplint flycheck-package
          flycheck-pos-tip flycheck-rtags flycheck-ycmd flyspell-correct
          flyspell-correct-helm font-utils forge fringe-helper fuzzy gendoxy gh-md
-         ghub git-commit git-link git-messenger git-modes git-timemachine
+         ghostel ghub git-commit git-link git-messenger git-modes git-timemachine
          gitignore-templates gntp gnuplot go-eldoc go-fill-struct go-gen-test
          go-guru go-impl go-mode go-rename go-tag godoctor golden-ratio
-         google-c-style google-translate goto-chg grizzl haml-mode helm helm-ag
-         helm-c-yasnippet helm-comint helm-company helm-core helm-css-scss
-         helm-ctest helm-descbinds helm-git-grep helm-ls-git helm-lsp helm-make
-         helm-mode-manager helm-org helm-org-rifle helm-projectile helm-purpose
-         helm-pydoc helm-rtags helm-swoop helm-themes helm-xref hide-comnt
-         hierarchy highlight-indentation highlight-numbers highlight-parentheses
-         hl-todo holy-mode ht htmlize hungry-delete hybrid-mode hydra iedit
-         imenu-list impatient-mode import-js importmagic indent-guide info+
-         insert-shebang inspector js-doc js2-mode js2-refactor json-mode
-         json-navigator json-reformat json-snatcher k8s-mode ligature link-hint
-         list-utils live-py-mode livid-mode load-env-vars load-relative
-         loc-changes log4e logview lorem-ipsum lsp-docker lsp-latex lsp-mode
-         lsp-origami lsp-pyright lsp-python-ms lsp-treemacs lsp-ui lua-mode lv
-         macrostep magit magit-section markdown-mode markdown-toc
-         math-symbol-lists mmm-mode multi-line multiple-cursors mustache-mode
-         nameless nerd-icons nerd-icons-completion nodejs-repl nose npm-mode
-         ob-cfengine3 open-junk-file org org-category-capture org-cliplink
-         org-contrib org-download org-journal org-mime org-modern org-pomodoro
-         org-present org-project-capture org-projectile org-rich-yank
-         org-superstar orgit orgit-forge origami overseer ox-gfm ox-hugo ox-pandoc
-         package-lint pandoc-mode paradox paredit parent-mode password-generator
-         pcache pcre2el persistent-soft persp-mode pfuture pg pip-requirements
-         pipenv pippel pkg-info poetry polymode popup popwin pos-tip posframe
-         powerline prettier-js projectile pug-mode py-isort pydoc pyenv-mode
-         pylookup pytest pythonic pyvenv quickrun rainbow-delimiters
-         react-snippets realgud reformatter rego-mode request request-deferred
-         restart-emacs rjsx-mode rtags s sass-mode scss-mode shfmt shrink-path
-         shut-up simple-httpd skewer-mode slim-mode smartparens smeargle space-doc
-         spaceline spacemacs-purpose-popwin spacemacs-whitespace-cleanup
-         sphinx-doc spinner sql-indent sqlformat sqlup-mode string-edit-at-point
-         string-inflection symbol-overlay symon tablist tagedit term-cursor
-         test-simple toc-org tomelr transient tree-sitter tree-sitter-langs
-         treemacs treemacs-evil treemacs-icons-dired treemacs-magit treemacs-persp
-         treemacs-projectile treepy ts-fold tsc ucs-utils undo-fu undo-fu-session
-         undo-tree unicode-fonts uuidgen vi-tilde-fringe vim-powerline
-         visual-fill-column volatile-highlights vundo web-beautify
-         web-completion-data web-mode websocket wfnames which-key window-purpose
-         winum with-editor writeroom-mode ws-butler yaml yaml-mode yapfify
-         yasnippet yasnippet-snippets ycmd))
+         google-c-style google-translate goto-chg grizzl groovy-imports
+         groovy-mode haml-mode helm helm-ag helm-c-yasnippet helm-comint
+         helm-company helm-core helm-css-scss helm-ctest helm-descbinds
+         helm-git-grep helm-ls-git helm-lsp helm-make helm-mode-manager helm-org
+         helm-org-rifle helm-projectile helm-purpose helm-pydoc helm-rtags
+         helm-swoop helm-themes helm-xref hide-comnt hierarchy
+         highlight-indentation highlight-numbers highlight-parentheses hl-todo
+         holy-mode ht htmlize hungry-delete hybrid-mode hydra iedit imenu-list
+         impatient-mode import-js importmagic indent-guide info+ insert-shebang
+         inspector js-doc js2-mode js2-refactor json-mode json-navigator
+         json-reformat json-snatcher k8s-mode ligature link-hint list-utils
+         live-py-mode livid-mode load-env-vars load-relative loc-changes log4e
+         logview lorem-ipsum lsp-docker lsp-latex lsp-mode lsp-origami lsp-pyright
+         lsp-python-ms lsp-treemacs lsp-ui lua-mode lv macrostep magit
+         magit-section markdown-mode markdown-toc math-symbol-lists mmm-mode
+         multi-line multiple-cursors mustache-mode nameless nerd-icons
+         nerd-icons-completion nodejs-repl nose npm-mode ob-cfengine3
+         open-junk-file org org-category-capture org-cliplink org-contrib
+         org-download org-journal org-mime org-modern org-pomodoro org-present
+         org-project-capture org-projectile org-rich-yank org-superstar orgit
+         orgit-forge origami overseer ox-gfm ox-hugo ox-pandoc package-lint
+         pandoc-mode paradox paredit parent-mode password-generator pcache pcre2el
+         persistent-soft persp-mode pfuture pg pip-requirements pipenv pippel
+         pkg-info poetry polymode popup popwin pos-tip posframe powerline
+         prettier-js projectile pug-mode py-isort pydoc pyenv-mode pylookup pytest
+         pythonic pyvenv quickrun rainbow-delimiters react-snippets realgud
+         reformatter rego-mode request request-deferred restart-emacs rjsx-mode
+         rtags s sass-mode scss-mode shfmt shrink-path shut-up simple-httpd
+         skewer-mode slim-mode smartparens smeargle space-doc spaceline
+         spacemacs-purpose-popwin spacemacs-whitespace-cleanup sphinx-doc spinner
+         sql-indent sqlformat sqlup-mode string-edit-at-point string-inflection
+         symbol-overlay symon tablist tagedit term-cursor test-simple toc-org
+         tomelr transient tree-sitter tree-sitter-langs treemacs treemacs-evil
+         treemacs-icons-dired treemacs-magit treemacs-persp treemacs-projectile
+         treepy ts-fold tsc ucs-utils undo-fu undo-fu-session undo-tree
+         unicode-fonts uuidgen vi-tilde-fringe vim-powerline visual-fill-column
+         volatile-highlights vundo web-beautify web-completion-data web-mode
+         websocket wfnames which-key window-purpose winum with-editor
+         writeroom-mode ws-butler yaml yaml-mode yapfify yasnippet
+         yasnippet-snippets ycmd))
    '(safe-local-variable-values
      '((etags-regen-ignores "test/manual/etags/")
        (etags-regen-regexp-alist

@@ -11,6 +11,9 @@
     autoenv
     zsh-autoenv
 
+    # Bluetooth
+    bluetui
+
     # oil shell
     oils-for-unix
 
@@ -101,7 +104,7 @@
     ## Tools and Utils
     #
 
-    cutter # rev-ing
+    # cutter # rev-ing -- broken against Qt 6.11.0 (SBK_CUTTERPLUGIN_IDX rename), uncomment when fixed upstream
 
     # AI
     # aider-chat
@@ -216,7 +219,7 @@
 
     # Search
     ripgrep
-    silver-searcher # Also known as ag
+    silver-searcher-ng # Also known as ag
     postgresql # Really only need psql
     postgres-language-server
     # perl540Packages.TAPParserSourceHandlerpgTAP # postregresql unit testing using pg_prove
