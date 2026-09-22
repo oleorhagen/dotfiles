@@ -45,6 +45,7 @@
     docker
 
     # Utils
+    zip
     unzip
     jq
     tree
@@ -69,6 +70,9 @@
 
     # Hardware
     kicad
+
+    # Graphics
+    inkscape
 
     # GTK conf
     lxappearance
