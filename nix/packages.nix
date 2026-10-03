@@ -262,6 +262,12 @@
     # Devenv
     devenv
 
+    # command-line email: fetch (mbsync) -> index (notmuch) -> read/write (neomutt) -> send (msmtp)
+    isync
+    msmtp
+    neomutt
+    notmuch
+
     # Configuration management (built from source, see ~/projects/cfe-build-nixos)
     (pkgs.callPackage /home/oleorhagen/projects/cfe-build-nixos/nix/cfengine.nix { })
 
