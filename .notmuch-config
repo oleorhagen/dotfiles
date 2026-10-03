@@ -1,0 +1,16 @@
+[database]
+path=/home/oleorhagen/Mail
+
+[user]
+name=Ole Petter Orhagen
+primary_email=olepo89@gmail.com
+
+[new]
+tags=unread;inbox;
+ignore=
+
+[search]
+exclude_tags=deleted;spam;
+
+[maildir]
+synchronize_flags=true
