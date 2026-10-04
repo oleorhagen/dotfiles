@@ -5,7 +5,29 @@
   ...
 }:
 
+let
+  # passff-host's bundled script hardcodes a PATH without
+  # /run/current-system/sw/bin, so the gpg/tree/etc subprocess it spawns
+  # can't be found. Patch that in.
+  passffHostFixed = pkgs.passff-host.overrideAttrs (old: {
+    postPatch =
+      old.postPatch
+      + ''
+        sed -i 's#"PATH": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"#"PATH": "/run/current-system/sw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"#' src/passff.py
+      '';
+  });
+in
+
 {
+
+  # Managed here (rather than as a plain `firefox` entry in systemPackages)
+  # so that nativeMessagingHosts.packages gets baked into Firefox's own
+  # package - Firefox only looks for native messaging manifests inside its
+  # own store path (MOZ_SYSTEM_DIR), not in /run/current-system/sw.
+  programs.firefox = {
+    enable = true;
+    nativeMessagingHosts.packages = [ passffHostFixed ];
+  };
 
   environment.systemPackages = with pkgs; [
     grim # Screenshot

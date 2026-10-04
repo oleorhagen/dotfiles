@@ -24,7 +24,8 @@
     man-pages-posix
 
     # Browsers
-    firefox
+    # firefox is managed via `programs.firefox` in gui.nix (needed to wire up
+    # PassFF's native messaging host correctly)
     firefox-devedition
     google-chrome
 
@@ -73,6 +74,8 @@
 
     # Graphics
     inkscape
+    openscad
+    freecad
 
     # GTK conf
     lxappearance
@@ -97,14 +100,10 @@
 
     # Pass password manager
     pass
-    # Native messaging host so the PassFF Firefox extension can call `pass`.
-    # Upstream hardcodes a PATH without /run/current-system/sw/bin, so gpg/tree/etc
-    # can't be found by the subprocess it spawns - patch that in.
-    (passff-host.overrideAttrs (old: {
-      postPatch = old.postPatch + ''
-        sed -i 's#"PATH": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"#"PATH": "/run/current-system/sw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"#' src/passff.py
-      '';
-    }))
+    # passff-host (PassFF's native messaging helper) is wired up via
+    # `programs.firefox.nativeMessagingHosts.packages` in gui.nix instead of
+    # here - Firefox only reads native messaging manifests from inside its
+    # own package, not from /run/current-system/sw.
 
     # Backups
     restic

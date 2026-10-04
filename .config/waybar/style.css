@@ -1,19 +1,38 @@
+/* ---------------------------------------------------------------- *
+ * Nord-themed waybar, matching the Nord accents used in
+ * ~/.config/sway/config.d/window-decoration.conf
+ * ---------------------------------------------------------------- */
+
+@define-color bg        #2e3440;
+@define-color bg-alt     #3b4252;
+@define-color fg         #e5e9f0;
+@define-color fg-dim     #d8dee9;
+@define-color accent     #88c0d0;  /* frost blue   - network / default accent */
+@define-color accent2    #8fbcbb;  /* frost teal   - cpu / memory             */
+@define-color accent3    #b48ead;  /* purple       - memory alt               */
+@define-color good       #a3be8c;  /* green        - battery ok               */
+@define-color warn       #ebcb8b;  /* yellow       - warning states           */
+@define-color crit       #bf616a;  /* red          - critical states          */
+@define-color sep        #4c566a;
+
 * {
   min-height: 0;
   font-size: 14px;
-  /* `otf-font-awesome` is required to be installed for icons */
-  font-family: "Font Awesome 5 Free", "Iosevka", Roboto, Helvetica, Arial,
-    sans-serif;
+  font-weight: 600;
+  /* `Symbols Nerd Font` carries the glyph set used by the icons below;
+     `Font Awesome 5 Free` is kept first for the legacy FA icons already
+     in the config (logo, pulseaudio, vpn, etc). */
+  font-family: "Font Awesome 5 Free", "Iosevka Nerd Font", "Symbols Nerd Font",
+    Roboto, Helvetica, Arial, sans-serif;
   border: none;
   border-radius: 0;
-  /*font-weight: bold;*/
 }
 
 window#waybar {
-  color: #ffffff;
-  background-color: transparent;
-  border-bottom: none;
-  transition-duration: 0.5s;
+  background-color: alpha(@bg, 0.85);
+  color: @fg;
+  border-bottom: 2px solid @sep;
+  transition-duration: 0.4s;
   transition-property: background-color;
 }
 
@@ -21,165 +40,269 @@ window#waybar.hidden {
   opacity: 0.2;
 }
 
-#workspaces button {
-  margin: 0px 0;
-  padding: 0.5rem 0.9rem;
-  background: #2e3440;
+/* ---------------------------------------------------------------- *
+ * Shared "pill" look for every module
+ * ---------------------------------------------------------------- */
+
+#custom-logo,
+#mode,
+#pulseaudio,
+#backlight,
+#custom-icon-cube,
+#custom-displays,
+#custom-hackeriet,
+#custom-vpn,
+#network,
+#cpu,
+#memory,
+#temperature,
+#battery,
+#clock,
+#tray,
+#idle_inhibitor,
+#window {
+  margin: 5px 2px;
+  padding: 0 11px;
+  border-radius: 10px;
+  background: @bg-alt;
+  color: @fg-dim;
+  transition: all 0.2s ease-in-out;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#custom-logo:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#battery:hover {
+  background: shade(@bg-alt, 1.25);
+}
+
+/* ---------------------------------------------------------------- *
+ * Workspaces
+ * ---------------------------------------------------------------- */
+
+#workspaces {
+  margin: 5px 4px;
+  padding: 0 2px;
+  border-radius: 10px;
+  background: @bg-alt;
+}
+
+#workspaces button {
+  margin: 3px 2px;
+  padding: 0 10px;
+  border-radius: 8px;
+  background: transparent;
+  color: @fg-dim;
+  transition: all 0.2s ease-in-out;
+}
+
 #workspaces button:hover {
-  color: #ffffff;
-  background: rgba(0, 1, 51, 0.6);
+  color: @fg;
+  background: rgba(136, 192, 208, 0.15);
   box-shadow: inherit;
 }
 
 #workspaces button.focused {
-  color: #2e3440;
-  background: #d8dee9;
+  color: @bg;
+  background: @accent;
 }
 
 #workspaces button.urgent {
-  background-color: #eb4d4b;
+  color: @fg;
+  background: @crit;
+}
+
+#window {
+  font-weight: 400;
+  color: @fg-dim;
 }
 
 #mode {
-  color: #ffa000;
-  background-color: #000133;
-  /* border-bottom: 3px solid #ffffff; */
+  color: @warn;
+  background: @bg-alt;
+  border: 1px solid @warn;
 }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#mpd,
-#custom-logo,
-#custom-emailicon,
-#custom-unreademail,
-#custom-pacman-package-count,
-#custom-icon-cube {
-  margin: 0px 0;
-  padding: 0.5rem 0.9rem;
-  color: #d8dee9;
-  background: #2e3440;
+/* ---------------------------------------------------------------- *
+ * Logo / misc icons
+ * ---------------------------------------------------------------- */
+
+#custom-logo {
+  margin-left: 6px;
+  padding: 0 14px;
+  font-size: 1.15em;
+  color: @bg;
+  background: @accent;
 }
 
-#clock {
-  color: #282a36;
-  background-color: #d8dee9;
+#custom-icon-cube,
+#custom-displays {
+  color: @fg-dim;
+  min-width: 20px;
 }
 
-@keyframes blink {
-  to {
-    color: #2e3440;
-    background-color: #ffffff;
-  }
+#tray {
+  margin-right: 6px;
 }
 
-#battery.critical:not(.charging) {
-  color: #ffffff;
-  background-color: #f53c3c;
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: @crit;
+}
+
+/* ---------------------------------------------------------------- *
+ * Audio / backlight
+ * ---------------------------------------------------------------- */
+
+#pulseaudio.icon,
+#backlight.icon {
+  color: @bg;
+  background: @fg-dim;
+  margin-right: 0;
+  border-radius: 10px 0 0 10px;
+}
+
+#pulseaudio.sound,
+#backlight.value {
+  margin-left: 0;
+  border-radius: 0 10px 10px 0;
+  min-width: 28px;
+}
+
+#pulseaudio.muted.icon {
+  background-color: @sep;
+  color: @fg-dim;
+}
+
+/* ---------------------------------------------------------------- *
+ * Network (wifi)
+ * ---------------------------------------------------------------- */
+
+#network {
+  color: @accent;
+}
+
+#network.disconnected {
+  color: @crit;
+}
+
+#network.linked {
+  color: @warn;
+}
+
+/* ---------------------------------------------------------------- *
+ * CPU / memory / temperature
+ * ---------------------------------------------------------------- */
+
+#cpu {
+  color: @accent2;
+}
+
+#memory {
+  color: @accent3;
+}
+
+#temperature {
+  color: @good;
+}
+
+#temperature.critical {
+  color: @fg;
+  background-color: @crit;
   animation-name: blink;
-  animation-duration: 0.5s;
+  animation-duration: 1s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
 
-label:focus {
-  background-color: #2e3440;
+/* ---------------------------------------------------------------- *
+ * Battery
+ * ---------------------------------------------------------------- */
+
+#battery {
+  color: @good;
 }
 
-
-#backlight.icon {
-  color: #2e3440;
-  background: #d8dee9;
+#battery.charging,
+#battery.plugged {
+  color: @accent;
 }
 
-#backlight.value {
-  min-width: 20px;
+#battery.warning:not(.charging) {
+  color: @warn;
 }
 
-#network {
-  color: #d8dee9;
+#battery.critical:not(.charging) {
+  color: @fg;
+  background-color: @crit;
+  animation-name: blink;
+  animation-duration: 0.75s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
-#network.disconnected {
-  color: #ff0000;
+@keyframes blink {
+  to {
+    background-color: transparent;
+    color: @crit;
+  }
 }
 
-#pulseaudio.icon {
-  color: #2e3440;
-  background: #d8dee9;
+/* ---------------------------------------------------------------- *
+ * Clock
+ * ---------------------------------------------------------------- */
+
+#clock {
+  margin-right: 2px;
+  color: @bg;
+  background-color: @fg-dim;
+  font-weight: 700;
 }
 
-#pulseaudio.muted.icon {
-  background-color: gray;
-  /*color: #2a5c45;*/
+/* ---------------------------------------------------------------- *
+ * VPN / hackeriet door / media
+ * ---------------------------------------------------------------- */
+
+#custom-vpn {
+  min-width: 65px;
+}
+
+#custom-vpn.connected {
+  color: @good;
+}
+
+#custom-vpn.disconnected {
+  color: @fg-dim;
+}
+
+#custom-hackeriet {
+  min-width: 65px;
 }
 
 #custom-media {
   min-width: 100px;
-  color: #2a5c45;
-  background-color: #66cc99;
+  color: @bg;
+  background-color: @good;
 }
 
 #custom-media.custom-spotify {
-  background-color: #66cc99;
+  background-color: @good;
 }
 
 #custom-media.custom-vlc {
-  background-color: #ffa000;
+  background-color: @warn;
 }
 
-#temperature.critical {
-  background-color: #eb4d4b;
-}
-
-#custom-logo {
-  color: #282a36;
-  font-size: 1.15em;
-  background: deeppink;
-}
-
-#custom-emailicon,
-#custom-icon-cube {
-  color: #282a36;
-  background: #d8dee9;
-}
-
-#custom-unreademail {
-  min-width: 15px;
-  background: #282a36;
-}
-
-
-#custom-vpn {
-  min-width: 65px;
-  background: #2e3440;
-  border: 0.2rem solid;
-}
-
-#custom-hackeriet {
-    min-width: 65px;
-    background: #2e3440;
-}
-
-#custom-displays {
-    min-width: 45px;
-    background: #2e3440;
-}
-
-#custom-cpuinfo {
-    min-width: 45px;
-    background: #2e3440;
+label:focus {
+  background-color: @bg-alt;
 }
