@@ -1,0 +1,33 @@
+set mbox_type   = Maildir
+set folder      = "~/Mail/gmail"
+set spoolfile   = "+Inbox"
+set record      = "+Sent"
+set postponed   = "+Drafts"
+set trash       = "+Trash"
+set mail_check  = 60
+
+set realname    = "Ole Petter Orhagen"
+set from        = "olepo89@gmail.com"
+set use_from    = yes
+set sendmail    = "/run/current-system/sw/bin/msmtp"
+unset use_envelope_from
+
+set editor      = "vim"
+
+# notmuch virtual folders (neomutt built with --with-notmuch)
+set nm_default_uri = "notmuch:///home/oleorhagen/Mail"
+virtual-mailboxes \
+  "Inbox"   "notmuch:///home/oleorhagen/Mail?query=tag:inbox" \
+  "Unread"  "notmuch:///home/oleorhagen/Mail?query=tag:unread" \
+  "Sent"    "notmuch:///home/oleorhagen/Mail?query=tag:sent" \
+  "All"     "notmuch:///home/oleorhagen/Mail?query=*"
+
+bind index,pager \Cf vfolder-from-query
+macro index,pager a "<modify-labels>-inbox -unread +archived\n" "archive thread"
+
+set sidebar_visible = yes
+set sidebar_width   = 28
+set mail_check_stats
+
+bind index,pager B sidebar-toggle-visible
+bind index B next-unread-mailbox

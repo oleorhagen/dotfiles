@@ -1,0 +1,33 @@
+[Desktop Entry]
+FullScreen=true
+shouldShowMenuBarComingFromFullScreen=false
+shouldShowToolBarComingFromFullScreen=false
+
+[General]
+LockSidebar=true
+ShowSidebar=true
+
+[MainWindow]
+MenuBar=Disabled
+
+[Recent Files]
+File1[$e]=$HOME/scratchpad/hackeriet/economy/presentation/2026/2026-02-09T21:10:52,904764399+01:00.png
+File10[$e]=$HOME/projects/pcbs/flower-pcb/simple-flower-v1/leaf_outline.svg
+File2[$e]=$HOME/scratchpad/hackeriet/economy/presentation/2026/2026-03-13T18:01:59,094716872+01:00.png
+File3[$e]=$HOME/scratchpad/hackeriet/economy/presentation/2026/2026-04-13T21:31:28,266339128+02:00.png
+File4[$e]=$HOME/oslo-theme.pdf.png
+File5[$e]=$HOME/oslo-oldtown-earth.pdf
+File6[$e]=$HOME/oslo-fancy.pdf.png
+File7[$e]=$HOME/oslo-new-white-clean.png
+File8[$e]=$HOME/2026-08-11T22:32:37,257238460+02:00.png
+File9[$e]=$HOME/projects/sign-pcb/orhagen-sign-preview.png
+Name1[$e]=2026-02-09T21:10:52,904764399+01:00.png
+Name10[$e]=leaf_outline.svg
+Name2[$e]=2026-03-13T18:01:59,094716872+01:00.png
+Name3[$e]=2026-04-13T21:31:28,266339128+02:00.png
+Name4[$e]=oslo-theme.pdf.png
+Name5[$e]=oslo-oldtown-earth.pdf
+Name6[$e]=oslo-fancy.pdf.png
+Name7[$e]=oslo-new-white-clean.png
+Name8[$e]=2026-08-11T22:32:37,257238460+02:00.png
+Name9[$e]=orhagen-sign-preview.png
