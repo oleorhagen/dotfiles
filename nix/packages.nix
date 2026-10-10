@@ -275,6 +275,12 @@
     neomutt
     notmuch
 
+    # lsusb pretty
+    cyme
+
+    # Bash bby
+    bash
+
     # Configuration management (built from source, see ~/projects/cfe-build-nixos)
     (pkgs.callPackage /home/oleorhagen/projects/cfe-build-nixos/nix/cfengine.nix { })
 
